@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The One — Site Map</title>
+<link rel="stylesheet" href="meeting-assets/meeting.css">
+
+<style>
+  body{background:
+    radial-gradient(1200px 700px at 85% -10%,rgba(255,61,127,.17),transparent 60%),
+    radial-gradient(1000px 620px at 5% 10%,rgba(245,184,73,.11),transparent 58%),#070A11;
+    min-height:100vh}
+  *::-webkit-scrollbar{display:none}
+  *{scrollbar-width:none;-ms-overflow-style:none}
+  html,body{overflow-x:hidden;max-width:100%}
+  html{scroll-behavior:smooth;scroll-padding-top:86px}
+  /* tree connectors */
+  ul.tree{list-style:none;margin:0;padding:0 0 0 22px;position:relative}
+  ul.tree.root{padding-left:0}
+  li.tl{position:relative;padding:3px 0 3px 20px}
+  ul.tree.root > li.tl{padding-left:0}
+  li.tl:before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:rgba(255,255,255,.13)}
+  li.tl:last-child:before{bottom:calc(100% - 22px)}
+  li.tl:after{content:"";position:absolute;left:0;top:22px;width:14px;height:2px;background:rgba(255,255,255,.13)}
+  ul.tree.root > li.tl:before, ul.tree.root > li.tl:after{display:none}
+  .tnode{position:relative}
+  .rail{position:relative;padding-left:26px}
+  .rail:before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;border-radius:2px;
+    background:linear-gradient(180deg,#F5B849,#FF3D7F 26%,#35D6A4 54%,#9B8CFF 78%,#F5B849)}
+  .rail > *{position:relative}
+  .screen:focus-visible{outline:2px solid #FF3D7F;outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+  @media print{.bar{position:static}.screen{break-inside:avoid}}
+</style>
+<body class="font-sans text-text-primary">
+
+<div class="bar fixed top-0 inset-x-0 z-40 px-5 sm:px-6 py-3.5 flex items-center gap-3 sm:gap-4"
+     style="background:linear-gradient(180deg,rgba(7,10,17,.96),rgba(7,10,17,.7) 70%,transparent)">
+  <span class="text-[12px] font-extrabold tracking-[.18em] text-secondary shrink-0">THE&nbsp;ONE</span>
+  <span class="text-[13px] text-text-muted shrink-0 hidden md:inline">Site map · 21 screens</span>
+  <nav class="flex-1 min-w-0 flex items-center justify-center gap-4 sm:gap-5 text-[12px] font-bold text-text-muted overflow-hidden">
+    <a href="#footer" class="hover:text-text-primary transition">Footer</a>
+    <a href="#tree" class="hover:text-text-primary transition">Tree</a>
+    <a href="#flow" class="hover:text-text-primary transition">Flow</a>
+    <a href="#key" class="hover:text-text-primary transition">Key</a>
+  </nav>
+  <a href="user-flow-presenter.html" class="shrink-0 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-bold text-white transition"
+     style="background:linear-gradient(135deg,#FF3D7F,#B8155C);box-shadow:0 8px 22px -8px rgba(255,61,127,.75)">Presenter
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></a>
+</div>
+
+<main class="mx-auto max-w-[1180px] px-5 sm:px-7 pt-[92px] pb-24">
+
+  <header class="max-w-[760px]">
+    <span class="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[12px] font-bold ring-1 text-text-subtle bg-white/[.07] ring-white/12">
+      <i class="w-2 h-2 rounded-full bg-current opacity-80"></i>Companion to the user-flow presenter</span>
+    <h1 class="mt-4 text-[38px] sm:text-[46px] font-extrabold tracking-tight leading-[1.05]">Site map</h1>
+    <p class="text-[15px] text-text-muted mt-3 leading-relaxed">
+      All 21 screens as a navigation tree under the four footer buttons, plus the order a player meets them.
+      Each screen retains its original <b class="text-text-subtle">design-prompt.md</b> reference. The current presenter is the meeting baseline.
+      Any card opens that screen in the presenter.</p>
+    <div class="mt-5 rounded-2xl ring-1 ring-tertiary/25 bg-tertiary/[.07] px-4 py-3">
+      <p class="text-[12.5px] leading-relaxed text-state-success-tint" style="color:#A8EDD6">
+        <b>All 21 screens map 1:1 to the 21 in the brief</b> — every brief screen is covered exactly once,
+        Screen coverage is complete; meeting-review clarifications and proposed states are explicitly labeled. Coverage does not imply that every rule is approved.</p>
+    </div>
+    <div class="mt-6 flex flex-wrap gap-x-7 gap-y-3"><span class="inline-flex items-center gap-2 text-[12px] font-bold"><i class="w-2.5 h-2.5 rounded-sm" style="background:#F5B849"></i><span class="text-text-subtle">Acquisition</span><span class="text-text-muted tabular-nums">4</span></span><span class="inline-flex items-center gap-2 text-[12px] font-bold"><i class="w-2.5 h-2.5 rounded-sm" style="background:#FF3D7F"></i><span class="text-text-subtle">Predictions</span><span class="text-text-muted tabular-nums">6</span></span><span class="inline-flex items-center gap-2 text-[12px] font-bold"><i class="w-2.5 h-2.5 rounded-sm" style="background:#35D6A4"></i><span class="text-text-subtle">Live Arena</span><span class="text-text-muted tabular-nums">3</span></span><span class="inline-flex items-center gap-2 text-[12px] font-bold"><i class="w-2.5 h-2.5 rounded-sm" style="background:#9B8CFF"></i><span class="text-text-subtle">Results & Standings</span><span class="text-text-muted tabular-nums">8</span></span></div>
+  </header>
+
+  <section id="footer" class="mt-14">
+    <div class="flex items-baseline gap-3 flex-wrap">
+      <h2 class="text-[24px] font-extrabold tracking-tight">Where each footer button goes</h2>
+      <p class="text-[13px] text-text-muted">The bottom bar is on all 21 screens. Its destination depends on round and player state.</p>
+    </div>
+    <div class="mt-5 flex flex-wrap gap-4"><div class="flex-1 min-w-[150px]">
+  <div class="rounded-2xl ring-1 ring-white/12 bg-white/[.05] px-3 py-3 flex flex-col items-center gap-1.5">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF3D7F" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9L6.7 19.6l1.1-6L3.4 9.4l6-.8z"/></svg>
+    <span class="text-[12.5px] font-extrabold">Today</span>
+  </div>
+  <div class="flex justify-center py-1.5"><svg width="16" height="20" viewBox="0 0 24 24" fill="none" stroke="#96A0B5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v14"/><path d="M6 13l6 6 6-6"/></svg></div>
+  <a href="user-flow-presenter.html#2" class="screen block rounded-2xl ring-1 px-3 py-2.5 text-center transition hover:bg-white/[.09]" style="border-color:transparent;box-shadow:inset 0 0 0 1px #F5B84955;background:#F5B84912">
+    <span class="text-[10px] font-extrabold uppercase tracking-[.12em] text-text-muted">Example state</span>
+    <p class="text-[13px] font-bold mt-0.5">Choose your 2 matchups</p>
+    <p class="text-[11px] text-text-muted mt-0.5">Screen 2 · Brief #3</p>
+  </a>
+</div><div class="flex-1 min-w-[150px]">
+  <div class="rounded-2xl ring-1 ring-white/12 bg-white/[.05] px-3 py-3 flex flex-col items-center gap-1.5">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF3D7F" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>
+    <span class="text-[12.5px] font-extrabold">Arena</span>
+  </div>
+  <div class="flex justify-center py-1.5"><svg width="16" height="20" viewBox="0 0 24 24" fill="none" stroke="#96A0B5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v14"/><path d="M6 13l6 6 6-6"/></svg></div>
+  <a href="user-flow-presenter.html#11" class="screen block rounded-2xl ring-1 px-3 py-2.5 text-center transition hover:bg-white/[.09]" style="border-color:transparent;box-shadow:inset 0 0 0 1px #35D6A455;background:#35D6A412">
+    <span class="text-[10px] font-extrabold uppercase tracking-[.12em] text-text-muted">Example state</span>
+    <p class="text-[13px] font-bold mt-0.5">Live Arena</p>
+    <p class="text-[11px] text-text-muted mt-0.5">Screen 11 · Brief #11</p>
+  </a>
+</div><div class="flex-1 min-w-[150px]">
+  <div class="rounded-2xl ring-1 ring-white/12 bg-white/[.05] px-3 py-3 flex flex-col items-center gap-1.5">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF3D7F" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9M8 12l3 3 5-6"/></svg>
+    <span class="text-[12.5px] font-extrabold">Results</span>
+  </div>
+  <div class="flex justify-center py-1.5"><svg width="16" height="20" viewBox="0 0 24 24" fill="none" stroke="#96A0B5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v14"/><path d="M6 13l6 6 6-6"/></svg></div>
+  <a href="user-flow-presenter.html#14" class="screen block rounded-2xl ring-1 px-3 py-2.5 text-center transition hover:bg-white/[.09]" style="border-color:transparent;box-shadow:inset 0 0 0 1px #9B8CFF55;background:#9B8CFF12">
+    <span class="text-[10px] font-extrabold uppercase tracking-[.12em] text-text-muted">Example state</span>
+    <p class="text-[13px] font-bold mt-0.5">Results at 13:00</p>
+    <p class="text-[11px] text-text-muted mt-0.5">Screen 14 · Brief #14</p>
+  </a>
+</div><div class="flex-1 min-w-[150px]">
+  <div class="rounded-2xl ring-1 ring-white/12 bg-white/[.05] px-3 py-3 flex flex-col items-center gap-1.5">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF3D7F" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/></svg>
+    <span class="text-[12.5px] font-extrabold">Standings</span>
+  </div>
+  <div class="flex justify-center py-1.5"><svg width="16" height="20" viewBox="0 0 24 24" fill="none" stroke="#96A0B5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v14"/><path d="M6 13l6 6 6-6"/></svg></div>
+  <a href="user-flow-presenter.html#16" class="screen block rounded-2xl ring-1 px-3 py-2.5 text-center transition hover:bg-white/[.09]" style="border-color:transparent;box-shadow:inset 0 0 0 1px #9B8CFF55;background:#9B8CFF12">
+    <span class="text-[10px] font-extrabold uppercase tracking-[.12em] text-text-muted">Example state</span>
+    <p class="text-[13px] font-bold mt-0.5">Player leaderboard</p>
+    <p class="text-[11px] text-text-muted mt-0.5">Screen 16 · Brief #17</p>
+  </a>
+</div></div>
+    <div class="mt-5 grid gap-3 sm:grid-cols-2 text-[12px] leading-relaxed">
+      <div class="rounded-2xl ring-1 ring-white/15 bg-white/[.04] p-4"><b>Today</b><p class="text-text-muted mt-1">Open round → <a class="text-primary" href="user-flow-presenter.html#2">matchup hub</a>; unfinished matchup → resume saved draft; both locked → round-complete summary. Between rounds → <a class="text-primary" href="user-flow-presenter.html#19">countdown</a>.</p></div>
+      <div class="rounded-2xl ring-1 ring-white/15 bg-white/[.04] p-4"><b>Arena</b><p class="text-text-muted mt-1">Before both locks: activity and reactions only, plus Return to Today. After both locks → <a class="text-primary" href="user-flow-presenter.html#11">personalized direction</a>. After close: voting closed; follow Results. Personalized access is proposed for confirmation.</p></div>
+      <div class="rounded-2xl ring-1 ring-white/15 bg-white/[.04] p-4"><b>Results</b><p class="text-text-muted mt-1">Before 11:00: prior results or a first-round empty state. 11:00–13:00 → <a class="text-primary" href="user-flow-presenter.html#14">waiting</a>; publication → <a class="text-primary" href="user-flow-presenter.html#15">reveal</a>; complete → <a class="text-primary" href="user-flow-presenter.html#20">round result</a>.</p></div>
+      <div class="rounded-2xl ring-1 ring-white/15 bg-white/[.04] p-4"><b>Standings</b><p class="text-text-muted mt-1"><a class="text-primary" href="user-flow-presenter.html#16">Players</a> and <a class="text-primary" href="user-flow-presenter.html#17">Contestants</a> are separate views. Published season standings persist while the next round is live. Before the first result: no ranking yet.</p></div>
+    </div>
+
+  </section>
+
+  <section id="tree" class="mt-16">
+    <div class="flex items-baseline gap-3 flex-wrap">
+      <h2 class="text-[24px] font-extrabold tracking-tight">Navigation tree</h2>
+      <p class="text-[13px] text-text-muted">Every screen under the footer button it lives behind.</p>
+    </div>
+    <div class="mt-5"><ul class="tree root"><li class="tl"><div class="tnode inline-flex items-center gap-2 rounded-full px-4 py-2 text-[12px] font-extrabold uppercase tracking-[.12em] text-secondary" style="background:#F5B84918;box-shadow:inset 0 0 0 1px #F5B84940">The One · footer bar</div><ul class="tree"><li class="tl">
+  <div class="tnode inline-flex items-center gap-2.5 rounded-2xl ring-1 ring-white/12 bg-white/[.06] px-3.5 py-2.5">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FF3D7F" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9L6.7 19.6l1.1-6L3.4 9.4l6-.8z"/></svg>
+    <span class="text-[14.5px] font-extrabold">Today</span>
+    <span class="text-[11px] font-bold text-text-muted">example → screen 2</span>
+    <span class="ml-1 text-[11px] font-bold text-text-muted tabular-nums">12</span>
+  </div>
+  <ul class="tree"><li class="tl">
+  <div class="tnode text-[10px] font-extrabold uppercase tracking-[.14em] text-text-muted py-1.5">Predict a round</div>
+  <ul class="tree"><li class="tl"><a href="user-flow-presenter.html#1" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #F5B849">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#F5B84922;color:#F5B849;box-shadow:inset 0 0 0 1px #F5B84955">1</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Who wins?</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Match 3 · Round 7</p>
+      
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #1 · Public vote</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a></li><li class="tl"><a href="user-flow-presenter.html#2" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #F5B849">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#F5B84922;color:#F5B849;box-shadow:inset 0 0 0 1px #F5B84955">2</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Choose your 2 matchups</h4><span class="ml-1.5 rounded-md px-1.5 py-[3px] text-[9.5px] font-bold uppercase tracking-[.09em] bg-primary/20 ring-1 ring-primary/40 text-primary">Example landing</span></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Round 7 · 8 matchups on the card</p>
+      
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #3 · Round hub</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a></li><li class="tl"><a href="user-flow-presenter.html#3" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #F5B849">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#F5B84922;color:#F5B849;box-shadow:inset 0 0 0 1px #F5B84955">3</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Study the matchup</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Browse all four categories, then predict</p>
+      
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #4 · Matchup overview</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a></li><li class="tl"><a href="user-flow-presenter.html#4" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #FF3D7F">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#FF3D7F22;color:#FF3D7F;box-shadow:inset 0 0 0 1px #FF3D7F55">4</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Who will win?</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Prediction 1 of 5</p>
+      
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #5 · Predict the winner</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a></li><li class="tl"><a href="user-flow-presenter.html#5" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #FF3D7F">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#FF3D7F22;color:#FF3D7F;box-shadow:inset 0 0 0 1px #FF3D7F55">5</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Best Smile</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Prediction 2 of 5</p>
+      
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #6 · Smile</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a></li><li class="tl"><a href="user-flow-presenter.html#6" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #FF3D7F">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#FF3D7F22;color:#FF3D7F;box-shadow:inset 0 0 0 1px #FF3D7F55">6</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Style</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Prediction 3 of 5</p>
+      
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #7 · Style</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a></li><li class="tl"><a href="user-flow-presenter.html#7" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #FF3D7F">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#FF3D7F22;color:#FF3D7F;box-shadow:inset 0 0 0 1px #FF3D7F55">7</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Confidence</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Prediction 4 of 5</p>
+      
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #8 · Confidence</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a></li><li class="tl"><a href="user-flow-presenter.html#8" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #FF3D7F">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#FF3D7F22;color:#FF3D7F;box-shadow:inset 0 0 0 1px #FF3D7F55">8</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Sense of Humor</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Prediction 5 of 5</p>
+      
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #9 · Sense of humour</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a></li><li class="tl"><a href="user-flow-presenter.html#9" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #FF3D7F">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#FF3D7F22;color:#FF3D7F;box-shadow:inset 0 0 0 1px #FF3D7F55">9</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Lock your prediction</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Match 1 of 2 · nothing changes after this</p>
+      
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #10 · Lock</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#35D6A4"><i class="w-1.5 h-1.5 rounded-full" style="background:#35D6A4"></i>Live Arena</span>
+      </div>
+    </div>
+  </div>
+</a></li><li class="tl"><a href="user-flow-presenter.html#10" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #F5B849">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#F5B84922;color:#F5B849;box-shadow:inset 0 0 0 1px #F5B84955">10</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Save your prediction</h4><span class="ml-1.5 rounded-md px-1.5 py-[3px] text-[9.5px] font-bold uppercase tracking-[.09em] bg-white/[.08] ring-1 ring-white/15 text-text-muted">Sheet</span></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">One-time · asked at your first lock</p>
+      
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #2 · Sign-up</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#F5B849"><i class="w-1.5 h-1.5 rounded-full" style="background:#F5B849"></i>Our recommendation</span>
+      </div>
+    </div>
+  </div>
+</a></li></ul>
+</li><li class="tl">
+  <div class="tnode text-[10px] font-extrabold uppercase tracking-[.14em] text-text-muted py-1.5">Between rounds</div>
+  <ul class="tree"><li class="tl"><a href="user-flow-presenter.html#19" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #9B8CFF">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#9B8CFF22;color:#9B8CFF;box-shadow:inset 0 0 0 1px #9B8CFF55">19</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Round 8 opens at 17:00</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Round 7 · settled at 13:00</p>
+      
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #18 · Countdown</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a></li><li class="tl"><a href="user-flow-presenter.html#21" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #9B8CFF">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#9B8CFF22;color:#9B8CFF;box-shadow:inset 0 0 0 1px #9B8CFF55">21</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">You missed a round</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Round 8 · missed</p>
+      
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #19 · Missed a round</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#F5B849"><i class="w-1.5 h-1.5 rounded-full" style="background:#F5B849"></i>Our recommendation</span>
+      </div>
+    </div>
+  </div>
+</a></li></ul>
+</li></ul>
+</li><li class="tl">
+  <div class="tnode inline-flex items-center gap-2.5 rounded-2xl ring-1 ring-white/12 bg-white/[.06] px-3.5 py-2.5">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FF3D7F" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>
+    <span class="text-[14.5px] font-extrabold">Arena</span>
+    <span class="text-[11px] font-bold text-text-muted">example → screen 11</span>
+    <span class="ml-1 text-[11px] font-bold text-text-muted tabular-nums">3</span>
+  </div>
+  <ul class="tree"><li class="tl">
+  <div class="tnode text-[10px] font-extrabold uppercase tracking-[.14em] text-text-muted py-1.5">Follow it live</div>
+  <ul class="tree"><li class="tl"><a href="user-flow-presenter.html#11" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #35D6A4">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#35D6A422;color:#35D6A4;box-shadow:inset 0 0 0 1px #35D6A455">11</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Live Arena</h4><span class="ml-1.5 rounded-md px-1.5 py-[3px] text-[9.5px] font-bold uppercase tracking-[.09em] bg-primary/20 ring-1 ring-primary/40 text-primary">Example landing</span></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Your predictions vs the live crowd</p>
+      
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #11 · Live Arena</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#35D6A4"><i class="w-1.5 h-1.5 rounded-full" style="background:#35D6A4"></i>Live Arena</span>
+      </div>
+    </div>
+  </div>
+</a></li><li class="tl"><a href="user-flow-presenter.html#12" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #35D6A4">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#35D6A422;color:#35D6A4;box-shadow:inset 0 0 0 1px #35D6A455">12</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">What's heating up</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Round 7 · all 8 matchups</p>
+      
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #12 · Browsing live</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#35D6A4"><i class="w-1.5 h-1.5 rounded-full" style="background:#35D6A4"></i>Live Arena</span>
+      </div>
+    </div>
+  </div>
+</a></li><li class="tl"><a href="user-flow-presenter.html#13" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #35D6A4">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#35D6A422;color:#35D6A4;box-shadow:inset 0 0 0 1px #35D6A455">13</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">What changed since you left</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Round 7 · Valentina vs Sofía</p>
+      
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #13 · Return visit</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#35D6A4"><i class="w-1.5 h-1.5 rounded-full" style="background:#35D6A4"></i>Live Arena</span>
+      </div>
+    </div>
+  </div>
+</a></li></ul>
+</li></ul>
+</li><li class="tl">
+  <div class="tnode inline-flex items-center gap-2.5 rounded-2xl ring-1 ring-white/12 bg-white/[.06] px-3.5 py-2.5">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FF3D7F" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9M8 12l3 3 5-6"/></svg>
+    <span class="text-[14.5px] font-extrabold">Results</span>
+    <span class="text-[11px] font-bold text-text-muted">example → screen 14</span>
+    <span class="ml-1 text-[11px] font-bold text-text-muted tabular-nums">3</span>
+  </div>
+  <ul class="tree"><li class="tl">
+  <div class="tnode text-[10px] font-extrabold uppercase tracking-[.14em] text-text-muted py-1.5">The reveal</div>
+  <ul class="tree"><li class="tl"><a href="user-flow-presenter.html#14" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #9B8CFF">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#9B8CFF22;color:#9B8CFF;box-shadow:inset 0 0 0 1px #9B8CFF55">14</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Results at 13:00</h4><span class="ml-1.5 rounded-md px-1.5 py-[3px] text-[9.5px] font-bold uppercase tracking-[.09em] bg-primary/20 ring-1 ring-primary/40 text-primary">Example landing</span></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Round 7 · Valentina vs Sofía</p>
+      
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #14 · Closed</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a></li><li class="tl"><a href="user-flow-presenter.html#15" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #9B8CFF">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#9B8CFF22;color:#9B8CFF;box-shadow:inset 0 0 0 1px #9B8CFF55">15</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Results update</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Round 7 · Valentina vs Sofía</p>
+      
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #15 · Results update</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#F5B849"><i class="w-1.5 h-1.5 rounded-full" style="background:#F5B849"></i>Our recommendation</span>
+      </div>
+    </div>
+  </div>
+</a></li><li class="tl"><a href="user-flow-presenter.html#20" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #9B8CFF">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#9B8CFF22;color:#9B8CFF;box-shadow:inset 0 0 0 1px #9B8CFF55">20</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Your Round 7 result</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Round 7 · all 10 predictions scored</p>
+      
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #16 · Player's result</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a></li></ul>
+</li></ul>
+</li><li class="tl">
+  <div class="tnode inline-flex items-center gap-2.5 rounded-2xl ring-1 ring-white/12 bg-white/[.06] px-3.5 py-2.5">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FF3D7F" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/></svg>
+    <span class="text-[14.5px] font-extrabold">Standings</span>
+    <span class="text-[11px] font-bold text-text-muted">example → screen 16</span>
+    <span class="ml-1 text-[11px] font-bold text-text-muted tabular-nums">3</span>
+  </div>
+  <ul class="tree"><li class="tl">
+  <div class="tnode text-[10px] font-extrabold uppercase tracking-[.14em] text-text-muted py-1.5">Players</div>
+  <ul class="tree"><li class="tl"><a href="user-flow-presenter.html#16" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #9B8CFF">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#9B8CFF22;color:#9B8CFF;box-shadow:inset 0 0 0 1px #9B8CFF55">16</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Player leaderboard</h4><span class="ml-1.5 rounded-md px-1.5 py-[3px] text-[9.5px] font-bold uppercase tracking-[.09em] bg-primary/20 ring-1 ring-primary/40 text-primary">Example landing</span></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Round 7</p>
+      
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #17 · Player leaderboard</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#F5B849"><i class="w-1.5 h-1.5 rounded-full" style="background:#F5B849"></i>Our recommendation</span>
+      </div>
+    </div>
+  </div>
+</a></li></ul>
+</li><li class="tl">
+  <div class="tnode text-[10px] font-extrabold uppercase tracking-[.14em] text-text-muted py-1.5">Contestants</div>
+  <ul class="tree"><li class="tl"><a href="user-flow-presenter.html#17" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #9B8CFF">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#9B8CFF22;color:#9B8CFF;box-shadow:inset 0 0 0 1px #9B8CFF55">17</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">The 16</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Contestant standings · after Round 7</p>
+      
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #20 · Contestant league table</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a></li><li class="tl"><a href="user-flow-presenter.html#18" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #9B8CFF">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#9B8CFF22;color:#9B8CFF;box-shadow:inset 0 0 0 1px #9B8CFF55">18</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Valentina Restrepo</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Rank 3 of 16</p>
+      
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #21 · Contestant profile</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a></li></ul>
+</li></ul>
+</li></ul></li></ul></div>
+  </section>
+
+  <section id="flow" class="mt-16">
+    <div class="flex items-baseline gap-3 flex-wrap">
+      <h2 class="text-[24px] font-extrabold tracking-tight">The flow</h2>
+      <p class="text-[13px] text-text-muted">One round, start to finish — with the branches that split off it.</p>
+    </div>
+    <div class="mt-5 rail max-w-[860px] space-y-2"><div class="my-3 flex items-center gap-2.5">
+  <span class="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[.11em]" style="color:#F5B849;background:#F5B84918;box-shadow:inset 0 0 0 1px #F5B84940">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>17:00 · Round opens</span>
+  <span class="flex-1 h-px" style="background:linear-gradient(90deg,#F5B84955,transparent)"></span></div><a href="user-flow-presenter.html#1" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #F5B849">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#F5B84922;color:#F5B849;box-shadow:inset 0 0 0 1px #F5B84955">1</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Who wins?</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Match 3 · Round 7</p>
+      <p class="text-[12px] leading-relaxed text-text-muted mt-1.5">Public voting: overall choice, then four category votes. Proposed category-voting collection flow; no account required.</p>
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #1 · Public vote</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a><div class="flex items-center gap-2 pl-1 py-1.5">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96A0B5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v12a3 3 0 0 0 3 3h9"/><path d="M15 15l3 3-3 3"/></svg>
+  <span class="text-[11.5px] font-semibold" style="color:#96A0B5">Voting confirmation → optional invitation to predict. Returning predictors go directly to screen 2.</span></div><a href="user-flow-presenter.html#2" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #F5B849">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#F5B84922;color:#F5B849;box-shadow:inset 0 0 0 1px #F5B84955">2</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Choose your 2 matchups</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Round 7 · 8 matchups on the card</p>
+      <p class="text-[12px] leading-relaxed text-text-muted mt-1.5">The round's 8 matchups; the player's 2 are visually distinct from the 6 they can only watch.</p>
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #3 · Round hub</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a><a href="user-flow-presenter.html#3" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #F5B849">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#F5B84922;color:#F5B849;box-shadow:inset 0 0 0 1px #F5B84955">3</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Study the matchup</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Browse all four categories, then predict</p>
+      <p class="text-[12px] leading-relaxed text-text-muted mt-1.5">Both contestants, their four category tabs, socials and follower count.</p>
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #4 · Matchup overview</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a><div class="flex items-center gap-2 pl-1 py-1.5">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96A0B5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v12a3 3 0 0 0 3 3h9"/><path d="M15 15l3 3-3 3"/></svg>
+  <span class="text-[11.5px] font-semibold" style="color:#96A0B5">Five predictions per matchup — nothing changes once locked</span></div><div class="grid sm:grid-cols-2 gap-2"><a href="user-flow-presenter.html#4" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #FF3D7F">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#FF3D7F22;color:#FF3D7F;box-shadow:inset 0 0 0 1px #FF3D7F55">4</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Who will win?</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Prediction 1 of 5</p>
+      <p class="text-[12px] leading-relaxed text-text-muted mt-1.5">Binary pick between the two contestants.</p>
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #5 · Predict the winner</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a><a href="user-flow-presenter.html#5" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #FF3D7F">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#FF3D7F22;color:#FF3D7F;box-shadow:inset 0 0 0 1px #FF3D7F55">5</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Best Smile</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Prediction 2 of 5</p>
+      <p class="text-[12px] leading-relaxed text-text-muted mt-1.5">Face photo — identical crop for all contestants.</p>
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #6 · Smile</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a><a href="user-flow-presenter.html#6" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #FF3D7F">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#FF3D7F22;color:#FF3D7F;box-shadow:inset 0 0 0 1px #FF3D7F55">6</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Style</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Prediction 3 of 5</p>
+      <p class="text-[12px] leading-relaxed text-text-muted mt-1.5">Full-length photo.</p>
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #7 · Style</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a><a href="user-flow-presenter.html#7" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #FF3D7F">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#FF3D7F22;color:#FF3D7F;box-shadow:inset 0 0 0 1px #FF3D7F55">7</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Confidence</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Prediction 4 of 5</p>
+      <p class="text-[12px] leading-relaxed text-text-muted mt-1.5">Short video, 15s.</p>
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #8 · Confidence</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a><a href="user-flow-presenter.html#8" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #FF3D7F">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#FF3D7F22;color:#FF3D7F;box-shadow:inset 0 0 0 1px #FF3D7F55">8</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Sense of Humor</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Prediction 5 of 5</p>
+      <p class="text-[12px] leading-relaxed text-text-muted mt-1.5">Short video, 15s.</p>
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #9 · Sense of humour</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a></div><a href="user-flow-presenter.html#9" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #FF3D7F">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#FF3D7F22;color:#FF3D7F;box-shadow:inset 0 0 0 1px #FF3D7F55">9</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Lock your prediction</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Match 1 of 2 · nothing changes after this</p>
+      <p class="text-[12px] leading-relaxed text-text-muted mt-1.5">Summary of all 5 predictions and a single confirm. Nothing changes after this.</p>
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #10 · Lock</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#35D6A4"><i class="w-1.5 h-1.5 rounded-full" style="background:#35D6A4"></i>Live Arena</span>
+      </div>
+    </div>
+  </div>
+</a><div class="flex items-center gap-2 pl-1 py-1.5">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF3D7F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v12a3 3 0 0 0 3 3h9"/><path d="M15 15l3 3-3 3"/></svg>
+  <span class="text-[11.5px] font-semibold" style="color:#FF3D7F">Before lock: editable draft. After successful lock: final immediately</span></div><div class="flex items-center gap-2 pl-1 py-1.5">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5B849" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v12a3 3 0 0 0 3 3h9"/><path d="M15 15l3 3-3 3"/></svg>
+  <span class="text-[11.5px] font-semibold" style="color:#F5B849">First-ever lock → signup; successful save locks matchup 1</span></div><a href="user-flow-presenter.html#10" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #F5B849">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#F5B84922;color:#F5B849;box-shadow:inset 0 0 0 1px #F5B84955">10</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Save your prediction</h4><span class="ml-1.5 rounded-md px-1.5 py-[3px] text-[9.5px] font-bold uppercase tracking-[.09em] bg-white/[.08] ring-1 ring-white/15 text-text-muted">Sheet</span></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">One-time · asked at your first lock</p>
+      <p class="text-[12px] leading-relaxed text-text-muted mt-1.5">Phone number only. Reached when the player wants to predict, never to vote.</p>
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #2 · Sign-up</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#F5B849"><i class="w-1.5 h-1.5 rounded-full" style="background:#F5B849"></i>Our recommendation</span>
+      </div>
+    </div>
+  </div>
+</a><div class="flex items-center gap-2 pl-1 py-1.5">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#35D6A4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v12a3 3 0 0 0 3 3h9"/><path d="M15 15l3 3-3 3"/></svg>
+  <span class="text-[11.5px] font-semibold" style="color:#35D6A4">1 of 2 locked → repeat screens 3–9 for matchup 2; skip signup. 2 of 2 locked → Arena at 18:02</span></div><a href="user-flow-presenter.html#11" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #35D6A4">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#35D6A422;color:#35D6A4;box-shadow:inset 0 0 0 1px #35D6A455">11</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Live Arena</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Your predictions vs the live crowd</p>
+      <p class="text-[12px] leading-relaxed text-text-muted mt-1.5">After both matchups are locked: personalized direction only, with no crowd value or band membership. Before completion: activity-only Arena.</p>
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #11 · Live Arena</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#35D6A4"><i class="w-1.5 h-1.5 rounded-full" style="background:#35D6A4"></i>Live Arena</span>
+      </div>
+    </div>
+  </div>
+</a><div class="grid sm:grid-cols-2 gap-2"><a href="user-flow-presenter.html#12" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #35D6A4">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#35D6A422;color:#35D6A4;box-shadow:inset 0 0 0 1px #35D6A455">12</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">What's heating up</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Round 7 · all 8 matchups</p>
+      <p class="text-[12px] leading-relaxed text-text-muted mt-1.5">Browse and react to all eight matchups. Only the selected two score.</p>
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #12 · Browsing live</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#35D6A4"><i class="w-1.5 h-1.5 rounded-full" style="background:#35D6A4"></i>Live Arena</span>
+      </div>
+    </div>
+  </div>
+</a><a href="user-flow-presenter.html#13" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #35D6A4">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#35D6A422;color:#35D6A4;box-shadow:inset 0 0 0 1px #35D6A455">13</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">What changed since you left</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Round 7 · Valentina vs Sofía</p>
+      <p class="text-[12px] leading-relaxed text-text-muted mt-1.5">Direction changed since the last visit; live shares and band membership remain hidden.</p>
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #13 · Return visit</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#35D6A4"><i class="w-1.5 h-1.5 rounded-full" style="background:#35D6A4"></i>Live Arena</span>
+      </div>
+    </div>
+  </div>
+</a></div><div class="my-3 flex items-center gap-2.5">
+  <span class="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[.11em]" style="color:#FFB020;background:#FFB02018;box-shadow:inset 0 0 0 1px #FFB02040">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>11:00 · Voting closes</span>
+  <span class="flex-1 h-px" style="background:linear-gradient(90deg,#FFB02055,transparent)"></span></div><a href="user-flow-presenter.html#14" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #9B8CFF">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#9B8CFF22;color:#9B8CFF;box-shadow:inset 0 0 0 1px #9B8CFF55">14</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Results at 13:00</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Round 7 · Valentina vs Sofía</p>
+      <p class="text-[12px] leading-relaxed text-text-muted mt-1.5">11:00, waiting for results.</p>
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #14 · Closed</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a><div class="my-3 flex items-center gap-2.5">
+  <span class="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[.11em]" style="color:#9B8CFF;background:#9B8CFF18;box-shadow:inset 0 0 0 1px #9B8CFF40">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>13:00 · Reveal begins</span>
+  <span class="flex-1 h-px" style="background:linear-gradient(90deg,#9B8CFF55,transparent)"></span></div><div class="flex items-center gap-2 pl-1 py-1.5">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9B8CFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v12a3 3 0 0 0 3 3h9"/><path d="M15 15l3 3-3 3"/></svg>
+  <span class="text-[11.5px] font-semibold" style="color:#9B8CFF">Reveal → complete round result at 13:04 → season rank at 13:05</span></div><a href="user-flow-presenter.html#15" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #9B8CFF">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#9B8CFF22;color:#9B8CFF;box-shadow:inset 0 0 0 1px #9B8CFF55">15</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Results update</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Round 7 · Valentina vs Sofía</p>
+      <p class="text-[12px] leading-relaxed text-text-muted mt-1.5">13:00. Reveal → complete round result at 13:04 → season rank at 13:05, not all at once.</p>
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #15 · Results update</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#F5B849"><i class="w-1.5 h-1.5 rounded-full" style="background:#F5B849"></i>Our recommendation</span>
+      </div>
+    </div>
+  </div>
+</a><a href="user-flow-presenter.html#20" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #9B8CFF">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#9B8CFF22;color:#9B8CFF;box-shadow:inset 0 0 0 1px #9B8CFF55">20</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Your Round 7 result</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Round 7 · all 10 predictions scored</p>
+      <p class="text-[12px] leading-relaxed text-text-muted mt-1.5">Points earned, broken down per prediction.</p>
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #16 · Player's result</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a><a href="user-flow-presenter.html#16" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #9B8CFF">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#9B8CFF22;color:#9B8CFF;box-shadow:inset 0 0 0 1px #9B8CFF55">16</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Player leaderboard</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Round 7</p>
+      <p class="text-[12px] leading-relaxed text-text-muted mt-1.5">The player's rank among thousands, plus their streak and one protector token.</p>
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #17 · Player leaderboard</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#F5B849"><i class="w-1.5 h-1.5 rounded-full" style="background:#F5B849"></i>Our recommendation</span>
+      </div>
+    </div>
+  </div>
+</a><div class="grid sm:grid-cols-2 gap-2"><a href="user-flow-presenter.html#17" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #9B8CFF">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#9B8CFF22;color:#9B8CFF;box-shadow:inset 0 0 0 1px #9B8CFF55">17</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">The 16</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Contestant standings · after Round 7</p>
+      <p class="text-[12px] leading-relaxed text-text-muted mt-1.5">Abbreviated preview of 16 contestants; cut line between ranks 8 and 9. Winner rule awaits confirmation.</p>
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #20 · Contestant league table</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a><a href="user-flow-presenter.html#18" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #9B8CFF">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#9B8CFF22;color:#9B8CFF;box-shadow:inset 0 0 0 1px #9B8CFF55">18</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Valentina Restrepo</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Rank 3 of 16</p>
+      <p class="text-[12px] leading-relaxed text-text-muted mt-1.5">Her record, her next matchup, her socials. Doubles as the page she shares.</p>
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #21 · Contestant profile</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a></div><div class="my-3 flex items-center gap-2.5">
+  <span class="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[.11em]" style="color:#F5B849;background:#F5B84918;box-shadow:inset 0 0 0 1px #F5B84940">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>13:36 · Between rounds</span>
+  <span class="flex-1 h-px" style="background:linear-gradient(90deg,#F5B84955,transparent)"></span></div><a href="user-flow-presenter.html#19" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #9B8CFF">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#9B8CFF22;color:#9B8CFF;box-shadow:inset 0 0 0 1px #9B8CFF55">19</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">Round 8 opens at 17:00</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Round 7 · settled at 13:00</p>
+      <p class="text-[12px] leading-relaxed text-text-muted mt-1.5">The gap between 13:00 results and the 17:00 next round.</p>
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #18 · Countdown</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#96A0B5"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i>From Mati's docs</span>
+      </div>
+    </div>
+  </div>
+</a><div class="my-3 flex items-center gap-2.5">
+  <span class="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[.11em]" style="color:#F5B849;background:#F5B84918;box-shadow:inset 0 0 0 1px #F5B84940">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>17:00 · Round 8 opens</span>
+  <span class="flex-1 h-px" style="background:linear-gradient(90deg,#F5B84955,transparent)"></span></div><div class="flex items-center gap-2 pl-1 py-1.5">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5B849" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v12a3 3 0 0 0 3 3h9"/><path d="M15 15l3 3-3 3"/></svg>
+  <span class="text-[11.5px] font-semibold" style="color:#F5B849">At 17:00 return to screen 2 for new matchups; public voting is an optional acquisition branch</span></div></div>
+    <div class="mt-8 max-w-[860px] rounded-2xl ring-1 ring-state-warning/25 bg-state-warning/[.07] px-5 py-4">
+      <h3 class="text-[13px] font-extrabold uppercase tracking-[.12em] text-state-warning">Off the main line</h3>
+      <div class="mt-3 grid sm:grid-cols-2 gap-2 items-start">
+        <a href="user-flow-presenter.html#21" class="screen group block rounded-2xl ring-1 ring-white/10 bg-white/[.045] px-3.5 py-3 transition hover:bg-white/[.09] hover:ring-white/20" style="border-left:3px solid #9B8CFF">
+  <div class="flex items-start gap-2.5">
+    <span class="shrink-0 mt-[1px] w-6 h-6 rounded-lg grid place-items-center text-[11.5px] font-extrabold tabular-nums" style="background:#9B8CFF22;color:#9B8CFF;box-shadow:inset 0 0 0 1px #9B8CFF55">21</span>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center flex-wrap gap-y-1"><h4 class="text-[14px] font-bold leading-snug">You missed a round</h4></div>
+      <p class="text-[11.5px] text-text-subtle/70 mt-0.5">Round 8 · missed</p>
+      <p class="text-[12px] leading-relaxed text-text-muted mt-1.5">Proposed recovery: protector preserves streak only; no points restored. Without a protector, restart the streak. Return to Today.</p>
+      <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1 text-[10.5px] font-bold text-tertiary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Brief #19 · Missed a round</span>
+        <span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold" style="color:#F5B849"><i class="w-1.5 h-1.5 rounded-full" style="background:#F5B849"></i>Our recommendation</span>
+      </div>
+    </div>
+  </div>
+</a>
+        <div class="rounded-2xl ring-1 ring-white/10 bg-white/[.03] px-3.5 py-3">
+          <p class="text-[12px] leading-relaxed text-text-muted">
+            On return after a missed round: with a protector, preserve the streak; without one, explain the reset. Neither restores missed points. Return to Today for the next round. Protector policy is proposed for meeting approval.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="key" class="mt-16">
+    <h2 class="text-[24px] font-extrabold tracking-tight">Key</h2>
+    <div class="mt-5 grid gap-4 sm:grid-cols-2 max-w-[900px]">
+      <div class="rounded-2xl ring-1 ring-white/10 bg-white/[.04] px-5 py-4">
+        <h3 class="text-[12px] font-extrabold uppercase tracking-[.12em] text-text-muted">Phase — the stripe on each card</h3>
+        <div class="mt-3 flex flex-col gap-2.5"><span class="inline-flex items-center gap-2 text-[12px] font-bold"><i class="w-2.5 h-2.5 rounded-sm" style="background:#F5B849"></i><span class="text-text-subtle">Acquisition</span><span class="text-text-muted tabular-nums">4</span></span><span class="inline-flex items-center gap-2 text-[12px] font-bold"><i class="w-2.5 h-2.5 rounded-sm" style="background:#FF3D7F"></i><span class="text-text-subtle">Predictions</span><span class="text-text-muted tabular-nums">6</span></span><span class="inline-flex items-center gap-2 text-[12px] font-bold"><i class="w-2.5 h-2.5 rounded-sm" style="background:#35D6A4"></i><span class="text-text-subtle">Live Arena</span><span class="text-text-muted tabular-nums">3</span></span><span class="inline-flex items-center gap-2 text-[12px] font-bold"><i class="w-2.5 h-2.5 rounded-sm" style="background:#9B8CFF"></i><span class="text-text-subtle">Results & Standings</span><span class="text-text-muted tabular-nums">8</span></span></div>
+      </div>
+      <div class="rounded-2xl ring-1 ring-white/10 bg-white/[.04] px-5 py-4">
+        <h3 class="text-[12px] font-extrabold uppercase tracking-[.12em] text-text-muted">How the presenter labels it</h3>
+        <div class="mt-3 flex flex-col gap-2.5"><span class="inline-flex items-center gap-2 text-[12px] font-bold"><i class="w-1.5 h-1.5 rounded-full" style="background:#96A0B5"></i><span style="color:#96A0B5">From Mati's docs</span><span class="text-text-muted tabular-nums">13</span></span><span class="inline-flex items-center gap-2 text-[12px] font-bold"><i class="w-1.5 h-1.5 rounded-full" style="background:#F5B849"></i><span style="color:#F5B849">Our recommendation</span><span class="text-text-muted tabular-nums">4</span></span><span class="inline-flex items-center gap-2 text-[12px] font-bold"><i class="w-1.5 h-1.5 rounded-full" style="background:#35D6A4"></i><span style="color:#35D6A4">Live Arena</span><span class="text-text-muted tabular-nums">4</span></span><span class="inline-flex items-center gap-2 text-[12px] font-bold"><i class="w-1.5 h-1.5 rounded-full" style="background:#FFB020"></i><span style="color:#FFB020">Open question</span><span class="text-text-muted tabular-nums">0</span></span></div>
+      </div>
+      <div class="rounded-2xl ring-1 ring-white/10 bg-white/[.04] px-5 py-4 sm:col-span-2">
+        <h3 class="text-[12px] font-extrabold uppercase tracking-[.12em] text-text-muted">Checked against the brief</h3>
+        <p class="text-[12.5px] leading-relaxed text-text-muted mt-2">
+          Each card carries <span class="text-tertiary font-bold">Brief #N</span> — its screen number in
+          <b class="text-text-subtle">design-prompt.md</b>, with the name the brief uses. Screens with no brief number are
+          flagged <span class="text-state-warning font-bold">Not in the brief</span>.
+          Currently flagged: <b class="text-text-subtle">none</b>.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+</body>
+</html>

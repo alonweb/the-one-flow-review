@@ -1,0 +1,92 @@
+<title>The One — Flow Review</title>
+<style>
+  :root{
+    --bg:#070A11;
+    --surface:rgba(255,255,255,.045);
+    --surface-hover:rgba(255,255,255,.075);
+    --ring:rgba(255,255,255,.10);
+    --text:#F4F6FA;
+    --muted:#96A0B5;
+    --pink:#FF3D7F;
+    --gold:#F5B849;
+    --teal:#35D6A4;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 700px at 85% -10%, rgba(255,61,127,.17), transparent 60%),
+      radial-gradient(1000px 620px at 5% 10%, rgba(245,184,73,.11), transparent 58%),
+      var(--bg);
+    min-height:100%;
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    display:flex;
+    justify-content:center;
+    padding:56px 16px;
+  }
+  .wrap{width:100%;max-width:640px}
+  .eyebrow{
+    font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--gold);margin:0 0 10px;
+  }
+  h1{
+    margin:0 0 14px;font-size:clamp(30px,6vw,40px);font-weight:800;line-height:1.08;
+    text-wrap:balance;
+  }
+  .lede{
+    margin:0 0 36px;color:var(--muted);font-size:15px;line-height:1.6;max-width:52ch;
+  }
+  .cards{display:flex;flex-direction:column;gap:14px}
+  a.card{
+    display:flex;align-items:center;gap:16px;
+    text-decoration:none;color:var(--text);
+    background:var(--surface);
+    border:1px solid var(--ring);
+    border-radius:20px;
+    padding:20px 22px;
+    transition:background .15s ease,border-color .15s ease,transform .15s ease;
+  }
+  a.card:hover{background:var(--surface-hover);border-color:rgba(255,255,255,.2);transform:translateY(-1px)}
+  a.card:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .glyph{
+    flex-shrink:0;width:48px;height:48px;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;font-weight:800;
+  }
+  .glyph.presenter{background:rgba(255,61,127,.14);color:var(--pink);border:1px solid rgba(255,61,127,.3)}
+  .glyph.sitemap{background:rgba(53,214,164,.14);color:var(--teal);border:1px solid rgba(53,214,164,.3)}
+  .card-body{flex:1;min-width:0}
+  .card-title{font-size:17px;font-weight:700;margin:0 0 3px}
+  .card-desc{font-size:13px;color:var(--muted);margin:0;line-height:1.45}
+  .arrow{flex-shrink:0;color:var(--muted);font-size:18px}
+  footer{margin-top:40px;font-size:12px;color:var(--muted);line-height:1.6}
+  footer b{color:var(--text)}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">The One — Daily Prediction Flow</p>
+  <h1>Presentation and site map, for Mati's review.</h1>
+  <p class="lede">Both documents below are the current baseline: 21 numbered screens covering the daily loop — matchup predictions, Live Arena, results, and standings.</p>
+
+  <div class="cards">
+    <a class="card" href="user-flow-presenter.html">
+      <div class="glyph presenter">▶</div>
+      <div class="card-body">
+        <p class="card-title">Presentation</p>
+        <p class="card-desc">Click through all 21 screens in order, with speaker notes.</p>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+    <a class="card" href="user-flow-sitemap.html">
+      <div class="glyph sitemap">◈</div>
+      <div class="card-body">
+        <p class="card-title">Site map</p>
+        <p class="card-desc">The full flow at a glance, grouped by tab, with every screen linked back to the presentation.</p>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+  </div>
+
+  <footer>Best viewed on desktop. Screen IDs and links are stable — jump to any screen directly from the site map.</footer>
+</div>

@@ -1,0 +1,25 @@
+/* One matchup fills the chooser; frame sizes are independent of source ratios. */
+.matchup-picker{display:flex;flex-direction:column;gap:12px;outline-offset:5px}
+.matchup-heading h2{font-size:26px;font-weight:800;line-height:1.12;letter-spacing:-.7px;margin:0}
+.matchup-heading p{font-size:12px;color:#aeb4c2;margin:7px 0 0}
+.matchup-status{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#bbc1ce}
+.matchup-status b{color:#f5b849;font-size:12px}
+.matchup-stage{touch-action:pan-y;user-select:none}
+.matchup-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.matchup-card[hidden]{display:none}
+.matchup-card figure{margin:0;min-width:0}
+.matchup-photo{height:clamp(220px,37dvh,340px);position:relative;overflow:hidden;border-radius:18px;background:#343139}
+.matchup-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;pointer-events:none}
+.matchup-demo{position:absolute;right:6px;bottom:6px;background:#ffffffed;color:#403840;border-radius:5px;padding:2px 5px;font-size:8px}
+.matchup-card figcaption{padding:9px 2px 0}.matchup-card figcaption b{display:block;font-size:19px;line-height:1.25}.matchup-card figcaption span{display:block;color:#aeb4c2;font-size:11px;margin-top:3px}
+.matchup-browse{display:flex;align-items:center;justify-content:space-between;gap:7px}.matchup-browse span{font-size:10px;color:#bbc1ce;text-align:center}
+.matchup-browse button{width:42px;height:42px;border:1px solid #ffffff25;background:#ffffff09;border-radius:50%;color:#fff;font-size:21px;cursor:pointer}
+.matchup-picker button:disabled{opacity:.4;cursor:default}
+#matchup-select,#matchup-continue{min-height:46px;border-radius:13px;font-size:14px;font-weight:700;cursor:pointer;padding:10px;border:1px solid #ffffff30}
+#matchup-select{background:#ffffff0b;color:#fff}#matchup-select[aria-pressed=true]{border-color:#f5b849;color:#f5b849;background:#f5b84915}
+#matchup-continue{background:#ba2058;color:#fff;border-color:transparent}
+#matchup-message{font-size:11px;color:#bbc1ce;min-height:16px;text-align:center}
+#matchup-selections:empty{display:none}#matchup-selections{display:flex;gap:8px}
+.matchup-chip{display:flex;flex:1;align-items:center;justify-content:center;gap:4px;min-height:44px;border:1px solid #f5b84955;background:#f5b84910;border-radius:10px;padding:5px;color:#f5b849;font-size:11px;cursor:pointer}
+.matchup-chip img{width:25px;height:32px;object-fit:cover;object-position:center 22%;border-radius:5px}.matchup-chip span{margin-left:4px}
+@media(max-width:380px){.matchup-heading h2{font-size:23px}.matchup-card figcaption b{font-size:17px}.matchup-photo{height:240px}}

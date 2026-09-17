@@ -61,15 +61,18 @@
   .card-body{flex:1;min-width:0}
   .card-title{font-size:17px;font-weight:700;margin:0 0 3px}
   .card-desc{font-size:13px;color:var(--muted);margin:0;line-height:1.45}
+  .glyph.pdf{background:rgba(245,184,73,.14);color:var(--amber,#F5B849);border:1px solid rgba(245,184,73,.3)}
+  .ver{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.08em;
+       color:#F5B849;background:rgba(245,184,73,.10);border:1px solid rgba(245,184,73,.35);vertical-align:middle}
   .arrow{flex-shrink:0;color:var(--muted);font-size:18px}
   footer{margin-top:40px;font-size:12px;color:var(--muted);line-height:1.6}
   footer b{color:var(--text)}
 </style>
 
 <div class="wrap">
-  <p class="eyebrow">The One — Daily Prediction Flow</p>
+  <p class="eyebrow">The One — Daily Prediction Flow &nbsp;<span data-ver class="ver">V1</span></p>
   <h1>Presentation and site map.</h1>
-  <p class="lede">Both documents below are the current baseline: 29 numbered screens — the daily prediction loop, the closing rounds 12 to 15, and the full playoff run through to the final.</p>
+  <p class="lede">Everything below is the current baseline: 29 numbered screens — the daily prediction loop, the closing rounds 12 to 15, and the full playoff run through to the final.</p>
 
   <div class="cards">
     <a class="card" href="user-flow-presenter.html">
@@ -85,6 +88,14 @@
       <div class="card-body">
         <p class="card-title">Site map</p>
         <p class="card-desc">The full flow at a glance, grouped by tab, with every screen linked back to the presentation.</p>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+    <a class="card" href="user-flow-presenter.pdf" download="The-One-Flow-V1.pdf" data-pdf>
+      <div class="glyph pdf">↓</div>
+      <div class="card-body">
+        <p class="card-title">All screens as PDF</p>
+        <p class="card-desc" data-pdf-desc>Every screen in order, one per page. Version V1.</p>
       </div>
       <div class="arrow">→</div>
     </a>

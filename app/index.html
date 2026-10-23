@@ -1455,7 +1455,7 @@ html.protoon main.wrap { display: none; }
   <div id="screens"></div>
   <section class="group devlist" id="failure-states"><h2>For developers: rare failure states</h2>
     <p class="devintro">These states have no screens of their own. Each row says what the player should see and what the app has to do. <em>Open</em> marks a rule still to be decided.</p>
-    <div class="devwrap"><table class="devtab"><thead><tr><th>Where</th><th>What goes wrong</th><th>What the player sees</th><th>What the app does</th></tr></thead><tbody><tr><td>Sign-in</td><td>The player cancels Google, Facebook or Microsoft, or it fails</td><td>“Sign-in didn’t finish” on the sign-in screen, with Try again and the other two; the match they tapped stays on the card</td><td>Keep what the player tapped (a match, a table invite, My profile) through every retry. Nothing is created until sign-in succeeds.</td></tr><tr><td>Sign-in</td><td>A returning player picks a different provider than last time</td><td>“You already have an account with Google” and a button to use it</td><td>Match accounts by verified email where the provider gives one; never create a second account silently. <em>Open:</em> whether to link providers.</td></tr><tr><td>Avatar</td><td>Camera permission refused, or no camera</td><td>Upload a photo, or pick a ready-made avatar</td><td>Never block Join on the camera.</td></tr><tr><td>Avatar</td><td>The AI image service is slow or fails</td><td>The photo as taken, with “Your AI versions are on the way” and Try again</td><td>Time out after a few seconds; keep the photo version so Join goes on; retry in the background.</td></tr><tr><td>Lobby</td><td>Under 700 joined at the start time</td><td>The card turns to Cancelled: “512 joined, 700 needed”; a notification and an Activity row</td><td>Cancel for everyone at once. Friends’ tables on that match are cancelled with their coins back.</td></tr><tr><td>Questions</td><td>The connection drops while an answer saves</td><td>“Saving…” on the button, then “Not saved yet · Try again”; the answer stays on screen</td><td>Keep the answer on the phone; show Saved only when the server confirms; sending the same answer twice counts once.</td></tr><tr><td>Questions</td><td>The app closes or the phone restarts mid-match</td><td>Back in the match at the first unanswered question, earlier answers in place</td><td>Save each answer on the server as it is saved, not only at the end.</td></tr><tr><td>Questions</td><td>The picks close while the player is answering</td><td>The Picks closed screen: saved answers count, the rest score nothing</td><td>The server’s clock decides, not the phone’s.</td></tr><tr><td>Lock</td><td>The lock request gets no answer</td><td>“Checking your lock…”, then Locked, or “Not locked yet · Try again”</td><td>Ask the server for the lock state before sending again; never show Locked until it is confirmed.</td></tr><tr><td>Results</td><td>Counting takes longer than planned</td><td>“Counting the votes” on the match card and the locked screen, with the new time</td><td>Results go to everyone at once; the notification only when final.</td></tr><tr><td>Friends’ table</td><td>Not enough coins for the minimum</td><td>The shortfall before paying (“You need 60 more”), and the button off</td><td>Check the balance before taking any coins.</td></tr><tr><td>Friends’ table</td><td>Two friends take the last seat at the same moment</td><td>The second sees “The table just filled” and keeps their coins</td><td>Seat and coins move together on the server, one at a time.</td></tr><tr><td>Friends’ table</td><td>Coins taken but the seat not confirmed</td><td>“Taking your seat…”, then Seated, or “Coins back · try again”</td><td>One transaction for the seat and the coins; give the coins back automatically if the seat didn’t happen.</td></tr><tr><td>Friends’ table</td><td>Not full when the picks close</td><td>The cancelled table screen, everyone’s coins back, a notification</td><td>Cancel and refund every seat at the close.</td></tr><tr><td>Friends’ table</td><td>A player leaves before it is full</td><td>Their seat opens again and their coins come back</td><td>Refund at once; the seat count and the pot update for everyone at the table.</td></tr><tr><td>Payment</td><td>The card is declined</td><td>“Payment didn’t go through. You weren’t charged.” with Try again or another method</td><td>Unlock nothing; leave no half-finished purchase.</td></tr><tr><td>Payment</td><td>No answer from the payment service</td><td>“Checking your payment…”, then the purchase, or “Not charged”</td><td>Ask the payment service for the result before trying again; one key per purchase so nobody is charged twice.</td></tr><tr><td>Paid contact</td><td>She isn’t available when a chat, room or call is bought</td><td>Before paying: “Luciana is offline · back at 18:00”, and the item off</td><td>Show her availability on her menu. <em>Open:</em> what happens if she doesn’t join after payment (money back, or a later time).</td></tr><tr><td>Paid contact</td><td>The connection drops during a chat, room or call</td><td>“Reconnecting…” and Rejoin while paid time is left</td><td>Keep the session open for its paid time. <em>Open:</em> whether the clock stops while disconnected.</td></tr><tr><td>Custom request</td><td>She declines, or doesn’t answer within 24 hours</td><td>“Luciana couldn’t do this one” in Activity and her chat</td><td><em>Open:</em> money back, as a rule.</td></tr><tr><td>Report and block</td><td>A report is sent</td><td>“Reported. Our team will review this message.”</td><td>Keep the message and what came before it for the review; tell the reporter the outcome in Activity.</td></tr><tr><td>Account</td><td>Delete account fails, or a table or purchase is still open</td><td>What is still open, and Try again or “We’ll finish it and email you”</td><td>Settle open tables and refunds first. <em>Open:</em> what happens to coins left in the balance.</td></tr><tr><td>Notifications</td><td>Notifications are off, or a banner is missed</td><td>The same events in Activity</td><td>Every notification also writes an Activity row.</td></tr></tbody></table></div>
+    <div class="devwrap"><table class="devtab"><thead><tr><th>Where</th><th>What goes wrong</th><th>What the player sees</th><th>What the app does</th></tr></thead><tbody><tr><td>Sign-in</td><td>The player cancels Google, Facebook or Microsoft, or it fails</td><td>“Sign-in didn’t finish” on the sign-in screen, with Try again and the other two; the match they tapped stays on the card</td><td>Keep what the player tapped (a match, a table invite, My profile) through every retry. Nothing is created until sign-in succeeds.</td></tr><tr><td>Sign-in</td><td>A returning player picks a different provider than last time</td><td>“You already have an account with Google” and a button to use it</td><td>Match accounts by verified email where the provider gives one; never create a second account silently. <em>Open:</em> whether to link providers.</td></tr><tr><td>Avatar</td><td>Camera permission refused, or no camera</td><td>Upload a photo, or pick a ready-made avatar</td><td>Never block Join on the camera.</td></tr><tr><td>Avatar</td><td>The AI image service is slow or fails</td><td>The photo as taken, with “Your AI versions are on the way” and Try again</td><td>Time out after a few seconds; keep the photo version so Join goes on; retry in the background.</td></tr><tr><td>Lobby</td><td>Under 700 joined at the start time</td><td>The card turns to Cancelled: “512 joined, 700 needed”; a notification and an Activity row</td><td>Cancel for everyone at once. Friends’ tables on that match are cancelled with their coins back.</td></tr><tr><td>Questions</td><td>The connection drops while an answer saves</td><td>“Saving…” on the button, then “Not saved yet · Try again”; the answer stays on screen</td><td>Keep the answer on the phone; show Saved only when the server confirms; sending the same answer twice counts once.</td></tr><tr><td>Questions</td><td>The app closes or the phone restarts mid-match</td><td>Back in the match at the first unanswered question, earlier answers in place</td><td>Save each answer on the server as it is saved, not only at the end.</td></tr><tr><td>Questions</td><td>The picks close while the player is answering</td><td>The Picks closed screen: saved answers count, the rest score nothing</td><td>The server’s clock decides, not the phone’s.</td></tr><tr><td>Lock</td><td>The lock request gets no answer</td><td>“Checking your lock…”, then Locked, or “Not locked yet · Try again”</td><td>Ask the server for the lock state before sending again; never show Locked until it is confirmed.</td></tr><tr><td>Results</td><td>Counting takes longer than planned</td><td>“Counting the votes” on the match card and the locked screen, with the new time</td><td>Results go to everyone at once; the notification only when final.</td></tr><tr><td>Friends’ table</td><td>Not enough coins for the minimum</td><td>The shortfall before paying (“You need 60 more”), and the button off</td><td>Check the balance before taking any coins.</td></tr><tr><td>Friends’ table</td><td>Two friends take the last seat at the same moment</td><td>The second sees “The table just filled” and keeps their coins</td><td>Seat and coins move together on the server, one at a time.</td></tr><tr><td>Friends’ table</td><td>Coins taken but the seat not confirmed</td><td>“Taking your seat…”, then Seated, or “Coins back · try again”</td><td>One transaction for the seat and the coins; give the coins back automatically if the seat didn’t happen.</td></tr><tr><td>Friends’ table</td><td>Not full when the picks close</td><td>The cancelled table screen, everyone’s coins back, a notification</td><td>Cancel and refund every seat at the close.</td></tr><tr><td>Friends’ table</td><td>A player leaves before it is full</td><td>Their seat opens again and their coins come back</td><td>Refund at once; the seat count and the pot update for everyone at the table.</td></tr><tr><td>Payment</td><td>The card is declined</td><td>“Payment didn’t go through. You weren’t charged.” with Try again or another method</td><td>Unlock nothing; leave no half-finished purchase.</td></tr><tr><td>Payment</td><td>No answer from the payment service</td><td>“Checking your payment…”, then the purchase, or “Not charged”</td><td>Ask the payment service for the result before trying again; one key per purchase so nobody is charged twice.</td></tr><tr><td>Paid contact</td><td>She isn’t available when a chat, room or call is bought</td><td>Before paying: “Zofia is offline · back at 18:00”, and the item off</td><td>Show her availability on her menu. <em>Open:</em> what happens if she doesn’t join after payment (money back, or a later time).</td></tr><tr><td>Paid contact</td><td>The connection drops during a chat, room or call</td><td>“Reconnecting…” and Rejoin while paid time is left</td><td>Keep the session open for its paid time. <em>Open:</em> whether the clock stops while disconnected.</td></tr><tr><td>Custom request</td><td>She declines, or doesn’t answer within 24 hours</td><td>“Zofia couldn’t do this one” in Activity and her chat</td><td><em>Open:</em> money back, as a rule.</td></tr><tr><td>Report and block</td><td>A report is sent</td><td>“Reported. Our team will review this message.”</td><td>Keep the message and what came before it for the review; tell the reporter the outcome in Activity.</td></tr><tr><td>Account</td><td>Delete account fails, or a table or purchase is still open</td><td>What is still open, and Try again or “We’ll finish it and email you”</td><td>Settle open tables and refunds first. <em>Open:</em> what happens to coins left in the balance.</td></tr><tr><td>Notifications</td><td>Notifications are off, or a banner is missed</td><td>The same events in Activity</td><td>Every notification also writes an Activity row.</td></tr></tbody></table></div>
   </section>
 </main>
 
@@ -1465,6 +1465,7 @@ html.protoon main.wrap { display: none; }
   var STILL = /still/.test(location.hash); // no animation, for screenshots and the PDF
   var APP = window.THEONE_APP === true || /^#app/.test(location.hash); // the prototype alone, for presenting
   var FLAGS = {
+    PL: '<svg class="flag" viewBox="0 0 8 5" aria-hidden="true"><rect width="8" height="5" fill="#dc143c"/><rect width="8" height="2.5" fill="#fff"/></svg>',
     CO: '<svg class="flag" viewBox="0 0 3 2" aria-hidden="true"><rect width="3" height="1" fill="#fcd116"/><rect y="1" width="3" height=".5" fill="#003893"/><rect y="1.5" width="3" height=".5" fill="#ce1126"/></svg>',
     BR: '<svg class="flag" viewBox="0 0 20 14" aria-hidden="true"><rect width="20" height="14" fill="#009c3b"/><path d="M10 1.6 18.4 7 10 12.4 1.6 7z" fill="#ffdf00"/><circle cx="10" cy="7" r="3.1" fill="#002776"/></svg>',
     US: '<svg class="flag" viewBox="0 0 19 10" aria-hidden="true"><rect width="19" height="10" fill="#b22234"/><path d="M0 1.5h19M0 3.5h19M0 5.5h19M0 7.5h19" stroke="#fff" stroke-width=".8"/><rect width="8" height="5.4" fill="#3c3b6e"/></svg>',
@@ -1476,7 +1477,7 @@ html.protoon main.wrap { display: none; }
     IT: '<svg class="flag" viewBox="0 0 3 2" aria-hidden="true"><rect width="1" height="2" fill="#009246"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ce2b37"/></svg>'
   };
   var W = {
-    L: { name: "Luciana", cc: "CO", country: "Colombia" },
+    L: { name: "Zofia", cc: "PL", country: "Poland" },
     M: { name: "Mariana", cc: "BR", country: "Brazil" }
   };
   var S = 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
@@ -1534,7 +1535,7 @@ html.protoon main.wrap { display: none; }
   function pill(dot, a, b, c) { return '<div class="pill"><span class="dot' + (dot === "live" ? " live" : "") + '"></span>' + a + (b ? ' <span class="sep">|</span> <span class="thin">' + b + '</span>' : '') + (c ? ' <b>' + c + '</b>' : '') + '</div>'; }
   // a match left half-way: a bar above the tabs on every other screen, and the questions left on the Game tab, until the picks close
   function resumeBar(r) {
-    return '<button class="resume" type="button" data-q="' + r.q + '"><span class="rduo"><img src="' + IMG + 'luciana-general.jpg" alt="" style="object-position:75% 0%"><img src="' + IMG + 'mariana-general.jpg" alt="" style="object-position:12% 0%"></span>' +
+    return '<button class="resume" type="button" data-q="' + r.q + '"><span class="rduo"><img src="' + IMG + 'zofia-general.jpg" alt="" style="object-position:75% 0%"><img src="' + IMG + 'mariana-general.jpg" alt="" style="object-position:12% 0%"></span>' +
       '<span class="rtxt"><b><i></i>In progress</b><small>' + r.done + ' of 5 · 12:43 left</small><span class="rpips">' + [0, 1, 2, 3, 4].map(function (k) { return '<i' + (k < r.done ? ' class="on"' : '') + '></i>'; }).join("") + '</span></span>' +
       '<span class="rgo">Continue</span></button>';
   }
@@ -1580,7 +1581,7 @@ html.protoon main.wrap { display: none; }
   function fillIn(p, lo, hi) { return ((p - lo) / (hi - lo) * 100).toFixed(1) + "%"; }
   function done(s) { return s.you && s.crowd && s.pct != null; }
   // the game layer (2026-10-16): faces instead of names, the player's avatar, the crowd, confetti
-  var FACE = { L: ["luciana-portrait.jpg", "42% 37%", "42% 38%"], M: ["mariana-general.jpg", "47% 27%", "47% 28%"] };
+  var FACE = { L: ["zofia-portrait.jpg", "50% 28%", "50% 28%"], M: ["mariana-portrait.jpg", "50% 28%", "50% 28%"] }; // 22 Oct: each woman's close-up, centred on her face
   function face(k, cls) { var f = FACE[k]; return '<span class="face' + (cls ? " " + cls : "") + '"><img src="' + IMG + f[0] + '" alt="' + W[k].name + '" style="object-position:' + f[1] + ';transform-origin:' + f[2] + '"></span>'; }
   function gseg(i) { return '<div class="segc gsegc"><span' + (i ? '' : ' class="on"') + ' data-g="home-open">All games</span><span' + (i ? ' class="on"' : '') + ' data-g="my-games">My games</span></div>'; }
   function ranks3() { return '<div class="tiles3 ranks">' + [["city", "Tel Aviv", 3, 2], ["country", "Israel", 18, 4], ["world", "World", 575, 31]].map(function (r) { return '<div class="stat" role="button" tabindex="0" data-rank="' + r[0] + '"><small>' + r[1] + ' ›</small><b>#' + r[2] + '</b><em>▲ ' + r[3] + '</em></div>'; }).join("") + '</div>'; }
@@ -1617,7 +1618,7 @@ html.protoon main.wrap { display: none; }
     { t: "Overall", you: "L", crowd: "L", pct: 55, res: ["L", 58], pts: 3 },
     { t: "First impression", you: "L", crowd: "M", pct: 58, res: ["M", 60], pts: 2 },
     { t: "Going Out / Date", you: "L", crowd: "L", pct: 63, res: ["L", 63], pts: 7 },
-    { t: "Swimwear", you: "M", crowd: "L", pct: 72, res: ["M", 55], pts: 0 },
+    { t: "At the Beach", you: "M", crowd: "L", pct: 72, res: ["M", 55], pts: 0 },
     { t: "Bring Her to Mama", you: "L", crowd: "L", pct: 61, res: ["L", 64], pts: 3 }
   ];
   var Q0 = JSON.parse(JSON.stringify(Q)); // the sample answers, put back on restart
@@ -1630,20 +1631,20 @@ html.protoon main.wrap { display: none; }
     var best = null; Q.forEach(function (q) { if (q.res[0] === q.crowd && q.res[1] !== q.pct && (!best || gapOf(q) < gapOf(best))) best = q; });
     return best ? '<div class="soclose">' + icon("target", "var(--pink)") + '<span><b>So close:</b> ' + best.t + ', ' + gapOf(best) + ' off the exact ' + best.res[1] + '%</span></div>' : '';
   }
-  var PHOTOS = [ // [Luciana, Mariana, crop L/M for 400px panes, crop L/M for 300px panes], centred on faces found with Vision
-    ["luciana-general.jpg", "mariana-general.jpg", "75% 0%", "12% 0%", "100% 0%", "0% 0%"],
-    ["luciana-portrait.jpg", "mariana-general.jpg", "34% 0%", "12% 0%", "26% 0%", "0% 0%"],
-    ["luciana-date.jpg", "mariana-date.jpg", "53% 0%", "26% 0%", "55% 0%", "13% 0%"],
-    ["luciana-swim.jpg", "mariana-swim.jpg", "47% 0%", "23% 0%", "46% 0%", "7% 0%"],
-    ["luciana-mama.jpg", "mariana-mama.jpg", "91% 0%", "17% 0%", "100% 0%", "0% 0%"]
+  var PHOTOS = [ // [Zofia, Mariana, crop L/M for 400px panes, crop L/M for 300px panes], centred on faces found with Vision
+    ["zofia-general.jpg", "mariana-general.jpg", "75% 0%", "12% 0%", "100% 0%", "0% 0%"],
+    ["zofia-portrait.jpg", "mariana-general.jpg", "34% 0%", "12% 0%", "26% 0%", "0% 0%"],
+    ["zofia-date.jpg", "mariana-date.jpg", "53% 0%", "26% 0%", "55% 0%", "13% 0%"],
+    ["zofia-swim.jpg", "mariana-swim.jpg", "47% 0%", "23% 0%", "46% 0%", "7% 0%"],
+    ["zofia-mama.jpg", "mariana-mama.jpg", "91% 0%", "17% 0%", "100% 0%", "0% 0%"]
   ];
   // home (2026-10-16): a feed of matches, and a one-time intro that explains the game
   var FEED = [
-    { a: ["luciana-general.jpg", "100% 0%", "Luciana", "CO", "Colombia"], b: ["mariana-general.jpg", "0% 0%", "Mariana", "BR", "Brazil"], live: true },
+    { a: ["zofia-general.jpg", "100% 0%", "Zofia", "PL", "Poland"], b: ["mariana-general.jpg", "0% 0%", "Mariana", "BR", "Brazil"], live: true },
     { a: ["sophie.jpg", "50% 25%", "Sophie", "US", "USA"], b: ["emma.jpg", "50% 25%", "Emma", "GB", "UK"], time: "18:00", lobby: 412, early: true },
     { a: ["nina.jpg", "50% 25%", "Nina", "ES", "Spain"], b: ["valentina.jpg", "50% 25%", "Valentina", "AR", "Argentina"], time: "19:00", lobby: 168 },
     { a: ["maya.jpg", "50% 25%", "Maya", "MX", "Mexico"], b: ["luna.jpg", "50% 25%", "Luna", "ES", "Spain"], time: "20:00", opens: "19:30" },
-    { a: ["luciana-general.jpg", "100% 0%", "Luciana", "CO", "Colombia"], b: ["sophie.jpg", "50% 25%", "Sophie", "US", "USA"], day: "Tomorrow", time: "17:00", opens: "16:30 tomorrow" },
+    { a: ["zofia-general.jpg", "100% 0%", "Zofia", "PL", "Poland"], b: ["sophie.jpg", "50% 25%", "Sophie", "US", "USA"], day: "Tomorrow", time: "17:00", opens: "16:30 tomorrow" },
     { a: ["mariana-general.jpg", "0% 0%", "Mariana", "BR", "Brazil"], b: ["emma.jpg", "50% 25%", "Emma", "GB", "UK"], day: "Tomorrow", time: "18:00", opens: "17:30 tomorrow" },
     { a: ["valentina.jpg", "50% 25%", "Valentina", "AR", "Argentina"], b: ["maya.jpg", "50% 25%", "Maya", "MX", "Mexico"], day: "Tomorrow", time: "19:00", opens: "18:30 tomorrow" }
   ];
@@ -1720,12 +1721,12 @@ html.protoon main.wrap { display: none; }
       '<div class="ibar">' + [0, 1, 2, 3, 4].map(function () { return '<span><i></i></span>'; }).join("") + '</div>' +
       '<button class="introskip" type="button">Skip</button>' +
       '<div class="itap">Tap for the next slide · <b>left side to go back</b></div>' +
-      '<div class="beat b1"><div class="b1duo"><span class="l"><img src="' + IMG + 'luciana-general.jpg" alt="" style="object-position:75% 0%"></span><span class="r"><img src="' + IMG + 'mariana-general.jpg" alt="" style="object-position:12% 0%"></span><span class="b1vs">VS</span></div>' +
+      '<div class="beat b1"><div class="b1duo"><span class="l"><img src="' + IMG + 'zofia-general.jpg" alt="" style="object-position:75% 0%"></span><span class="r"><img src="' + IMG + 'mariana-general.jpg" alt="" style="object-position:12% 0%"></span><span class="b1vs">VS</span></div>' +
         '<div class="cap"><b>Two women. One match.</b><span>Five questions about them, every match.</span></div></div>' +
       '<div class="beat b2"><div class="b2stage">' + rain.map(function (a, i) { return '<img src="' + IMG + a + '" alt="" style="left:' + pos[i][0] + '%;top:' + pos[i][1] + '%;--d:' + i * 70 + 'ms">'; }).join("") +
         '<div class="b2count">1,000<small>players</small></div></div>' +
         '<div class="cap"><b>Up to 1,000 players vote.</b><span>700 or more and the match starts. Fewer, and it’s cancelled.</span></div></div>' +
-      '<div class="beat b3"><div class="b3duo"><span class="l"><img src="' + IMG + 'luciana-general.jpg" alt="" style="object-position:75% 0%"><i class="ring"></i><span class="b3you">' + meav() + '<b>You</b></span><span class="b3crowd">' + mini3() + '<b>+2</b></span></span><span class="r"><img src="' + IMG + 'mariana-general.jpg" alt="" style="object-position:12% 0%"></span></div>' +
+      '<div class="beat b3"><div class="b3duo"><span class="l"><img src="' + IMG + 'zofia-general.jpg" alt="" style="object-position:75% 0%"><i class="ring"></i><span class="b3you">' + meav() + '<b>You</b></span><span class="b3crowd">' + mini3() + '<b>+2</b></span></span><span class="r"><img src="' + IMG + 'mariana-general.jpg" alt="" style="object-position:12% 0%"></span></div>' +
         '<div class="cap"><b>Predict the crowd.</b><span>Pick your favourite, then guess who most players will pick.</span></div></div>' +
       '<div class="beat b4"><div class="b4big">63<small>%</small></div><div class="b4ruler">' + [60, 61, 62, 63, 64, 65, 66, 67, 68, 69].map(function (n, i) { return '<span class="' + (n === 63 ? "hit" : "") + '" style="--d:' + i * 50 + 'ms">' + n + '</span>'; }).join("") + '</div>' +
         '<div class="b4pts"><span style="--d:0ms">Winner +2</span><span style="--d:150ms">Range +1</span><span class="ex" style="--d:300ms">Exact % = 7</span></div>' +
@@ -1806,7 +1807,7 @@ html.protoon main.wrap { display: none; }
   // friends' tables (2026-10-16): a side game on the picks each friend already made in the match, for a closed pot of coins.
   // The house takes its cut off the top; the top three share the rest in proportion to their points.
   var TBL = { name: "Friday Night Six", code: "FN6-482", min: 100, cut: 20, bal: 1240,
-    seats: [ // in the order they sat down; q = points per question in Luciana vs Mariana (Big M's are his own, from Q); stake per 100 of the minimum
+    seats: [ // in the order they sat down; q = points per question in Zofia vs Mariana (Big M's are his own, from Q); stake per 100 of the minimum
       { n: "Big M", av: "bigm.png", me: 1, stake: 100, picks: 5, c: "#ff2e8b", q: Q.map(function (x) { return x.pts; }) },
       { n: "Noa_K", av: "av-girl.jpg", stake: 100, picks: 5, c: "#35d6a4", q: [3, 0, 3, 0, 7] },
       { n: "Itay22", av: "av-lion.jpg", stake: 150, picks: 5, c: "#f5b849", q: [2, 3, 7, 0, 0] },
@@ -1850,16 +1851,16 @@ html.protoon main.wrap { display: none; }
   }
   // the match a table plays on, on every table screen: a player can sit at several tables, on different matches
   function tmatch(s) {
-    return '<div class="tmatchbig"><div class="tmduo"><span class="tmw">' + face("L", "lg2" + (s.res ? " won" : "")) + '<b>Luciana</b></span><span class="vs3">VS</span><span class="tmw">' + face("M", "lg2") + '<b>Mariana</b></span></div>' +
-      '<div class="tcount">' + (s.res ? '<small>The match</small><b class="fin">Final</b><em>Luciana won with 58%</em>' : '<small>Results in</small><b class="tcd">' + (s.cd || "17:43") + '</b><em>Luciana vs Mariana · 13:00 your time</em>') + '</div></div>';
+    return '<div class="tmatchbig"><div class="tmduo"><span class="tmw">' + face("L", "lg2" + (s.res ? " won" : "")) + '<b>Zofia</b></span><span class="vs3">VS</span><span class="tmw">' + face("M", "lg2") + '<b>Mariana</b></span></div>' +
+      '<div class="tcount">' + (s.res ? '<small>The match</small><b class="fin">Final</b><em>Zofia won with 58%</em>' : '<small>Results in</small><b class="tcd">' + (s.cd || "17:43") + '</b><em>Zofia vs Mariana · 13:00 your time</em>') + '</div></div>';
   }
   // the invite's match banner: which match, its state, how many play it, when the results come
   function tmatchInv() {
     return '<div class="tminv"><div class="tmlab">The match this table plays on</div>' +
-      '<div class="tmduo big"><span class="tmw">' + face("L", "lg3") + '<b>Luciana</b><small>' + FLAGS.CO + 'Colombia</small></span><span class="vs3">VS</span><span class="tmw">' + face("M", "lg3") + '<b>Mariana</b><small>' + FLAGS.BR + 'Brazil</small></span></div>' +
+      '<div class="tmduo big"><span class="tmw">' + face("L", "lg3") + '<b>Zofia</b><small>' + FLAGS.PL + 'Poland</small></span><span class="vs3">VS</span><span class="tmw">' + face("M", "lg3") + '<b>Mariana</b><small>' + FLAGS.BR + 'Brazil</small></span></div>' +
       '<div class="tmstats"><span class="live"><small><i></i>Picks close in</small><b>12:43</b></span><span><small>Players in</small><b>1,000</b></span><span><small>Results at</small><b>13:00</b></span></div></div>';
   }
-  function tmchip(sub, won) { return '<div class="tmchip">' + face("L", "sm" + (won ? " won" : "")) + '<span class="vs3 sm">VS</span>' + face("M", "sm") + '<span><b>Luciana vs Mariana</b><small>' + sub + '</small></span></div>'; }
+  function tmchip(sub, won) { return '<div class="tmchip">' + face("L", "sm" + (won ? " won" : "")) + '<span class="vs3 sm">VS</span>' + face("M", "sm") + '<span><b>Zofia vs Mariana</b><small>' + sub + '</small></span></div>'; }
   function mchip(T, sub) {
     if (T === TBL) return tmchip(sub, true);
     function f(i, cls) { return '<span class="face sm' + cls + '"><img src="' + IMG + T.match[i] + '" alt="' + T.match[i + 2] + '" style="object-position:50% 25%;transform:none"></span>'; }
@@ -1867,12 +1868,12 @@ html.protoon main.wrap { display: none; }
   }
   function tcard(s, which) {
     function c(t, a, b, k, kc, name, line, btn) { return '<div class="mcard tcard2" data-t="' + t + '"><div class="thumbs"><img src="' + IMG + a + '" alt=""><img src="' + IMG + b + '" alt=""><span class="vs">VS</span></div><div class="st"><span class="k' + kc + '">' + k + '</span><b>' + name + '</b><span>' + line + '</span>' + btn + '</div></div>'; }
-    if (which === "crew") return s.jt ? c("crew", "luciana-date.jpg", "mariana-date.jpg", "Friends’ table · 5 of 6", "", TBL3.name, "Luciana vs Mariana · waiting for one more seat", '<span class="mini">Open &gt;</span>')
-      : c("crew", "luciana-date.jpg", "mariana-date.jpg", "Invitation", "", TBL3.name, "Noa_K invited you · Luciana vs Mariana · minimum " + TBL3.min, '<span class="mini">See the invite &gt;</span>');
+    if (which === "crew") return s.jt ? c("crew", "zofia-date.jpg", "mariana-date.jpg", "Friends’ table · 5 of 6", "", TBL3.name, "Zofia vs Mariana · waiting for one more seat", '<span class="mini">Open &gt;</span>')
+      : c("crew", "zofia-date.jpg", "mariana-date.jpg", "Invitation", "", TBL3.name, "Noa_K invited you · Zofia vs Mariana · minimum " + TBL3.min, '<span class="mini">See the invite &gt;</span>');
     if (which === "duo") return c("duo", "sophie.jpg", "emma.jpg", "Friends’ table · cancelled", " muted", "Weekend Duo", "Sophie vs Emma · Tuesday · not full, 100 coins back", "");
     if (which === "office") return c("office", "nina.jpg", "valentina.jpg", "Friends’ table · final", " muted", "Office League", "Nina vs Valentina · yesterday · you came 3rd, +66 coins", "");
     var M = tmine(TBL, s.min), n = s.app ? s.tn : 6;
-    return c("fns", "luciana-date.jpg", "mariana-date.jpg", "Friends’ table · " + n + " of 6", "", TBL.name, "Luciana vs Mariana · " + (s.res ? "you came " + ORD[M.mi] + (M.won ? ", payout " + M.won + " coins" : "") : 'results in <em class="tcd">' + (s.cd || "17:43") + '</em>'), '<span class="mini">' + (s.res ? "See results" : "Open the table") + ' &gt;</span>');
+    return c("fns", "zofia-date.jpg", "mariana-date.jpg", "Friends’ table · " + n + " of 6", "", TBL.name, "Zofia vs Mariana · " + (s.res ? "you came " + ORD[M.mi] + (M.won ? ", payout " + M.won + " coins" : "") : 'results in <em class="tcd">' + (s.cd || "17:43") + '</em>'), '<span class="mini">' + (s.res ? "See results" : "Open the table") + ' &gt;</span>');
   }
   // one-tap sign-in on the first Join
   var SSO = [["gg", "Google", '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3z"/><path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22z"/><path fill="#FBBC05" d="M6.4 14c-.2-.6-.3-1.3-.3-2s.1-1.4.3-2V7.4H3.1a10 10 0 0 0 0 9.2z"/><path fill="#EA4335" d="M12 6c1.5 0 2.8.5 3.8 1.5l2.9-2.9A10 10 0 0 0 3.1 7.4L6.4 10C7.2 7.7 9.4 6 12 6z"/></svg>'],
@@ -1880,10 +1881,10 @@ html.protoon main.wrap { display: none; }
     ["ms", "Microsoft", '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="9.5" height="9.5" fill="#F25022"/><rect x="12.5" y="2" width="9.5" height="9.5" fill="#7FBA00"/><rect x="2" y="12.5" width="9.5" height="9.5" fill="#00A4EF"/><rect x="12.5" y="12.5" width="9.5" height="9.5" fill="#FFB900"/></svg>']];
   function ssoMark(n, pre) { var o = SSO.filter(function (x) { return x[1] === (n || "Google"); })[0] || SSO[0]; return o[2] + (pre || "") + o[1]; }
   // the women, for Competitors and the Following row on My profile; FOL is who the player follows, the same on every screen
-  var WOMEN = [["luciana-portrait.jpg", "Luciana", "CO", "Colombia", 1, 1, "Live now", "50% 22%"], ["mariana-general.jpg", "Mariana", "BR", "Brazil", 0, 0, "Played today", "45% 12%"], ["sophie.jpg", "Sophie", "US", "USA", 0, 1, "Plays 18:00", "50% 25%"], ["emma.jpg", "Emma", "GB", "UK", 0, 0, "Plays 18:00", "50% 25%"],
+  var WOMEN = [["zofia-portrait.jpg", "Zofia", "PL", "Poland", 1, 1, "Live now", "50% 22%"], ["mariana-portrait.jpg", "Mariana", "BR", "Brazil", 0, 0, "Played today", "45% 12%"], ["sophie.jpg", "Sophie", "US", "USA", 0, 1, "Plays 18:00", "50% 25%"], ["emma.jpg", "Emma", "GB", "UK", 0, 0, "Plays 18:00", "50% 25%"],
     ["nina.jpg", "Nina", "ES", "Spain", 0, 1, "Plays 19:00", "50% 25%"], ["valentina.jpg", "Valentina", "AR", "Argentina", 0, 0, "Plays 19:00", "50% 25%"], ["maya.jpg", "Maya", "MX", "Mexico", 0, 0, "Plays 20:00", "50% 25%"], ["luna.jpg", "Luna", "ES", "Spain", 0, 0, "Plays 20:00", "50% 25%"]];
-  var FOL0 = { Luciana: 1, Sophie: 1, Nina: 1 }, FOL = JSON.parse(JSON.stringify(FOL0));
-  function folBtn() { return '<span class="fbtn' + (FOL.Luciana ? ' on' : '') + '">' + icon("bell") + (FOL.Luciana ? 'Following' : 'Follow') + '</span>'; }
+  var FOL0 = { Zofia: 1, Sophie: 1, Nina: 1 }, FOL = JSON.parse(JSON.stringify(FOL0));
+  function folBtn() { return '<span class="fbtn' + (FOL.Zofia ? ' on' : '') + '">' + icon("bell") + (FOL.Zofia ? 'Following' : 'Follow') + '</span>'; }
   // a match card for any match in the feed, with both women's faces
   function fchip(m, sub) { function f(x) { return '<span class="face sm"><img src="' + IMG + x[0] + '" alt="' + x[2] + '" style="object-position:' + (x[1] === "100% 0%" || x[1] === "0% 0%" ? "50% 20%" : x[1]) + ';transform:none"></span>'; } return '<div class="tmchip">' + f(m.a) + '<span class="vs3 sm">VS</span>' + f(m.b) + '<span><b>' + m.a[2] + ' vs ' + m.b[2] + '</b><small>' + sub + '</small></span></div>'; }
   var SCREENS = [
@@ -2051,12 +2052,12 @@ html.protoon main.wrap { display: none; }
         "<b>Range first, then the exact number</b>: 60–69, then 63 on a row of numbers you can see and tap.",
         "<b>No points while you vote</b>: they come with the results, when the match closes. <b>Save</b> stamps the answer and the next question slides in. Nothing is final until the review."],
       r: function () { return dragPhone("q3-you-L-crowd-L-band-1-pct-63", "Question 3, Going Out / Date: playable"); } },
-    { id: "q4", t: "Question 4 of 5: Swimwear", src: "Drag to predict", notes: [
-        "<b>Your vote and the crowd’s pick differ</b>: you chose Mariana but expect most players to choose Luciana, at 72%."],
+    { id: "q4", t: "Question 4 of 5: At the beach", src: "Drag to predict", notes: [
+        "<b>Your vote and the crowd’s pick differ</b>: you chose Mariana but expect most players to choose Zofia, at 72%."],
       open: "Swimwear is still waiting on the store-policy decision.",
       r: function () { return dragPhone("q4-you-M-crowd-L-band-2-pct-72", "Question 4, Swimwear: playable"); } },
     { id: "q5", t: "Question 5 of 5: Bring Her to Mama", src: "Drag to predict", notes: [
-        "<b>The last question</b>: her own photo with her mother, the crop keeping Luciana’s face whole.",
+        "<b>The last question</b>: her own photo with her mother, the crop keeping Zofia’s face whole.",
         "<b>After the fifth Save</b> the player reviews all five answers (next screen) and locks them there, the one final step. Change on the review reopens that question, then comes back."],
       r: function () { return dragPhone("q5-you-L-crowd-L-band-1-pct-61", "Question 5, Bring Her to Mama: playable"); } },
     { id: "review", anim: true, t: "Review before locking", src: "Missing from the PDF (screen 8 in the list)", notes: [
@@ -2068,7 +2069,7 @@ html.protoon main.wrap { display: none; }
         "<b>Gold only for the lock</b>, which glows, with “Final” said before the tap."],
       r: function () { return phone(body(
         top() + pill("live", "Live match", "Picks close in", "9m 05s") +
-        '<div class="revhead">' + meav() + '<div><h2 class="h-mid">Review your picks</h2><p class="sub">Luciana vs Mariana · results at 13:00, your time</p></div></div>' +
+        '<div class="revhead">' + meav() + '<div><h2 class="h-mid">Review your picks</h2><p class="sub">Zofia vs Mariana · results at 13:00, your time</p></div></div>' +
         '<div class="dcard"><div class="rrows">' + Q.map(function (q, i) {
           return '<div class="rrow" style="--d:' + i + '"><div class="rq"><small>' + q.t + '</small><span class="act">Change</span></div><div class="rduel">' +
             ["L", "M"].map(function (k) {
@@ -2111,7 +2112,7 @@ html.protoon main.wrap { display: none; }
         top() + pill("", "Final", "1,000 predictions counted") +
         '<div class="center"><h2 class="h-mid">Results</h2></div>' +
         duo([PHOTOS[0][0], PHOTOS[0][1], PHOTOS[0][2], PHOTOS[0][3]], 150, { sm: true, win: "L" }) +
-        '<div class="dcard"><div class="split"><div class="names"><span>Luciana 58%</span><em>42% Mariana</em></div><div class="sb"><span style="width:58%"></span><span style="width:42%"></span></div></div>' +
+        '<div class="dcard"><div class="split"><div class="names"><span>Zofia 58%</span><em>42% Mariana</em></div><div class="sb"><span style="width:58%"></span><span style="width:42%"></span></div></div>' +
         '<div class="reshead"><span>Category</span><span>Crowd</span><span>You</span><span>Pts</span></div><div class="resrows">' + Q.map(function (q, i) {
           var ex = q.res[0] === q.crowd && q.res[1] === q.pct;
           return '<div class="resrow' + (ex ? " exact" : "") + '" style="--d:' + i + '"><span class="rt">' + q.t + '</span>' +
@@ -2132,7 +2133,7 @@ html.protoon main.wrap { display: none; }
       r: function (s) {
         function mk(state, gold) { return '<span class="mk ' + state + (gold ? " gold" : "") + '">' + (state === "y" ? "✓" : state === "n" ? "✕" : "–") + '</span>'; }
         return phone(body(
-        top() + pill("", "Final", "Luciana vs Mariana") +
+        top() + pill("", "Final", "Zofia vs Mariana") +
         '<div class="ptshero"><b class="huge pts" data-count="' + qTot() + '" data-prefix="+">+' + qTot() + '</b><span><small>Points this match</small>Total<b>328 → ' + (328 + qTot()) + '</b></span></div>' +
         '<div class="dcard bd"><div class="bdh"><span>Category<em class="sub">crowd · you</em></span><span>Winner<em>+2</em></span><span>Range<em>+1</em></span><span>Exact<em>= 7</em></span><span>Pts</span></div>' +
           Q.map(function (q, i) {
@@ -2152,15 +2153,15 @@ html.protoon main.wrap { display: none; }
         "<b>A portrait instead of the bikini photo</b>, and only what the app offers, with starting prices.",
         "<b>“Supporting her never changes the match”</b> said up front."],
       r: function () { return phone(body(
-        top() + pill("", "Final", "Luciana vs Mariana") +
+        top() + pill("", "Final", "Zofia vs Mariana") +
         '<h2 class="h-big">Get more from the game</h2><p class="sub">The match is over. Now you can talk to the women you follow.</p>' +
-        '<div class="hero" style="height:176px"><img src="' + IMG + 'luciana-portrait.jpg" alt="" style="object-position:50% 25%"></div>' +
+        '<div class="hero" style="height:176px"><img src="' + IMG + 'zofia-portrait.jpg" alt="" style="object-position:50% 25%"></div>' +
         '<div class="lcard">' +
           '<div class="feat"><span class="ic">' + icon("chat", "var(--on-dot)") + '</span><div><b>Messages and private chat</b><span>Send a message, or chat 1:1 for 10 minutes.</span></div><span class="price">FROM $1</span></div>' +
-          '<div class="feat"><span class="ic">' + icon("live", "var(--on-dot)") + '</span><div><b>Post-game live</b><span>Join Luciana’s live with all her fans now.</span></div><span class="price">$5</span></div>' +
+          '<div class="feat"><span class="ic">' + icon("live", "var(--on-dot)") + '</span><div><b>Post-game live</b><span>Join Zofia’s live with all her fans now.</span></div><span class="price">$5</span></div>' +
           '<div class="feat"><span class="ic">' + icon("video", "var(--on-dot)") + '</span><div><b>Video call</b><span>A short 1:1 call.</span></div><span class="price">$5</span></div>' +
         '</div><div class="caption">Supporting her never changes the match.</div>' +
-        '<button class="btn black push">See Luciana’s page &gt;</button><div class="textlink">Not now</div>'
+        '<button class="btn black push">See Zofia’s page &gt;</button><div class="textlink">Not now</div>'
       ) + nav("Games"), true); } },
     { id: "my-games", t: "Games › My games", src: "Page 13 (was “Tables”)", notes: [
         "<b>Inside the Games tab</b>: All games | My games at the top, then This session, Past and Tables. (“My games” replaced the designer’s “Tables”: in sport, tables means standings.)",
@@ -2176,11 +2177,11 @@ html.protoon main.wrap { display: none; }
         if (tabs) list = tcard(s, "crew") + (s.app && !s.tbl ? '' : tcard(s)) + tcard(s, "office") + tcard(s, "duo") + '<button class="btn outline tnew" type="button">Start a friends’ table</button>';
         else if (past) list = m("valentina.jpg", "maya.jpg", "Final", "", "+11 points", "Yesterday · Valentina vs Maya") + m("luna.jpg", "emma.jpg", "Final", "", "+6 points", "Tuesday · Luna vs Emma") +
           m("emma.jpg", "nina.jpg", "Cancelled", " muted", "Not enough players", "Wednesday · Emma vs Nina · 512 joined, 700 needed") +
-          m("luciana-general.jpg", "nina.jpg", "Final", "", "+14 points", "Monday · Luciana vs Nina") + m("mariana-general.jpg", "sophie.jpg", "Final", "", "+3 points", "Sunday · Mariana vs Sophie");
+          m("zofia-general.jpg", "nina.jpg", "Final", "", "+14 points", "Monday · Zofia vs Nina") + m("mariana-general.jpg", "sophie.jpg", "Final", "", "+3 points", "Sunday · Mariana vs Sophie");
         else {
-          now = !s.app || (s.locked && !s.res) ? m("luciana-date.jpg", "mariana-date.jpg", "Locked", "", "Results at 13:00", "Luciana vs Mariana · 5 picks")
-            : s.res ? m("luciana-date.jpg", "mariana-date.jpg", "Final", "", "+" + qTot() + " points", "Luciana vs Mariana · winner right " + qWins() + " of 5")
-            : m("luciana-date.jpg", "mariana-date.jpg", "Live", "", "Picks close in 12m", "Luciana vs Mariana · " + (s.left ? s.left.done + " of 5 picked" : "not predicted yet"), '<span class="mini">' + (s.left ? "Continue" : "Predict") + ' &gt;</span>');
+          now = !s.app || (s.locked && !s.res) ? m("zofia-date.jpg", "mariana-date.jpg", "Locked", "", "Results at 13:00", "Zofia vs Mariana · 5 picks")
+            : s.res ? m("zofia-date.jpg", "mariana-date.jpg", "Final", "", "+" + qTot() + " points", "Zofia vs Mariana · winner right " + qWins() + " of 5")
+            : m("zofia-date.jpg", "mariana-date.jpg", "Live", "", "Picks close in 12m", "Zofia vs Mariana · " + (s.left ? s.left.done + " of 5 picked" : "not predicted yet"), '<span class="mini">' + (s.left ? "Continue" : "Predict") + ' &gt;</span>');
           list = now + m("sophie.jpg", "emma.jpg", "Final", "", "+8 points", "Sophie vs Emma · winner right 4 of 5") +
             m("nina.jpg", "valentina.jpg", "Final", "", "+5 points", "Nina vs Valentina · winner right 2 of 5") +
             m("maya.jpg", "luna.jpg", "Not predicted", " muted", "Picks close in 42m", "Maya vs Luna", '<span class="mini">Predict &gt;</span>');
@@ -2204,7 +2205,7 @@ html.protoon main.wrap { display: none; }
           n(1, "18:00", "sophie.jpg", "emma.jpg", "Sophie vs Emma", (je[1] ? 413 : 412) + " joined · 700 to start", 1) +
           n(2, "19:00", "nina.jpg", "valentina.jpg", "Nina vs Valentina", (je[2] ? 169 : 168) + " joined · 700 to start", 1) +
           n(3, "20:00", "maya.jpg", "luna.jpg", "Maya vs Luna", "Lobby opens at 19:30") +
-          n(4, "Tomorrow 17:00", "luciana-general.jpg", "sophie.jpg", "Luciana vs Sophie", "Lobby opens at 16:30")
+          n(4, "Tomorrow 17:00", "zofia-general.jpg", "sophie.jpg", "Zofia vs Sophie", "Lobby opens at 16:30")
         ) + nav("Games"), true);
       } },
 
@@ -2220,7 +2221,7 @@ html.protoon main.wrap { display: none; }
       r: function (s) { var mn = s.min || TBL.min, ok = !s.app || s.locked, done = s.left ? s.left.done : 0; return phone(body(
         '<div class="ph-top"><span class="iconbtn">' + icon("back", "var(--on-ic)") + '</span><div class="kick">Friends’ table</div><span class="coinbal">' + icon("coin", "var(--gold)") + TBL.bal.toLocaleString("en-US") + '</span></div>' +
         '<h2 class="h-mid center">Start a table</h2>' +
-        '<div class="tmatch"><div class="thumbs"><img src="' + IMG + 'luciana-date.jpg" alt=""><img src="' + IMG + 'mariana-date.jpg" alt=""><span class="vs">VS</span></div><span><small>The match</small><b>Luciana vs Mariana</b>' + (ok ? '<em>' + icon("lock", "var(--green)") + 'Your 5 picks are locked</em>' : '<em class="wait"><span class="tpips">' + [0, 1, 2, 3, 4].map(function (k) { return '<i' + (k < done ? ' class="on"' : '') + '></i>'; }).join("") + '</span>' + (done ? done + ' of 5 picks made' : 'No picks made yet') + '</em>') + '</span></div>' +
+        '<div class="tmatch"><div class="thumbs"><img src="' + IMG + 'zofia-date.jpg" alt=""><img src="' + IMG + 'mariana-date.jpg" alt=""><span class="vs">VS</span></div><span><small>The match</small><b>Zofia vs Mariana</b>' + (ok ? '<em>' + icon("lock", "var(--green)") + 'Your 5 picks are locked</em>' : '<em class="wait"><span class="tpips">' + [0, 1, 2, 3, 4].map(function (k) { return '<i' + (k < done ? ' class="on"' : '') + '></i>'; }).join("") + '</span>' + (done ? done + ' of 5 picks made' : 'No picks made yet') + '</em>') + '</span></div>' +
         '<div class="lcard tform">' +
           '<div class="flabel">Table name</div><div class="field"><input class="grow tname" type="text" value="' + TBL.name + '" maxlength="20" aria-label="Table name" autocomplete="off">' + icon("pencil", "var(--ink-3)") + '</div>' +
           '<div class="flabel">Minimum to take a seat</div>' +
@@ -2233,7 +2234,7 @@ html.protoon main.wrap { display: none; }
         (ok ? '<button class="btn black push">Open the table · ' + mn + ' coins</button>' : '<div class="caption">Lock all five picks to open the table. Its name and minimum are kept.</div><button class="btn black push">' + (done ? 'Finish my picks · ' + done + ' of 5' : 'Make my picks') + ' &gt;</button>')
       ) + nav("Games"), true); } },
     { id: "tbl-invite", anim: true, t: "Friends’ table 2: invite", src: "New", st: { inv: {} }, notes: [
-        "<b>The match banner</b>: the match this table plays on (Luciana vs Mariana, both women large), its state (live, picks close in 12:43), the 1,000 players in it, and the results at 13:00.",
+        "<b>The match banner</b>: the match this table plays on (Zofia vs Mariana, both women large), its state (live, picks close in 12:43), the 1,000 players in it, and the results at 13:00.",
         "<b>Five seats to fill</b>, counted on the friends list; the table screen shows them filling.",
         "<b>A code and a link</b> on one row, with Copy link, Messages and Share. The message carries the table, the match, the minimum and the split.",
         "<b>Friends already on THE ONE</b> (here, players from your city) get the invite inside the app. Tap Invite.",
@@ -2283,7 +2284,7 @@ html.protoon main.wrap { display: none; }
         function sy(k, txt) { if (k >= n) return ''; return '<div class="sys coinl">' + icon("coin", "var(--gold)") + TBL.seats[k].n + ' took ' + (txt || "a seat") + ' · ' + tstake(TBL.seats[k], mn) + '</div>'; }
         return phone(body(
           '<div class="chathead grp"><span>' + icon("back", "var(--on-ic)") + '</span><span class="gstack">' + [1, 2, 0].map(function (k) { return '<img src="' + IMG + TBL.seats[k].av + '" alt="">'; }).join("") + '</span><div><b>' + TBL.name + '</b><small>' + n + (n === 1 ? ' player' : ' players') + ' · ' + Math.min(n, 4) + ' here now</small></div><span class="coinbal">' + icon("coin", "var(--gold)") + tpay(TBL.seats.slice(0, n), mn).pot.toLocaleString("en-US") + '</span></div>' +
-          '<div class="timerbar tmbar"><span class="tmf">' + face("L", "xs") + face("M", "xs") + '</span><span class="grow">Luciana vs Mariana · ' + (s.res ? '<b>Final</b> · Luciana won' : 'results in <b class="tcd">' + (s.cd || "17:43") + '</b>') + '</span><span class="mini">Table</span></div>' +
+          '<div class="timerbar tmbar"><span class="tmf">' + face("L", "xs") + face("M", "xs") + '</span><span class="grow">Zofia vs Mariana · ' + (s.res ? '<b>Final</b> · Zofia won' : 'results in <b class="tcd">' + (s.cd || "17:43") + '</b>') + '</span><span class="mini">Table</span></div>' +
           '<div class="msgs"><div class="sys">Today · Big M opened the table</div>' +
             sy(1) + fr(1, "I’m in. Who else?", "12:41") + sy(2) + fr(2, "Putting in 150. Feeling it today", "12:42") +
             '<div class="msg me">Locked all five. The Date question was easy<small>12:43</small></div>' +
@@ -2293,7 +2294,7 @@ html.protoon main.wrap { display: none; }
         ) + nav("Games"), true);
       } },
     { id: "tbl-results", anim: true, t: "Friends’ table 5: table results", src: "New", notes: [
-        "<b>The match on top</b>, so the result reads against the right match: Luciana vs Mariana, final.",
+        "<b>The match on top</b>, so the result reads against the right match: Zofia vs Mariana, final.",
         "<b>At 13:00, with the match results</b>: the table ranks the six by their points in the match, the same points as Your points.",
         "<b>The top three share the pot in proportion to their points</b>: 15, 13 and 12 of 40 take 195, 169 and 156 of the 520.",
         "<b>The pot in full</b>: 650 in, 130 to the house (20%), 520 shared.",
@@ -2308,7 +2309,7 @@ html.protoon main.wrap { display: none; }
           '<img src="' + IMG + p.av + '" alt=""><b>' + p.n + (p.me ? ' <span class="youtag">YOU</span>' : '') + '</b><span class="ptsl">' + tpts(p) + ' pts</span><span class="won">' + icon("coin", "var(--gold)") + '+' + R.won[r - 1].toLocaleString("en-US") + '</span></div>'; }
         function pips5(p) { return '<span class="pips">' + p.q.map(function (x) { return '<i class="' + (x === 7 ? "x" : x ? "w" : "n") + '"></i>'; }).join("") + '</span>'; }
         return phone(body(
-          top() + pill("", "Final", T.name) + mchip(T, "Final · " + (T === TBL ? "Luciana won with 58%" : T.won)) +
+          top() + pill("", "Final", T.name) + mchip(T, "Final · " + (T === TBL ? "Zofia won with 58%" : T.won)) +
           '<div class="thero">' + meav() + '<div><h2>' + (mi === 0 ? "You win the table" : "You came " + ["1st", "2nd", "3rd", "4th", "5th", "6th"][mi]) + '</h2></div></div>' +
           '<div class="tmath tnet"><span class="g">Your payout<b>' + icon("coin", "var(--gold)") + (mi < 3 ? R.won[mi] : 0).toLocaleString("en-US") + '</b></span><span>Your entry<b>' + stk.toLocaleString("en-US") + '</b></span>' +
             '<span class="' + (mi < 3 && R.won[mi] >= stk ? "up" : "dn") + '">Net<b>' + ((mi < 3 ? R.won[mi] : 0) >= stk ? '+' : '−') + Math.abs((mi < 3 ? R.won[mi] : 0) - stk).toLocaleString("en-US") + '</b></span></div>' +
@@ -2332,7 +2333,7 @@ html.protoon main.wrap { display: none; }
         return phone(body(
           '<div class="ph-top"><span class="iconbtn">' + icon("back", "var(--on-ic)") + '</span><div class="kick">Friends’ table</div><span class="coinbal">' + icon("coin", "var(--gold)") + (TBL.bal - (sat ? T.min : 0)).toLocaleString("en-US") + '</span></div>' +
           '<div class="tjhead"><img src="' + IMG + T.seats[0].av + '" alt=""><div><small>' + (sat ? 'You’re seated at' : T.seats[0].n + ' invited you to') + '</small><h2>' + T.name + '</h2></div></div>' +
-          tmchip(s.res ? "Final · Luciana won with 58%" : "Live · picks and seats close in 12:43") +
+          tmchip(s.res ? "Final · Zofia won with 58%" : "Live · picks and seats close in 12:43") +
           '<div class="lcard tjcard"><div class="tjseats">' + [0, 1, 2, 3, 4, 5].map(function (k) { var q = seats[k]; return q ? '<span class="tjs' + (q.me ? " me" : "") + '"><img src="' + IMG + q.av + '" alt="">' + (k === 0 ? '<i>' + icon("crown", "var(--gold)") + '</i>' : '') + '<b>' + q.n + '</b></span>' : '<span class="tjs open"><span>' + icon("plus", "var(--pink)") + '</span><b>Open</b></span>'; }).join("") + '</div>' +
             '<div class="tjstats"><span><small>Minimum</small><b>' + icon("coin", "var(--gold)") + T.min + '</b></span><span><small>In the pot</small><b>' + icon("coin", "var(--gold)") + pot + '</b></span><span><small>Seated</small><b>' + n + ' of 6</b></span></div></div>' +
           '<div class="tjrules">' +
@@ -2371,7 +2372,7 @@ html.protoon main.wrap { display: none; }
         "<b>Search and empty results</b>: typing a name narrows the cards; when nothing matches, the grid says so and offers to clear the search or the filters.",
         "<b>A woman’s card opens her full page</b>: stats and best categories always; her contact menu and prices only after her match’s results."],
       r: function (s) {
-        var L = WOMEN, nf = L.filter(function (w) { return FOL[w[1]]; }).length, cty = s.cty || {}, CN = { CO: "Colombia", BR: "Brazil", US: "USA", GB: "UK", ES: "Spain", AR: "Argentina", MX: "Mexico" };
+        var L = WOMEN, nf = L.filter(function (w) { return FOL[w[1]]; }).length, cty = s.cty || {}, CN = { PL: "Poland", CO: "Colombia", BR: "Brazil", US: "USA", GB: "UK", ES: "Spain", AR: "Argentina", MX: "Mexico" };
         var con = Object.keys(cty).filter(function (k) { return cty[k]; });
         var CH = [["all", "All", 128], ["following", "Following", nf], ["live", "Live now", 1], ["today", "Playing today", 6]];
         var rows = L.filter(function (w) { return (s.chip === "following" ? FOL[w[1]] : s.chip === "live" ? w[4] : s.chip === "today" ? /^Plays/.test(w[6]) : true) && (!con.length || cty[w[2]]); });
@@ -2379,7 +2380,7 @@ html.protoon main.wrap { display: none; }
         var sheet = '<span class="fdim" data-act="sheet"></span><div class="fsheet" role="dialog" aria-label="Filters"><span class="fgrab"></span>' +
           '<div class="fsh-head"><b>Filters</b><span class="mini ghost" data-act="sheet">Close</span></div>' +
           '<div class="flabel">Sort by</div><div class="fopts"><span class="on">Popular</span><span>Newest</span><span>A–Z</span></div>' +
-          '<div class="flabel">Country</div><div class="fopts">' + ["CO", "BR", "US", "GB", "ES", "AR", "MX"].map(function (c) { return '<span class="' + (cty[c] ? "on" : "") + '" data-act="cty" data-v="' + c + '">' + FLAGS[c] + CN[c] + '</span>'; }).join("") + '<span>More…</span></div>' +
+          '<div class="flabel">Country</div><div class="fopts">' + ["PL", "BR", "US", "GB", "ES", "AR", "MX"].map(function (c) { return '<span class="' + (cty[c] ? "on" : "") + '" data-act="cty" data-v="' + c + '">' + FLAGS[c] + CN[c] + '</span>'; }).join("") + '<span>More…</span></div>' +
           '<div class="flabel">Show only</div><div class="fopts"><span><i class="ldot"></i>Live now</span><span>Playing today</span><span>Following</span></div>' +
           '<div class="fsh-btns"><span class="btn outline" data-act="ctyclr">Reset</span><span class="btn black" data-act="sheet">Show ' + shown + (shown === 1 ? ' woman' : ' women') + '</span></div></div>';
         return phone(body(
@@ -2435,9 +2436,9 @@ html.protoon main.wrap { display: none; }
             return '<button class="fol" type="button" data-w="' + w[1] + '"><span class="folph' + (w[3] ? " live" : "") + '"><img src="' + IMG + w[0] + '" alt="" style="object-position:' + w[4] + '"></span><b>' + w[1] + '</b><small>' + (w[3] ? '<i class="ldot"></i>' : '') + w[2] + '</small></button>'; }).join("") +
             '<button class="fol more" type="button"><span class="folph">+</span><b>Find more</b><small>Competitors</small></button></div>' +
           '<div class="sechead pseg"><div class="segc"><span' + (tabsOn ? ' class="on"' : '') + ' data-act="pt" data-v="tables">My tables · ' + ((fns ? 2 : 1) + (s && s.jt ? 1 : 0)) + '</span><span' + (tabsOn ? '' : ' class="on"') + ' data-act="pt" data-v="games">Recent games</span></div><span class="mini ghost secall">All ›</span></div>' +
-          (tabsOn ? (fns ? trow("fns", "luciana-date.jpg", "mariana-date.jpg", "Friday Night Six · " + fn + " of 6", "Luciana vs Mariana", s && s.res ? "You came " + ORD[fR.mi] + " · results are in" : 'Results in <i class="tcd">' + ((s && s.cd) || "17:43") + '</i>', s && s.res ? '<b>' + (fR.won ? '+' + fR.won : '0') + '</b><small>coins</small>' : '<b>' + fpot + '</b><small>pot</small>') : '') +
+          (tabsOn ? (fns ? trow("fns", "zofia-date.jpg", "mariana-date.jpg", "Friday Night Six · " + fn + " of 6", "Zofia vs Mariana", s && s.res ? "You came " + ORD[fR.mi] + " · results are in" : 'Results in <i class="tcd">' + ((s && s.cd) || "17:43") + '</i>', s && s.res ? '<b>' + (fR.won ? '+' + fR.won : '0') + '</b><small>coins</small>' : '<b>' + fpot + '</b><small>pot</small>') : '') +
               trow("office", "nina.jpg", "valentina.jpg", "Office League · final", "Nina vs Valentina", "Yesterday · you came 3rd of 6", '<b>+66</b><small>coins</small>')
-            : rg("luciana-portrait.jpg", "mariana-general.jpg", "Today · 13:00", "Luciana vs Mariana", pend ? null : qTot(), Q.map(function (q) { return pend ? "" : q.pts === 7 ? "x" : q.res[0] === q.crowd ? "w" : "n"; }), pend ? "Results at 13:00, your time" : qWins() + " of 5 winners · " + qEx() + " exact") +
+            : rg("zofia-portrait.jpg", "mariana-general.jpg", "Today · 13:00", "Zofia vs Mariana", pend ? null : qTot(), Q.map(function (q) { return pend ? "" : q.pts === 7 ? "x" : q.res[0] === q.crowd ? "w" : "n"; }), pend ? "Results at 13:00, your time" : qWins() + " of 5 winners · " + qEx() + " exact") +
               rg("sophie.jpg", "emma.jpg", "Yesterday · 21:00", "Sophie vs Emma", 8, ["w", "w", "n", "w", "w"], "4 of 5 winners"))
         ) + nav("My profile"), true);
       } },
@@ -2463,9 +2464,9 @@ html.protoon main.wrap { display: none; }
         "<b>The bell on My profile</b> opens it, with a dot when something is new. The tab bar stays at four tabs."],
       r: function (s) {
         var R = s.res, L = [
-          [R ? "trophy" : "hour", R ? "Results are in" : "Picks close in 12 minutes", R ? "Luciana vs Mariana · you scored +" + qTot() : "Luciana vs Mariana", R ? "results" : "home-open", 1, "now"],
-          ["people", "Noa_K invited you to Beach Crew", "A friends’ table on Luciana vs Mariana · minimum 150", "tbl-join", 1, "12:31"],
-          ["chat", "Luciana answered your message", "“Thank you! See you at the live”", "chat", 0, "Yesterday"],
+          [R ? "trophy" : "hour", R ? "Results are in" : "Picks close in 12 minutes", R ? "Zofia vs Mariana · you scored +" + qTot() : "Zofia vs Mariana", R ? "results" : "home-open", 1, "now"],
+          ["people", "Noa_K invited you to Beach Crew", "A friends’ table on Zofia vs Mariana · minimum 150", "tbl-join", 1, "12:31"],
+          ["chat", "Zofia answered your message", "“Thank you! See you at the live”", "chat", 0, "Yesterday"],
           ["coin", "Office League: you came 3rd", "Payout 66 coins · entry 50 · net +16", "office", 0, "Yesterday"],
           ["trophy", "You won last week’s prize", "Claim it by Sunday, 23:59 your time", "prize", 0, "Monday"],
           ["block", "Emma vs Nina was cancelled", "512 joined; a match needs 700 to start", "", 0, "Wednesday"],
@@ -2487,7 +2488,7 @@ html.protoon main.wrap { display: none; }
         var app = s.app, made = !app || s.tbl, res = !app || s.res, jt = app && s.jt, M = tmine(TBL, s.min || TBL.min), rows = [];
         if (made && res) rows.push(["Friday Night Six · payout", "Today · " + ORD[M.mi] + (M.won ? " · entry " + M.stake + " · net " + (M.won >= M.stake ? "+" : "−") + Math.abs(M.won - M.stake) : " · no share"), M.won]);
         if (jt) rows.push(["Beach Crew · entry", "Today · back if you leave before it’s full", -TBL3.min]);
-        if (made) rows.push(["Friday Night Six · entry", "Today · Luciana vs Mariana", -M.stake]);
+        if (made) rows.push(["Friday Night Six · entry", "Today · Zofia vs Mariana", -M.stake]);
         rows.push(["Office League · payout", "Yesterday · 3rd · entry 50 · net +16", 66], ["Office League · entry", "Yesterday · Nina vs Valentina", -50], ["Weekend Duo · refund", "Tuesday · the table didn’t fill", 100], ["Weekend Duo · entry", "Tuesday · Sophie vs Emma", -100]);
         var bal = TBL.bal - (made ? M.stake : 0) + (made && res ? M.won : 0) - (jt ? TBL3.min : 0);
         return phone(body(
@@ -2505,11 +2506,11 @@ html.protoon main.wrap { display: none; }
       open: "Open: what she can show here during the match, and the video’s length and format.",
       r: function (s) { return phone(body(
         '<div class="ph-top"><span class="iconbtn">' + icon("back", "var(--on-ic)") + '</span><div class="kick">Question 1 of 5 · Overall</div><span class="iconbtn"></span></div>' +
-        '<button class="vhero' + (s.play ? " playing" : "") + '" data-act="hplay" aria-label="' + (s.play ? "Pause" : "Play") + ' Luciana’s video"><img src="' + IMG + 'luciana-general.jpg" alt="" style="object-position:62% 12%"><span class="fade"></span>' +
+        '<button class="vhero' + (s.play ? " playing" : "") + '" data-act="hplay" aria-label="' + (s.play ? "Pause" : "Play") + ' Zofia’s video"><img src="' + IMG + 'zofia-general.jpg" alt="" style="object-position:62% 12%"><span class="fade"></span>' +
           '<span class="vpill">' + icon(s.play ? "pause" : "play", "#fff") + (s.play ? "0:03 / 0:08" : "Watch · 0:08") + '</span><span class="vbar"><i></i></span>' +
-          '<span class="hname"><b>Luciana</b><small>' + FLAGS.CO + 'Colombia</small></span></button>' +
+          '<span class="hname"><b>Zofia</b><small>' + FLAGS.PL + 'Poland</small></span></button>' +
         '<div class="row2">' + folBtn() + '<span class="socials"><span>' + icon("ig", "var(--on-ic)") + '</span><span>' + icon("fb", "var(--on-ic)") + '</span><span>' + icon("tt", "var(--on-ic)") + '</span></span></div>' +
-        '<div class="gal">' + [["luciana-portrait.jpg", "50% 20%"], ["luciana-date.jpg", "50% 25%"], ["luciana-mama.jpg", "88% 20%"]].map(function (g) { return '<span><img src="' + IMG + g[0] + '" alt="" style="object-position:' + g[1] + '"></span>'; }).join("") + '</div>' +
+        '<div class="gal">' + [["zofia-portrait.jpg", "50% 20%"], ["zofia-date.jpg", "50% 25%"], ["zofia-mama.jpg", "88% 20%"]].map(function (g) { return '<span><img src="' + IMG + g[0] + '" alt="" style="object-position:' + g[1] + '"></span>'; }).join("") + '</div>' +
         '<div class="lcard soon"><span class="ic">' + icon("lock", "var(--gold)") + '</span><div><b>Chat, live and calls open after the results</b><span>Her contact menu shows when the match ends. Supporting her never changes the match.</span></div></div>' +
         '<button class="btn black push">Back to my vote</button>'
       ) + nav("Games"), true); } },
@@ -2519,23 +2520,23 @@ html.protoon main.wrap { display: none; }
         "<b>The flow’s contact menu and prices</b>, with the length of each item.",
         "<b>Her stats laid out as in the designer’s card</b> (Pilot mockup 3, page 15): photo, name, handle, country, Follow and her socials, then labelled numbers: Record 12W – 4L, Win rate 75%, Matches 16.",
         "<b>Her best categories</b> as photo tiles with a bar, the win % and the record (First impression 80%, 4–1). No church, and no Swimwear tile while that category waits on the store decision.",
-        "<b>Her own prices</b>: each woman sets the price of every item on her menu (Luciana’s are shown). 80% goes to her, and “never changes the match” is on the page.",
+        "<b>Her own prices</b>: each woman sets the price of every item on her menu (Zofia’s are shown). 80% goes to her, and “never changes the match” is on the page.",
         "<b>Country, not city.</b> Custom request opens a form to write the request before paying."],
       r: function (s) {
         var pre = s && s.app && !s.res; // her match isn't final yet: the profile shows, her menu and prices wait
         var M = [["msg", "Send a message", "one message", "$1"], ["chat", "Private chat", "10 minutes", "$3"], ["live", "Post-game live", "with her fans", "$5"], ["room", "Private room", "10 minutes", "$5"], ["video", "Video call", "5 minutes", "$5"], ["request", "Custom request", "one request", "$3"], ["tip", "Tip", "support her", "From $1"]];
         return phone(body(
           '<div class="ph-top"><span class="iconbtn">' + icon("back", "var(--on-ic)") + '</span><div class="kick">Competitor' + (pre ? ' · playing now' : '') + '</div><span class="iconbtn"></span></div>' +
-          '<div class="lcard hcard"><div class="hc-top"><div class="hc-ph"><img src="' + IMG + 'luciana-portrait.jpg" alt="" style="object-position:50% 25%"></div><div class="hc-id"><h4>Luciana</h4><small class="hand">@luciana</small><small>' + FLAGS.CO + 'Colombia</small>' +
+          '<div class="lcard hcard"><div class="hc-top"><div class="hc-ph"><img src="' + IMG + 'zofia-portrait.jpg" alt="" style="object-position:50% 25%"></div><div class="hc-id"><h4>Zofia</h4><small class="hand">@zofia</small><small>' + FLAGS.PL + 'Poland</small>' +
             '<div class="hc-act">' + folBtn() + '<span class="socials"><span>' + icon("ig", "var(--on-ic)") + '</span><span>' + icon("fb", "var(--on-ic)") + '</span><span>' + icon("tt", "var(--on-ic)") + '</span></span></div></div></div>' +
             '<div class="hc-stats"><span><small>Record</small><b>12W – 4L</b></span><span><small>Win rate</small><b>' + icon("games", "var(--gold)") + '75%</b></span><span><small>Matches</small><b>16</b></span></div></div>' +
           '<div class="kick">Her best categories</div>' +
-          '<div class="bestcats">' + [["luciana-portrait.jpg", "First impression", 80, "4–1", "50% 22%"], ["luciana-general.jpg", "Overall", 75, "12–4", "62% 10%"], ["luciana-date.jpg", "Going Out / Date", 75, "3–1", "50% 22%"], ["luciana-mama.jpg", "Bring Her to Mama", 75, "3–1", "88% 18%"]].map(function (c, i) {
+          '<div class="bestcats">' + [["zofia-portrait.jpg", "First impression", 80, "4–1", "50% 22%"], ["zofia-general.jpg", "Overall", 75, "12–4", "62% 10%"], ["zofia-date.jpg", "Going Out / Date", 75, "3–1", "50% 22%"], ["zofia-mama.jpg", "Bring Her to Mama", 75, "3–1", "88% 18%"]].map(function (c, i) {
             return '<div class="bc" style="--d:' + i + '"><span class="bcph"><img src="' + IMG + c[0] + '" alt="" style="object-position:' + c[4] + '"></span><b>' + c[1] + '</b><span class="bcbar"><i style="width:' + c[2] + '%"></i></span><em>' + c[2] + '%<small>' + c[3] + '</small></em></div>'; }).join("") + '</div>' +
-          (pre ? '<div class="kick">Talk to her</div><div class="lcard soon"><span class="ic">' + icon("lock", "var(--gold)") + '</span><div><b>Chat, live and calls open after the results</b><span>Luciana is playing now. Her menu and her prices show when the match ends, at 13:00 your time. Supporting her never changes the match.</span></div></div>'
+          (pre ? '<div class="kick">Talk to her</div><div class="lcard soon"><span class="ic">' + icon("lock", "var(--gold)") + '</span><div><b>Chat, live and calls open after the results</b><span>Zofia is playing now. Her menu and her prices show when the match ends, at 13:00 your time. Supporting her never changes the match.</span></div></div>'
             : '<div class="kick">Stay after the match</div>' +
           '<div class="lcard" style="gap:0"><div class="menu two">' + M.map(function (m) { return '<div class="mrow"><span class="ic">' + icon(m[0], "var(--on-dot)") + '</span><b>' + m[1] + '</b><span class="mmeta"><span class="price">' + m[3] + '</span>' + m[2] + '</span></div>'; }).join("") + '</div></div>' +
-          '<div class="note80">Luciana sets her own prices, and 80% goes to her. Supporting her never changes the match.</div>')
+          '<div class="note80">Zofia sets her own prices, and 80% goes to her. Supporting her never changes the match.</div>')
         ) + nav("Competitors"), true);
       } },
     { id: "chat", t: "Private chat", src: "Page 16", notes: [
@@ -2544,29 +2545,29 @@ html.protoon main.wrap { display: none; }
         "<b>Opens what was bought</b>: Send a message opens this chat with one message to send (then it says Sent); Private chat opens 10 minutes.",
         "<b>Neutral sample messages</b>, and her country only (no age or city)."],
       r: function (s) { var one = s && s.mode === "msg"; return phone(body(
-        '<div class="chathead"><span>' + icon("back", "var(--on-ic)") + '</span><img src="' + IMG + 'luciana-portrait.jpg" alt="" style="object-position:50% 25%"><div><b>Luciana</b><small>' + FLAGS.CO + 'Colombia</small></div><div class="tools"><span>' + icon("flag", "var(--on-ic)") + 'Report</span><span>' + icon("block", "var(--on-ic)") + 'Block</span></div></div>' +
+        '<div class="chathead"><span>' + icon("back", "var(--on-ic)") + '</span><img src="' + IMG + 'zofia-portrait.jpg" alt="" style="object-position:50% 25%"><div><b>Zofia</b><small>' + FLAGS.PL + 'Poland</small></div><div class="tools"><span>' + icon("flag", "var(--on-ic)") + 'Report</span><span>' + icon("block", "var(--on-ic)") + 'Block</span></div></div>' +
         (one ? '<div class="timerbar"><span>One message · <b>' + (s.sent ? 'sent' : '1 to send') + '</b></span><span class="mini">Chat 10 min · $3</span></div>'
           : '<div class="timerbar"><span>Private chat · <b>7:42</b> left</span><span class="mini">+10 min · $3</span></div>') +
         '<div class="msgs"><div class="sys">' + (one ? 'Yesterday · private chat' : 'Today · private chat started') + '</div>' +
-          '<div class="msg me">Hi Luciana! Good luck in tonight’s match.<small>18:04</small></div>' +
+          '<div class="msg me">Hi Zofia! Good luck in tonight’s match.<small>18:04</small></div>' +
           '<div class="msg her">Thanks! Did you predict it?<small>18:05</small></div>' +
-          (one ? '<div class="sys">Today · one message to Luciana. She answers here.</div>' + (s.sent ? '<div class="msg me">' + s.sent + '<small>now</small></div><div class="sys">Sent. Her answer shows here and in Activity.</div>' : '') :
+          (one ? '<div class="sys">Today · one message to Zofia. She answers here.</div>' + (s.sent ? '<div class="msg me">' + s.sent + '<small>now</small></div><div class="sys">Sent. Her answer shows here and in Activity.</div>' : '') :
           '<div class="msg me">I did. The Date question was close.<small>18:05</small></div>' +
           '<div class="msg her">It always is. Will you join the live after results?<small>18:06</small></div>' +
           '<div class="msg me">I’ll be there.<small>18:06</small></div>') + '</div>' +
         (one && s.sent ? '<div class="composer"><div class="field done">Message sent ✓</div></div>' : '<div class="composer"><div class="field">' + (one ? 'Write your one message…' : 'Type a message…') + '</div><span class="send">' + icon("send", "var(--on-dot)") + '</span></div>')) + nav("Competitors"), true); } },
     { id: "live", t: "Post-game live: her room with her fans", src: "Page 17, first half", notes: [
-        "<b>One competitor, all her fans</b>: after the results Luciana goes live in her own room, and everyone who follows her joins and talks to her together. Entry $5, as in the flow.",
+        "<b>One competitor, all her fans</b>: after the results Zofia goes live in her own room, and everyone who follows her joins and talks to her together. Entry $5, as in the flow.",
         "<b>Each woman has her own room</b>: Mariana’s opens from her page.",
         "<b>Fans write in the stream and she answers</b> (her name in gold). The player’s camera is never on.",
         "<b>Tips appear as messages</b> in the stream, with no totals or rankings of spenders.",
         "<b>Report</b> on the room, and <b>tap a fan’s line</b> to report that message or block the fan."],
       r: function () { return phone(body(
-        '<div class="ph-top"><span class="iconbtn">' + icon("back", "var(--on-ic)") + '</span><div class="kick">Luciana · post-game live</div><span class="iconbtn">' + icon("flag", "var(--on-ic)") + '</span></div>' +
-        '<div class="stage" style="height:350px"><img class="full" src="' + IMG + 'luciana-portrait.jpg" alt="" style="object-position:50% 22%">' +
+        '<div class="ph-top"><span class="iconbtn">' + icon("back", "var(--on-ic)") + '</span><div class="kick">Zofia · post-game live</div><span class="iconbtn">' + icon("flag", "var(--on-ic)") + '</span></div>' +
+        '<div class="stage" style="height:350px"><img class="full" src="' + IMG + 'zofia-portrait.jpg" alt="" style="object-position:50% 22%">' +
           '<div class="tl"><span class="lbadge">● LIVE</span><span class="dbadge">32:10</span></div><div class="tr"><span class="dbadge">' + icon("eye", "#fff") + '128 fans</span></div>' +
-          '<div class="hername">Luciana<small>' + FLAGS.CO + 'Colombia · live with her fans</small></div></div>' +
-        '<div class="stream"><div class="sline"><b>Daniel</b>Congrats Luciana!</div><div class="sline"><b>Ana</b>The Mama question was so close</div><div class="sline her"><b>Luciana</b>Thank you all! Who called the Date question?</div><div class="sline tipl">' + icon("tip", "var(--on-ic)").replace('<svg', '<svg style="width:16px;height:16px;flex:none"') + 'Carlos sent a $2 tip to Luciana</div><div class="sline"><b>Mateo</b>See you next week</div></div>' +
+          '<div class="hername">Zofia<small>' + FLAGS.PL + 'Poland · live with her fans</small></div></div>' +
+        '<div class="stream"><div class="sline"><b>Daniel</b>Congrats Zofia!</div><div class="sline"><b>Ana</b>The Mama question was so close</div><div class="sline her"><b>Zofia</b>Thank you all! Who called the Date question?</div><div class="sline tipl">' + icon("tip", "var(--on-ic)").replace('<svg', '<svg style="width:16px;height:16px;flex:none"') + 'Carlos sent a $2 tip to Zofia</div><div class="sline"><b>Mateo</b>See you next week</div></div>' +
         '<div class="composer"><div class="field">Say something…</div><span class="send">' + icon("send", "var(--on-dot)") + '</span></div>' +
         '<div class="controls"><span class="ctl tip"><i>' + icon("tip", "var(--on-dot)") + '</i>Tip</span><span class="ctl"><i>' + icon("chat", "var(--on-ic)") + '</i>Chat</span><span class="ctl end"><i>' + icon("end", "#fff") + '</i>Leave</span></div>') + nav("Competitors"), true); } },
     { id: "call", t: "Video call or private room (1:1)", src: "Page 17, second half", notes: [
@@ -2576,25 +2577,25 @@ html.protoon main.wrap { display: none; }
         "<b>Your camera tile stays clear of her face.</b> Report is one tap away."],
       r: function (s) { var room = s && s.mode === "room"; return phone(body(
         '<div class="ph-top"><span class="iconbtn">' + icon("back", "var(--on-ic)") + '</span>' + pill("live", room ? "Private room" : "Video call", "", room ? "9:12 left" : "4:12 left") + '<span class="iconbtn">' + icon("flag", "var(--on-ic)") + '</span></div>' +
-        '<div class="stage" style="height:560px"><img class="full" src="' + IMG + 'luciana-portrait.jpg" alt="" style="object-position:50% 20%"><div class="hername">Luciana<small>' + FLAGS.CO + 'Colombia</small></div><div class="selftile"><img src="' + IMG + 'cam-man.jpg" alt=""></div></div>' +
-        '<div class="caption">' + (room ? 'Private room · just you and Luciana · 10 minutes for $5, her price' : 'Video call · 5 minutes for $5, her price') + '</div>' +
+        '<div class="stage" style="height:560px"><img class="full" src="' + IMG + 'zofia-portrait.jpg" alt="" style="object-position:50% 20%"><div class="hername">Zofia<small>' + FLAGS.PL + 'Poland</small></div><div class="selftile"><img src="' + IMG + 'cam-man.jpg" alt=""></div></div>' +
+        '<div class="caption">' + (room ? 'Private room · just you and Zofia · 10 minutes for $5, her price' : 'Video call · 5 minutes for $5, her price') + '</div>' +
         '<div class="controls push"><span class="ctl"><i>' + icon("mic", "var(--on-ic)") + '</i>Mic</span><span class="ctl"><i>' + icon("video", "var(--on-ic)") + '</i>Camera</span><span class="ctl end"><i>' + icon("end", "#fff") + '</i>End</span></div>') + nav("Competitors"), true); } },
     { id: "request", t: "Custom request: write it first", src: "New", st: { rq: "shout" }, notes: [
         "<b>Write the request before paying</b>: what kind (shout-out, short video or voice note), what to say, and who it’s for.",
-        "<b>Her price and her time</b>: Luciana sets the price and answers within 24 hours. The answer arrives in Activity and in her chat.",
+        "<b>Her price and her time</b>: Zofia sets the price and answers within 24 hours. The answer arrives in Activity and in her chat.",
         "<b>Pay $3 and send</b> opens the pay sheet; Cancel goes back to her page."],
       open: "Open: what happens if she declines or doesn’t answer in time (money back, as a rule?), and what she may refuse.",
       r: function (s) {
         var K = [["shout", "Shout-out"], ["video", "Short video"], ["voice", "Voice note"]];
         return phone(body(
           '<div class="ph-top"><span class="iconbtn">' + icon("back", "var(--on-ic)") + '</span><div class="kick">Custom request</div><span class="iconbtn"></span></div>' +
-          '<div class="rqhead"><img src="' + IMG + 'luciana-portrait.jpg" alt="" style="object-position:50% 25%"><div><b>Luciana</b><small>' + FLAGS.CO + 'Colombia · answers within 24 hours</small></div><span class="rqprice">$3</span></div>' +
+          '<div class="rqhead"><img src="' + IMG + 'zofia-portrait.jpg" alt="" style="object-position:50% 25%"><div><b>Zofia</b><small>' + FLAGS.PL + 'Poland · answers within 24 hours</small></div><span class="rqprice">$3</span></div>' +
           '<div class="lcard">' +
             '<div class="flabel">What would you like?</div><div class="tchips">' + K.map(function (k) { return '<button class="qc' + (s.rq === k[0] ? " on" : "") + '" type="button" data-act="rq" data-v="' + k[0] + '">' + k[1] + '</button>'; }).join("") + '</div>' +
             '<div class="flabel">Your request</div><div class="field rqtext"><textarea class="grow" rows="4" aria-label="Your request">Say happy birthday to my brother Dan. He’s your biggest fan!</textarea></div>' +
             '<div class="flabel">For</div><div class="field"><input class="grow nick" type="text" value="Dan" maxlength="20" aria-label="Who it’s for" autocomplete="off"></div>' +
           '</div>' +
-          '<div class="caption">Luciana sets this price. Her answer arrives in Activity and in your chat with her. Supporting her never changes the match.</div>' +
+          '<div class="caption">Zofia sets this price. Her answer arrives in Activity and in your chat with her. Supporting her never changes the match.</div>' +
           '<button class="btn black push">Pay $3 and send</button><div class="textlink">Cancel</div>'
         ) + nav("Competitors"), true);
       } },
@@ -2669,7 +2670,7 @@ html.protoon main.wrap { display: none; }
         "<b>Report and block</b> work from her chat, her live and a table’s chat: tap a message."],
       open: "Open: what happens to coins left in the balance and to purchases when an account is deleted, how long data is kept, and whether the selfie is kept after the avatar is made. The wording here waits on those.",
       r: function (s) {
-        var ub = s.unb || {}, B = [["Tomer.K", "av-lion.jpg", "In Friday Night Six’s chat"], ["Shai_99", "av-sun.jpg", "In Luciana’s live"]];
+        var ub = s.unb || {}, B = [["Tomer.K", "av-lion.jpg", "In Friday Night Six’s chat"], ["Shai_99", "av-sun.jpg", "In Zofia’s live"]];
         function lk(k, label, v) { return '<div class="setrow" data-k="' + k + '"><span>' + label + '</span><em>' + (v || "") + icon("chev", "currentColor") + '</em></div>'; }
         return phone(body(
           '<div class="ph-top"><span class="iconbtn">' + icon("back", "var(--on-ic)") + '</span><div class="kick">Settings</div><span class="iconbtn"></span></div><div class="center"><h2 class="h-mid">Privacy and safety</h2></div>' +
@@ -2897,7 +2898,7 @@ html.protoon main.wrap { display: none; }
     "tbl-results": "Rematch, Back to the chat, or Coin history.", "tbl-join": "Take a seat (coins), then Leave the table to get them back.", "tbl-cancel": "Start a new table, or Back to My games.",
     closed: "Back to Games.", request: "Pick a kind, edit the text, then Pay $3 and send.", "profile-edit": "Change the country and city, then Save.", activity: "Tap a row: each opens its place.",
     coins: "Back with the arrow.", prize: "Claim my prize, or How the weekly prize works.", privacy: "Unblock a player, or Delete my account.", results: "See my points.",
-    points: "Next match.", "after-first": "See Luciana’s page, or Not now.", "her-page": "Try Private chat, Post-game live or Video call.", me: "Tap a ranking tile, a woman you follow, Edit, or a recent game.",
+    points: "Next match.", "after-first": "See Zofia’s page, or Not now.", "her-page": "Try Private chat, Post-game live or Video call.", me: "Tap a ranking tile, a woman you follow, Edit, or a recent game.",
     women: "Explore: type a name, try the chips or the filter button, or tap a woman.", settings: "Tap the switches, Rules and points, or Log out to start again.", away: "Tap Continue on the bar: it opens question 3.", "her-game": "Back to my vote returns to the question.", "my-games": "Tap a match.", ranking: "Use the tabs at the bottom." };
   var NAVT = ["home-open", "me", "ranking", "women"];
   var SOON = "toast:You’ll get a reminder before it opens.";
@@ -2918,9 +2919,9 @@ html.protoon main.wrap { display: none; }
   }
   function joinThen() { if (!SIGNED) { JOIN_AFTER = { live: true }; return "login"; } pst("home-first").joined = true; redraw(); ptoast("You’re in. The lobby fills…"); setTimeout(function () { if (CUR === "home-first") go("home-open"); }, 1300); return null; }
   function rankGo(el) { var s = pst("ranking"); s.sc = el.dataset.rank; s.per = "all"; return "ranking"; } // the tiles show all-time ranks
-  function herGo(n) { return n === "Luciana" ? "her-page" : "toast:" + n + "’s page works like Luciana’s. Only Luciana’s is built in this mockup."; }
+  function herGo(n) { return n === "Zofia" ? "her-page" : "toast:" + n + "’s page works like Zofia’s. Only Zofia’s is built in this mockup."; }
   function folToggle(n) { FOL[n] = !FOL[n]; redraw(); ptoast(FOL[n] ? "Following " + n + ". You’ll hear when she goes live." : "You unfollowed " + n + "."); return null; }
-  var NOTBUILT = "toast:This match’s result opens here, like Luciana vs Mariana’s. Only that one is built in this mockup.";
+  var NOTBUILT = "toast:This match’s result opens here, like Zofia vs Mariana’s. Only that one is built in this mockup.";
   function gsegGo(el) { return el.classList.contains("on") ? null : el.dataset.g; }
   var HOT = {
     splash: [[".phone", "intro"]],
@@ -2941,7 +2942,7 @@ html.protoon main.wrap { display: none; }
     locked: [[".btn.black", "home-open"], [".tctab", function () { return JW ? "tbl-join" : "tbl-create"; }]],
     "tbl-create": [[".ph-top .iconbtn:first-child", "back"], [".coinbal", "coins"], [".btn.push", function () {
       if (!LOCKED) { TB.wait = true; return resumeAt(LEFT ? LEFT.q : null); } // finish the picks first, then back to the table
-      var mn = pst("tbl-create").min || TBL.min; coinSheet({ t: "Open the table", sub: TBL.name + " · Luciana vs Mariana", amt: mn, then: function () { go("tbl-invite"); } }); return null; }]],
+      var mn = pst("tbl-create").min || TBL.min; coinSheet({ t: "Open the table", sub: TBL.name + " · Zofia vs Mariana", amt: mn, then: function () { go("tbl-invite"); } }); return null; }]],
     "tbl-invite": [[".ph-top .iconbtn:first-child", "back"], [".coinbal", "coins"], [".tcopy, .tshare span:first-child", "toast:Link copied: theone.app/t/FN6482"], [".tshare span:nth-child(2)", "toast:Opens Messages with the invite."],
       [".tshare span:nth-child(3)", "toast:Opens the share sheet."], [".btn.push", "tbl-table"]],
     "tbl-table": [[".ph-top .iconbtn:first-child", "back"], [".tclose", function () { closeSheet(); return null; }], [".coinbal", "coins"], [".tchat, .tchatb", "tbl-chat"], [".tseat.empty", "tbl-invite"], [".btn.red", "tbl-results"]],
@@ -2956,7 +2957,7 @@ html.protoon main.wrap { display: none; }
       if (pst("my-games").tab === "tables") { var t = el.dataset.t; if (t === "office") { pst("tbl-results").t = "office"; return "tbl-results"; } if (t === "crew") return "tbl-join"; if (t === "duo") return "tbl-cancel"; return RESULTS_IN ? "tbl-results" : "tbl-table"; }
       if (pst("my-games").tab === "past") return NOTBUILT;
       if (k === 0) return RESULTS_IN ? "results" : LOCKED ? "locked" : resumeAt(LEFT ? LEFT.q : null);
-      return k === 3 ? "toast:Maya vs Luna plays like Luciana vs Mariana. Only that match is playable in this mockup." : NOTBUILT; }]],
+      return k === 3 ? "toast:Maya vs Luna plays like Zofia vs Mariana. Only that match is playable in this mockup." : NOTBUILT; }]],
     "next-games": [[".mini[data-act]", function (el) { if (!SIGNED && el.dataset.act === "je") { JOIN_AFTER = { je: el.dataset.v }; return "login"; } var s = pst("next-games"), a = el.dataset.act; applyAct(s, el); redraw(); var on = s[a][el.dataset.v];
         ptoast(a === "je" ? (on ? "You’re in. We’ll remind you before it starts." : "You left the lobby.") : (on ? "We’ll remind you when the lobby opens." : "Reminder off.")); return null; }], [".mcard", "home-open"]],
     me: [[".actbtn", "activity"], [".trg", function (el) { if (el.dataset.t === "office") { pst("tbl-results").t = "office"; return "tbl-results"; } return RESULTS_IN ? "tbl-results" : "tbl-table"; }],
@@ -2964,15 +2965,15 @@ html.protoon main.wrap { display: none; }
       [".fol", function (el) { return herGo(el.dataset.w); }],
       [".rg", function (el, h) { return [].indexOf.call(h.querySelectorAll(".rg:not(.trg)"), el) ? NOTBUILT : RESULTS_IN ? "results" : LOCKED ? "locked" : resumeAt(LEFT ? LEFT.q : null); }], [".sechead .mini", "my-games"], [".editb, .pc-loc em", "profile-edit"], [".pc-av", "design"]],
     women: [[".sclr", function (el, h) { var i = h.querySelector(".sin"); i.value = ""; i.dispatchEvent(new Event("input", { bubbles: true })); return null; }], [".wbell", function (el) { return folToggle(el.closest(".wcard").querySelector(".wname b").textContent); }], [".wcard", function (el) { return herGo(el.querySelector(".wname b").textContent); }]],
-    "her-game": [[".btn.black, .ph-top .iconbtn:first-child", function () { return OVER ? "close" : "back"; }], [".fbtn", function () { return folToggle("Luciana"); }],
-      [".socials span", function (el) { return "toast:Opens Luciana’s " + ["Instagram", "Facebook", "TikTok"][[].indexOf.call(el.parentNode.children, el)] + "."; }]],
+    "her-game": [[".btn.black, .ph-top .iconbtn:first-child", function () { return OVER ? "close" : "back"; }], [".fbtn", function () { return folToggle("Zofia"); }],
+      [".socials span", function (el) { return "toast:Opens Zofia’s " + ["Instagram", "Facebook", "TikTok"][[].indexOf.call(el.parentNode.children, el)] + "."; }]],
     "her-page": [[".ph-top .iconbtn:first-child", "back"], [".mrow", function (el) { var k = [].indexOf.call(el.parentNode.children, el); if (k === 5) return "request"; paySheet(PAYS[k]); return null; }],
-      [".fbtn", function () { return folToggle("Luciana"); }],
-      [".socials span", function (el) { return "toast:Opens Luciana’s " + ["Instagram", "Facebook", "TikTok"][[].indexOf.call(el.parentNode.children, el)] + "."; }]],
-    chat: [[".chathead > span:first-child", "back"], [".timerbar .mini", function () { if (pst("chat").mode === "msg") { paySheet(PAYS[1]); return null; } paySheet({ t: "10 more minutes", sub: "Private chat with Luciana", price: "$3", then: function () { var b = host().querySelector(".timerbar b"); if (b) b.textContent = "17:42"; ptoast("10 minutes added."); } }); return null; }],
+      [".fbtn", function () { return folToggle("Zofia"); }],
+      [".socials span", function (el) { return "toast:Opens Zofia’s " + ["Instagram", "Facebook", "TikTok"][[].indexOf.call(el.parentNode.children, el)] + "."; }]],
+    chat: [[".chathead > span:first-child", "back"], [".timerbar .mini", function () { if (pst("chat").mode === "msg") { paySheet(PAYS[1]); return null; } paySheet({ t: "10 more minutes", sub: "Private chat with Zofia", price: "$3", then: function () { var b = host().querySelector(".timerbar b"); if (b) b.textContent = "17:42"; ptoast("10 minutes added."); } }); return null; }],
       [".tools span:first-child", "toast:Reported. Our team will look at this chat."], [".tools span:last-child", "toast:Blocked. She can no longer message you."]],
     live: [[".ph-top .iconbtn:first-child, .ctl.end", "back"], [".stream .sline", function (el) { return /\b(her|mine|tipl|blocked)\b/.test(el.className) ? null : rbFrom(el, el, "live"); }], [".ph-top .iconbtn:last-child", "toast:Reported. Our team will look at this room."],
-      [".ctl.tip", function () { paySheet({ t: "Tip Luciana", sub: "In the post-game live", tip: true, then: function (a) { var st = host().querySelector(".stream"); if (!st) return; var d = document.createElement("div"); d.className = "sline tipl"; d.innerHTML = icon("tip", "var(--on-ic)").replace('<svg', '<svg style="width:16px;height:16px;flex:none"'); d.appendChild(document.createTextNode("You sent a $" + (a || 2) + " tip to Luciana")); st.appendChild(d); st.scrollTop = st.scrollHeight; } }); return null; }],
+      [".ctl.tip", function () { paySheet({ t: "Tip Zofia", sub: "In the post-game live", tip: true, then: function (a) { var st = host().querySelector(".stream"); if (!st) return; var d = document.createElement("div"); d.className = "sline tipl"; d.innerHTML = icon("tip", "var(--on-ic)").replace('<svg', '<svg style="width:16px;height:16px;flex:none"'); d.appendChild(document.createTextNode("You sent a $" + (a || 2) + " tip to Zofia")); st.appendChild(d); st.scrollTop = st.scrollHeight; } }); return null; }],
       [".controls .ctl:nth-child(2)", function (el, h) { openField(h.querySelector(".composer .field")); return null; }]],
     call: [[".ph-top .iconbtn:first-child, .ctl.end", "back"], [".ph-top .iconbtn:last-child", "toast:Reported. Our team will look at this call."]],
     ranking: [[".prize .mini", function () { prizeSheet(); return null; }]],
@@ -2981,11 +2982,11 @@ html.protoon main.wrap { display: none; }
         if (JT) { pst("my-games").tab = "tables"; return "my-games"; }
         if (!SIGNED) { JOIN_AFTER = { to: "tbl-join" }; return "login"; }
         if (!LOCKED) { JW = true; return resumeAt(LEFT ? LEFT.q : null); }
-        coinSheet({ t: "Take a seat", sub: TBL3.name + " · Luciana vs Mariana", amt: TBL3.min, then: function () { JT = true; JW = false; redraw(); ptoast("You’re seated: 5 of 6. Coins back if you leave before it’s full."); } }); return null; }]],
+        coinSheet({ t: "Take a seat", sub: TBL3.name + " · Zofia vs Mariana", amt: TBL3.min, then: function () { JT = true; JW = false; redraw(); ptoast("You’re seated: 5 of 6. Coins back if you leave before it’s full."); } }); return null; }]],
     "tbl-cancel": [[".btn.black", "tbl-create"], [".textlink", function () { pst("my-games").tab = "tables"; return "my-games"; }]],
     request: [[".ph-top .iconbtn:first-child, .textlink", "back"], [".btn.black", function () {
         var k = pst("request").rq || "shout", nm = { shout: "A shout-out", video: "A short video", voice: "A voice note" }[k];
-        paySheet({ t: "Custom request", sub: nm + " from Luciana", price: "$3", then: function () { back(); ptoast("Request sent. Luciana answers within 24 hours."); } }); return null; }]],
+        paySheet({ t: "Custom request", sub: nm + " from Zofia", price: "$3", then: function () { back(); ptoast("Request sent. Zofia answers within 24 hours."); } }); return null; }]],
     "profile-edit": [[".ph-top .iconbtn:first-child, .textlink", "back"], [".peav", "design"], [".btn.black", function () { ptoast("Profile saved."); return "back"; }]],
     activity: [[".ph-top .iconbtn:first-child", "back"], [".actrow", function (el) {
         var dd = el.dataset.dest;
@@ -3052,9 +3053,9 @@ html.protoon main.wrap { display: none; }
   function paySheet(o) {
     PAYTHEN = o.then;
     layer('<div class="fdim" data-close></div><div class="fsheet paysh" role="dialog" aria-label="' + o.t + '"><span class="fgrab"></span>' +
-      '<div class="payhead"><img src="' + IMG + 'luciana-portrait.jpg" alt="" style="object-position:50% 25%"><span><b>' + o.t + '</b><small>' + o.sub + '</small></span>' + (o.tip ? '' : '<em>' + o.price + '</em>') + '</div>' +
+      '<div class="payhead"><img src="' + IMG + 'zofia-portrait.jpg" alt="" style="object-position:50% 25%"><span><b>' + o.t + '</b><small>' + o.sub + '</small></span>' + (o.tip ? '' : '<em>' + o.price + '</em>') + '</div>' +
       (o.tip ? '<div class="fopts tipam">' + [1, 2, 5, 10].map(function (a) { return '<span data-amt="' + a + '"' + (a === 2 ? ' class="on"' : '') + '>$' + a + '</span>'; }).join("") + '</div>' : '') +
-      '<div class="paynote">Luciana’s price. 80% goes to her. Supporting her never changes the match.</div>' +
+      '<div class="paynote">Zofia’s price. 80% goes to her. Supporting her never changes the match.</div>' +
       '<button type="button" class="btn black" data-pay>Pay ' + (o.tip ? "$2" : o.price) + '</button><div class="textlink" data-close>Cancel</div></div>');
   }
   function coinSheet(o) { // putting coins into a friends' table
@@ -3080,17 +3081,17 @@ html.protoon main.wrap { display: none; }
     layer('<div class="fdim" data-close></div><div class="fsheet picksh" role="dialog" aria-label="' + title + '"><span class="fgrab"></span><div class="fsh-head"><b>' + title + '</b><span class="mini ghost" data-close>Close</span></div>' +
       '<div class="fopts">' + opts.map(function (o) { return '<span data-pick="' + o[0] + '"' + (o[0] === cur ? ' class="on"' : '') + '>' + (o[1] || "") + o[0] + '</span>'; }).join("") + '</div></div>');
   }
-  var CITIES = { Israel: ["Tel Aviv", "Jerusalem", "Haifa", "Eilat"], USA: ["New York", "Los Angeles", "Miami", "Chicago"], UK: ["London", "Manchester", "Liverpool"], Spain: ["Madrid", "Barcelona", "Valencia"], Mexico: ["Mexico City", "Guadalajara", "Cancún"], Colombia: ["Bogotá", "Medellín", "Cali"], Brazil: ["São Paulo", "Rio de Janeiro"], Argentina: ["Buenos Aires", "Córdoba"] };
+  var CITIES = { Israel: ["Tel Aviv", "Jerusalem", "Haifa", "Eilat"], USA: ["New York", "Los Angeles", "Miami", "Chicago"], UK: ["London", "Manchester", "Liverpool"], Spain: ["Madrid", "Barcelona", "Valencia"], Mexico: ["Mexico City", "Guadalajara", "Cancún"], Poland: ["Kraków", "Warsaw", "Gdańsk"], Colombia: ["Bogotá", "Medellín", "Cali"], Brazil: ["São Paulo", "Rio de Janeiro"], Argentina: ["Buenos Aires", "Córdoba"] };
   var COUNTRIES = [["Israel", "IL"], ["USA", "US"], ["UK", "GB"], ["Spain", "ES"], ["Mexico", "MX"], ["Colombia", "CO"], ["Brazil", "BR"], ["Argentina", "AR"]];
   var PAYS = [
-    { t: "Send a message", sub: "One message to Luciana", price: "$1", then: function () { var c = pst("chat"); c.mode = "msg"; c.sent = null; go("chat"); ptoast("Write your message to Luciana."); } },
-    { t: "Private chat", sub: "10 minutes with Luciana", price: "$3", then: function () { pst("chat").mode = "chat"; go("chat"); } },
-    { t: "Post-game live", sub: "Luciana’s room, with all her fans", price: "$5", then: function () { go("live"); } },
-    { t: "Private room", sub: "10 minutes, just you and Luciana", price: "$5", then: function () { pst("call").mode = "room"; go("call"); } },
-    { t: "Video call", sub: "5 minutes with Luciana", price: "$5", then: function () { pst("call").mode = "video"; go("call"); } },
-    { t: "Custom request", sub: "A personal shout-out or a short video", price: "$3", then: function () { ptoast("Request sent. Luciana answers within 24 hours."); } },
-    { t: "Tip Luciana", sub: "Support her", tip: true, then: function (a) { ptoast("You sent Luciana a $" + (a || 2) + " tip."); } }];
-  var SAY = { chat: [["Good luck tonight!", "Thank you! I’m so nervous"], ["What did the crowd pick on Mama?", "You’ll see at 13:00"], ["See you at the live", "Can’t wait. Bring your friends!"]], live: [["Congrats, Luciana!"], ["That Date question was so close"], ["See you next week"]],
+    { t: "Send a message", sub: "One message to Zofia", price: "$1", then: function () { var c = pst("chat"); c.mode = "msg"; c.sent = null; go("chat"); ptoast("Write your message to Zofia."); } },
+    { t: "Private chat", sub: "10 minutes with Zofia", price: "$3", then: function () { pst("chat").mode = "chat"; go("chat"); } },
+    { t: "Post-game live", sub: "Zofia’s room, with all her fans", price: "$5", then: function () { go("live"); } },
+    { t: "Private room", sub: "10 minutes, just you and Zofia", price: "$5", then: function () { pst("call").mode = "room"; go("call"); } },
+    { t: "Video call", sub: "5 minutes with Zofia", price: "$5", then: function () { pst("call").mode = "video"; go("call"); } },
+    { t: "Custom request", sub: "A personal shout-out or a short video", price: "$3", then: function () { ptoast("Request sent. Zofia answers within 24 hours."); } },
+    { t: "Tip Zofia", sub: "Support her", tip: true, then: function (a) { ptoast("You sent Zofia a $" + (a || 2) + " tip."); } }];
+  var SAY = { chat: [["Good luck tonight!", "Thank you! I’m so nervous"], ["What did the crowd pick on Mama?", "You’ll see at 13:00"], ["See you at the live", "Can’t wait. Bring your friends!"]], live: [["Congrats, Zofia!"], ["That Date question was so close"], ["See you next week"]],
     "tbl-chat": [["Good luck everyone", "Luck has nothing to do with it", 1], ["Video at 13:00 for the results?", "I’m there", 2], ["Rematch tonight?", "Only if the pot is bigger", 4]] }, SAYK = { chat: 0, live: 0, "tbl-chat": 0 };
   function openField(f) {
     if (!f || f.classList.contains("done")) return; var i = f.querySelector("input");
@@ -3130,7 +3131,7 @@ html.protoon main.wrap { display: none; }
     if (TB.wait || /^tbl-(create|invite)$/.test(CUR) || (TB.made && (TB.n < 6 || Date.now() < TB.due))) { if (TB.made && TB.n < 6 && !TB.t) tfill(); NOTIF_T = setTimeout(showNotif, TB.made ? Math.max(300, Math.min(4000, TB.due - Date.now())) : 4000); return; }
     RESULTS_IN = true; if (!P || !P.classList.contains("on")) return;
     var n = document.createElement("div"); n.className = "pnotif"; n.setAttribute("role", "button");
-    n.innerHTML = '<span class="pnic">1</span><span class="pntx"><span class="pnapp">THE ONE · now</span><b>Results are in!</b><small>You scored +' + qTot() + ' in Luciana vs Mariana. Tap to see.</small></span>';
+    n.innerHTML = '<span class="pnic">1</span><span class="pntx"><span class="pnapp">THE ONE · now</span><b>Results are in!</b><small>You scored +' + qTot() + ' in Zofia vs Mariana. Tap to see.</small></span>';
     P.querySelector(".playr").appendChild(n);
     setTimeout(function () { n.classList.add("out"); setTimeout(function () { n.remove(); }, 400); }, 9000);
     if (/^(home-open|my-games|tbl-table|tbl-chat)$/.test(CUR)) redraw();

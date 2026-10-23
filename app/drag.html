@@ -128,7 +128,9 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
 .story.in { animation: soIn .28s ease-out; }
 @keyframes soIn { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: none; } }
 .so-media { position: absolute; inset: 0; pointer-events: none; }
-.so-media .fg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; } /* full screen, placed on her face (object-position per photo) */
+.so-media .fg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.so-media .fg[hidden], .so-snd[hidden] { display: none; } /* a clip (.mp4) plays in the same place as a photo */
+.so-snd { width: 40px; height: 40px; border: 0; border-radius: 50%; background: rgba(14, 3, 9, .45); color: #fff; font: 400 17px/1 var(--ui); cursor: pointer; } /* full screen, placed on her face (object-position per photo) */
 .so-shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(0, 0, 0, .62) 0, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 50%, rgba(7, 3, 10, .96) 100%); }
 .so-segs { position: absolute; top: calc(12px + env(safe-area-inset-top)); left: 12px; right: 12px; z-index: 3; display: flex; gap: 4px; pointer-events: none; }
 .so-seg { flex: 1; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, .3); overflow: hidden; }
@@ -376,16 +378,17 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
   "use strict";
   var IMG = "img/";
   var FLAGS = {
+    PL: '<svg class="flag" viewBox="0 0 8 5" aria-hidden="true"><rect width="8" height="5" fill="#dc143c"/><rect width="8" height="2.5" fill="#fff"/></svg>',
     CO: '<svg class="flag" viewBox="0 0 3 2" aria-hidden="true"><rect width="3" height="1" fill="#fcd116"/><rect y="1" width="3" height=".5" fill="#003893"/><rect y="1.5" width="3" height=".5" fill="#ce1126"/></svg>',
     BR: '<svg class="flag" viewBox="0 0 20 14" aria-hidden="true"><rect width="20" height="14" fill="#009c3b"/><path d="M10 1.6 18.4 7 10 12.4 1.6 7z" fill="#ffdf00"/><circle cx="10" cy="7" r="3.1" fill="#002776"/></svg>'
   };
-  var W = { L: { name: "Luciana", cc: "CO", country: "Colombia" }, M: { name: "Mariana", cc: "BR", country: "Brazil" } };
+  var W = { L: { name: "Zofia", cc: "PL", country: "Poland" }, M: { name: "Mariana", cc: "BR", country: "Brazil" } };
   var Q = [ // photos cropped around faces found with Vision (re-checked 22 Oct for the taller, rounded cards)
-    { t: "Overall", h: ["Who is", "the one?"], L: ["luciana-general.jpg", "75% 0%"], M: ["mariana-general.jpg", "18% 0%"] },
-    { t: "First impression", h: ["Who is the one", "at first sight?"], L: ["luciana-portrait.jpg", "34% 0%"], M: ["mariana-general.jpg", "12% 0%"] },
-    { t: "Going Out / Date", h: ["Who is the one", "for a date?"], L: ["luciana-date.jpg", "53% 0%"], M: ["mariana-date.jpg", "26% 0%"] },
-    { t: "Swimwear", h: ["Who is the one", "in swimwear?"], L: ["luciana-swim.jpg", "47% 0%"], M: ["mariana-swim.jpg", "23% 0%"] },
-    { t: "Bring Her to Mama", h: ["Who is the one", "to bring to Mama?"], L: ["luciana-mama.jpg", "64% 0%"], M: ["mariana-mama.jpg", "21% 0%"] }
+    { t: "Overall", h: ["Who is", "the one?"], L: ["zofia-01-who-is-the-one-1.jpg", "50% 0%"], M: ["mariana-01-who-is-the-one-1.jpg", "50% 0%"] },
+    { t: "First impression", h: ["Who is the one", "at first sight?"], L: ["zofia-02-at-first-sight-1.jpg", "50% 0%"], M: ["mariana-02-at-first-sight-1.jpg", "50% 0%"] },
+    { t: "Going Out / Date", h: ["Who is the one", "for a date?"], L: ["zofia-03-for-a-date-1.jpg", "50% 0%"], M: ["mariana-03-for-a-date-1.jpg", "50% 0%"] },
+    { t: "At the Beach", h: ["Who is the one", "at the beach?"], L: ["zofia-04-at-the-beach-1.jpg", "50% 0%"], M: ["mariana-04-at-the-beach-1.jpg", "50% 0%"] },
+    { t: "Bring Her to Mama", h: ["Who is the one", "to bring to Mama?"], L: ["zofia-05-to-bring-to-mama-1.jpg", "50% 0%"], M: ["mariana-05-to-bring-to-mama-1.jpg", "50% 0%"] }
   ];
   var BANDS = [[51, 59], [60, 69], [70, 79], [80, 89], [90, 100]];
   var CROWD = ["av-lion.jpg", "av-girl.jpg", "av-panda.jpg", "av-astro.jpg", "av-sun.jpg"];
@@ -479,13 +482,13 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
 
   /* ---------- her preview and her stats (2026-10-22) ---------- */
   // Demo data. In the app her photos and short videos come from her own uploads, in the order she set; the numbers come from all her matches.
-  // media: [photo, x % that centres her face when the photo fills the screen (found with Vision), x % to pan to when a wide photo holds two faces]
+  // pics: her three photos for each question (img/<woman>-<question>-<n>.jpg, already centred on her face by tools/import_photos.py); her preview plays the current question's three
   var HER = {
-    L: { age: 27, city: "Medellín", bio: "I can play almost any song on the piano by ear.", media: [["luciana-general.jpg", 74], ["luciana-portrait.jpg", 35], ["luciana-date.jpg", 53], ["luciana-swim.jpg", 47], ["luciana-mama.jpg", 37, 66]],
+    L: { age: 26, city: "Kraków", bio: "Ballet until I was 18. Now I only dance in the kitchen.", portrait: "zofia-portrait.jpg", pics: [["zofia-01-who-is-the-one-1.jpg", "zofia-01-who-is-the-one-2.jpg", "zofia-01-who-is-the-one-3.jpg"], ["zofia-02-at-first-sight-1.jpg", "zofia-02-at-first-sight-2.jpg", "zofia-02-at-first-sight-3.jpg"], ["zofia-03-for-a-date-1.jpg", "zofia-03-for-a-date-2.jpg", "zofia-03-for-a-date-3.jpg"], ["zofia-04-at-the-beach-1.jpg", "zofia-04-at-the-beach-2.jpg", "zofia-04-at-the-beach-3.jpg"], ["zofia-05-to-bring-to-mama-1.jpg", "zofia-05-to-bring-to-mama-2.jpg", "zofia-05-to-bring-to-mama-3.jpg"]],
       rank: 6, total: 16, wins: 12,
       last: [["sophie.jpg", "Sophie", 1, 58], ["emma.jpg", "Emma", 1, 64], ["nina.jpg", "Nina", 0, 41], ["valentina.jpg", "Valentina", 1, 71], ["maya.jpg", "Maya", 1, 66]],
       q: [[12, [4, 5, 2, 1, 0], 4], [13, [3, 6, 3, 1, 0], 3], [11, [5, 4, 2, 0, 0], 5], [9, [6, 2, 1, 0, 0], 7], [14, [2, 5, 4, 2, 1], 2]] }, // per question: won, times in each range when she won, lost
-    M: { age: 24, city: "Rio de Janeiro", bio: "Beach volleyball every morning, samba every night.", media: [["mariana-general.jpg", 15], ["mariana-date.jpg", 27], ["mariana-swim.jpg", 24], ["mariana-mama.jpg", 18]],
+    M: { age: 27, city: "Rio de Janeiro", bio: "Beach volleyball every morning, samba every night.", portrait: "mariana-portrait.jpg", pics: [["mariana-01-who-is-the-one-1.jpg", "mariana-01-who-is-the-one-2.jpg", "mariana-01-who-is-the-one-3.jpg"], ["mariana-02-at-first-sight-1.jpg", "mariana-02-at-first-sight-2.jpg", "mariana-02-at-first-sight-3.jpg"], ["mariana-03-for-a-date-1.jpg", "mariana-03-for-a-date-2.jpg", "mariana-03-for-a-date-3.jpg"], ["mariana-04-at-the-beach-1.jpg", "mariana-04-at-the-beach-2.jpg", "mariana-04-at-the-beach-3.jpg"], ["mariana-05-to-bring-to-mama-1.jpg", "mariana-05-to-bring-to-mama-2.jpg", "mariana-05-to-bring-to-mama-3.jpg"]],
       rank: 11, total: 15, wins: 9,
       last: [["luna.jpg", "Luna", 1, 55], ["sophie.jpg", "Sophie", 0, 47], ["maya.jpg", "Maya", 1, 61], ["valentina.jpg", "Valentina", 1, 58], ["nina.jpg", "Nina", 0, 44]],
       q: [[9, [3, 4, 2, 0, 0], 6], [8, [4, 3, 1, 0, 0], 7], [11, [2, 4, 3, 2, 0], 4], [12, [2, 3, 4, 2, 1], 3], [7, [4, 2, 1, 0, 0], 8]] }
@@ -495,17 +498,20 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
   function openStory(k) {
     closeStats(); closeStory();
     var h = HER[k], w = W[k];
-    sto = { k: k, i: 0, hold: null, held: false, anim: null };
+    sto = { k: k, i: 0, hold: null, held: false, anim: null, media: h.pics[Math.min(qi, Q.length - 1)].map(function (f) { return [f, 50]; }) };
     var s = document.createElement("div"); s.className = "story" + (RM ? "" : " in"); s.setAttribute("role", "dialog"); s.setAttribute("aria-label", w.name + "’s preview");
     s.style.setProperty("--dur", STORY_MS + "ms");
-    s.innerHTML = '<div class="so-media"><img class="fg" alt=""></div><div class="so-shade"></div>' +
-      '<div class="so-segs">' + h.media.map(function () { return '<span class="so-seg"><i></i></span>'; }).join("") + '</div>' +
-      '<div class="so-head"><img src="' + IMG + h.media[0][0] + '" alt=""><div><b>' + w.name + FLAGS[w.cc] + '</b><small>' + h.age + ' · ' + h.city + '</small></div><button class="so-x" aria-label="Close">✕</button></div>' +
+    s.innerHTML = '<div class="so-media"><img class="fg" alt=""><video class="fg" muted playsinline preload="auto" hidden></video></div><div class="so-shade"></div>' +
+      '<div class="so-segs">' + sto.media.map(function () { return '<span class="so-seg"><i></i></span>'; }).join("") + '</div>' +
+      '<div class="so-head"><img src="' + IMG + h.portrait + '" alt=""><div><b>' + w.name + FLAGS[w.cc] + '</b><small>' + h.age + ' · ' + h.city + '</small></div><button class="so-snd" aria-label="Sound on" hidden>🔇</button><button class="so-x" aria-label="Close">✕</button></div>' +
       '<span class="so-tap prev"></span><span class="so-tap next"></span>' +
       (RM ? '' : '<span class="so-hint" style="left:14px">‹ Tap</span><span class="so-hint" style="right:14px">Tap ›</span>') +
       '<div class="so-foot"><p class="so-bio">' + h.bio + '</p><button class="so-btn see">See her stats</button><button class="so-btn back">Back to my vote</button></div>';
     phone.appendChild(s); storyEl = s;
     $(".so-x", s).addEventListener("click", closeStory);
+    $(".so-snd", s).addEventListener("click", function () { // clips start muted (phones only autoplay silent video); one tap turns sound on for her clips
+      sto.sound = !sto.sound; var v = $(".so-media video", s); v.muted = !sto.sound; this.textContent = sto.sound ? "🔊" : "🔇"; this.setAttribute("aria-label", sto.sound ? "Sound off" : "Sound on");
+    });
     $(".so-btn.back", s).addEventListener("click", closeStory);
     $(".so-btn.see", s).addEventListener("click", function () { openStats(k); });
     // tap the right side for the next photo, the left side for the one before; hold anywhere to pause
@@ -526,27 +532,41 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
   }
   function storyGo(i) {
     var s = storyEl; if (!s) return;
-    var media = HER[sto.k].media;
+    var media = sto.media;
     if (i < 0) i = 0;
     if (i > media.length - 1) { // after her last photo the story waits on it, with both buttons
       s.querySelectorAll(".so-seg").forEach(function (g) { g.className = "so-seg done"; }); return;
     }
     sto.i = i;
     s.querySelectorAll(".so-seg").forEach(function (g, n) { g.className = "so-seg" + (n < i ? " done" : ""); });
-    var fg = $(".so-media .fg", s), m = media[i], x0 = m[1] + "% 0%", x1 = (m[2] != null ? m[2] : m[1]) + "% 0%";
-    fg.src = IMG + m[0];
+    var m = media[i], x0 = m[1] + "% 0%", x1 = (m[2] != null ? m[2] : m[1]) + "% 0%", clip = /\.mp4$/.test(m[0]);
+    var img = $(".so-media img.fg", s), vid = $(".so-media video", s), fg = clip ? vid : img, seg = s.querySelectorAll(".so-seg")[i];
     if (sto.anim) { sto.anim.cancel(); sto.anim = null; }
+    img.hidden = clip; vid.hidden = !clip; $(".so-snd", s).hidden = !clip;
+    if (clip) { // the progress bar lasts as long as the clip
+      vid.muted = !sto.sound; vid.style.objectPosition = x1;
+      var setDur = function () { if (vid.duration) seg.style.setProperty("--dur", Math.round(vid.duration * 1000) + "ms"); };
+      vid.onloadedmetadata = setDur; if (vid.getAttribute("src") !== IMG + m[0]) vid.src = IMG + m[0]; else setDur();
+      try { vid.currentTime = 0; } catch (x) {}
+      if (!s.classList.contains("paused")) { var pr = vid.play(); if (pr && pr.catch) pr.catch(function () {}); }
+      if (RM) seg.className = "so-seg done"; else { void seg.offsetWidth; seg.className = "so-seg now"; }
+      return;
+    }
+    vid.pause();
+    fg.src = IMG + m[0];
     var still = RM || phone.classList.contains("still") || !fg.animate;
     fg.style.objectPosition = still ? x1 : x0;
     // a slow zoom while it shows; a wide photo with two faces pans from one to the other (her)
     if (!still) sto.anim = fg.animate([{ transform: "scale(1)", objectPosition: x0 }, { transform: "scale(1.06)", objectPosition: x1 }], { duration: STORY_MS, easing: m[2] != null ? "ease-in-out" : "linear", fill: "forwards" });
     if (s.classList.contains("paused") && sto.anim) sto.anim.pause();
-    var seg = s.querySelectorAll(".so-seg")[i];
     if (RM) seg.className = "so-seg done"; // no timer when motion is reduced: she moves on with a tap
     else { void seg.offsetWidth; seg.className = "so-seg now"; }
   }
-  function storyPause(on) { if (!storyEl) return; storyEl.classList.toggle("paused", on); if (sto.anim) { if (on) sto.anim.pause(); else sto.anim.play(); } }
-  function closeStory() { if (storyEl) { clearTimeout(sto.hold); if (sto.anim) sto.anim.cancel(); storyEl.remove(); storyEl = null; } }
+  function storyPause(on) {
+    if (!storyEl) return; storyEl.classList.toggle("paused", on); if (sto.anim) { if (on) sto.anim.pause(); else sto.anim.play(); }
+    var v = $(".so-media video", storyEl); if (v && !v.hidden) { if (on) v.pause(); else { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); } }
+  }
+  function closeStory() { if (storyEl) { clearTimeout(sto.hold); if (sto.anim) sto.anim.cancel(); var v = $(".so-media video", storyEl); if (v) v.pause(); storyEl.remove(); storyEl = null; } }
   function openStats(k) {
     closeStats();
     var h = HER[k], w = W[k], open = Math.min(qi, Q.length - 1);
@@ -554,7 +574,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     var el = document.createElement("div"); el.className = "stats" + (RM ? "" : " in"); el.setAttribute("role", "dialog"); el.setAttribute("aria-label", w.name + "’s stats");
     var range = function (n) { return n === 0 ? "never" : n === 1 ? "1 time" : n + " times"; };
     el.innerHTML = '<div class="ss-body">' +
-      '<div class="ss-top"><button class="ss-back" aria-label="Back to her preview">‹</button><img src="' + IMG + h.media[0][0] + '" alt=""><div><b>' + w.name + FLAGS[w.cc] + '</b><small>Ranked #' + h.rank + '</small></div><span class="ss-clock"><span class="dot"></span><b>' + clockText() + '</b>&nbsp;left</span></div>' +
+      '<div class="ss-top"><button class="ss-back" aria-label="Back to her preview">‹</button><img src="' + IMG + h.portrait + '" alt=""><div><b>' + w.name + FLAGS[w.cc] + '</b><small>Ranked #' + h.rank + '</small></div><span class="ss-clock"><span class="dot"></span><b>' + clockText() + '</b>&nbsp;left</span></div>' +
       '<div class="ss-facts">Won <b>' + h.wins + '</b> of her <b>' + h.total + '</b> matches</div>' +
       '<div class="ss-h">Last 5 matches</div>' +
       '<div class="ss-last">' + h.last.map(function (m) { return '<div class="' + (m[2] ? "w" : "l") + '"><img src="' + IMG + m[0] + '" alt=""><b>' + (m[2] ? "Won" : "Lost") + '</b><span>' + m[3] + '%</span><small>vs ' + m[1] + '</small></div>'; }).join("") + '</div>' +

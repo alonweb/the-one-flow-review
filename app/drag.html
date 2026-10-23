@@ -592,7 +592,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     var c = center(chip); burst(c.x, c.y, ["#ff2e8b", "#ff7ab8", "#fff"], 16, 60);
     if (step === "me") {
       step = "crowd"; syncStep();
-      setInstr("Now drag the crowd onto most players’ pick, or tap her photo", "THE CROWD", false); trayState();
+      setInstr("PREDICT THE CROWD VOTE", "THE CROWD", false); trayState(); // Alon's wording, 22 Oct
       var cc = $("#homeCrowd .chip"); if (cc) { cc.classList.remove("bob", "asleep"); cc.classList.add("awake"); }
     } else trayState();
   }

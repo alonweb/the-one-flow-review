@@ -1183,7 +1183,7 @@ html.protoon main.wrap { display: none; }
 .tpot b svg { width: 30px; height: 30px; }
 .tpot small { display: block; margin-top: 5px; font: 700 10.5px/1.25 var(--label); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-2); }
 .tseat { position: absolute; width: 96px; height: 104px; margin: -52px 0 0 -48px; display: grid; justify-items: center; align-content: start; gap: 3px; text-align: center; z-index: 1; }
-.tseat .av { position: relative; width: 56px; height: 56px; }
+.tseat .av { position: relative; width: 56px; height: 56px; overflow: visible; border-radius: 50%; box-shadow: none; } /* 23 Oct: nothing cut (the general .av box clipped the photo, ring, crown and tick) */
 .tseat .av img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; display: block; background: var(--plum-2); box-shadow: 0 0 0 2.5px rgba(255, 255, 255, .5), 0 8px 18px rgba(0, 0, 0, .55); }
 .tseat.me .av img { box-shadow: 0 0 0 2.5px var(--pink), 0 0 18px rgba(255, 46, 139, .65); }
 .tseat .adm { position: absolute; left: 50%; top: -15px; transform: translateX(-50%); line-height: 0; }
@@ -2251,8 +2251,8 @@ html.protoon main.wrap { display: none; }
         '<h2 class="h-mid center">' + (op ? 'Invite ' + ["", "one more friend", "two more friends", "three more friends", "four more friends", "five friends"][op] : 'The table is full') + '</h2>' + tmatchInv() +
                 '<div class="lcard tcodecard"><div class="tcode"><b>' + TBL.code + '</b><small>theone.app/t/' + TBL.code.replace("-", "") + '</small></div>' +
           '<div class="tshare"><span role="button" aria-label="Copy link" title="Copy link">' + icon("copy", "var(--pink)") + '</span><span role="button" aria-label="Messages" title="Messages">' + icon("chat", "var(--pink)") + '</span><span role="button" aria-label="Share" title="Share">' + icon("share", "var(--pink)") + '</span></div></div>' +
-        '<div class="lcard" style="gap:0"><div class="flabel" style="margin-bottom:4px">Friends on THE ONE · ' + op + (op === 1 ? ' seat' : ' seats') + ' open</div>' + TBL.seats.slice(1).map(function (p, k) {
-          var on = inv[k], sat = k + 1 < n; return '<div class="tfr"><img src="' + IMG + p.av + '" alt=""><span>' + p.n + '<small>Tel Aviv · played today</small></span>' + (sat ? '<span class="mini ghost on">Seated ✓</span>' : '<span class="mini' + (on ? " ghost on" : "") + '" data-act="tinv" data-v="' + k + '">' + (on ? "Invited ✓" : "Invite") + '</span>') + '</div>'; }).join("") + '</div>' +
+        '<div class="lcard" style="gap:0"><div class="flabel" style="margin-bottom:4px">Friends on THE ONE · ' + op + (op === 1 ? ' seat' : ' seats') + ' open</div>' + TFRIENDS.map(function (p, k) {
+          var sat = TBL.seats.slice(0, n).indexOf(p) > -1; return '<div class="tfr"><img src="' + IMG + p.av + '" alt=""><span>' + p.n + '<small>Tel Aviv · played today</small></span>' + (sat ? '<span class="mini ghost on">Seated ✓</span>' : '<span class="mini" data-act="tadd" data-v="' + k + '">Add</span>') + '</div>'; }).join("") + '</div>' +
         '<button class="btn black push">Go to the table &gt;</button>'
       ) + nav("Games"), true); } },
     { id: "tbl-table", anim: true, t: "Friends’ table 3: the table", src: "New", st: { n: 6 }, notes: [
@@ -2956,7 +2956,7 @@ html.protoon main.wrap { display: none; }
     "tbl-create": [[".ph-top .iconbtn:first-child", "back"], [".coinbal", "coins"], [".btn.push", function () {
       if (!LOCKED) { TB.wait = true; return resumeAt(LEFT ? LEFT.q : null); } // finish the picks first, then back to the table
       var mn = pst("tbl-create").min || TBL.min; coinSheet({ t: "Open the table", sub: TBL.name + " · Zofia vs Mariana", amt: mn, then: function () { go("tbl-invite"); } }); return null; }]],
-    "tbl-invite": [[".ph-top .iconbtn:first-child", "back"], [".coinbal", "coins"], [".tcopy, .tshare span:first-child", "toast:Link copied: theone.app/t/FN6482"], [".tshare span:nth-child(2)", "toast:Opens Messages with the invite."],
+    "tbl-invite": [["[data-act=tadd]", tadd], [".ph-top .iconbtn:first-child", "back"], [".coinbal", "coins"], [".tcopy, .tshare span:first-child", "toast:Link copied: theone.app/t/FN6482"], [".tshare span:nth-child(2)", "toast:Opens Messages with the invite."],
       [".tshare span:nth-child(3)", "toast:Opens the share sheet."], [".btn.push", "tbl-table"]],
     "tbl-table": [[".ph-top .iconbtn:first-child", "back"], [".tclose", function () { closeSheet(); return null; }], [".coinbal", "coins"], [".tchat, .tchatb", "tbl-chat"], [".tseat.empty", "tbl-invite"], [".btn.red", "tbl-results"]],
     "tbl-chat": [[".chathead > span:first-child", "back"], [".timerbar .mini", "tbl-table"], [".msg.fr", function (el) { return rbFrom(el, el.querySelector("span"), "tbl"); }]],
@@ -3015,7 +3015,7 @@ html.protoon main.wrap { display: none; }
       ["[data-k=pay]", "toast:Your payment methods and receipts."], ["[data-k=priv]", "privacy"], ["[data-k=help]", "toast:Questions? Chat with support."], ["[data-k=logout]", function () { restart(true); return null; }]]
   };
   HOT["profile-edit"] = HOT["profile-edit"].concat(HOT["signup-1"].filter(function (h) { return /^\.geo/.test(h[0]); }));
-  function restart(keep) { if (!keep) KNOWN = null; JT = false; JW = false; PICKS = null; MC = 1; PICKS2 = null; M2DONE = false; applyPicks(); SEEN_AF = false; FOL = JSON.parse(JSON.stringify(FOL0)); clearTimeout(TB.t); TB = { made: false, n: 1, min: TBL.min, t: null, fresh: null, bump: false }; HIST = []; PST = {}; JOINED = {}; REMIND = {}; SIGNED = false; JOIN_AFTER = null; SSO_USED = null; LEFT = null; LOCKED = false; RESULTS_IN = false; SEEN_INTRO = false; clearTimeout(NOTIF_T); if (P) P.querySelector(".playr").innerHTML = ""; closeOverlay(true); go("splash", false); }
+  function restart(keep) { TBL.seats.splice.apply(TBL.seats, [1, TBL.seats.length - 1].concat(TFRIENDS)); if (!keep) KNOWN = null; JT = false; JW = false; PICKS = null; MC = 1; PICKS2 = null; M2DONE = false; applyPicks(); SEEN_AF = false; FOL = JSON.parse(JSON.stringify(FOL0)); clearTimeout(TB.t); TB = { made: false, n: 1, min: TBL.min, t: null, fresh: null, bump: false }; HIST = []; PST = {}; JOINED = {}; REMIND = {}; SIGNED = false; JOIN_AFTER = null; SSO_USED = null; LEFT = null; LOCKED = false; RESULTS_IN = false; SEEN_INTRO = false; clearTimeout(NOTIF_T); if (P) P.querySelector(".playr").innerHTML = ""; closeOverlay(true); go("splash", false); }
   function layer(html) { closeLayer(); var d = document.createElement("div"); d.className = "lay"; d.innerHTML = html; P.querySelector(".playr").appendChild(d); return d; }
   function closeLayer() { if (P) P.querySelectorAll(".playr .lay").forEach(function (x) { x.remove(); }); }
   function openMenu() {
@@ -3079,6 +3079,13 @@ html.protoon main.wrap { display: none; }
       '<button type="button" class="btn black" data-pay>Put in ' + o.amt + ' coins</button><div class="textlink" data-close>Cancel</div></div>');
   }
   // the friends' table fills one seat at a time, and the pot grows
+  var TFRIENDS = TBL.seats.slice(1); // the friends to add, in a fixed order on the invite screen
+  function tadd(el) { // 23 Oct: you add each friend yourself (the table no longer fills on its own)
+    var p = TFRIENDS[+el.dataset.v], at = TBL.seats.indexOf(p); if (!TB.made || at < TB.n) return null;
+    TBL.seats.splice(at, 1); TBL.seats.splice(TB.n, 0, p); TB.n++; // the next seat goes to the friend you tapped
+    if (TB.n === 6) TB.full = Date.now();
+    redraw(); ptoast(p.n + " took a seat · " + tstake(p, TB.min) + " coins"); return null;
+  }
   function tfill() {
     TB.t = setTimeout(function () {
       TB.n++; var p = TBL.seats[TB.n - 1];
@@ -3141,7 +3148,7 @@ html.protoon main.wrap { display: none; }
   }
   function showNotif() {
     // with a table, 13:00 is the table's countdown reaching zero, once its seats are full
-    if (TB.wait || /^tbl-(create|invite)$/.test(CUR) || (TB.made && (TB.n < 6 || Date.now() < TB.due))) { if (TB.made && TB.n < 6 && !TB.t) tfill(); NOTIF_T = setTimeout(showNotif, TB.made ? Math.max(300, Math.min(4000, TB.due - Date.now())) : 4000); return; }
+    if (TB.wait || /^tbl-(create|invite)$/.test(CUR) || (TB.made && (TB.n < 6 || Date.now() < TB.due))) { NOTIF_T = setTimeout(showNotif, TB.made ? Math.max(300, Math.min(4000, TB.due - Date.now())) : 4000); return; }
     RESULTS_IN = true; if (!P || !P.classList.contains("on")) return;
     var n = document.createElement("div"); n.className = "pnotif"; n.setAttribute("role", "button");
     n.innerHTML = '<span class="pnic">1</span><span class="pntx"><span class="pnapp">THE ONE · now</span><b>Results are in!</b><small>You scored +' + qTot() + ' in Zofia vs Mariana. Tap to see.</small></span>';
@@ -3199,7 +3206,6 @@ html.protoon main.wrap { display: none; }
     if (id !== "tbl-results") pst("tbl-results").t = null; // Office League's result only when opened from its card
     if (id === "tbl-create" && LOCKED) TB.wait = false;
     if (id === "tbl-invite" && !TB.made) { TB.made = true; TB.n = 1; TB.min = pst("tbl-create").min || TBL.min; TB.due = Date.now() + 40000; }
-    if (id === "tbl-table" && TB.made && TB.n < 6 && !TB.t) tfill();
     if (id === "locked" && !LOCKED) { LOCKED = true; clearTimeout(NOTIF_T); NOTIF_T = setTimeout(showNotif, 5000); }
     art.querySelector(".pslot").innerHTML = rend(id);
     setInfo(id);

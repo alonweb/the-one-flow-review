@@ -1655,9 +1655,9 @@ html.protoon main.wrap { display: none; }
   var FIRST = [["KingPick", "av-lion.jpg", ""], ["MayaWin", "av-astro.jpg", ""], ["LunaStar", "av-panda.jpg", ""], ["Diego11", "av-girl.jpg", ""], ["MateoPro", "av-sun.jpg", ""],
     ["Noah E.", "av-lion.jpg", "h1"], ["Ella V.", "av-girl.jpg", "h1"], ["Omer L.", "av-astro.jpg", "h2"], ["Dana R.", "av-panda.jpg", "h2"], ["Shira.B", "av-sun.jpg", "h1"],
     ["Itay22", "av-lion.jpg", "h2"], ["Noa_K", "av-girl.jpg", "h2"], ["Gal.M", "av-panda.jpg", "h1"], ["Yael_S", "av-astro.jpg", "h1"], ["RonB", "av-sun.jpg", "h2"]];
-  function first15(youAt) {
+  function first15(youAt) { // 22 Oct: "KingPick was first" is gone from the header (Alon); only "You're #N" once you've joined
     var row = FIRST.slice(); if (youAt) row.splice(youAt - 1, 1, ["You", null, "me"]);
-    return '<div class="first15"><div class="f15h"><span>First 15 to join</span><b>' + icon("crown", "var(--gold)") + row[0][0] + ' was first' + (youAt ? ' · you’re #' + youAt : '') + '</b></div><div class="f15r">' + row.map(function (p, i) {
+    return '<div class="first15"><div class="f15h"><span>First 15 to join</span>' + (youAt ? '<b>You’re #' + youAt + '</b>' : '') + '</div><div class="f15r">' + row.map(function (p, i) {
       return '<span class="f15' + (i === 0 ? " one" : "") + (p[2] === "me" ? " me" : "") + '" style="--d:' + i + '" title="' + (i + 1) + '. ' + p[0] + '">' + (p[2] === "me" ? meav() : '<img src="' + IMG + p[1] + '" alt="' + p[0] + '"' + (p[2] ? ' class="' + p[2] + '"' : '') + '>') + '</span>'; }).join("") + '</div></div>';
   }
   // the chips over the feed; with hundreds of matches, Joined is the quick way back to yours

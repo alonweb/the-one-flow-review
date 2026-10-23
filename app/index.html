@@ -1465,6 +1465,8 @@ html.protoon main.wrap { display: none; }
   var STILL = /still/.test(location.hash); // no animation, for screenshots and the PDF
   var APP = window.THEONE_APP === true || /^#app/.test(location.hash); // the prototype alone, for presenting
   var FLAGS = {
+    RU: '<svg class="flag" viewBox="0 0 9 6" aria-hidden="true"><rect width="9" height="6" fill="#d52b1e"/><rect width="9" height="4" fill="#0039a6"/><rect width="9" height="2" fill="#fff"/></svg>',
+    LB: '<svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#ed1c24"/><rect y="5" width="30" height="10" fill="#fff"/><path d="M15 6.2 19 13.6H11Z" fill="#00a651"/><rect x="14.4" y="13.4" width="1.2" height="1.6" fill="#00a651"/></svg>',
     PL: '<svg class="flag" viewBox="0 0 8 5" aria-hidden="true"><rect width="8" height="5" fill="#dc143c"/><rect width="8" height="2.5" fill="#fff"/></svg>',
     CO: '<svg class="flag" viewBox="0 0 3 2" aria-hidden="true"><rect width="3" height="1" fill="#fcd116"/><rect y="1" width="3" height=".5" fill="#003893"/><rect y="1.5" width="3" height=".5" fill="#ce1126"/></svg>',
     BR: '<svg class="flag" viewBox="0 0 20 14" aria-hidden="true"><rect width="20" height="14" fill="#009c3b"/><path d="M10 1.6 18.4 7 10 12.4 1.6 7z" fill="#ffdf00"/><circle cx="10" cy="7" r="3.1" fill="#002776"/></svg>',
@@ -1641,7 +1643,7 @@ html.protoon main.wrap { display: none; }
   // home (2026-10-16): a feed of matches, and a one-time intro that explains the game
   var FEED = [
     { a: ["zofia-general.jpg", "100% 0%", "Zofia", "PL", "Poland"], b: ["mariana-general.jpg", "0% 0%", "Mariana", "BR", "Brazil"], live: true },
-    { a: ["sophie.jpg", "50% 25%", "Sophie", "US", "USA"], b: ["emma.jpg", "50% 25%", "Emma", "GB", "UK"], time: "18:00", lobby: 412, early: true },
+    { a: ["katya-general.jpg", "50% 0%", "Katya", "RU", "Russia"], b: ["yasmin-general.jpg", "50% 0%", "Yasmin", "LB", "Lebanon"], live: true, m2: true }, // 23 Oct: the second playable match
     { a: ["nina.jpg", "50% 25%", "Nina", "ES", "Spain"], b: ["valentina.jpg", "50% 25%", "Valentina", "AR", "Argentina"], time: "19:00", lobby: 168 },
     { a: ["maya.jpg", "50% 25%", "Maya", "MX", "Mexico"], b: ["luna.jpg", "50% 25%", "Luna", "ES", "Spain"], time: "20:00", opens: "19:30" },
     { a: ["zofia-general.jpg", "100% 0%", "Zofia", "PL", "Poland"], b: ["sophie.jpg", "50% 25%", "Sophie", "US", "USA"], day: "Tomorrow", time: "17:00", opens: "16:30 tomorrow" },
@@ -1678,7 +1680,11 @@ html.protoon main.wrap { display: none; }
     return '<div class="feed">' + list.map(function (x) {
       var m = x[0], i = x[1], mine = fjoined(m, s, open, i);
       var head, lob, btn;
-      if (m.live) {
+      if (m.m2) { // the second match: its own picks, no results in this mockup
+        head = '<span class="fstat live"><i></i>Live · picks close in <b>12m 43s</b></span>';
+        lob = '<div class="count"><b data-count="1000">1,000</b>/ 1,000 joined</div><div class="bar"><span style="width:100%"></span></div>' + first15();
+        btn = M2DONE ? '<button class="btn black m2">Your picks are in ✓</button>' : '<button class="btn black m2">Predict this match &gt;</button>';
+      } else if (m.live) {
         head = open && s.res ? '<span class="fstat"><i></i>Final · <b>1,000</b> predictions</span>' : '<span class="fstat live"><i></i>Live · picks close in <b>12m 43s</b></span>';
         if (open && s.res) {
           lob = '<div class="rprog">' + pips(5) + '<b>+' + qTot() + ' points</b><small>Results are in</small></div>' + first15();
@@ -1735,7 +1741,7 @@ html.protoon main.wrap { display: none; }
         '<div class="cap"><b>Climb. Win the week.</b><span>Points add up all week. The top players win the weekly prize.</span></div></div>' +
       '</div>';
   }
-  function dragPhone(state, title) { return '<div class="phone dragphone"><iframe src="drag.html#embed-' + state + (STILL ? "-still" : "") + '" title="' + title + '" loading="lazy"></iframe></div>'; }
+  function dragPhone(state, title) { return '<div class="phone dragphone"><iframe src="drag.html#embed-' + state + (MC === 2 ? "-m2" : "") + (STILL ? "-still" : "") + '" title="' + title + '" loading="lazy"></iframe></div>'; }
   function bleed(i, h, s, mode) {
     var P = PHOTOS[i];
     return '<div class="bleed" style="height:' + h + 'px">' + ["L", "M"].map(function (k, ix) {
@@ -2855,6 +2861,7 @@ html.protoon main.wrap { display: none; }
   // ===== clickable prototype (#play): one phone you click through like the app =====
   var BY = {}, ORDER = []; SCREENS.forEach(function (sc) { if (sc.id) { BY[sc.id] = sc; ORDER.push(sc.id); } });
   var PST = {}, HIST = [], CUR = null, OVER = null, SEEN_INTRO = false, P = null, LEFT = null, LOCKED = false, RESULTS_IN = false, NOTIF_T = null, PAYTHEN = null, JOINED = {}, REMIND = {}, SIGNED = false, JOIN_AFTER = null, SSO_USED = null;
+  var MC = 1, PICKS2 = null, M2DONE = false; // MC: the match being played (2 = Katya vs Yasmin); PICKS2 and M2DONE: its answers and whether they are in
   var PICKS = null, KNOWN = null, SEEN_AF = false, JT = false, JW = false, RB = null; // JT: seated at Beach Crew; JW: its invite waits on the picks; RB: the message being reported // the answers saved on the question page; the sign-in used before; the after-results offer seen
   var TB = { made: false, n: 1, min: TBL.min, t: null, fresh: null, bump: false }; // the friends' table in the prototype: seats fill one by one once it opens
   function rend(id) { // a match left half-way shows on every screen outside it
@@ -2917,6 +2924,12 @@ html.protoon main.wrap { display: none; }
     pst("home-first").joined = true; go("home-first"); ptoast("You’re in. The lobby fills…");
     setTimeout(function () { if (CUR === "home-first") go("home-open"); }, 1300); return null;
   }
+  function goM2() { // the second match: straight into its questions (after sign-in for a guest)
+    if (M2DONE) return "toast:Your Katya vs Yasmin picks are in. Results at 13:00.";
+    MC = 2; var s = pst("q1"); s.at = null; s.one = false;
+    if (!SIGNED) { JOIN_AFTER = { to: "q1" }; return "login"; }
+    return "q1";
+  }
   function joinThen() { if (!SIGNED) { JOIN_AFTER = { live: true }; return "login"; } pst("home-first").joined = true; redraw(); ptoast("You’re in. The lobby fills…"); setTimeout(function () { if (CUR === "home-first") go("home-open"); }, 1300); return null; }
   function rankGo(el) { var s = pst("ranking"); s.sc = el.dataset.rank; s.per = "all"; return "ranking"; } // the tiles show all-time ranks
   function herGo(n) { return n === "Zofia" ? "her-page" : "toast:" + n + "’s page works like Zofia’s. Only Zofia’s is built in this mockup."; }
@@ -2936,8 +2949,8 @@ html.protoon main.wrap { display: none; }
     selfie: [[".selfskip", function () { ptoast("Pick one of the ready-made avatars."); return "signup-1"; }], [".shutter, .shutter-row .ctl:first-child", "design"], [".shutter-row .ctl:last-child", function (el, h) { h.querySelector(".cam").classList.toggle("flip"); return null; }], [".ph-top .iconbtn:first-child", "back"]],
     design: [[".craftlink", "design-craft"], [".btn.push", avatarDone], ["[data-k=retake]", "selfie"], ["[data-k=more]", function () { ptoast("Drawing three new versions…"); entrance(host()); return null; }], [".ph-top .iconbtn:first-child", "back"]],
     "design-craft": [[".btn.push", avatarDone], [".textlink", "design"], [".ph-top .iconbtn:first-child", "back"]],
-    "home-first": [[".gsegc [data-g]", gsegGo], [".howbtn", function () { return "intro"; }], [".fcard:first-child .btn.black", joinThen], [".fend b", "next-games"], [".fcard .btn.outline[data-act]", feedBtn]],
-    "home-open": [[".gsegc [data-g]", gsegGo], [".fcard:first-child .btn.black", function () { return RESULTS_IN ? "results" : LOCKED ? "locked" : resumeAt(LEFT ? LEFT.q : null); }], [".fend b", "next-games"], [".fcard .btn.outline[data-act]", feedBtn], [".howbtn", function () { return "intro"; }]],
+    "home-first": [[".gsegc [data-g]", gsegGo], [".howbtn", function () { return "intro"; }], [".fcard .btn.m2", goM2], [".fcard:first-child .btn.black", function () { MC = 1; return joinThen(); }], [".fend b", "next-games"], [".fcard .btn.outline[data-act]", feedBtn]],
+    "home-open": [[".gsegc [data-g]", gsegGo], [".fcard .btn.m2", goM2], [".fcard:first-child .btn.black", function () { MC = 1; return RESULTS_IN ? "results" : LOCKED ? "locked" : resumeAt(LEFT ? LEFT.q : null); }], [".fend b", "next-games"], [".fcard .btn.outline[data-act]", feedBtn], [".howbtn", function () { return "intro"; }]],
     review: [[".btn.red", "locked"], [".act", function (el, h) { var k = [].indexOf.call(h.querySelectorAll(".act"), el), s = pst("q1"); s.at = k + 1; s.one = true; return "q1"; }]],
     locked: [[".btn.black", "home-open"], [".tctab", function () { return JW ? "tbl-join" : "tbl-create"; }]],
     "tbl-create": [[".ph-top .iconbtn:first-child", "back"], [".coinbal", "coins"], [".btn.push", function () {
@@ -3002,7 +3015,7 @@ html.protoon main.wrap { display: none; }
       ["[data-k=pay]", "toast:Your payment methods and receipts."], ["[data-k=priv]", "privacy"], ["[data-k=help]", "toast:Questions? Chat with support."], ["[data-k=logout]", function () { restart(true); return null; }]]
   };
   HOT["profile-edit"] = HOT["profile-edit"].concat(HOT["signup-1"].filter(function (h) { return /^\.geo/.test(h[0]); }));
-  function restart(keep) { if (!keep) KNOWN = null; JT = false; JW = false; PICKS = null; applyPicks(); SEEN_AF = false; FOL = JSON.parse(JSON.stringify(FOL0)); clearTimeout(TB.t); TB = { made: false, n: 1, min: TBL.min, t: null, fresh: null, bump: false }; HIST = []; PST = {}; JOINED = {}; REMIND = {}; SIGNED = false; JOIN_AFTER = null; SSO_USED = null; LEFT = null; LOCKED = false; RESULTS_IN = false; SEEN_INTRO = false; clearTimeout(NOTIF_T); if (P) P.querySelector(".playr").innerHTML = ""; closeOverlay(true); go("splash", false); }
+  function restart(keep) { if (!keep) KNOWN = null; JT = false; JW = false; PICKS = null; MC = 1; PICKS2 = null; M2DONE = false; applyPicks(); SEEN_AF = false; FOL = JSON.parse(JSON.stringify(FOL0)); clearTimeout(TB.t); TB = { made: false, n: 1, min: TBL.min, t: null, fresh: null, bump: false }; HIST = []; PST = {}; JOINED = {}; REMIND = {}; SIGNED = false; JOIN_AFTER = null; SSO_USED = null; LEFT = null; LOCKED = false; RESULTS_IN = false; SEEN_INTRO = false; clearTimeout(NOTIF_T); if (P) P.querySelector(".playr").innerHTML = ""; closeOverlay(true); go("splash", false); }
   function layer(html) { closeLayer(); var d = document.createElement("div"); d.className = "lay"; d.innerHTML = html; P.querySelector(".playr").appendChild(d); return d; }
   function closeLayer() { if (P) P.querySelectorAll(".playr .lay").forEach(function (x) { x.remove(); }); }
   function openMenu() {
@@ -3280,12 +3293,14 @@ html.protoon main.wrap { display: none; }
   function exitProto() { if (!P) return; document.documentElement.classList.remove("protoon"); P.classList.remove("on"); closeOverlay(true); try { history.replaceState(null, "", "#top"); } catch (x) {} window.scrollTo(0, 0); }
   window.THEONE_PROTO = {
     open: function (id) { if (!P || !P.classList.contains("on")) return false; overlay(id); return true; },
-    tab: function (i, pr) { if (!P || !P.classList.contains("on")) return; var t = NAVT[i]; if (pr && /^q\d$/.test(CUR) && pr.done < 5) LEFT = { q: pr.q, done: pr.done }; if (t) go(guard(t)); },
+    tab: function (i, pr) { if (!P || !P.classList.contains("on")) return; var t = NAVT[i]; if (MC === 2) { MC = 1; if (t) go(guard(t)); return; } if (pr && /^q\d$/.test(CUR) && pr.done < 5) LEFT = { q: pr.q, done: pr.done }; if (t) go(guard(t)); },
     // the question page saves each answer here, and reads them back when the player returns to the match
-    save: function (p) { if (!P || !P.classList.contains("on") || !/^q\d$/.test(CUR)) return; PICKS = JSON.parse(JSON.stringify(p)); applyPicks(); },
-    load: function () { return P && P.classList.contains("on") && PICKS ? JSON.parse(JSON.stringify(PICKS)) : null; },
+    save: function (p) { if (!P || !P.classList.contains("on") || !/^q\d$/.test(CUR)) return; if (MC === 2) { PICKS2 = JSON.parse(JSON.stringify(p)); return; } PICKS = JSON.parse(JSON.stringify(p)); applyPicks(); },
+    load: function () { var k = MC === 2 ? PICKS2 : PICKS; return P && P.classList.contains("on") && k ? JSON.parse(JSON.stringify(k)) : null; },
     changed: function () { if (P && /^q\d$/.test(CUR)) { pst("q1").one = false; ptoast("Saved. Back to your review."); setTimeout(function () { if (/^q\d$/.test(CUR)) go("review"); }, 700); } },
-    ended: function () { LEFT = null; if (P && /^q\d$/.test(CUR)) { go("review"); return true; } return false; } // straight to the review after the fifth answer (22 Oct: the 5/5 summary in between is gone)
+    ended: function () {
+      if (P && /^q\d$/.test(CUR) && MC === 2) { M2DONE = true; MC = 1; go("home-open"); ptoast("Your Katya vs Yasmin picks are in. Results at 13:00."); return true; }
+      LEFT = null; if (P && /^q\d$/.test(CUR)) { go("review"); return true; } return false; } // straight to the review after the fifth answer (22 Oct: the 5/5 summary in between is gone)
   };
   if (APP || /^#play/.test(location.hash)) enterProto();
   window.addEventListener("hashchange", function () { if (/^#app/.test(location.hash) && !APP) { location.reload(); return; } if (/^#play/.test(location.hash) && !(P && P.classList.contains("on"))) enterProto(); });

@@ -632,12 +632,11 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     pane(k).classList.add("spot"); pane(other).classList.add("dim"); dock.classList.add("away"); phone.classList.add("bopen");
     var b = document.createElement("div"); b.className = "banner" + (RM ? "" : " in"); bannerEl = b;
     b.innerHTML = '<span class="tail"></span>' +
-      '<div class="bn-head">' + miniCrowd() + '<div><small>The crowd picks ' + W[k].name + '</small><b>How many of the 1,000?</b></div><span class="tag">YOUR GUESS</span></div>' +
+      '<div class="bn-head">' + miniCrowd() + '<div><small>The crowd picks ' + W[k].name + '</small><b>Exact vote</b></div><span class="tag">YOUR GUESS</span></div>' +
       '<div class="bn-step"><span>1</span>Pick the range</div>' +
       '<div class="ranges">' + BANDS.map(function (r, i) { return '<button class="rb" data-i="' + i + '">' + r[0] + '–' + r[1] + '</button>'; }).join("") + '</div>' +
       '<div class="exact" hidden><div class="bn-step"><span>2</span>Now the exact %</div><div class="numrow"><span class="split" id="splitL"></span><div class="bignum unset" id="bignum">–<small>%</small></div><span class="split r" id="splitR"></span></div><div class="ruler" id="ruler"></div></div>' +
-      '<button class="lock" id="lock" disabled>Pick a range</button>' +
-      '<div class="ch">Changed your mind? Tap ' + W[other].name + ' or drag the crowd onto her.</div>';
+      '<button class="lock" id="lock" disabled>Pick a range</button>'; // the "Changed your mind?" line is gone (Alon, 22 Oct); tapping the other woman still moves the crowd
     phone.appendChild(b);
     var pb = box(pane(k)), bb = box(b), tx = pb.x + pb.w / 2 - bb.x;
     b.style.setProperty("--tx", Math.max(30, Math.min(bb.w - 30, tx)) + "px");

@@ -1644,11 +1644,7 @@ html.protoon main.wrap { display: none; }
   var FEED = [
     { a: ["zofia-general.jpg", "100% 0%", "Zofia", "PL", "Poland"], b: ["mariana-general.jpg", "0% 0%", "Mariana", "BR", "Brazil"], live: true },
     { a: ["katya-general.jpg", "50% 0%", "Katya", "RU", "Russia"], b: ["yasmin-general.jpg", "50% 0%", "Yasmin", "LB", "Lebanon"], live: true, m2: true }, // 23 Oct: the second playable match
-    { a: ["nina.jpg", "50% 25%", "Nina", "ES", "Spain"], b: ["valentina.jpg", "50% 25%", "Valentina", "AR", "Argentina"], time: "19:00", lobby: 168 },
-    { a: ["maya.jpg", "50% 25%", "Maya", "MX", "Mexico"], b: ["luna.jpg", "50% 25%", "Luna", "ES", "Spain"], time: "20:00", opens: "19:30" },
-    { a: ["zofia-general.jpg", "100% 0%", "Zofia", "PL", "Poland"], b: ["sophie.jpg", "50% 25%", "Sophie", "US", "USA"], day: "Tomorrow", time: "17:00", opens: "16:30 tomorrow" },
-    { a: ["mariana-general.jpg", "0% 0%", "Mariana", "BR", "Brazil"], b: ["emma.jpg", "50% 25%", "Emma", "GB", "UK"], day: "Tomorrow", time: "18:00", opens: "17:30 tomorrow" },
-    { a: ["valentina.jpg", "50% 25%", "Valentina", "AR", "Argentina"], b: ["maya.jpg", "50% 25%", "Maya", "MX", "Mexico"], day: "Tomorrow", time: "19:00", opens: "18:30 tomorrow" }
+    { a: ["valeria-general.jpg", "50% 0%", "Valeria", "CO", "Colombia"], b: ["brooke-general.jpg", "50% 0%", "Brooke", "US", "USA"], live: true, m3: true }, // 23 Oct: the third playable match
   ];
   function fside(x) { return '<span class="pane"><img src="' + IMG + x[0] + '" alt="" style="object-position:' + x[1] + '"><span class="fade"></span><span class="who"><b>' + x[2] + '</b><small>' + FLAGS[x[3]] + x[4] + '</small></span></span>'; }
   function joiners(me, more) {
@@ -1680,10 +1676,11 @@ html.protoon main.wrap { display: none; }
     return '<div class="feed">' + list.map(function (x) {
       var m = x[0], i = x[1], mine = fjoined(m, s, open, i);
       var head, lob, btn;
-      if (m.m2) { // the second match: its own picks, no results in this mockup
+      if (m.m2 || m.m3) { // the second and third matches: their own picks, no results in this mockup
         head = '<span class="fstat live"><i></i>Live · picks close in <b>12m 43s</b></span>';
         lob = '<div class="count"><b data-count="1000">1,000</b>/ 1,000 joined</div><div class="bar"><span style="width:100%"></span></div>' + first15();
-        btn = M2DONE ? '<button class="btn black m2">Your picks are in ✓</button>' : '<button class="btn black m2">Predict this match &gt;</button>';
+        var mk = m.m3 ? "m3" : "m2";
+        btn = (m.m3 ? M3DONE : M2DONE) ? '<button class="btn black ' + mk + '">Your picks are in ✓</button>' : '<button class="btn black ' + mk + '">Predict this match &gt;</button>';
       } else if (m.live) {
         head = open && s.res ? '<span class="fstat"><i></i>Final · <b>1,000</b> predictions</span>' : '<span class="fstat live"><i></i>Live · picks close in <b>12m 43s</b></span>';
         if (open && s.res) {
@@ -1741,7 +1738,7 @@ html.protoon main.wrap { display: none; }
         '<div class="cap"><b>Climb. Win the week.</b><span>Points add up all week. The top players win the weekly prize.</span></div></div>' +
       '</div>';
   }
-  function dragPhone(state, title) { return '<div class="phone dragphone"><iframe src="drag.html#embed-' + state + (MC === 2 ? "-m2" : "") + (STILL ? "-still" : "") + '" title="' + title + '" loading="lazy"></iframe></div>'; }
+  function dragPhone(state, title) { return '<div class="phone dragphone"><iframe src="drag.html#embed-' + state + (MC > 1 ? "-m" + MC : "") + (STILL ? "-still" : "") + '" title="' + title + '" loading="lazy"></iframe></div>'; }
   function bleed(i, h, s, mode) {
     var P = PHOTOS[i];
     return '<div class="bleed" style="height:' + h + 'px">' + ["L", "M"].map(function (k, ix) {
@@ -2361,7 +2358,7 @@ html.protoon main.wrap { display: none; }
         var seats = [["Big M", "bigm.png", 100, 1], ["Noa_K", "av-girl.jpg", 100], ["Itay22", "av-lion.jpg", 150], ["Gal.M", "av-panda.jpg", 100]];
         return phone(body(
           top() + pill("", "Cancelled", "Weekend Duo") +
-          fchip(FEED[1], "Tuesday 18:00 · final") +
+          fchip({ a: ["sophie.jpg", "50% 25%", "Sophie", "US", "USA"], b: ["emma.jpg", "50% 25%", "Emma", "GB", "UK"] }, "Tuesday 18:00 · final") +
           '<div class="center"><h2 class="h-mid">Table cancelled</h2><p class="sub" style="margin-top:4px">Weekend Duo had 4 of 6 seats when the picks closed. A table runs only when it’s full, so everyone gets their coins back.</p></div>' +
           '<div class="lcard" style="gap:0">' + seats.map(function (q) { return '<div class="tfr"><img src="' + IMG + q[1] + '" alt=""><span>' + q[0] + (q[3] ? ' <span class="youtag">YOU</span>' : '') + '<small>Put in ' + q[2] + '</small></span><span class="tback">' + icon("coin", "var(--gold)") + q[2] + ' back</span></div>'; }).join("") + '</div>' +
           '<div class="tbalnote">' + icon("undo", "var(--green)") + '<span><b>Your 100 coins are back.</b> Balance 1,240.</span></div>' +
@@ -2861,7 +2858,8 @@ html.protoon main.wrap { display: none; }
   // ===== clickable prototype (#play): one phone you click through like the app =====
   var BY = {}, ORDER = []; SCREENS.forEach(function (sc) { if (sc.id) { BY[sc.id] = sc; ORDER.push(sc.id); } });
   var PST = {}, HIST = [], CUR = null, OVER = null, SEEN_INTRO = false, P = null, LEFT = null, LOCKED = false, RESULTS_IN = false, NOTIF_T = null, PAYTHEN = null, JOINED = {}, REMIND = {}, SIGNED = false, JOIN_AFTER = null, SSO_USED = null;
-  var MC = 1, PICKS2 = null, M2DONE = false; // MC: the match being played (2 = Katya vs Yasmin); PICKS2 and M2DONE: its answers and whether they are in
+  var MC = 1, PICKS2 = null, M2DONE = false, PICKS3 = null, M3DONE = false; // MC: the match being played (2 = Katya vs Yasmin, 3 = Valeria vs Brooke); PICKS2/3 and M2/3DONE: its answers and whether they are in
+  var MNAME = { 2: "Katya vs Yasmin", 3: "Valeria vs Brooke" };
   var PICKS = null, KNOWN = null, SEEN_AF = false, JT = false, JW = false, RB = null; // JT: seated at Beach Crew; JW: its invite waits on the picks; RB: the message being reported // the answers saved on the question page; the sign-in used before; the after-results offer seen
   var TB = { made: false, n: 1, min: TBL.min, t: null, fresh: null, bump: false }; // the friends' table in the prototype: seats fill one by one once it opens
   function rend(id) { // a match left half-way shows on every screen outside it
@@ -2924,9 +2922,11 @@ html.protoon main.wrap { display: none; }
     pst("home-first").joined = true; go("home-first"); ptoast("You’re in. The lobby fills…");
     setTimeout(function () { if (CUR === "home-first") go("home-open"); }, 1300); return null;
   }
-  function goM2() { // the second match: straight into its questions (after sign-in for a guest)
-    if (M2DONE) return "toast:Your Katya vs Yasmin picks are in. Results at 13:00.";
-    MC = 2; var s = pst("q1"); s.at = null; s.one = false;
+  function goM2() { return goM(2); }
+  function goM3() { return goM(3); }
+  function goM(n) { // the second or third match: straight into its questions (after sign-in for a guest)
+    if (n === 3 ? M3DONE : M2DONE) return "toast:Your " + MNAME[n] + " picks are in. Results at 13:00.";
+    MC = n; var s = pst("q1"); s.at = null; s.one = false;
     if (!SIGNED) { JOIN_AFTER = { to: "q1" }; return "login"; }
     return "q1";
   }
@@ -2949,8 +2949,8 @@ html.protoon main.wrap { display: none; }
     selfie: [[".selfskip", function () { ptoast("Pick one of the ready-made avatars."); return "signup-1"; }], [".shutter, .shutter-row .ctl:first-child", "design"], [".shutter-row .ctl:last-child", function (el, h) { h.querySelector(".cam").classList.toggle("flip"); return null; }], [".ph-top .iconbtn:first-child", "back"]],
     design: [[".craftlink", "design-craft"], [".btn.push", avatarDone], ["[data-k=retake]", "selfie"], ["[data-k=more]", function () { ptoast("Drawing three new versions…"); entrance(host()); return null; }], [".ph-top .iconbtn:first-child", "back"]],
     "design-craft": [[".btn.push", avatarDone], [".textlink", "design"], [".ph-top .iconbtn:first-child", "back"]],
-    "home-first": [[".gsegc [data-g]", gsegGo], [".howbtn", function () { return "intro"; }], [".fcard .btn.m2", goM2], [".fcard:first-child .btn.black", function () { MC = 1; return joinThen(); }], [".fend b", "next-games"], [".fcard .btn.outline[data-act]", feedBtn]],
-    "home-open": [[".gsegc [data-g]", gsegGo], [".fcard .btn.m2", goM2], [".fcard:first-child .btn.black", function () { MC = 1; return RESULTS_IN ? "results" : LOCKED ? "locked" : resumeAt(LEFT ? LEFT.q : null); }], [".fend b", "next-games"], [".fcard .btn.outline[data-act]", feedBtn], [".howbtn", function () { return "intro"; }]],
+    "home-first": [[".gsegc [data-g]", gsegGo], [".howbtn", function () { return "intro"; }], [".fcard .btn.m2", goM2], [".fcard .btn.m3", goM3], [".fcard:first-child .btn.black", function () { MC = 1; return joinThen(); }], [".fend b", "next-games"], [".fcard .btn.outline[data-act]", feedBtn]],
+    "home-open": [[".gsegc [data-g]", gsegGo], [".fcard .btn.m2", goM2], [".fcard .btn.m3", goM3], [".fcard:first-child .btn.black", function () { MC = 1; return RESULTS_IN ? "results" : LOCKED ? "locked" : resumeAt(LEFT ? LEFT.q : null); }], [".fend b", "next-games"], [".fcard .btn.outline[data-act]", feedBtn], [".howbtn", function () { return "intro"; }]],
     review: [[".btn.red", "locked"], [".act", function (el, h) { var k = [].indexOf.call(h.querySelectorAll(".act"), el), s = pst("q1"); s.at = k + 1; s.one = true; return "q1"; }]],
     locked: [[".btn.black", "home-open"], [".tctab", function () { return JW ? "tbl-join" : "tbl-create"; }]],
     "tbl-create": [[".ph-top .iconbtn:first-child", "back"], [".coinbal", "coins"], [".btn.push", function () {
@@ -3015,7 +3015,7 @@ html.protoon main.wrap { display: none; }
       ["[data-k=pay]", "toast:Your payment methods and receipts."], ["[data-k=priv]", "privacy"], ["[data-k=help]", "toast:Questions? Chat with support."], ["[data-k=logout]", function () { restart(true); return null; }]]
   };
   HOT["profile-edit"] = HOT["profile-edit"].concat(HOT["signup-1"].filter(function (h) { return /^\.geo/.test(h[0]); }));
-  function restart(keep) { TBL.seats.splice.apply(TBL.seats, [1, TBL.seats.length - 1].concat(TFRIENDS)); if (!keep) KNOWN = null; JT = false; JW = false; PICKS = null; MC = 1; PICKS2 = null; M2DONE = false; applyPicks(); SEEN_AF = false; FOL = JSON.parse(JSON.stringify(FOL0)); clearTimeout(TB.t); TB = { made: false, n: 1, min: TBL.min, t: null, fresh: null, bump: false }; HIST = []; PST = {}; JOINED = {}; REMIND = {}; SIGNED = false; JOIN_AFTER = null; SSO_USED = null; LEFT = null; LOCKED = false; RESULTS_IN = false; SEEN_INTRO = false; clearTimeout(NOTIF_T); if (P) P.querySelector(".playr").innerHTML = ""; closeOverlay(true); go("splash", false); }
+  function restart(keep) { TBL.seats.splice.apply(TBL.seats, [1, TBL.seats.length - 1].concat(TFRIENDS)); if (!keep) KNOWN = null; JT = false; JW = false; PICKS = null; MC = 1; PICKS2 = null; M2DONE = false; PICKS3 = null; M3DONE = false; applyPicks(); SEEN_AF = false; FOL = JSON.parse(JSON.stringify(FOL0)); clearTimeout(TB.t); TB = { made: false, n: 1, min: TBL.min, t: null, fresh: null, bump: false }; HIST = []; PST = {}; JOINED = {}; REMIND = {}; SIGNED = false; JOIN_AFTER = null; SSO_USED = null; LEFT = null; LOCKED = false; RESULTS_IN = false; SEEN_INTRO = false; clearTimeout(NOTIF_T); if (P) P.querySelector(".playr").innerHTML = ""; closeOverlay(true); go("splash", false); }
   function layer(html) { closeLayer(); var d = document.createElement("div"); d.className = "lay"; d.innerHTML = html; P.querySelector(".playr").appendChild(d); return d; }
   function closeLayer() { if (P) P.querySelectorAll(".playr .lay").forEach(function (x) { x.remove(); }); }
   function openMenu() {
@@ -3299,13 +3299,13 @@ html.protoon main.wrap { display: none; }
   function exitProto() { if (!P) return; document.documentElement.classList.remove("protoon"); P.classList.remove("on"); closeOverlay(true); try { history.replaceState(null, "", "#top"); } catch (x) {} window.scrollTo(0, 0); }
   window.THEONE_PROTO = {
     open: function (id) { if (!P || !P.classList.contains("on")) return false; overlay(id); return true; },
-    tab: function (i, pr) { if (!P || !P.classList.contains("on")) return; var t = NAVT[i]; if (MC === 2) { MC = 1; if (t) go(guard(t)); return; } if (pr && /^q\d$/.test(CUR) && pr.done < 5) LEFT = { q: pr.q, done: pr.done }; if (t) go(guard(t)); },
+    tab: function (i, pr) { if (!P || !P.classList.contains("on")) return; var t = NAVT[i]; if (MC > 1) { MC = 1; if (t) go(guard(t)); return; } if (pr && /^q\d$/.test(CUR) && pr.done < 5) LEFT = { q: pr.q, done: pr.done }; if (t) go(guard(t)); },
     // the question page saves each answer here, and reads them back when the player returns to the match
-    save: function (p) { if (!P || !P.classList.contains("on") || !/^q\d$/.test(CUR)) return; if (MC === 2) { PICKS2 = JSON.parse(JSON.stringify(p)); return; } PICKS = JSON.parse(JSON.stringify(p)); applyPicks(); },
-    load: function () { var k = MC === 2 ? PICKS2 : PICKS; return P && P.classList.contains("on") && k ? JSON.parse(JSON.stringify(k)) : null; },
+    save: function (p) { if (!P || !P.classList.contains("on") || !/^q\d$/.test(CUR)) return; if (MC === 2) { PICKS2 = JSON.parse(JSON.stringify(p)); return; } if (MC === 3) { PICKS3 = JSON.parse(JSON.stringify(p)); return; } PICKS = JSON.parse(JSON.stringify(p)); applyPicks(); },
+    load: function () { var k = MC === 2 ? PICKS2 : MC === 3 ? PICKS3 : PICKS; return P && P.classList.contains("on") && k ? JSON.parse(JSON.stringify(k)) : null; },
     changed: function () { if (P && /^q\d$/.test(CUR)) { pst("q1").one = false; ptoast("Saved. Back to your review."); setTimeout(function () { if (/^q\d$/.test(CUR)) go("review"); }, 700); } },
     ended: function () {
-      if (P && /^q\d$/.test(CUR) && MC === 2) { M2DONE = true; MC = 1; go("home-open"); ptoast("Your Katya vs Yasmin picks are in. Results at 13:00."); return true; }
+      if (P && /^q\d$/.test(CUR) && MC > 1) { var n = MC; if (n === 3) M3DONE = true; else M2DONE = true; MC = 1; go("home-open"); ptoast("Your " + MNAME[n] + " picks are in. Results at 13:00."); return true; }
       LEFT = null; if (P && /^q\d$/.test(CUR)) { go("review"); return true; } return false; } // straight to the review after the fifth answer (22 Oct: the 5/5 summary in between is gone)
   };
   if (APP || /^#play/.test(location.hash)) enterProto();

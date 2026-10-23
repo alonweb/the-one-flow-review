@@ -1,6 +1,6 @@
 (function () {
   // A soft gate for THE ONE App preview: the page shows once the password's SHA-256 matches. Unlocked for this tab only.
-  var HASH = 'f93cc17466ae25b869fcb95639fa0a2e35e229681cdb432e740eba31c9a91e58';
+  var HASH = '5a24f03a01d5b10cab6124f3c0e7086994ac9c869fc8e76e1463458f829fc864';
   var KEY = 'the-one-app-unlocked';
 
   function hex(buf) { return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ('0' + b.toString(16)).slice(-2); }).join(''); }

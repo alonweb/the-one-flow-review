@@ -1715,7 +1715,7 @@ html.protoon main.wrap { display: none; }
       return '<div class="fcard"><div class="fhead">' + head + (mine ? '<span class="fno in">✓ Joined</span>' : '<span class="fno">' + (i ? "Coming up" : "Your next match") + '</span>') + '</div>' +
         '<div class="fduo" style="height:' + (i ? 250 : 290) + 'px">' + fside(m.a) + fside(m.b) + '<span class="vs">VS</span></div>' +
         '<div class="lobby flob">' + lob + '</div>' + btn + '</div>';
-    }).join("") + (list.length ? '' : '<div class="fempty"><b>No matches here</b>Join one from All, or tap Notify me on a match to hear when its lobby opens.</div>') + '<div class="fend">A new match every hour. <b>See all next games</b></div></div>';
+    }).join("") + (list.length ? '' : '<div class="fempty"><b>No matches here</b>Join one from All, or tap Notify me on a match to hear when its lobby opens.</div>') + '</div>';
   }
   function introHTML() {
     var rain = ["av-lion.jpg", "av-girl.jpg", "av-panda.jpg", "av-astro.jpg", "av-sun.jpg", "av-girl.jpg", "av-lion.jpg", "av-astro.jpg", "av-panda.jpg", "av-sun.jpg", "av-girl.jpg", "av-lion.jpg"];
@@ -1903,7 +1903,7 @@ html.protoon main.wrap { display: none; }
       r: function (s) { return phone(body(
         top('<button class="howbtn introreplay" type="button">' + icon("play", "currentColor") + 'How it works</button>') +
         gseg(0) +
-        fchips(s, false) + feed(s, false)
+        feed(s, false)
       ) + nav("Games") + '<button class="swipehint" type="button">' + icon("chev", "#fff") + 'Swipe up for more matches</button>' + fdots(s, false) + introHTML().replace('class="beat b1"', 'class="beat b1 on"'), true).replace('class="phone has-nav"', 'class="phone has-nav feedphone introstill' + (STILL ? ' introfrozen' : '') + '"'); } },
     { id: "home-first", anim: true, t: "Games: first visit, as a guest", src: "Page 5, rethought", st: { joined: false }, notes: [
         "<b>Straight after the intro</b>, open to browse before signing in.",
@@ -1917,7 +1917,7 @@ html.protoon main.wrap { display: none; }
       r: function (s) { return phone(body(
         top('<button class="howbtn introreplay" type="button">' + icon("play", "currentColor") + 'How it works</button>') +
         gseg(0) +
-        fchips(s, false) + feed(s, false)
+        feed(s, false)
       ) + nav("Games") + '<button class="swipehint" type="button">' + icon("chev", "#fff") + 'Swipe up for more matches</button>' + fdots(s, false), true).replace('class="phone has-nav"', 'class="phone has-nav feedphone"'); } },
     { id: "login", t: "Sign in, the first time you join", src: "New", notes: [
         "<b>Only the first time</b>: Join the match as a guest opens this. After you sign in once, Join is one tap.",
@@ -2011,7 +2011,7 @@ html.protoon main.wrap { display: none; }
       r: function (s) { return phone(body(
         top('<button class="howbtn introreplay" type="button">' + icon("play", "currentColor") + 'How it works</button>') +
         gseg(0) +
-        fchips(s, true) + feed(s, true)
+        feed(s, true)
       ) + nav("Games") + '<button class="swipehint" type="button">' + icon("chev", "#fff") + 'Swipe up for more matches</button>' + fdots(s, true), true).replace('class="phone has-nav"', 'class="phone has-nav feedphone"'); } },
     // the questions: the drag-to-predict concept, one live phone per question, each opened at a different moment of the flow
     { id: "q1", t: "Question 1 of 5: Overall", src: "Drag to predict", notes: [
@@ -2949,8 +2949,8 @@ html.protoon main.wrap { display: none; }
     selfie: [[".selfskip", function () { ptoast("Pick one of the ready-made avatars."); return "signup-1"; }], [".shutter, .shutter-row .ctl:first-child", "design"], [".shutter-row .ctl:last-child", function (el, h) { h.querySelector(".cam").classList.toggle("flip"); return null; }], [".ph-top .iconbtn:first-child", "back"]],
     design: [[".craftlink", "design-craft"], [".btn.push", avatarDone], ["[data-k=retake]", "selfie"], ["[data-k=more]", function () { ptoast("Drawing three new versions…"); entrance(host()); return null; }], [".ph-top .iconbtn:first-child", "back"]],
     "design-craft": [[".btn.push", avatarDone], [".textlink", "design"], [".ph-top .iconbtn:first-child", "back"]],
-    "home-first": [[".gsegc [data-g]", gsegGo], [".howbtn", function () { return "intro"; }], [".fcard .btn.m2", goM2], [".fcard .btn.m3", goM3], [".fcard:first-child .btn.black", function () { MC = 1; return joinThen(); }], [".fend b", "next-games"], [".fcard .btn.outline[data-act]", feedBtn]],
-    "home-open": [[".gsegc [data-g]", gsegGo], [".fcard .btn.m2", goM2], [".fcard .btn.m3", goM3], [".fcard:first-child .btn.black", function () { MC = 1; return RESULTS_IN ? "results" : LOCKED ? "locked" : resumeAt(LEFT ? LEFT.q : null); }], [".fend b", "next-games"], [".fcard .btn.outline[data-act]", feedBtn], [".howbtn", function () { return "intro"; }]],
+    "home-first": [[".gsegc [data-g]", gsegGo], [".howbtn", function () { return "intro"; }], [".fcard .btn.m2", goM2], [".fcard .btn.m3", goM3], [".fcard:first-child .btn.black", function () { MC = 1; return joinThen(); }], [".fcard .btn.outline[data-act]", feedBtn]],
+    "home-open": [[".gsegc [data-g]", gsegGo], [".fcard .btn.m2", goM2], [".fcard .btn.m3", goM3], [".fcard:first-child .btn.black", function () { MC = 1; return RESULTS_IN ? "results" : LOCKED ? "locked" : resumeAt(LEFT ? LEFT.q : null); }], [".fcard .btn.outline[data-act]", feedBtn], [".howbtn", function () { return "intro"; }]],
     review: [[".btn.red", "locked"], [".act", function (el, h) { var k = [].indexOf.call(h.querySelectorAll(".act"), el), s = pst("q1"); s.at = k + 1; s.one = true; return "q1"; }]],
     locked: [[".btn.black", "home-open"], [".tctab", function () { return JW ? "tbl-join" : "tbl-create"; }]],
     "tbl-create": [[".ph-top .iconbtn:first-child", "back"], [".coinbal", "coins"], [".btn.push", function () {

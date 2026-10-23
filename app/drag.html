@@ -63,11 +63,14 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
 @keyframes blink { 50% { opacity: .35; } }
 .qhead { text-align: center; padding: 8px 16px 6px; }
 .kick { font: 600 11.5px/1 var(--label); letter-spacing: .22em; text-transform: uppercase; color: var(--ink-2); display: flex; justify-content: center; gap: 8px; align-items: center; }
-.kick .kcat { color: var(--pink); font-weight: 800; }
 .chipk { font: 700 10.5px/1 var(--label); letter-spacing: .12em; background: var(--gold); color: var(--gold-ink); padding: 4px 8px; border-radius: 999px; }
 /* 22 Oct: the headline is "Who is THE ONE?" on every question, as in the pink design; the question's own name sits in the line above it */
-.qhead h2 { margin: 6px 0 0; font: 400 29px/1.05 "Archivo Black", var(--ui); letter-spacing: -.01em; text-transform: uppercase; white-space: nowrap; }
-.qhead h2 em { font-style: normal; color: var(--pink); text-shadow: 0 0 22px rgba(255, 46, 139, .65); }
+/* 22 Oct, option B: the headline says what you are judging, always in two lines (white, then pink) so the photos never change size between questions */
+.qhead h2 { margin: 6px 0 0; font: 400 25px/1.08 "Archivo Black", var(--ui); letter-spacing: -.01em; text-transform: uppercase; }
+.qhead h2 span { display: block; white-space: nowrap; line-height: 28px; }
+.qhead h2 .l2 { font-size: 30px; line-height: 34px; color: var(--pink); text-shadow: 0 0 22px rgba(255, 46, 139, .65); }
+.qhead h2 .l2.pop { animation: hpop .6s var(--spring); }
+@keyframes hpop { 0% { transform: scale(.6); opacity: 0; } 60% { transform: scale(1.08); opacity: 1; } 100% { transform: none; } }
 
 /* ---------- the two women ---------- */
 .stage { position: relative; flex: 1 1 auto; min-height: 280px; max-height: 470px; } /* 470 since 22 Oct: the instruction row above the tray is gone, so the photos take its space */
@@ -325,7 +328,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
 @keyframes toast { 0% { opacity: 0; transform: translate(-50%, -8px); } 12%, 80% { opacity: 1; transform: translate(-50%, 0); } 100% { opacity: 0; } }
 .pane:focus-visible, .chip:focus-visible, .rb:focus-visible, .cell:focus-visible, .lock:focus-visible, .again:focus-visible, .nbtn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 .still *, .still *::before, .still *::after { animation: none !important; transition: none !important; }
-@media (max-height: 720px) { .qhead h2 { font-size: 27px; } .tray { min-height: 131px; padding-block: 10px; } .bignum { font-size: 40px; } .rb { min-height: 36px; } .cell { min-height: 30px; } .bn-step { display: none; } .rb { font-size: 15px; } .bopen .slot { opacity: 0; transition: opacity .2s; } }
+@media (max-height: 720px) { .qhead h2 { font-size: 21px; } .qhead h2 span { line-height: 23px; } .qhead h2 .l2 { font-size: 25px; line-height: 28px; } .stage { min-height: 262px; } .tray { min-height: 131px; padding-block: 10px; } .bignum { font-size: 40px; } .rb { min-height: 36px; } .cell { min-height: 30px; } .bn-step { display: none; } .rb { font-size: 15px; } .bopen .slot { opacity: 0; transition: opacity .2s; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } .hand { display: none; } }
 </style>
 
@@ -337,7 +340,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
         <div class="qdots" id="qdots" aria-label="Question progress"></div>
       </div>
       <div class="pillrow"><span class="pill"><span class="dot"></span>LIVE MATCH · PICKS CLOSE IN <b id="timer">12m 43s</b></span></div>
-      <div class="qhead"><div class="kick">Question <span id="qn">1</span> of 5 · <span class="kcat" id="qtitle">Overall</span></div><h2>Who is <em>the one?</em></h2></div>
+      <div class="qhead"><div class="kick">Question <span id="qn">1</span> of 5</div><h2 id="qtitle"><span class="l1">Who is</span><span class="l2">the one?</span></h2></div>
       <div class="stage" id="stage"><div class="panes" id="panes"></div><span class="vs">VS</span></div>
       <div class="dock" id="dock">
         <div class="tray" id="tray">
@@ -377,12 +380,12 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     BR: '<svg class="flag" viewBox="0 0 20 14" aria-hidden="true"><rect width="20" height="14" fill="#009c3b"/><path d="M10 1.6 18.4 7 10 12.4 1.6 7z" fill="#ffdf00"/><circle cx="10" cy="7" r="3.1" fill="#002776"/></svg>'
   };
   var W = { L: { name: "Luciana", cc: "CO", country: "Colombia" }, M: { name: "Mariana", cc: "BR", country: "Brazil" } };
-  var Q = [ // photos cropped around faces found with Vision (400px-tall panes)
-    { t: "Overall", L: ["luciana-general.jpg", "75% 0%"], M: ["mariana-general.jpg", "12% 0%"] },
-    { t: "First impression", L: ["luciana-portrait.jpg", "34% 0%"], M: ["mariana-general.jpg", "12% 0%"] },
-    { t: "Going Out / Date", L: ["luciana-date.jpg", "53% 0%"], M: ["mariana-date.jpg", "26% 0%"] },
-    { t: "Swimwear", L: ["luciana-swim.jpg", "47% 0%"], M: ["mariana-swim.jpg", "23% 0%"] },
-    { t: "Bring Her to Mama", L: ["luciana-mama.jpg", "91% 0%"], M: ["mariana-mama.jpg", "17% 0%"] }
+  var Q = [ // photos cropped around faces found with Vision (re-checked 22 Oct for the taller, rounded cards)
+    { t: "Overall", h: ["Who is", "the one?"], L: ["luciana-general.jpg", "75% 0%"], M: ["mariana-general.jpg", "18% 0%"] },
+    { t: "First impression", h: ["Who is the one", "at first sight?"], L: ["luciana-portrait.jpg", "34% 0%"], M: ["mariana-general.jpg", "12% 0%"] },
+    { t: "Going Out / Date", h: ["Who is the one", "for a date?"], L: ["luciana-date.jpg", "53% 0%"], M: ["mariana-date.jpg", "26% 0%"] },
+    { t: "Swimwear", h: ["Who is the one", "in swimwear?"], L: ["luciana-swim.jpg", "47% 0%"], M: ["mariana-swim.jpg", "23% 0%"] },
+    { t: "Bring Her to Mama", h: ["Who is the one", "to bring to Mama?"], L: ["luciana-mama.jpg", "64% 0%"], M: ["mariana-mama.jpg", "21% 0%"] }
   ];
   var BANDS = [[51, 59], [60, 69], [70, 79], [80, 89], [90, 100]];
   var CROWD = ["av-lion.jpg", "av-girl.jpg", "av-panda.jpg", "av-astro.jpg", "av-sun.jpg"];
@@ -446,6 +449,19 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
   function cur() { return picks[qi]; }
   function syncStep() { panesEl.dataset.step = step; } // shows or hides the tap-to-pick pills
   function setInstr(text) { var l = $("#instr"); l.textContent = text || ""; l.hidden = !text; }
+  function setHead(pop) { // the two headline lines; each shrinks until it fits the width (Mama is the longest)
+    var h = $("#qtitle"), l1 = $(".l1", h), l2 = $(".l2", h);
+    l1.textContent = Q[qi].h[0]; l2.textContent = Q[qi].h[1]; fitHead();
+    l2.classList.remove("pop"); if (pop && !RM) { void l2.offsetWidth; l2.classList.add("pop"); }
+  }
+  function fitHead() {
+    $("#qtitle").querySelectorAll("span").forEach(function (el) {
+      el.style.fontSize = ""; var fs = parseFloat(getComputedStyle(el).fontSize);
+      while (el.scrollWidth > el.clientWidth + 1 && fs > 14) { fs -= 1; el.style.fontSize = fs + "px"; }
+    });
+  }
+  window.addEventListener("resize", function () { if (qi < Q.length) fitHead(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (qi < Q.length) fitHead(); });
   function dots() { $("#qdots").innerHTML = Q.map(function (_, i) { return '<span class="' + (i === qi ? "now" : picks[i] && picks[i].locked ? "done" : "") + '"></span>'; }).join(""); }
 
   function buildPanes() {
@@ -582,7 +598,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
   function loadQuestion(enter) {
     picks[qi] = picks[qi] || { you: null, crowd: null, band: null, exact: null, locked: false };
     step = "me"; armed = null; syncStep();
-    $("#qn").textContent = qi + 1; $("#qtitle").textContent = Q[qi].t; dots(); buildPanes();
+    $("#qn").textContent = qi + 1; setHead(enter); dots(); buildPanes();
     closeBanner(true); dock.classList.remove("away");
     setInstr(""); trayState();
     if (enter && !RM) { stageEl.classList.remove("leave"); stageEl.classList.add("enter"); setTimeout(function () { stageEl.classList.remove("enter"); }, 600); }

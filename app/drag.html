@@ -122,9 +122,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
 .story.in { animation: soIn .28s ease-out; }
 @keyframes soIn { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: none; } }
 .so-media { position: absolute; inset: 0; pointer-events: none; }
-.so-media .bg { position: absolute; left: -40px; top: -40px; width: calc(100% + 80px); height: calc(100% + 80px); object-fit: cover; filter: blur(26px) brightness(.5) saturate(1.1); }
-.so-media .fg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; animation: soZoom var(--dur, 5s) linear forwards; }
-@keyframes soZoom { from { transform: scale(1); } to { transform: scale(1.06); } }
+.so-media .fg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; } /* full screen, placed on her face (object-position per photo) */
 .so-shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(0, 0, 0, .62) 0, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 50%, rgba(7, 3, 10, .96) 100%); }
 .so-segs { position: absolute; top: calc(12px + env(safe-area-inset-top)); left: 12px; right: 12px; z-index: 3; display: flex; gap: 4px; pointer-events: none; }
 .so-seg { flex: 1; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, .3); overflow: hidden; }
@@ -132,7 +130,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
 .so-seg.done i { width: 100%; }
 .so-seg.now i { animation: soFill var(--dur, 5s) linear forwards; }
 @keyframes soFill { to { width: 100%; } }
-.story.paused .so-media .fg, .story.paused .so-seg.now i { animation-play-state: paused; }
+.story.paused .so-seg.now i { animation-play-state: paused; }
 .so-head { position: absolute; top: calc(24px + env(safe-area-inset-top)); left: 12px; right: 6px; z-index: 3; display: flex; align-items: center; gap: 10px; }
 .so-head img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 2px var(--pink); }
 .so-head b { display: flex; align-items: center; gap: 6px; font: 700 16px/1.1 var(--ui); }
@@ -461,27 +459,28 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
 
   /* ---------- her preview and her stats (2026-10-22) ---------- */
   // Demo data. In the app her photos and short videos come from her own uploads, in the order she set; the numbers come from all her matches.
+  // media: [photo, x % that centres her face when the photo fills the screen (found with Vision), x % to pan to when a wide photo holds two faces]
   var HER = {
-    L: { age: 27, city: "Medellín", bio: "I can play almost any song on the piano by ear.", media: ["luciana-general.jpg", "luciana-portrait.jpg", "luciana-date.jpg", "luciana-swim.jpg", "luciana-mama.jpg"],
+    L: { age: 27, city: "Medellín", bio: "I can play almost any song on the piano by ear.", media: [["luciana-general.jpg", 74], ["luciana-portrait.jpg", 35], ["luciana-date.jpg", 53], ["luciana-swim.jpg", 47], ["luciana-mama.jpg", 37, 66]],
       rank: 6, total: 16, wins: 12,
       last: [["sophie.jpg", "Sophie", 1, 58], ["emma.jpg", "Emma", 1, 64], ["nina.jpg", "Nina", 0, 41], ["valentina.jpg", "Valentina", 1, 71], ["maya.jpg", "Maya", 1, 66]],
       q: [[12, [4, 5, 2, 1, 0], 4], [13, [3, 6, 3, 1, 0], 3], [11, [5, 4, 2, 0, 0], 5], [9, [6, 2, 1, 0, 0], 7], [14, [2, 5, 4, 2, 1], 2]] }, // per question: won, times in each range when she won, lost
-    M: { age: 24, city: "Rio de Janeiro", bio: "Beach volleyball every morning, samba every night.", media: ["mariana-general.jpg", "mariana-date.jpg", "mariana-swim.jpg", "mariana-mama.jpg"],
+    M: { age: 24, city: "Rio de Janeiro", bio: "Beach volleyball every morning, samba every night.", media: [["mariana-general.jpg", 15], ["mariana-date.jpg", 27], ["mariana-swim.jpg", 24], ["mariana-mama.jpg", 18]],
       rank: 11, total: 15, wins: 9,
       last: [["luna.jpg", "Luna", 1, 55], ["sophie.jpg", "Sophie", 0, 47], ["maya.jpg", "Maya", 1, 61], ["valentina.jpg", "Valentina", 1, 58], ["nina.jpg", "Nina", 0, 44]],
       q: [[9, [3, 4, 2, 0, 0], 6], [8, [4, 3, 1, 0, 0], 7], [11, [2, 4, 3, 2, 0], 4], [12, [2, 3, 4, 2, 1], 3], [7, [4, 2, 1, 0, 0], 8]] }
   };
-  var STORY_MS = 5000, storyEl = null, statsEl = null, sto = { k: null, i: 0, hold: null, held: false };
+  var STORY_MS = 5000, storyEl = null, statsEl = null, sto = { k: null, i: 0, hold: null, held: false, anim: null };
   function clockText() { return Math.floor(timerS / 60) + ":" + String(timerS % 60).padStart(2, "0"); }
   function openStory(k) {
     closeStats(); closeStory();
     var h = HER[k], w = W[k];
-    sto = { k: k, i: 0, hold: null, held: false };
+    sto = { k: k, i: 0, hold: null, held: false, anim: null };
     var s = document.createElement("div"); s.className = "story" + (RM ? "" : " in"); s.setAttribute("role", "dialog"); s.setAttribute("aria-label", w.name + "’s preview");
     s.style.setProperty("--dur", STORY_MS + "ms");
-    s.innerHTML = '<div class="so-media"><img class="bg" alt=""><img class="fg" alt=""></div><div class="so-shade"></div>' +
+    s.innerHTML = '<div class="so-media"><img class="fg" alt=""></div><div class="so-shade"></div>' +
       '<div class="so-segs">' + h.media.map(function () { return '<span class="so-seg"><i></i></span>'; }).join("") + '</div>' +
-      '<div class="so-head"><img src="' + IMG + h.media[0] + '" alt=""><div><b>' + w.name + FLAGS[w.cc] + '</b><small>' + h.age + ' · ' + h.city + '</small></div><button class="so-x" aria-label="Close">✕</button></div>' +
+      '<div class="so-head"><img src="' + IMG + h.media[0][0] + '" alt=""><div><b>' + w.name + FLAGS[w.cc] + '</b><small>' + h.age + ' · ' + h.city + '</small></div><button class="so-x" aria-label="Close">✕</button></div>' +
       '<span class="so-tap prev"></span><span class="so-tap next"></span>' +
       (RM ? '' : '<span class="so-hint" style="left:14px">‹ Tap</span><span class="so-hint" style="right:14px">Tap ›</span>') +
       '<div class="so-foot"><p class="so-bio">' + h.bio + '</p><button class="so-btn see">See her stats</button><button class="so-btn back">Back to my vote</button></div>';
@@ -493,15 +492,15 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     s.addEventListener("pointerdown", function (e) {
       if (!e.target.closest(".so-tap")) return;
       sto.held = false; clearTimeout(sto.hold);
-      sto.hold = setTimeout(function () { sto.held = true; s.classList.add("paused"); }, 220);
+      sto.hold = setTimeout(function () { sto.held = true; storyPause(true); }, 220);
     });
     s.addEventListener("pointerup", function (e) {
       if (!e.target.closest(".so-tap")) return;
       clearTimeout(sto.hold);
-      if (sto.held) { sto.held = false; s.classList.remove("paused"); return; }
+      if (sto.held) { sto.held = false; storyPause(false); return; }
       storyGo(sto.i + (e.target.closest(".so-tap.prev") ? -1 : 1));
     });
-    s.addEventListener("pointercancel", function () { clearTimeout(sto.hold); sto.held = false; s.classList.remove("paused"); });
+    s.addEventListener("pointercancel", function () { clearTimeout(sto.hold); sto.held = false; storyPause(false); });
     s.addEventListener("animationend", function (e) { if (e.animationName === "soFill") storyGo(sto.i + 1); });
     storyGo(0);
   }
@@ -514,22 +513,28 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     }
     sto.i = i;
     s.querySelectorAll(".so-seg").forEach(function (g, n) { g.className = "so-seg" + (n < i ? " done" : ""); });
-    var fg = $(".so-media .fg", s), bg = $(".so-media .bg", s);
-    fg.src = bg.src = IMG + media[i];
-    fg.style.animation = "none"; void fg.offsetWidth; fg.style.animation = "";
+    var fg = $(".so-media .fg", s), m = media[i], x0 = m[1] + "% 0%", x1 = (m[2] != null ? m[2] : m[1]) + "% 0%";
+    fg.src = IMG + m[0];
+    if (sto.anim) { sto.anim.cancel(); sto.anim = null; }
+    var still = RM || phone.classList.contains("still") || !fg.animate;
+    fg.style.objectPosition = still ? x1 : x0;
+    // a slow zoom while it shows; a wide photo with two faces pans from one to the other (her)
+    if (!still) sto.anim = fg.animate([{ transform: "scale(1)", objectPosition: x0 }, { transform: "scale(1.06)", objectPosition: x1 }], { duration: STORY_MS, easing: m[2] != null ? "ease-in-out" : "linear", fill: "forwards" });
+    if (s.classList.contains("paused") && sto.anim) sto.anim.pause();
     var seg = s.querySelectorAll(".so-seg")[i];
     if (RM) seg.className = "so-seg done"; // no timer when motion is reduced: she moves on with a tap
     else { void seg.offsetWidth; seg.className = "so-seg now"; }
   }
-  function closeStory() { if (storyEl) { clearTimeout(sto.hold); storyEl.remove(); storyEl = null; } }
+  function storyPause(on) { if (!storyEl) return; storyEl.classList.toggle("paused", on); if (sto.anim) { if (on) sto.anim.pause(); else sto.anim.play(); } }
+  function closeStory() { if (storyEl) { clearTimeout(sto.hold); if (sto.anim) sto.anim.cancel(); storyEl.remove(); storyEl = null; } }
   function openStats(k) {
     closeStats();
     var h = HER[k], w = W[k], open = Math.min(qi, Q.length - 1);
-    if (storyEl) storyEl.classList.add("paused");
+    storyPause(true);
     var el = document.createElement("div"); el.className = "stats" + (RM ? "" : " in"); el.setAttribute("role", "dialog"); el.setAttribute("aria-label", w.name + "’s stats");
     var range = function (n) { return n === 0 ? "never" : n === 1 ? "1 time" : n + " times"; };
     el.innerHTML = '<div class="ss-body">' +
-      '<div class="ss-top"><button class="ss-back" aria-label="Back to her preview">‹</button><img src="' + IMG + h.media[0] + '" alt=""><div><b>' + w.name + FLAGS[w.cc] + '</b><small>Ranked #' + h.rank + '</small></div><span class="ss-clock"><span class="dot"></span><b>' + clockText() + '</b>&nbsp;left</span></div>' +
+      '<div class="ss-top"><button class="ss-back" aria-label="Back to her preview">‹</button><img src="' + IMG + h.media[0][0] + '" alt=""><div><b>' + w.name + FLAGS[w.cc] + '</b><small>Ranked #' + h.rank + '</small></div><span class="ss-clock"><span class="dot"></span><b>' + clockText() + '</b>&nbsp;left</span></div>' +
       '<div class="ss-facts">Won <b>' + h.wins + '</b> of her <b>' + h.total + '</b> matches</div>' +
       '<div class="ss-h">Last 5 matches</div>' +
       '<div class="ss-last">' + h.last.map(function (m) { return '<div class="' + (m[2] ? "w" : "l") + '"><img src="' + IMG + m[0] + '" alt=""><b>' + (m[2] ? "Won" : "Lost") + '</b><span>' + m[3] + '%</span><small>vs ' + m[1] + '</small></div>'; }).join("") + '</div>' +
@@ -544,7 +549,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
       }).join("") +
       '</div><div class="ss-foot"><button class="so-btn back">Back to my vote</button></div>';
     phone.appendChild(el); statsEl = el;
-    $(".ss-back", el).addEventListener("click", function () { closeStats(); if (storyEl) storyEl.classList.remove("paused"); });
+    $(".ss-back", el).addEventListener("click", function () { closeStats(); storyPause(false); });
     $(".ss-foot .so-btn", el).addEventListener("click", function () { closeStats(); closeStory(); });
     el.querySelectorAll(".ss-qh").forEach(function (b) {
       b.addEventListener("click", function () { // one question open at a time
@@ -708,6 +713,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
   }
   function showEnd() {
     qi = Q.length; dots();
+    try { var pp = proto(); if (pp && pp.ended && pp.ended()) return; } catch (x) {} // inside the app the review comes straight after the fifth answer, with no summary in between
     var e = $("#end");
     var ok = Q.filter(function (_, i) { return picks[i] && picks[i].locked; }).length;
     e.innerHTML = '<div class="big">' + ok + '/5</div><h3>' + (ok === 5 ? "All five answered" : ok + " of 5 answered") + '</h3><p>Next, review them and lock. Results at 13:00, your time.</p><div class="list">' +
@@ -717,7 +723,6 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
       }).join("") + '</div><button class="again" id="again">Play again</button>';
     e.hidden = false; confetti(195, 200, 80); setTimeout(function () { confetti(195, 260, 50); }, 500);
     $("#again").addEventListener("click", restart);
-    try { if (window.parent !== window && window.parent.THEONE_PROTO) window.parent.THEONE_PROTO.ended(); } catch (x) {} // the clickable prototype moves on
   }
   function restart() { picks = []; qi = 0; $("#end").hidden = true; loadQuestion(true); }
   $("#restart").addEventListener("click", restart);
@@ -798,7 +803,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     if (e.target.closest(".cme")) { openHer(); return; }
     var p = e.target.closest(".pane"); if (p && !e.target.closest(".chip")) tapPane(p);
   });
-  phone.addEventListener("keydown", function (e) { if (e.key === "Escape" && (statsEl || storyEl)) { if (statsEl) { closeStats(); if (storyEl) storyEl.classList.remove("paused"); } else closeStory(); return; } var vc = e.target.closest && e.target.closest(".vbtn, .cme"); if (vc && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); e.stopPropagation(); vc.click(); return; } var chip = e.target.closest && e.target.closest(".chip"); if (chip && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); tapChip(chip); } });
+  phone.addEventListener("keydown", function (e) { if (e.key === "Escape" && (statsEl || storyEl)) { if (statsEl) { closeStats(); storyPause(false); } else closeStory(); return; } var vc = e.target.closest && e.target.closest(".vbtn, .cme"); if (vc && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); e.stopPropagation(); vc.click(); return; } var chip = e.target.closest && e.target.closest(".chip"); if (chip && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); tapChip(chip); } });
 
   /* ---------- clock ---------- */
   setInterval(function () {

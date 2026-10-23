@@ -3284,7 +3284,7 @@ html.protoon main.wrap { display: none; }
     save: function (p) { if (!P || !P.classList.contains("on") || !/^q\d$/.test(CUR)) return; PICKS = JSON.parse(JSON.stringify(p)); applyPicks(); },
     load: function () { return P && P.classList.contains("on") && PICKS ? JSON.parse(JSON.stringify(PICKS)) : null; },
     changed: function () { if (P && /^q\d$/.test(CUR)) { pst("q1").one = false; ptoast("Saved. Back to your review."); setTimeout(function () { if (/^q\d$/.test(CUR)) go("review"); }, 700); } },
-    ended: function () { LEFT = null; if (P && /^q\d$/.test(CUR)) { ptoast("All five answered. Now review them."); setTimeout(function () { if (/^q\d$/.test(CUR)) go("review"); }, 2200); } }
+    ended: function () { LEFT = null; if (P && /^q\d$/.test(CUR)) { go("review"); return true; } return false; } // straight to the review after the fifth answer (22 Oct: the 5/5 summary in between is gone)
   };
   if (APP || /^#play/.test(location.hash)) enterProto();
   window.addEventListener("hashchange", function () { if (/^#app/.test(location.hash) && !APP) { location.reload(); return; } if (/^#play/.test(location.hash) && !(P && P.classList.contains("on"))) enterProto(); });

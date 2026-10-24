@@ -364,8 +364,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
 .slot { bottom: 10px; }
 .slot.me { left: auto; right: 8px; }
 .slot.crowd { right: 8px; }
-.pane:has(.slot.me .chip) .slot.crowd { right: 48px; }
-.panes[data-step="crowd"] .slot.crowd, .panes[data-step="banner"] .slot.crowd { bottom: 100px; left: calc(50% - 30px); right: auto !important; } /* above the range banner, centred so its % and YOUR GUESS stay in view */
+.pane .slot.crowd { bottom: 100px; left: calc(50% - 30px); right: auto; } /* mid-photo in every step: above the range banner, and clear of Preview and your badge after Saved */
 .slot .chip .lbl { display: none; }
 .slot .chip.me .face { width: 34px; height: 34px; box-shadow: 0 0 0 2px var(--pink), 0 0 12px rgba(255, 46, 139, .7); }
 .slot .chip.crowd .cl { transform: scale(.72); transform-origin: bottom right; margin: -16px 0 0 -24px; }
@@ -582,6 +581,33 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     var m = n === 3 ? MATCH3 : MATCH2; MATCH = n; W = m.W; HER = m.HER;
     Q.forEach(function (q, i) { q.L = [m.HER.L.pics[i][0], "50% 0%"]; q.M = [m.HER.M.pics[i][0], "50% 0%"]; });
   }
+  // 24 Oct (Alon): a different line of hers on every slide of her preview; one per photo, in the order they play (the clip first)
+  var QUOTES = {
+    "zofia": [["Kraków is my city. Stay long enough and I’ll show you all of it.", "Opening night. I always leave before the last bow.", "Sunrise on the lake. The only thing I wake up early for."],
+      ["First coffee, no makeup. This is the real me.", "Minus ten outside. Warm me up with a good line.", "Red lips at the gallery. I came for the art, you looked at me."],
+      ["Champagne on a rooftop. You’d better have a good toast ready.", "I play one song on the piano. Make it worth it.", "Pick me up at eight. I choose the music."],
+      ["Baltic wind, salty hair, zero regrets.", "Sunset on the pier. Stay until the lights come on.", "A good book and a big hat. You bring the sunscreen."],
+      ["My babcia’s pierogi. Flour on my face is part of the recipe.", "Tea, cake and twenty questions from my mother. Ready?", "Christmas market, hot wine, and a gift for your mama."]], "mariana": [["Rio is my playground. Sugarloaf is just the view.", "Shoes off on Copacabana. That’s how you know I like you.", "Selarón steps, sunshine and way too much laughing."],
+      ["Hi. Yes, the smile is always this big.", "Look a little longer. I don’t bite. Much.", "Salt on my skin, sun in my eyes. Say something nice."],
+      ["Red dress, warm night in Leblon. Where are you taking me?", "One glass of wine and I’ll tell you everything.", "Samba until two. Keep up if you can."],
+      ["Coconut water and the best beach in the world.", "Golden hour on Ipanema. Walk with me.", "Surf in the morning, nap on the board after."],
+      ["Flowers for your mother. I already know what she likes.", "Sunday churrasco with my family. You bring dessert.", "I made brigadeiros. Chocolate opens every door, even Mama’s."]], "katya": [["White nights on the canals. The sun never sets, and neither do I.", "Snow on Palace Square. Spin with me.", "The rooftops of Petersburg at night. My favourite secret."],
+      ["Tea, slippers, messy hair. Still interested?", "Late taxi home. Tell me to come back.", "The Neva wind always messes up my hair. I let it."],
+      ["Red lips, chandeliers, and a man who can order the wine.", "A boat on the Neva and something golden in my glass.", "Order me something strong. I’ll stay for the conversation."],
+      ["Black Sea, sunglasses up. Pebbles beat sand, fight me.", "Sunset on the sea wall. Sit with me, no talking.", "The sweetest peach on the beach. Want a bite?"],
+      ["Raspberries from my grandmother’s dacha. I saved you some.", "Blini on Sunday morning. Flipping them is my party trick.", "Tea from the samovar and my best manners for your mama."]], "yasmin": [["The Beirut Corniche at sunset. The city looks at me, I look at the sea.", "Gemmayzeh on a weekday. Catch me between castings.", "The old port of Byblos. Seven thousand years and still romantic."],
+      ["Morning sun and bougainvillea. Smile first, coffee second.", "Fitting room, black satin. Yes or no?", "Eyes closed, wind in my hair. Tell me what you see."],
+      ["Beirut lights below us. Dinner is on you, dessert is on me.", "Mezze for two. I promise to share the hummus.", "Red dress, old convertible, coast road. Drive."],
+      ["Batroun beach club. Sunglasses down only for you.", "Walking the shore at sunset. Hold my sandals?", "Feet in the water, sun on my face. Perfect day."],
+      ["Lemons from our garden. My teta makes the best lemonade.", "Sunday lunch lasts three hours. Hungry?", "Man’oushe from scratch. Teta taught me, now I’ll teach you."]], "valeria": [["Comuna 13 is my backyard. Colour everywhere, like me.", "Medellín from the cable car. The city of eternal spring.", "Can’t dance salsa? I’ll teach you. Slowly."],
+      ["Hola. Yes, the curls are real.", "Colombian coffee: strong and sweet. Like me.", "Caught in the rain again. Share your umbrella?"],
+      ["A rooftop in El Poblado. Buy me a drink and earn a dance.", "Candles, red wine, a long dinner. No phones.", "I’m getting out of the taxi. Are you coming?"],
+      ["Caribbean sun, and my hat keeps flying away.", "A hammock in Tayrona. Wake me only if it’s you.", "Rosario Islands water. Almost as warm as my smile."],
+      ["My mother’s sancocho. One taste and you’re family.", "Coffee on the porch in Jardín. Mama will love you here.", "This is a lulo. Taste it before you meet my mother."]], "brooke": [["Sunset Cliffs. Best view in San Diego, and I’m in it.", "Boardwalk rides with no plan. Race you to the pier.", "Ballpark hot dogs and yelling at the umpire. My kind of date."],
+      ["Morning on the deck. Coffee’s on, come say hi.", "Iced coffee and a road-trip playlist. Shotgun’s yours.", "Just out of the water. Yes, I caught the best wave."],
+      ["Rooftop at sunset in my best dress. Your move.", "Beach bonfire, burnt marshmallows. Perfect night.", "One milkshake, two straws. Old-school romantic."],
+      ["Coronado at noon. Grab a board and keep up.", "Lifeguard tower, red hoodie. I’ll keep you safe.", "Beach volleyball. I don’t lose gracefully."],
+      ["I cooked the turkey myself. Mom still doesn’t believe it.", "Meet Bailey. She approves of you first, then my mom.", "Dad’s grill, my burgers. Come hungry."]]};
   var STORY_MS = 5000, storyEl = null, statsEl = null, sto = { k: null, i: 0, hold: null, held: false, anim: null };
   function clockText() { return Math.floor(timerS / 60) + ":" + String(timerS % 60).padStart(2, "0"); }
   function openStory(k) {
@@ -589,7 +615,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     var h = HER[k], w = W[k];
     var qq = Math.min(qi, Q.length - 1), pics = h.pics[qq].slice();
     if (h.clips && h.clips[qq]) pics[0] = h.clips[qq]; // her clip of this question's card photo plays first
-    sto = { k: k, i: 0, hold: null, held: false, anim: null, media: pics.map(function (f) { return [f, 50]; }) };
+    sto = { k: k, i: 0, hold: null, held: false, anim: null, media: pics.map(function (f) { return [f, 50]; }), lines: (QUOTES[h.portrait.split("-")[0]] || [])[qq] || [], bio: h.bio };
     var s = document.createElement("div"); s.className = "story" + (RM ? "" : " in"); s.setAttribute("role", "dialog"); s.setAttribute("aria-label", w.name + "’s preview");
     s.style.setProperty("--dur", STORY_MS + "ms");
     s.innerHTML = '<div class="so-media"><img class="fg" alt=""><video class="fg" muted playsinline preload="auto" hidden></video></div><div class="so-shade"></div>' +
@@ -628,7 +654,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     if (i > media.length - 1) { // after her last photo the story waits on it, with both buttons
       s.querySelectorAll(".so-seg").forEach(function (g) { g.className = "so-seg done"; }); return;
     }
-    sto.i = i;
+    sto.i = i; $(".so-bio", s).textContent = sto.lines[i] || sto.bio;
     s.querySelectorAll(".so-seg").forEach(function (g, n) { g.className = "so-seg" + (n < i ? " done" : ""); });
     var m = media[i], x0 = m[1] + "% 0%", x1 = (m[2] != null ? m[2] : m[1]) + "% 0%", clip = /\.mp4$/.test(m[0]);
     var img = $(".so-media img.fg", s), vid = $(".so-media video", s), fg = clip ? vid : img, seg = s.querySelectorAll(".so-seg")[i];

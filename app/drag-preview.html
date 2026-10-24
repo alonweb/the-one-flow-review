@@ -726,7 +726,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
   function trayState() {
     var p = cur();
     $("#homeMe").innerHTML = (p.you ? '<span class="empty">✓</span>' : meChip()) + '<span class="ht"><b>You</b><small>' + (p.you ? "Placed" : "Drag me") + '</small></span>';
-    $("#homeCrowd").innerHTML = (p.crowd ? '<span class="empty">✓</span>' : crowdChip(true)) + '<span class="ht"><b>Crowd</b><small>' + (p.crowd ? "Placed" : "1,000 players") + '</small></span>';
+    $("#homeCrowd").innerHTML = (p.crowd ? '<span class="empty">✓</span>' : crowdChip(false)) + '<span class="ht"><b>Crowd</b><small>' + (p.crowd ? "Placed" : "1,000 players") + '</small></span>';
     var m = $("#homeMe .chip"), c = $("#homeCrowd .chip");
     if (m && step === "me") m.classList.add("bob");
     if (c) c.classList.add(step === "me" ? "asleep" : "bob");

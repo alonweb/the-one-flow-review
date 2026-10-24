@@ -813,7 +813,8 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     panesEl.querySelectorAll(".pane").forEach(function (p) { var b = box(p); if (pt.x >= b.x && pt.x <= b.x + b.w && pt.y >= b.y && pt.y <= b.y + b.h) hit = p; });
     return hit;
   }
-  function canUse(kind) { if (cur().locked) return false; return kind === "me" || step !== "me"; }
+  var flying = null; // 24 Oct: a tapped chip still in the air (430 ms). Your vote counts from the tap, so a quick second tap is already the crowd (Alon: it used to place you twice)
+  function canUse(kind) { if (cur().locked) return false; return kind === "me" || step !== "me" || flying === "me"; }
   function startDrag(chip, e) {
     var kind = chip.dataset.kind; if (!canUse(kind)) { if (kind === "crowd") { chip.classList.remove("shake"); void chip.offsetWidth; chip.classList.add("shake"); toast("First choose yours: drag yourself or tap her photo"); } return; }
     e.preventDefault(); touched = true; $("#hand").style.display = "none";
@@ -858,14 +859,17 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
   function tapPane(paneEl) {
     var p = cur(), k = paneEl.dataset.k;
     // a plain tap selects her: your vote first, then the crowd; while the banner is open, tapping the other woman moves the crowd
-    var kind = armed || (step === "me" ? "me" : step === "crowd" ? "crowd" : step === "banner" && k !== p.crowd ? "crowd" : null); if (!kind || !canUse(kind)) return;
+    if (flying === "crowd") return; // the crowd is on its way; its banner opens next
+    var st = flying === "me" && step === "me" ? "crowd" : step;
+    var kind = armed || (st === "me" ? "me" : st === "crowd" ? "crowd" : st === "banner" && k !== p.crowd ? "crowd" : null); if (!kind || !canUse(kind)) return;
     touched = true;
     var src = document.querySelector('.chip.armed') || (kind === "me" ? $("#homeMe .chip") : step === "banner" ? pane(p.crowd).querySelector(".slot.crowd .chip") : $("#homeCrowd .chip")) , to = center(paneEl.querySelector(kind === "me" ? ".slot.me" : ".slot.crowd"));
     if (src && !RM) {
       var from = center(src), g = document.createElement("div"); g.className = "ghost"; g.innerHTML = kind === "me" ? meChip() : crowdChip(false);
       g.style.left = from.x + "px"; g.style.top = from.y + "px"; phone.appendChild(g);
       requestAnimationFrame(function () { g.classList.add("fly"); g.style.left = to.x + "px"; g.style.top = to.y + "px"; });
-      setTimeout(function () { g.remove(); place(kind, paneEl.dataset.k, to); }, 430);
+      flying = kind;
+      setTimeout(function () { if (flying === kind) flying = null; g.remove(); place(kind, paneEl.dataset.k, to); }, 430);
     } else place(kind, paneEl.dataset.k, to);
   }
   phone.addEventListener("pointerdown", function (e) { var chip = e.target.closest(".chip"); if (chip && !chip.closest(".ghost") && !chip.closest(".banner")) startDrag(chip, e); });

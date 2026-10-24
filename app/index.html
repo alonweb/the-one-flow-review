@@ -976,7 +976,7 @@ html.pfull .pstage .ph-body .btn.push { position: sticky; bottom: 10px; z-index:
 html.pfull .pstage .pfoot { flex: none; display: flex; flex-direction: column; gap: 8px; padding: 8px 16px 10px; } /* pinFoot(): a screen's main button, and what follows it, under the scrolling part */
 html.pfull .pstage .pfoot > .push { margin-top: 0; }
 html.pfull .pstage .cam { flex: 1 1 0; min-height: 240px; height: auto; } /* the selfie camera takes the room there is, the shutter stays in view */
-html.app .proto.on { flex-direction: row; justify-content: center; align-items: center; gap: 0; padding: 0; height: 100vh; height: 100dvh; box-sizing: border-box; overflow: hidden; }
+html.app .proto.on { flex-direction: row; justify-content: center; align-items: center; gap: 0; padding: 0; height: 100vh; height: 100dvh; min-height: 0; box-sizing: border-box; overflow: hidden; } /* min-height 0: .proto.on's min-height 100vh is the full screen on iPhone Safari, taller than the space between its bars; it pushed the app down (24 Oct) */
 .appctl { position: fixed; right: 18px; bottom: 18px; z-index: 50; display: flex; gap: 8px; opacity: .35; transition: opacity .2s; }
 .appctl:hover, .appctl:focus-within { opacity: 1; }
 .appctl button { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line-2); background: rgba(14, 3, 9, .85); color: var(--ink); font: 700 18px/1 var(--ui); cursor: pointer; display: grid; place-items: center; }

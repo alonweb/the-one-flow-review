@@ -5,7 +5,7 @@
 <title>THE ONE App · preview</title>
 <style>body{visibility:hidden}</style>
 <script src="gate.js"></script>
-<script>window.THEONE_APP = true; window.THEONE_V = "20261024172637"; window.THEONE_DRAG = "drag-preview.html";</script>
+<script>window.THEONE_APP = true; window.THEONE_V = "20261024181404"; window.THEONE_DRAG = "drag-preview.html";</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400..800&family=Barlow:wght@500;600;700;800&display=swap">
@@ -1024,79 +1024,167 @@ html.app .proto.on { flex-direction: row; justify-content: center; align-items: 
 .fdots { position: absolute; right: 7px; top: 300px; z-index: 4; display: grid; gap: 7px; }
 .fdot { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .28); cursor: pointer; transition: height .2s, background .2s; }
 .fdot.on { height: 22px; border-radius: 4px; background: var(--pink); box-shadow: 0 0 10px rgba(255, 46, 139, .7); }
-.iover { display: none; position: absolute; inset: 0; z-index: 20; background: radial-gradient(420px 380px at 50% 0%, #2a0a1b 0%, var(--bg) 72%); overflow: hidden; }
+/* ---------- the intro (24 Oct): five slides, one idea each, showing the real finger moves; the player taps Next ---------- */
+.iover { display: none; position: absolute; inset: 0; z-index: 20; background: radial-gradient(420px 380px at 50% 0%, #2a0a1b 0%, var(--bg) 72%); overflow: hidden; transition: opacity .4s ease; }
 .shot.introplay .iover, .introstill .iover { display: block; }
-.iover { cursor: pointer; transition: opacity .4s ease; }
 .shot.introclosing .iover { opacity: 0; }
-.iover .beat.on { opacity: 1; }
-.iover .ibar span.done i { width: 100%; }
-.itap { position: absolute; left: 0; right: 0; bottom: 26px; text-align: center; font: 700 10.5px/1 var(--label); letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); pointer-events: none; }
-.itap b { color: var(--ink); }
-.ibar { position: absolute; top: 20px; left: 18px; right: 86px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; z-index: 3; }
-.ibar span { height: 3px; border-radius: 2px; background: rgba(255, 255, 255, .22); overflow: hidden; }
-.ibar i { display: block; height: 100%; width: 0; background: #fff; }
-.introskip { position: absolute; top: 10px; right: 14px; z-index: 3; border: 0; background: rgba(255, 255, 255, .1); color: #fff; border-radius: 999px; padding: 7px 12px; font: 700 11px/1 var(--label); letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
-.beat { position: absolute; inset: 44px 0 0; opacity: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; padding: 0 22px 70px; text-align: center; }
-.b1 { --t: 0s; } .b2 { --t: 2.2s; } .b3 { --t: 4.4s; } .b4 { --t: 6.6s; } .b5 { --t: 8.8s; }
-.beat .cap b { display: block; font: 400 40px/1 var(--display); letter-spacing: .03em; text-transform: uppercase; color: #fff; text-wrap: balance; }
-.beat .cap span { display: block; margin-top: 10px; font: 400 16px/1.4 var(--ui); color: var(--ink-2); }
-.b1duo { position: relative; width: 100%; height: 380px; display: grid; grid-template-columns: 1fr 1fr; gap: 3px; border-radius: 24px; overflow: hidden; }
-.b1duo > span:not(.b1vs), .b3duo > span { position: relative; overflow: hidden; }
-.b1duo img, .b3duo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.b1vs { position: absolute; left: 50%; top: 50%; width: 66px; height: 66px; margin: -33px 0 0 -33px; border-radius: 50%; display: grid; place-items: center; background: var(--bg); color: var(--gold); border: 3px solid var(--gold); font: 400 26px/1 var(--display); box-shadow: 0 0 30px rgba(245, 184, 73, .6); z-index: 2; }
-.b2stage { position: relative; width: 100%; height: 340px; }
-.b2stage img { position: absolute; width: 48px; height: 48px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 2px var(--plum), 0 6px 16px rgba(0, 0, 0, .5); }
-.b2count { position: absolute; left: 0; right: 0; top: 108px; font: 400 100px/1 var(--display); letter-spacing: .02em; color: #fff; text-shadow: 0 0 40px rgba(255, 46, 139, .8); }
-.b2count small { display: block; font: 700 14px/1 var(--label); letter-spacing: .24em; text-transform: uppercase; color: var(--pink); margin-top: 8px; text-shadow: none; }
-.b3duo { position: relative; width: 88%; height: 320px; display: grid; grid-template-columns: 1fr 1fr; gap: 3px; border-radius: 22px; overflow: hidden; }
-.b3duo .ring { position: absolute; inset: 0; box-shadow: inset 0 0 0 3px var(--pink); z-index: 1; }
-.b3you { position: absolute; left: 10px; bottom: 12px; display: grid; justify-items: center; gap: 4px; z-index: 2; }
-.b3you .meav { width: 56px; height: 56px; }
-.b3crowd { position: absolute; left: 50%; top: 12px; margin-left: -26px; width: 52px; display: grid; justify-items: center; gap: 4px; z-index: 2; }
-.b3you b, .b3crowd b { font: 800 10.5px/1 var(--label); letter-spacing: .14em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; }
-.b3you b { background: #fff; color: var(--pink-ink); }
-.b3crowd b { background: var(--gold); color: var(--gold-ink); }
-.b4big { font: 400 124px/1 var(--display); color: #fff; text-shadow: 0 0 40px rgba(255, 46, 139, .8); }
-.b4big small { font-size: 54px; color: var(--muted); }
-.b4ruler { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 4px; width: 100%; }
-.b4ruler span { min-height: 36px; border-radius: 9px; display: grid; place-items: center; border: 1px solid var(--line-2); background: rgba(255, 255, 255, .04); font: 700 12px/1 var(--ui); color: var(--ink-2); }
-.b4ruler span.hit { background: var(--pink); border-color: var(--pink); color: var(--pink-ink); box-shadow: 0 0 18px rgba(255, 46, 139, .75); }
-.b4pts { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
-.b4pts span { font: 700 11px/1 var(--label); letter-spacing: .1em; text-transform: uppercase; padding: 8px 11px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line-2); color: var(--ink-2); }
-.b4pts .ex { background: var(--gold); color: var(--gold-ink); box-shadow: 0 0 18px rgba(245, 184, 73, .75); }
-.b5trophy svg { width: 128px; height: 128px; filter: drop-shadow(0 0 30px rgba(245, 184, 73, .85)); }
-.b5climb { display: inline-flex; align-items: center; gap: 12px; padding: 10px 18px 10px 10px; border-radius: 999px; background: var(--pink-soft); box-shadow: inset 0 0 0 1px rgba(255, 46, 139, .6); font: 400 28px/1 var(--display); letter-spacing: .03em; }
-.b5climb em { font: 700 14px/1 var(--ui); font-style: normal; color: var(--green); }
+.ibar { position: absolute; top: 24px; left: 20px; right: 96px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; z-index: 3; }
+.ibar span { height: 4px; border-radius: 2px; background: rgba(255, 255, 255, .2); transition: background .3s, box-shadow .3s; }
+.ibar span.done { background: #fff; }
+.ibar span.cur { background: var(--pink); box-shadow: 0 0 10px rgba(255, 46, 139, .8); }
+.introskip { position: absolute; top: 12px; right: 16px; z-index: 3; border: 0; background: rgba(255, 255, 255, .1); color: #fff; border-radius: 999px; padding: 9px 14px; font: 700 12px/1 var(--label); letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
+.ix-ctrls { position: absolute; left: 20px; right: 20px; bottom: 34px; display: grid; grid-template-columns: auto 1fr; gap: 12px; z-index: 3; }
+.ix-ctrls.first { grid-template-columns: 1fr; }
+.ix-ctrls.first .ix-back { display: none; }
+.ix-btn { min-height: 60px; border: 0; border-radius: 999px; color: var(--ink); font: 800 17px/1 var(--label); letter-spacing: .14em; text-transform: uppercase; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
+.ix-btn:active { transform: scale(.97); }
+.ix-back { padding: 0 24px; background: rgba(255, 255, 255, .08); box-shadow: inset 0 0 0 1px var(--line-2); }
+.ix-next { background: var(--pink); color: var(--pink-ink); box-shadow: 0 0 26px rgba(255, 46, 139, .6); }
+.ix-next svg { width: 20px; height: 20px; }
+.ix-next.play { background: var(--gold); color: var(--gold-ink); box-shadow: 0 0 26px rgba(245, 184, 73, .7); }
+/* a slide: the picture (.ix-vis, shrunk by introFit() on a short phone), then one big line and one small line */
+.beat { position: absolute; inset: 52px 0 118px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; padding: 0 22px; text-align: center; opacity: 0; visibility: hidden; transition: opacity .3s, visibility 0s .3s; }
+.beat.on { opacity: 1; visibility: visible; transition: opacity .3s; }
+.iover.short .beat { inset: 46px 0 92px; gap: 18px; }
+.iover.short .ix-ctrls { bottom: 18px; }
+.iover.short .ix-btn { min-height: 56px; }
+.ix-vis { width: 100%; flex: none; display: flex; flex-direction: column; align-items: center; gap: 26px; }
+.beat .cap b { display: block; font: 400 40px/1.02 var(--display); letter-spacing: .03em; text-transform: uppercase; color: #fff; text-wrap: balance; }
+.beat .cap b em { font-style: normal; color: var(--pink); text-shadow: 0 0 24px rgba(255, 46, 139, .55); }
+.beat .cap span { display: block; margin-top: 12px; font: 500 18px/1.4 var(--ui); color: var(--ink-2); text-wrap: balance; }
+.beat .cap span strong { color: var(--gold); font-weight: 800; }
+/* the two women */
+.ix-duo { position: relative; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.ix-ph { position: relative; overflow: hidden; border-radius: 22px; background: var(--plum); }
+.ix-ph > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ix-ring { position: absolute; inset: 0; border-radius: 22px; box-shadow: inset 0 0 0 4px var(--pink), inset 0 0 44px rgba(255, 46, 139, .45); z-index: 1; }
+.ix-ring.gold { box-shadow: inset 0 0 0 4px var(--gold), inset 0 0 44px rgba(245, 184, 73, .45); }
+.ix-ring.soft { opacity: .55; }
+.b1 .ix-duo { height: 430px; }
+.ix-vs { position: absolute; left: 50%; top: 50%; width: 68px; height: 68px; margin: -34px 0 0 -34px; border-radius: 50%; display: grid; place-items: center; background: var(--bg); color: var(--gold); border: 3px solid var(--gold); font: 400 27px/1 var(--display); box-shadow: 0 0 30px rgba(245, 184, 73, .6); z-index: 2; }
+/* slides 2 and 3: the photos with a home spot under them, where the chip waits to be dragged */
+.ix-stage { position: relative; width: 100%; height: 430px; }
+.ix-stage .ix-duo { height: 330px; }
+.ix-home { position: absolute; left: 50%; top: 380px; width: 80px; height: 80px; margin: -40px 0 0 -40px; border-radius: 50%; border: 2px dashed rgba(255, 255, 255, .22); }
+.ix-you, .ix-crowd { position: absolute; display: grid; justify-items: center; gap: 5px; z-index: 3; transform: translate(-50%, -50%); }
+.ix-you .ix-f { width: 64px; height: 64px; border-radius: 50%; overflow: hidden; background: radial-gradient(circle at 50% 45%, #3a1529, #1c0913); box-shadow: 0 0 0 3px var(--pink), 0 0 22px rgba(255, 46, 139, .7); }
+.ix-you .ix-f img { width: 100%; height: 100%; object-fit: contain; }
+.ix-lbl { font: 800 11px/1 var(--label); letter-spacing: .14em; padding: 4px 8px; border-radius: 999px; text-transform: uppercase; }
+.ix-you .ix-lbl { background: #fff; color: var(--pink-ink); }
+.ix-cl { position: relative; width: 84px; height: 58px; }
+.ix-cl img, .ix-cl .ix-m { position: absolute; width: 26px; height: 26px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 2px var(--plum); }
+.ix-cl .ix-m { display: grid; place-items: center; font: 800 10px/1 var(--ui); color: var(--pink-ink); }
+.ix-crowd .ix-lbl { background: var(--pink); color: var(--pink-ink); box-shadow: 0 0 12px rgba(255, 46, 139, .6); }
+.ix-plus { position: absolute; top: -16px; right: -22px; font: 400 24px/1 var(--display); padding: 5px 9px; border-radius: 12px; background: var(--gold); color: var(--gold-ink); box-shadow: 0 0 18px rgba(245, 184, 73, .85); }
+.ix-touch { position: absolute; left: 62%; top: 40%; width: 46px; height: 46px; border-radius: 50%; background: rgba(255, 255, 255, .3); border: 2px solid rgba(255, 255, 255, .9); opacity: 0; pointer-events: none; }
+.b2 .ix-you { left: 25%; top: 222px; }
+.b3 .ix-you { left: 25%; top: 262px; transform: translate(-50%, -50%) scale(.82); }
+.b3 .ix-crowd { left: 75%; top: 248px; }
+/* slide 4: how many out of 100 */
+.ix-s4top { display: flex; align-items: center; justify-content: center; gap: 18px; }
+.ix-her { width: 78px; height: 78px; border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 4px var(--gold), 0 0 26px rgba(245, 184, 73, .6); }
+.ix-her img { width: 100%; height: 100%; object-fit: cover; object-position: 12% 0%; }
+.ix-big { display: flex; align-items: baseline; font: 400 96px/1 var(--display); color: #fff; text-shadow: 0 0 40px rgba(255, 46, 139, .8); font-variant-numeric: tabular-nums; }
+.ix-big small { font-size: 44px; color: var(--muted); text-shadow: none; }
+.ix-grid { display: grid; grid-template-columns: repeat(10, 15px); gap: 5px; justify-content: center; }
+.ix-grid i { width: 15px; height: 15px; border-radius: 50%; background: rgba(255, 255, 255, .14); }
+.ix-grid i.y { background: var(--pink); box-shadow: 0 0 8px rgba(255, 46, 139, .6); }
+.ix-s4lbl { margin-top: -12px; font: 600 15px/1.2 var(--ui); color: var(--ink-2); }
+.ix-s4lbl b { color: var(--pink); font-weight: 800; }
+.ix-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }
+.ix-tile { display: grid; justify-items: center; gap: 4px; padding: 10px 8px; border-radius: 18px; background: rgba(255, 255, 255, .05); box-shadow: inset 0 0 0 1px var(--line-2); }
+.ix-tile small { font: 700 11px/1 var(--label); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
+.ix-tile b { font: 400 26px/1 var(--display); letter-spacing: .02em; }
+.ix-tile .ix-pt { font: 800 12px/1 var(--label); letter-spacing: .1em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; background: rgba(255, 255, 255, .12); }
+.ix-tile.ex { background: rgba(245, 184, 73, .12); box-shadow: inset 0 0 0 2px var(--gold), 0 0 24px rgba(245, 184, 73, .35); }
+.ix-tile.ex small { color: var(--gold); }
+.ix-tile.ex .ix-pt { background: var(--gold); color: var(--gold-ink); }
+/* slide 5: you climb the ranking */
+.ix-trophy svg { width: 112px; height: 112px; color: var(--gold); filter: drop-shadow(0 0 30px rgba(245, 184, 73, .85)); }
+.ix-board { position: relative; width: 100%; height: 232px; }
+.ix-rk { position: absolute; left: 0; width: 38px; height: 52px; display: grid; place-items: center; font: 400 22px/1 var(--display); color: var(--ink-3); }
+.ix-rk.g { color: var(--gold); }
+.ix-row { position: absolute; left: 46px; right: 0; height: 52px; display: flex; align-items: center; gap: 10px; padding: 0 16px 0 8px; border-radius: 16px; background: rgba(255, 255, 255, .05); box-shadow: inset 0 0 0 1px var(--line); text-align: left; }
+.ix-row > img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; flex: none; }
+.ix-nm { flex: 1; font: 700 16px/1 var(--ui); }
+.ix-pts { font: 400 24px/1 var(--display); font-variant-numeric: tabular-nums; }
+.ix-row.ix-me { background: linear-gradient(100deg, #4a0f2c, #26091a); box-shadow: inset 0 0 0 2px var(--pink), 0 0 24px rgba(255, 46, 139, .45); z-index: 2; }
+.ix-me .ix-av { width: 38px; height: 38px; border-radius: 50%; overflow: hidden; flex: none; background: radial-gradient(circle at 50% 45%, #3a1529, #1c0913); box-shadow: 0 0 0 2px var(--pink); }
+.ix-me .ix-av img { width: 100%; height: 100%; object-fit: contain; }
+.ix-up { font: 800 13px/1 var(--ui); color: var(--green); }
+.ix-float { position: absolute; right: 18px; top: -26px; font: 400 22px/1 var(--display); color: var(--gold); opacity: 0; }
+.ix-r0 { top: 0; } .ix-r1 { top: 60px; } .ix-r2 { top: 120px; } .ix-r3 { top: 180px; } /* the order at the end: KingPick, You, MayaWin, LunaStar */
 @media (prefers-reduced-motion: no-preference) {
-  .iover .ibar span.cur i { animation: ifill var(--dur, 2.4s) linear both; }
-  .iover .beat { transition: opacity .35s ease; }
-  .iover .beat.on .b1duo .l { animation: fromleft .7s var(--bounce) .1s both; }
-  .iover .beat.on .b1duo .r { animation: fromright .7s var(--bounce) .1s both; }
-  .iover .beat.on .b1vs { animation: slam .6s var(--bounce) .7s both; }
-  .iover .beat.on .cap { animation: capin .6s ease .5s both; }
-  .iover .beat.on .b2stage img { animation: rainin .7s var(--bounce) both; animation-delay: calc(.1s + var(--d)); }
-  .iover .beat.on .b2count { animation: slam .7s var(--bounce) .8s both; }
-  .iover .beat.on .b3duo { animation: popin .6s var(--bounce) .1s both; }
-  .iover .beat.on .b3you { animation: land .7s var(--bounce) .6s both; }
-  .iover .beat.on .b3crowd { animation: land .7s var(--bounce) 1.2s both; }
-  .iover .beat.on .b4big { animation: popin .6s var(--bounce) .1s both; }
-  .iover .beat.on .b4ruler span { animation: popin .4s var(--bounce) both; animation-delay: calc(.3s + var(--d)); }
-  .iover .beat.on .b4ruler span.hit { animation: burst .8s var(--bounce) .9s both; }
-  .iover .beat.on .b4pts span { animation: popin .45s var(--bounce) both; animation-delay: calc(1.2s + var(--d)); }
-  .iover .beat.on .b4pts .ex { animation-name: burst; animation-duration: .8s; }
-  .iover .beat.on .b5trophy { animation: drop .8s var(--bounce) .1s both; }
-  .iover .beat.on .b5climb { animation: rowin .6s var(--bounce) .7s both; }
+  .iover .ix-next:not(.play) { animation: ixglow 1.8s ease-in-out infinite; }
+  .iover .beat.on .cap { animation: capin .5s ease .15s both; }
+  .iover .b1.on .ix-ph:first-child { animation: fromleft .7s var(--bounce) .1s both; }
+  .iover .b1.on .ix-ph:nth-child(2) { animation: fromright .7s var(--bounce) .1s both; }
+  .iover .b1.on .ix-vs { animation: slam .6s var(--bounce) .7s both; }
+  /* slide 2: a finger drags YOU onto her, again and again */
+  .iover .b2.on .ix-you { animation: ixdragyou 3.8s ease-in-out .3s infinite both; }
+  .iover .b2.on .ix-you .ix-touch { animation: ixtouch 3.8s ease-in-out .3s infinite both; }
+  .iover .b2.on .ix-ring { animation: ixring 3.8s ease-in-out .3s infinite both; }
+  /* slide 3: YOU stays; a finger drags the crowd onto the other woman, +2 pops */
+  .iover .b3.on .ix-you { animation: ixpopyou .5s var(--bounce) .1s both; }
+  .iover .b3.on .ix-crowd { animation: ixdragcrowd 3.8s ease-in-out .5s infinite both; }
+  .iover .b3.on .ix-crowd .ix-touch { animation: ixtouch 3.8s ease-in-out .5s infinite both; }
+  .iover .b3.on .ix-ring.gold { animation: ixring 3.8s ease-in-out .5s infinite both; }
+  .iover .b3.on .ix-plus { animation: ixplus 3.8s ease-in-out .5s infinite both; }
+  /* slide 4: 63 of 100 dots light up, then the two point tiles */
+  .iover .b4.on .ix-her { animation: ixpop .5s var(--bounce) .05s both; }
+  .iover .b4.on .ix-grid i.y { animation: ixdot .3s var(--bounce) both; animation-delay: calc(.45s + var(--i) * 14ms); }
+  .iover .b4.on .ix-tile { animation: ixpop .45s var(--bounce) 1.5s both; }
+  .iover .b4.on .ix-tile.ex { animation: ixburst .8s var(--bounce) 1.8s both; }
+  /* slide 5: points count up, then you climb past two players */
+  .iover .b5.on .ix-trophy { animation: ixdrop .8s var(--bounce) .05s both; }
+  .iover .b5.on .ix-row { animation: ixrowin .45s var(--bounce) both; }
+  .iover .b5.on .ix-row.ix-r0 { animation-delay: .2s; }
+  .iover .b5.on .ix-row.ix-me { animation: ixclimb .8s var(--bounce) 1.3s both; }
+  .iover .b5.on .ix-row.ix-r2 { animation: ixdown1 .8s ease 1.3s both; }
+  .iover .b5.on .ix-row.ix-r3 { animation: ixdown2 .8s ease 1.3s both; }
+  .iover .b5.on .ix-float { animation: ixfloat 1.1s ease .45s both; }
+  .iover .b5.on .ix-up { animation: ixpop .45s var(--bounce) 2.1s both; }
   .swipehint { animation: hintbob 1.6s ease-in-out infinite; }
 }
 @keyframes beat { 0% { opacity: 0; transform: scale(1.04); } 10% { opacity: 1; transform: none; } 88% { opacity: 1; } 100% { opacity: 0; } }
 @keyframes beatlast { 0% { opacity: 0; transform: scale(1.04); } 8% { opacity: 1; transform: none; } 100% { opacity: 1; } }
 @keyframes introout { to { opacity: 0; visibility: hidden; } }
-@keyframes ifill { from { width: 0; } to { width: 100%; } }
 @keyframes fromleft { from { transform: translateX(-110%); } }
 @keyframes fromright { from { transform: translateX(110%); } }
 @keyframes slam { 0% { transform: scale(3); opacity: 0; } 60% { transform: scale(.9); opacity: 1; } 100% { transform: none; } }
 @keyframes capin { from { transform: translateY(16px); opacity: 0; } }
-@keyframes rainin { from { transform: translateY(-360px) rotate(-40deg); opacity: 0; } }
+@keyframes ixglow { 50% { box-shadow: 0 0 40px rgba(255, 46, 139, .95); } }
+@keyframes ixpop { from { transform: scale(.4); opacity: 0; } }
+@keyframes ixpopyou { from { transform: translate(-50%, -50%) scale(.3); opacity: 0; } }
+@keyframes ixburst { 0% { transform: scale(.4); opacity: 0; } 55% { transform: scale(1.12); opacity: 1; } 100% { transform: none; } }
+@keyframes ixdot { from { transform: scale(0); background: rgba(255, 255, 255, .14); } }
+@keyframes ixdrop { from { transform: translateY(-140px); opacity: 0; } }
+@keyframes ixrowin { from { transform: translateX(30px); opacity: 0; } }
+@keyframes ixclimb { from { top: 180px; } }
+@keyframes ixdown1 { from { top: 60px; } }
+@keyframes ixdown2 { from { top: 120px; } }
+@keyframes ixfloat { 0% { opacity: 0; transform: translateY(10px); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(-24px); } }
+@keyframes ixdragyou {
+  0% { left: 50%; top: 380px; opacity: 0; transform: translate(-50%, -50%) scale(.6); }
+  8%, 16% { left: 50%; top: 380px; opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  22% { left: 50%; top: 380px; transform: translate(-50%, -50%) scale(1.14); }
+  52% { left: 25%; top: 222px; transform: translate(-50%, -50%) scale(1.14); }
+  58% { left: 25%; top: 222px; transform: translate(-50%, -50%) scale(.9); }
+  64%, 90% { left: 25%; top: 222px; opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { left: 25%; top: 222px; opacity: 0; transform: translate(-50%, -50%) scale(1); }
+}
+@keyframes ixdragcrowd {
+  0% { left: 50%; top: 380px; opacity: 0; transform: translate(-50%, -50%) scale(.6); }
+  8%, 16% { left: 50%; top: 380px; opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  22% { left: 50%; top: 380px; transform: translate(-50%, -50%) scale(1.12); }
+  52% { left: 75%; top: 248px; transform: translate(-50%, -50%) scale(1.12); }
+  58% { left: 75%; top: 248px; transform: translate(-50%, -50%) scale(.9); }
+  64%, 90% { left: 75%; top: 248px; opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { left: 75%; top: 248px; opacity: 0; transform: translate(-50%, -50%) scale(1); }
+}
+@keyframes ixtouch { 0%, 12% { opacity: 0; transform: scale(1.5); } 18%, 52% { opacity: 1; transform: scale(1); } 58%, 100% { opacity: 0; transform: scale(1.4); } }
+@keyframes ixring { 0%, 56% { opacity: 0; } 62%, 90% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes ixplus { 0%, 60% { opacity: 0; transform: scale(.3); } 68% { opacity: 1; transform: scale(1.3); } 74%, 90% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
 @keyframes sheetup { from { transform: translateY(100%); } }
 /* ---------- clickable prototype (#play) ---------- */
 .protobtn { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; padding: 14px 22px; border-radius: 999px; background: linear-gradient(135deg, #ff4f9e, var(--pink) 45%, var(--pink-deep)); color: var(--pink-ink); font: 400 22px/1 var(--display); letter-spacing: .06em; text-transform: uppercase; text-decoration: none; box-shadow: 0 10px 30px -10px rgba(255, 46, 139, .8); }
@@ -1740,25 +1828,44 @@ html.protoon main.wrap { display: none; }
         '<div class="lobby flob">' + lob + '</div>' + btn + '</div>';
     }).join("") + (list.length ? '' : '<div class="fempty"><b>No matches here</b>Join one from All, or tap Notify me on a match to hear when its lobby opens.</div>') + '</div>';
   }
+  var INEXT = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'; // the arrow on the intro's Next
   function introHTML() {
-    var rain = ["av-lion.jpg", "av-girl.jpg", "av-panda.jpg", "av-astro.jpg", "av-sun.jpg", "av-girl.jpg", "av-lion.jpg", "av-astro.jpg", "av-panda.jpg", "av-sun.jpg", "av-girl.jpg", "av-lion.jpg"];
-    var pos = [[6, 6], [30, 0], [58, 8], [80, 2], [12, 70], [70, 66], [0, 38], [86, 34], [42, 76], [26, 88], [60, 88], [86, 82]];
+    var Z = { src: "zofia-general.jpg", pos: "75% 0%" }, M = { src: "mariana-general.jpg", pos: "12% 0%" };
+    var CRD = ["av-lion.jpg", "av-girl.jpg", "av-panda.jpg", "av-astro.jpg", "av-sun.jpg"], DOT = ["#ff2e8b", "#f5b849", "#35d6a4", "#8a7bff", "#ff8a3d"];
+    var CLP = [[30, 0], [4, 8], [56, 8], [17, 26], [43, 26], [0, 32], [60, 32], [30, 34]];
+    var TROPHY = '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M9.5 17h5v3h-5z"/></g></svg>';
+    function ph(w, extra) { return '<div class="ix-ph"><img src="' + IMG + w.src + '" alt="" style="object-position:' + w.pos + '">' + (extra || "") + '</div>'; }
+    function cap(title, line) { return '<div class="cap"><b>' + title + '</b><span>' + line + '</span></div>'; }
+    function you() { return '<div class="ix-you"><span class="ix-f"><img src="' + IMG + 'bigm.png" alt=""></span><span class="ix-lbl">You</span><i class="ix-touch"></i></div>'; }
+    function crowd() {
+      return '<div class="ix-crowd"><span class="ix-cl">' + CLP.map(function (p, i) {
+        var st = 'left:' + p[0] + 'px;top:' + p[1] + 'px;z-index:' + (i < 3 ? 1 : 2);
+        return i % 3 === 2 ? '<span class="ix-m" style="background:' + DOT[i % DOT.length] + ';' + st + '">' + "ABCDEFGH"[i] + '</span>' : '<img src="' + IMG + CRD[i % CRD.length] + '" alt="" style="' + st + '">';
+      }).join("") + '</span><span class="ix-lbl">Crowd</span><span class="ix-plus">+2</span><i class="ix-touch"></i></div>';
+    }
+    function cnt(from, to, delay, dur) { return '<b class="ix-cnt" data-from="' + from + '" data-to="' + to + '" data-delay="' + delay + '" data-dur="' + dur + '">' + to + '</b>'; }
+    var grid = ""; for (var i = 0; i < 100; i++) grid += '<i' + (i < 63 ? ' class="y" style="--i:' + i + '"' : '') + '></i>';
     return '<div class="iover" role="dialog" aria-label="How THE ONE works">' +
-      '<div class="ibar">' + [0, 1, 2, 3, 4].map(function () { return '<span><i></i></span>'; }).join("") + '</div>' +
+      '<div class="ibar">' + [0, 1, 2, 3, 4].map(function (i) { return '<span' + (i ? '' : ' class="cur"') + '></span>'; }).join("") + '</div>' +
       '<button class="introskip" type="button">Skip</button>' +
-      '<div class="itap">Tap for the next slide · <b>left side to go back</b></div>' +
-      '<div class="beat b1"><div class="b1duo"><span class="l"><img src="' + IMG + 'zofia-general.jpg" alt="" style="object-position:75% 0%"></span><span class="r"><img src="' + IMG + 'mariana-general.jpg" alt="" style="object-position:12% 0%"></span><span class="b1vs">VS</span></div>' +
-        '<div class="cap"><b>Two women. One match.</b><span>Five questions about them, every match.</span></div></div>' +
-      '<div class="beat b2"><div class="b2stage">' + rain.map(function (a, i) { return '<img src="' + IMG + a + '" alt="" style="left:' + pos[i][0] + '%;top:' + pos[i][1] + '%;--d:' + i * 70 + 'ms">'; }).join("") +
-        '<div class="b2count">1,000<small>players</small></div></div>' +
-        '<div class="cap"><b>Up to 1,000 players vote.</b><span>700 or more and the match starts. Fewer, and it’s cancelled.</span></div></div>' +
-      '<div class="beat b3"><div class="b3duo"><span class="l"><img src="' + IMG + 'zofia-general.jpg" alt="" style="object-position:75% 0%"><i class="ring"></i><span class="b3you">' + meav() + '<b>You</b></span><span class="b3crowd">' + mini3() + '<b>+2</b></span></span><span class="r"><img src="' + IMG + 'mariana-general.jpg" alt="" style="object-position:12% 0%"></span></div>' +
-        '<div class="cap"><b>Predict the crowd.</b><span>Pick your favourite, then guess who most players will pick.</span></div></div>' +
-      '<div class="beat b4"><div class="b4big">63<small>%</small></div><div class="b4ruler">' + [60, 61, 62, 63, 64, 65, 66, 67, 68, 69].map(function (n, i) { return '<span class="' + (n === 63 ? "hit" : "") + '" style="--d:' + i * 50 + 'ms">' + n + '</span>'; }).join("") + '</div>' +
-        '<div class="b4pts"><span style="--d:0ms">Winner +2</span><span style="--d:150ms">Range +1</span><span class="ex" style="--d:300ms">Exact % = 7</span></div>' +
-        '<div class="cap"><b>Nail the exact %.</b><span>An exact hit is worth 7 points.</span></div></div>' +
-      '<div class="beat b5"><div class="b5trophy">' + icon("trophy", "var(--gold)") + '</div><div class="b5climb">' + meav() + '<span>#412</span><em>▲ 31</em></div>' +
-        '<div class="cap"><b>Climb. Win the week.</b><span>Points add up all week. The top players win the weekly prize.</span></div></div>' +
+      '<div class="beat b1"><div class="ix-vis"><div class="ix-duo">' + ph(Z) + ph(M) + '<span class="ix-vs">VS</span></div></div>' +
+        cap('Two women. <em>One question.</em>', 'Who is the one at first sight?') + '</div>' +
+      '<div class="beat b2"><div class="ix-vis"><div class="ix-stage"><div class="ix-duo">' + ph(Z, '<i class="ix-ring"></i>') + ph(M) + '</div><span class="ix-home"></span>' + you() + '</div></div>' +
+        cap('Who do <em>YOU</em> like?', 'Drag your face onto her. No points, just be honest.') + '</div>' +
+      '<div class="beat b3"><div class="ix-vis"><div class="ix-stage"><div class="ix-duo">' + ph(Z, '<i class="ix-ring soft"></i>') + ph(M, '<i class="ix-ring gold"></i>') + '</div><span class="ix-home"></span>' + you() + crowd() + '</div></div>' +
+        cap('Who will <em>MOST</em> players like?', 'Guess right = <strong>2 points</strong>') + '</div>' +
+      '<div class="beat b4"><div class="ix-vis"><div class="ix-s4top"><span class="ix-her"><img src="' + IMG + M.src + '" alt=""></span><div class="ix-big">' + cnt(0, 63, 450, 900) + '<small>%</small></div></div>' +
+        '<div class="ix-grid">' + grid + '</div><div class="ix-s4lbl"><b>63</b> of every 100 players like her</div>' +
+        '<div class="ix-tiles"><div class="ix-tile"><small>Close</small><b>60–69</b><span class="ix-pt">+1 point</span></div><div class="ix-tile ex"><small>Exactly</small><b>63</b><span class="ix-pt">7 points</span></div></div></div>' +
+        cap('<em>How many</em> will like her?', 'Close = <strong>1 more point</strong>. Exactly right = <strong>7 points!</strong>') + '</div>' +
+      '<div class="beat b5"><div class="ix-vis"><div class="ix-trophy">' + TROPHY + '</div><div class="ix-board">' +
+        '<span class="ix-rk g ix-r0">#1</span><span class="ix-rk ix-r1">#2</span><span class="ix-rk ix-r2">#3</span><span class="ix-rk ix-r3">#4</span>' +
+        '<div class="ix-row ix-r0"><img src="' + IMG + 'av-lion.jpg" alt=""><span class="ix-nm">KingPick</span><span class="ix-pts">58</span></div>' +
+        '<div class="ix-row ix-me ix-r1"><span class="ix-av"><img src="' + IMG + 'bigm.png" alt=""></span><span class="ix-nm">You <span class="ix-up">▲ 2</span></span><span class="ix-pts">' + cnt(41, 55, 450, 700) + '</span><span class="ix-float">+14</span></div>' +
+        '<div class="ix-row ix-r2"><img src="' + IMG + 'av-astro.jpg" alt=""><span class="ix-nm">MayaWin</span><span class="ix-pts">52</span></div>' +
+        '<div class="ix-row ix-r3"><img src="' + IMG + 'av-panda.jpg" alt=""><span class="ix-nm">LunaStar</span><span class="ix-pts">47</span></div>' +
+        '</div></div>' + cap('More points, <em>higher</em> you climb', 'The best players win the prize every week.') + '</div>' +
+      '<div class="ix-ctrls first"><button class="ix-btn ix-back" type="button">Back</button><button class="ix-btn ix-next" type="button">Next' + INEXT + '</button></div>' +
       '</div>';
   }
   function dragPhone(state, title) { return '<div class="phone dragphone"><iframe src="' + (window.THEONE_DRAG || "drag.html") + (window.THEONE_V ? "?v=" + window.THEONE_V : "") + '#embed-' + state + (MC > 1 ? "-m" + MC : "") + (STILL ? "-still" : "") + '" title="' + title + '" loading="lazy"></iframe></div>'; }
@@ -1918,8 +2025,8 @@ html.protoon main.wrap { display: none; }
     { id: "splash", anim: true, t: "Splash: the app loads", src: "Page 1", notes: ["<b>Kept as designed.</b> The logo with its “1” badge stays fixed from here on.", "<b>Then the intro</b>, then the Games screen. Signing in waits for the first Join."],
       r: function () { return phone('<div class="ph-body"><div class="splash"><div class="logo big">THE ONE <i>1</i></div><div class="loading">LOADING NEXT MATCH…</div><div class="lbar"><span></span></div></div></div>'); } },
     { id: "intro", anim: true, intro: true, t: "Intro: how THE ONE works", src: "Page 5, rethought", st: { joined: false }, notes: [
-        "<b>Right after the app loads</b>, once: five slides with story bars and Skip: two women face off, 1,000 players vote, you predict the crowd, the exact % is worth 7, climb and win the week.",
-        "<b>Click per slide</b>: tap the right side for the next slide, the left side to go back; left alone, each slide moves on after about 2½ seconds.",
+        "<b>Right after the app loads</b>, once: five slides, one idea each, simple enough for a child: two women, one question; who do you like (drag your face onto her, no points); who will most players like (+2); how many will like her (close +1, exact = 7, shown as 63 of 100 dots); more points, higher you climb.",
+        "<b>Nothing plays by itself</b>: a slide stays until the player taps Next; Back goes one slide back, the last button is Let’s play, and Skip is always there. Slides 2 and 3 show the finger dragging the chip, as in the game.",
         "<b>Then the Games screen</b> (next): no sign-in yet, so a new player sees the matches first.",
         "<b>How it works</b> on the Games screen and in Settings plays it again."],
       open: "Open: in the app the intro would be a short animation or video. How long it runs, and whether players who arrive from a shared match link see it too.",
@@ -2823,19 +2930,42 @@ html.protoon main.wrap { display: none; }
     art.querySelectorAll("[data-count]").forEach(countUp);
     clearTimeout(art._calm); art._calm = setTimeout(function () { art.classList.add("calm"); }, 3200);
   }
-  // the intro shows one slide at a time; it moves on by itself, or the player taps: right side = next, left side = back
-  var SLIDE_MS = [2400, 2400, 2600, 2800, 3000];
+  // the intro (24 Oct) shows one slide at a time and waits: Next moves on, Back goes back, Let's play or Skip ends it
+  function introCount(el) {
+    var from = +el.dataset.from, to = +el.dataset.to;
+    clearTimeout(el._t); cancelAnimationFrame(el._r);
+    if (still || el.closest(".introfrozen")) { el.textContent = to; return; }
+    el.textContent = from;
+    el._t = setTimeout(function () {
+      var t0 = performance.now(), dur = +el.dataset.dur;
+      (function tick(now) { var k = Math.max(0, Math.min(1, (now - t0) / dur)); k = 1 - Math.pow(1 - k, 3); el.textContent = Math.round(from + (to - from) * k); if (k < 1) el._r = requestAnimationFrame(tick); })(t0);
+    }, +el.dataset.delay);
+  }
+  // on a phone shorter than the 844 frame, the buttons sit lower and each slide's picture shrinks to fit; the words keep their size
+  function introFit(ov) {
+    if (!ov.offsetHeight) return;
+    ov.classList.toggle("short", ov.offsetHeight < 800);
+    ov.querySelectorAll(".beat").forEach(function (b) {
+      var v = b.querySelector(".ix-vis"), c = b.querySelector(".cap"); if (!v || !c) return;
+      v.style.zoom = "";
+      var room = b.clientHeight - c.offsetHeight - (parseFloat(getComputedStyle(b).rowGap) || 0), need = v.offsetHeight;
+      if (need > room) v.style.zoom = Math.max(.55, room / need).toFixed(3);
+    });
+  }
+  window.addEventListener("resize", function () { requestAnimationFrame(function () { document.querySelectorAll(".shot.introplay .iover, .introstill .iover").forEach(introFit); }); });
   function introGo(art, n) {
     var ov = art.querySelector(".iover"); if (!ov) return;
     if (n < 0) n = 0;
     if (n > 4) { endIntro(art); return; }
-    art._slide = n;
-    ov.querySelectorAll(".beat").forEach(function (b, i) { b.classList.toggle("on", i === n); });
-    ov.querySelectorAll(".ibar span").forEach(function (sp, i) { sp.classList.toggle("done", i < n); sp.classList.remove("cur"); if (i === n) { sp.style.setProperty("--dur", SLIDE_MS[n] + "ms"); void sp.offsetWidth; sp.classList.add("cur"); } });
-    clearTimeout(art._intro); art._intro = setTimeout(function () { introGo(art, n + 1); }, SLIDE_MS[n]);
+    art._slide = n; introFit(ov);
+    var beats = ov.querySelectorAll(".beat");
+    beats.forEach(function (b) { b.classList.remove("on"); }); void ov.offsetWidth; beats[n].classList.add("on");
+    ov.querySelectorAll(".ibar span").forEach(function (sp, i) { sp.className = i < n ? "done" : i === n ? "cur" : ""; });
+    ov.querySelector(".ix-ctrls").classList.toggle("first", n === 0);
+    var nx = ov.querySelector(".ix-next"); nx.classList.toggle("play", n === 4); nx.innerHTML = n === 4 ? "Let’s play" : "Next" + INEXT;
+    beats[n].querySelectorAll(".ix-cnt").forEach(introCount);
   }
   function endIntro(art) {
-    clearTimeout(art._intro);
     if (art.id === "intro") return; // the intro screen on this page stays on its slide
     if (P && art.id === "pshot" && CUR === "intro") { go("home-first"); return; } // in the prototype the Games screen follows
     art.classList.add("introclosing");
@@ -2852,8 +2982,8 @@ html.protoon main.wrap { display: none; }
     if (tab && !e.target.closest("#proto")) { var to = tab.textContent.trim().toLowerCase() === "me" ? "me" : "women"; if (!tab.closest("#" + to)) { document.getElementById(to).scrollIntoView({ behavior: "smooth" }); return; } }
     var rs = e.target.closest(".resume");
     if (rs && !e.target.closest("#proto")) { var qa = document.getElementById("q" + rs.dataset.q); if (qa) qa.scrollIntoView({ behavior: "smooth" }); return; }
-    var ov = e.target.closest(".iover");
-    if (ov && !e.target.closest(".introskip")) { var r = ov.getBoundingClientRect(), a0 = ov.closest(".shot"); introGo(a0, (a0._slide || 0) + (e.clientX < r.left + r.width * .3 ? -1 : 1)); return; }
+    var ib = e.target.closest(".iover .ix-next, .iover .ix-back");
+    if (ib) { var a0 = ib.closest(".shot"); introGo(a0, (a0._slide || 0) + (ib.classList.contains("ix-back") ? -1 : 1)); return; }
     var nx = e.target.closest(".swipehint, .fdot");
     if (nx) { // click per slide in the feed: the hint goes to the next match, a dot jumps to that match
       var ph = nx.closest(".phone"), f = ph && ph.querySelector(".feed"); if (!f) return;

@@ -1761,7 +1761,7 @@ html.protoon main.wrap { display: none; }
         '<div class="cap"><b>Climb. Win the week.</b><span>Points add up all week. The top players win the weekly prize.</span></div></div>' +
       '</div>';
   }
-  function dragPhone(state, title) { return '<div class="phone dragphone"><iframe src="drag.html#embed-' + state + (MC > 1 ? "-m" + MC : "") + (STILL ? "-still" : "") + '" title="' + title + '" loading="lazy"></iframe></div>'; }
+  function dragPhone(state, title) { return '<div class="phone dragphone"><iframe src="' + (window.THEONE_DRAG || "drag.html") + '#embed-' + state + (MC > 1 ? "-m" + MC : "") + (STILL ? "-still" : "") + '" title="' + title + '" loading="lazy"></iframe></div>'; }
   function bleed(i, h, s, mode) {
     var P = PHOTOS[i];
     return '<div class="bleed" style="height:' + h + 'px">' + ["L", "M"].map(function (k, ix) {

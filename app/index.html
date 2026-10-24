@@ -770,6 +770,20 @@ button.pane { cursor: pointer; }
 .fcard .btn svg { width: 18px; height: 18px; }
 .fchips + .feed { --feedh: 603px; }
 .fcard .btn.outline.on { color: var(--pink); box-shadow: inset 0 0 0 1.5px var(--pink); }
+/* 24 Oct (Alon): the two women take the card; under them one compact block (count + first 15 on a line, a thin bar) and a slimmer button. Each card fits the feed, its button clear of the swipe hint */
+.feed .fcard { height: calc(var(--feedh, 645px) - 40px); display: flex; flex-direction: column; gap: 9px; }
+.feed .fcard .fduo { flex: 1 1 0; min-height: 150px; height: auto !important; }
+.fcard .flob { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 7px 10px; }
+.fcard .flob > .first15 { order: 2; margin-left: auto; gap: 4px; }
+.fcard .flob > .bar { order: 3; flex: 1 0 100%; height: 5px; }
+.fcard .flob .count { justify-content: flex-start; gap: 5px; font-size: 11.5px; white-space: nowrap; }
+.fcard .flob .count b { font-size: 24px; }
+.fcard .flob .rprog { gap: 2px 7px; } .fcard .flob .rprog b { font-size: 19px; white-space: nowrap; } .fcard .flob .rpips { gap: 3px; } .fcard .flob .rpips i { width: 8px; } .fcard .flob .rprog small { display: none; } /* its line ("Question 3 is next", "Results are in") is what the button says */
+.fcard .flob .f15h { justify-content: flex-end; gap: 6px; font-size: 9px; letter-spacing: .12em; }
+.fcard .flob .f15r { justify-content: flex-end; padding: 0; }
+.fcard .flob .f15 { width: 19px; height: 19px; margin-right: -10px; } .fcard .flob .f15:last-child { margin-right: 0; }
+.fcard .flob .f15.one { width: 23px; height: 23px; }
+.fcard .btn { min-height: 46px; font-size: 19px; }
 /* the prototype as an app: the phone alone, its sheets, menu and payments */
 .pstage .phone { height: 844px; }
 .pstage .ph-body { min-height: 0; }
@@ -970,8 +984,6 @@ html.pfull .pstage .ph-body { overflow-y: auto; scrollbar-width: none; }
 html.pfull .pstage .ph-body::-webkit-scrollbar { display: none; }
 html.pfull .pstage .feed { --feedh: calc(var(--ph) - 199px); }
 html.pfull .playr { border-radius: 0; }
-html.pfull .pstage .fcard { height: calc(var(--feedh) - 40px); display: flex; flex-direction: column; } /* each match card fits the feed, its button in view above the swipe hint */
-html.pfull .pstage .fcard .fduo { flex: 1 1 0; min-height: 150px; height: auto !important; }
 html.pfull .pstage .ph-body .btn.push { position: sticky; bottom: 10px; z-index: 3; } /* a main button inside a card stays in view while the rest scrolls */
 html.pfull .pstage .pfoot { flex: none; display: flex; flex-direction: column; gap: 8px; padding: 8px 16px 10px; } /* pinFoot(): a screen's main button, and what follows it, under the scrolling part */
 html.pfull .pstage .pfoot > .push { margin-top: 0; }
@@ -1709,8 +1721,7 @@ html.protoon main.wrap { display: none; }
           btn = '<button class="btn black">Predict this match &gt;</button>';
         } else {
           var n = s.joined ? 743 : 742;
-          lob = '<div class="count"><b data-count="' + n + '">' + n + '</b>/ 1,000 joined</div><div class="bar b700"><span style="width:' + n / 10 + '%"></span><i></i></div>' + first15() +
-            '<small>' + (s.joined ? "<b>You’re in.</b> Over 700 joined, so the match is on. It opens in a moment." : "<b>The match is on:</b> over 700 joined. Up to 1,000 can play.") + '</small>';
+          lob = '<div class="count"><b data-count="' + n + '">' + n + '</b>/ 1,000 joined</div><div class="bar b700"><span style="width:' + n / 10 + '%"></span><i></i></div>' + first15(); // 24 Oct: the sentence under it is gone (Alon: a much smaller block); the bar's gold 700 mark says the match is on
           btn = s.joined ? '<button class="btn black" disabled>You’re in ✓</button>' : '<button class="btn black" data-act="join">Join the match &gt;</button>';
         }
       } else if (m.lobby) {

@@ -964,6 +964,18 @@ button.pane { cursor: pointer; }
 .mini.on { color: var(--pink); box-shadow: inset 0 0 0 1px var(--pink); }
 html.app body { margin: 0; overflow: hidden; background: radial-gradient(900px 700px at 50% 0%, #2a0a1b 0%, #0b0509 60%, #050205 100%), #050205; }
 html.app .ppanel { display: none; }
+/* 24 Oct: full screen on a phone (fit() sets --ph, the visible height in design pixels) */
+html.pfull .pstage .phone, html.pfull .pstage .phone.dragphone, html.pfull .pstage .phone.feedphone { height: var(--ph); min-height: 0; border-radius: 0; box-shadow: none; }
+html.pfull .pstage .ph-body { overflow-y: auto; scrollbar-width: none; }
+html.pfull .pstage .ph-body::-webkit-scrollbar { display: none; }
+html.pfull .pstage .feed { --feedh: calc(var(--ph) - 199px); }
+html.pfull .playr { border-radius: 0; }
+html.pfull .pstage .fcard { height: calc(var(--feedh) - 40px); display: flex; flex-direction: column; } /* each match card fits the feed, its button in view above the swipe hint */
+html.pfull .pstage .fcard .fduo { flex: 1 1 0; min-height: 150px; height: auto !important; }
+html.pfull .pstage .ph-body .btn.push { position: sticky; bottom: 10px; z-index: 3; } /* a main button inside a card stays in view while the rest scrolls */
+html.pfull .pstage .pfoot { flex: none; display: flex; flex-direction: column; gap: 8px; padding: 8px 16px 10px; } /* pinFoot(): a screen's main button, and what follows it, under the scrolling part */
+html.pfull .pstage .pfoot > .push { margin-top: 0; }
+html.pfull .pstage .cam { flex: 1 1 0; min-height: 240px; height: auto; } /* the selfie camera takes the room there is, the shutter stays in view */
 html.app .proto.on { flex-direction: row; justify-content: center; align-items: center; gap: 0; padding: 0; height: 100vh; height: 100dvh; box-sizing: border-box; overflow: hidden; }
 .appctl { position: fixed; right: 18px; bottom: 18px; z-index: 50; display: flex; gap: 8px; opacity: .35; transition: opacity .2s; }
 .appctl:hover, .appctl:focus-within { opacity: 1; }
@@ -3192,7 +3204,16 @@ html.protoon main.wrap { display: none; }
     P.querySelectorAll("#pmap button").forEach(function (b) { b.classList.toggle("on", b.dataset.go === id); });
   }
   function host() { return P.querySelector(".pover.on .pshot") || P.querySelector("#pshot"); }
-  function redraw() { var h = host(), id = h.dataset.id; keepScroll(h, function () { h.querySelector(".pslot").innerHTML = rend(id); }); }
+  function redraw() { var h = host(), id = h.dataset.id; keepScroll(h, function () { h.querySelector(".pslot").innerHTML = rend(id); pinFoot(h); }); }
+  function pinFoot(root) { // full screen on a phone: the screen's main button and what follows it stay under the part that scrolls
+    if (!document.documentElement.classList.contains("pfull")) return;
+    root.querySelectorAll(".ph-body").forEach(function (b) {
+      var n = b.querySelector(":scope > .btn.push"); if (!n) return;
+      var f = document.createElement("div"); f.className = "pfoot";
+      while (n) { var nx = n.nextElementSibling; f.appendChild(n); n = nx; }
+      b.parentNode.insertBefore(f, b.nextSibling);
+    });
+  }
   function go(id, push) {
     if (!BY[id]) return;
     if (push !== false && CUR && CUR !== id) HIST.push(CUR);
@@ -3207,7 +3228,7 @@ html.protoon main.wrap { display: none; }
     if (id === "tbl-create" && LOCKED) TB.wait = false;
     if (id === "tbl-invite" && !TB.made) { TB.made = true; TB.n = 1; TB.min = pst("tbl-create").min || TBL.min; TB.due = Date.now() + 40000; }
     if (id === "locked" && !LOCKED) { LOCKED = true; clearTimeout(NOTIF_T); NOTIF_T = setTimeout(showNotif, 5000); }
-    art.querySelector(".pslot").innerHTML = rend(id);
+    art.querySelector(".pslot").innerHTML = rend(id); pinFoot(art);
     setInfo(id);
     if (sc.intro && !STILL) { SEEN_INTRO = true; startIntro(art); } else if (!still && sc.anim) entrance(art);
     if (id === "splash") setTimeout(function () { if (CUR === "splash") go("intro"); }, 2200);
@@ -3230,6 +3251,17 @@ html.protoon main.wrap { display: none; }
   }
   function fit() {
     if (!P) return;
+    // 24 Oct: on a phone the app fills the screen: full width, the real visible height (at least 640, the game's minimum), no phone frame
+    var full = APP && window.innerWidth <= 500, st = P.querySelector(".pstage"), pw = P.querySelector(".pwrap");
+    document.documentElement.classList.toggle("pfull", full);
+    if (full) {
+      var fs = Math.min(window.innerWidth / 390, window.innerHeight / 640), H = Math.floor(window.innerHeight / fs);
+      P.style.height = window.innerHeight + "px";
+      st.style.transform = "scale(" + fs + ")"; st.style.height = H + "px"; st.style.setProperty("--ph", H + "px");
+      pw.style.width = 390 * fs + "px"; pw.style.height = H * fs + "px";
+      return;
+    }
+    st.style.height = ""; st.style.removeProperty("--ph");
     var narrow = window.innerWidth <= 760, bar = narrow && !APP ? P.querySelector(".ppanel").offsetHeight : 0, m = window.innerWidth <= 500 ? 8 : 32;
     var s = APP ? Math.min(1.25, (window.innerWidth - m) / 390, (window.innerHeight - m) / 844) : Math.min(1, (window.innerWidth - 24) / 390, (window.innerHeight - (narrow ? bar + 20 : 40)) / 844);
     if (APP) P.style.height = window.innerHeight + "px"; // the visible height: on iPhone Safari 100dvh can be taller than the screen between its bars, which pushed the app down behind the toolbar

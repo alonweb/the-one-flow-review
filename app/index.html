@@ -3232,6 +3232,7 @@ html.protoon main.wrap { display: none; }
     if (!P) return;
     var narrow = window.innerWidth <= 760, bar = narrow && !APP ? P.querySelector(".ppanel").offsetHeight : 0, m = window.innerWidth <= 500 ? 8 : 32;
     var s = APP ? Math.min(1.25, (window.innerWidth - m) / 390, (window.innerHeight - m) / 844) : Math.min(1, (window.innerWidth - 24) / 390, (window.innerHeight - (narrow ? bar + 20 : 40)) / 844);
+    if (APP) P.style.height = window.innerHeight + "px"; // the visible height: on iPhone Safari 100dvh can be taller than the screen between its bars, which pushed the app down behind the toolbar
     P.querySelector(".pstage").style.transform = "scale(" + s + ")";
     var w = P.querySelector(".pwrap"); w.style.width = 390 * s + "px"; w.style.height = 844 * s + "px";
   }
@@ -3285,6 +3286,7 @@ html.protoon main.wrap { display: none; }
       var mo = h.querySelector(".wgrid .more"); if (mo) mo.hidden = !!q;
     });
     window.addEventListener("resize", fit);
+    if (window.visualViewport) window.visualViewport.addEventListener("resize", fit);
     setInterval(function () { if (!P.classList.contains("on") || !TB.due) return; var t = tcdText(); P.querySelectorAll(".tcd").forEach(function (b) { if (b.textContent !== t) b.textContent = t; }); }, 250);
     document.addEventListener("keydown", function (e) {
       if (!P || !P.classList.contains("on")) return;

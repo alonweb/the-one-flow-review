@@ -384,6 +384,18 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
 .bn-face img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; display: block; }
 .bn-head b { font-size: 22px; white-space: nowrap; }
 .tray .arrow { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; align-self: center; padding: 0 0 2px; background: linear-gradient(135deg, var(--pink), var(--gold)); color: #1a0610; font: 800 20px/1 var(--ui); letter-spacing: 0; box-shadow: 0 0 0 3px rgba(14, 3, 9, .9), 0 0 14px rgba(255, 46, 139, .55), 0 0 18px rgba(245, 184, 73, .35); } /* your vote + the crowd's: pink to gold */
+.tapewrap { position: relative; height: 70px; margin: 2px -4px 0; }
+.tape { position: absolute; inset: 0; overflow-x: scroll; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; touch-action: pan-x; outline: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 20%, #000 80%, transparent); mask-image: linear-gradient(90deg, transparent, #000 20%, #000 80%, transparent); }
+.tape::-webkit-scrollbar { display: none; }
+.tape .strip { position: relative; height: 100%; display: flex; }
+.tape .pad { flex: none; }
+.tape .tk { flex: none; width: 12px; height: 100%; position: relative; scroll-snap-align: center; cursor: pointer; }
+.tape .tk::before { content: ""; position: absolute; left: 50%; top: 8px; width: 2px; height: 14px; margin-left: -1px; border-radius: 1px; background: rgba(255, 255, 255, .3); }
+.tape .tk.m5::before { height: 22px; background: rgba(255, 255, 255, .5); }
+.tape .tk.m10::before { height: 32px; background: #fff; }
+.tape .tk b { position: absolute; top: 46px; left: 50%; transform: translateX(-50%); font: 400 15px/1 var(--display); color: var(--ink-3); }
+.tpin { position: absolute; left: 50%; top: 0; width: 4px; height: 44px; margin-left: -2px; border-radius: 2px; background: var(--pink); box-shadow: 0 0 12px var(--pink); pointer-events: none; }
+.tpin::after { content: ""; position: absolute; left: 50%; top: -6px; margin-left: -7px; border: 7px solid transparent; border-top-color: var(--pink); }
 </style>
 
 <div class="page">
@@ -792,26 +804,33 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     var b = document.createElement("div"); b.className = "banner" + (RM ? "" : " in"); bannerEl = b;
     b.innerHTML = '<span class="tail"></span>' +
       '<div class="bn-head"><span class="bn-face"><img src="' + IMG + HER[k].portrait + '" alt=""></span><div><small>Exact vote · your guess</small><b>What % will vote ' + W[k].name + '?</b></div></div>' + // 24 Oct preview: say plainly what the player guesses, with her face
-      '<div class="bn-step"><span>1</span>Pick the range of her votes</div>' +
-      '<div class="ranges">' + BANDS.map(function (r, i) { return '<button class="rb" data-i="' + i + '">' + r[0] + '–' + r[1] + '</button>'; }).join("") + '</div>' +
-      '<div class="exact" hidden><div class="bn-step"><span>2</span>Now the exact %</div><div class="numrow"><span class="split" id="splitL"></span><div class="bignum unset" id="bignum">–<small>%</small></div><span class="split r" id="splitR"></span></div><div class="ruler" id="ruler"></div></div>' +
-      '<button class="lock" id="lock" disabled>Pick a range</button>'; // the "Changed your mind?" line is gone (Alon, 22 Oct); tapping the other woman still moves the crowd
+      '<div class="numrow"><span class="split" id="splitL"></span><div class="bignum unset" id="bignum">–<small>%</small></div><span class="split r" id="splitR"></span></div>' +
+      tapeHTML() + // 25 Oct (Alon chose A): one number on a ruler that scrolls under a pin; no ranges to pick
+      '<button class="lock" id="lock" disabled>Swipe the ruler</button>'; // the "Changed your mind?" line is gone (Alon, 22 Oct); tapping the other woman still moves the crowd
     phone.appendChild(b);
     var pb = box(pane(k)), bb = box(b), tx = pb.x + pb.w / 2 - bb.x;
     b.style.setProperty("--tx", Math.max(30, Math.min(bb.w - 30, tx)) + "px");
-    b.querySelectorAll(".rb").forEach(function (el) { el.addEventListener("click", function () { pickBand(+el.dataset.i); }); });
     $("#lock", b).addEventListener("click", lockIt);
-    if (p.band != null) pickBand(p.band, true);
+    bindTape($("#tape", b)); if (p.exact != null) showExact();
   }
-  function pickBand(i, silent) {
-    var p = cur(), b = bannerEl; if (!b) return;
-    if (p.band !== i) p.exact = null; p.band = i;
-    b.querySelectorAll(".rb").forEach(function (el) { var on = +el.dataset.i === i; el.classList.toggle("on", on); el.classList.remove("pop"); if (on && !silent) { void el.offsetWidth; el.classList.add("pop"); } });
-    var ex = $(".exact", b), was = ex.hidden; ex.hidden = false; if (was && !RM) ex.classList.add("in");
-    var lo = BANDS[i][0], hi = BANDS[i][1], cells = [];
-    for (var n = lo; n <= hi; n++) cells.push('<button class="cell" data-n="' + n + '">' + n + '</button>');
-    var ruler = $("#ruler", b); ruler.innerHTML = cells.join("");
-    bindRuler(ruler, lo, hi); showExact();
+  function tapeHTML() {
+    var t = ""; for (var n = 51; n <= 100; n++) t += '<span class="tk' + (n % 10 === 0 ? " m10" : n % 5 === 0 ? " m5" : "") + '" data-n="' + n + '">' + (n % 10 === 0 || n === 51 ? "<b>" + n + "</b>" : "") + '</span>';
+    return '<div class="tapewrap"><div class="tape" id="tape" tabindex="0" role="slider" aria-valuemin="51" aria-valuemax="100" aria-label="Her share of the crowd"><div class="strip"><span class="pad"></span>' + t + '<span class="pad"></span></div></div><span class="tpin"></span></div>';
+  }
+  function bandOf(n) { for (var i = 0; i < BANDS.length; i++) if (n >= BANDS[i][0] && n <= BANDS[i][1]) return i; return null; }
+  function bindTape(tape) {
+    var moved = false;
+    function pads() { var half = tape.clientWidth / 2 - 6; tape.querySelectorAll(".pad").forEach(function (x) { x.style.width = half + "px"; }); }
+    function go(n) { tape.scrollLeft = (n - 51) * 12; }
+    var start = cur().exact != null ? cur().exact : 70; // opens on 70 (or her saved number)
+    pads(); go(start); setTimeout(function () { pads(); go(start); }, 60);
+    ["touchstart", "pointerdown", "wheel"].forEach(function (ev) { tape.addEventListener(ev, function () { moved = true; }, { passive: true }); });
+    tape.addEventListener("scroll", function () { if (!moved) return; var p = cur(), n = Math.max(51, Math.min(100, 51 + Math.round(tape.scrollLeft / 12))); if (n === p.exact) return; p.exact = n; p.band = bandOf(n); showExact(); });
+    tape.querySelectorAll(".tk").forEach(function (x) { x.addEventListener("click", function () { moved = true; tape.scrollTo({ left: (+x.dataset.n - 51) * 12, behavior: RM ? "auto" : "smooth" }); }); });
+    tape.addEventListener("keydown", function (e) { var d = e.key === "ArrowRight" || e.key === "ArrowUp" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowDown" ? -1 : 0; if (!d) return; e.preventDefault(); moved = true; go((cur().exact == null ? 70 : cur().exact) + d); });
+  }
+  function pickBand(i, silent) { // deep links (-band-2-pct-72) and tests still set a range; the ruler shows the number
+    var p = cur(); p.band = i; if (bannerEl && p.exact != null) showExact();
   }
   function showExact() {
     var p = cur(), b = bannerEl; if (!b) return;
@@ -819,13 +838,14 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     b.querySelectorAll(".cell").forEach(function (c) { c.classList.toggle("on", +c.dataset.n === p.exact); });
     if (p.exact == null) {
       big.className = "bignum unset"; big.innerHTML = "–<small>%</small>"; $("#splitL", b).innerHTML = ""; $("#splitR", b).innerHTML = "";
-      lock.disabled = true; lock.textContent = "Set the exact %"; lock.classList.remove("ready");
+      lock.disabled = true; lock.textContent = "Swipe the ruler"; lock.classList.remove("ready");
     } else {
       big.className = "bignum"; big.innerHTML = p.exact + "<small>%</small>";
       if (!RM) { void big.offsetWidth; big.classList.add("bump"); }
       var l = k === "L" ? p.exact : 100 - p.exact, r = 100 - l;
       $("#splitL", b).innerHTML = "<b>" + W.L.name + "</b>" + l + "%"; $("#splitR", b).innerHTML = "<b>" + W.M.name + "</b>" + r + "%";
-      lock.disabled = false; lock.textContent = "Save"; lock.classList.add("ready");
+      lock.disabled = false; lock.textContent = "Save " + p.exact + "%"; lock.classList.add("ready");
+      var tp = $("#tape", b); if (tp) { tp.setAttribute("aria-valuenow", p.exact); if (Math.round(tp.scrollLeft / 12) !== p.exact - 51 && !tp.matches(":active")) tp.scrollLeft = (p.exact - 51) * 12; }
     }
   }
   function bindRuler(ruler, lo, hi) {

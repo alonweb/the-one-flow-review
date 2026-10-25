@@ -5,7 +5,7 @@
 <title>THE ONE App</title>
 <style>body{visibility:hidden}</style>
 <script src="gate.js"></script>
-<script>window.THEONE_APP = true; window.THEONE_V = "20261025120126";</script>
+<script>window.THEONE_APP = true; window.THEONE_V = "20261025121139";</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400..800&family=Barlow:wght@500;600;700;800&display=swap">
@@ -2111,7 +2111,7 @@ html.protoon main.wrap { display: none; }
           '<div class="flabel">Background</div><div class="swatches">' + AVBG.map(function (b) {
             return '<button class="sw' + (b[0] === s.bg ? " on" : "") + '" data-act="bg" data-v="' + b[0] + '" aria-label="' + b[0] + ' background" aria-pressed="' + (b[0] === s.bg) + '" style="background:' + b[1] + '"></button>'; }).join("") + '</div></div>' +
         '<button class="btn black push">Use this avatar</button><div class="textlink">Back to the four versions</div>') + nav("My profile"), true); } },
-    { id: "signup-1", t: "Your player ID: the last step", src: "Page 2, after sign-in and the avatar", notes: [
+    { id: "signup-1", t: "Your player ID: the last step", src: "Page 2, after sign-in and the avatar", st: { terms: true }, notes: [ // 25 Oct (Alon): the 18+/Terms box starts ticked for the test group
         "<b>The last step of the first Join</b>: after signing in and making your avatar, check the nickname and pick your city. <b>Join the match</b> puts you in the match you tapped.",
         "<b>Big M is the example player</b>: selected here and the same everywhere after.",
         "<b>Your new avatar is selected</b>; the Selfie tile makes another, or pick a ready-made one.",

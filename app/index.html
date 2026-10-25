@@ -5,7 +5,7 @@
 <title>THE ONE App</title>
 <style>body{visibility:hidden}</style>
 <script src="gate.js"></script>
-<script>window.THEONE_APP = true; window.THEONE_V = "20261025121139";</script>
+<script>window.THEONE_APP = true; window.THEONE_V = "20261025122300";</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400..800&family=Barlow:wght@500;600;700;800&display=swap">
@@ -1868,7 +1868,7 @@ html.protoon main.wrap { display: none; }
       '<div class="ix-ctrls first"><button class="ix-btn ix-back" type="button">Back</button><button class="ix-btn ix-next" type="button">Next' + INEXT + '</button></div>' +
       '</div>';
   }
-  function dragPhone(state, title) { return '<div class="phone dragphone"><iframe src="' + (window.THEONE_DRAG || "drag.html") + (window.THEONE_V ? "?v=" + window.THEONE_V : "") + '#embed-' + state + (MC > 1 ? "-m" + MC : "") + (STILL ? "-still" : "") + '" title="' + title + '" loading="lazy"></iframe></div>'; }
+  function dragPhone(state, title) { return '<div class="phone dragphone"><iframe src="' + (window.THEONE_DRAG || "drag.html") + (window.THEONE_V ? "?v=" + window.THEONE_V : "") + '#embed-' + state + (MC > 1 ? "-m" + MC : "") + (LOCKED || M2DONE || M3DONE ? "-later" : "") + (STILL ? "-still" : "") + '" title="' + title + '" loading="lazy"></iframe></div>'; }
   function bleed(i, h, s, mode) {
     var P = PHOTOS[i];
     return '<div class="bleed" style="height:' + h + 'px">' + ["L", "M"].map(function (k, ix) {

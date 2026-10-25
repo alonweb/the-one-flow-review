@@ -389,7 +389,8 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
 .tape::-webkit-scrollbar { display: none; }
 .tape .strip { position: relative; height: 100%; display: flex; }
 .tape .pad { flex: none; }
-.tape .tk { flex: none; width: 12px; height: 100%; position: relative; scroll-snap-align: center; cursor: pointer; }
+.tape { cursor: grab; } .tape.grab { cursor: grabbing; }
+.tape .tk { flex: none; width: 12px; height: 100%; position: relative; scroll-snap-align: center; }
 .tape .tk::before { content: ""; position: absolute; left: 50%; top: 8px; width: 2px; height: 14px; margin-left: -1px; border-radius: 1px; background: rgba(255, 255, 255, .3); }
 .tape .tk.m5::before { height: 22px; background: rgba(255, 255, 255, .5); }
 .tape .tk.m10::before { height: 32px; background: #fff; }
@@ -826,7 +827,17 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     pads(); go(start); setTimeout(function () { pads(); go(start); }, 60);
     ["touchstart", "pointerdown", "wheel"].forEach(function (ev) { tape.addEventListener(ev, function () { moved = true; }, { passive: true }); });
     tape.addEventListener("scroll", function () { if (!moved) return; var p = cur(), n = Math.max(51, Math.min(100, 51 + Math.round(tape.scrollLeft / 12))); if (n === p.exact) return; p.exact = n; p.band = bandOf(n); showExact(); });
-    tape.querySelectorAll(".tk").forEach(function (x) { x.addEventListener("click", function () { moved = true; tape.scrollTo({ left: (+x.dataset.n - 51) * 12, behavior: RM ? "auto" : "smooth" }); }); });
+    tape.querySelectorAll(".tk").forEach(function (x) { x.addEventListener("click", function () { if (tape._dragged) { tape._dragged = false; return; } moved = true; tape.scrollTo({ left: (+x.dataset.n - 51) * 12, behavior: RM ? "auto" : "smooth" }); }); });
+    // a mouse (or pen) drags the ruler left and right too; a finger already swipes it natively
+    var dg = null;
+    tape.addEventListener("pointerdown", function (e) {
+      if (e.pointerType === "touch") return;
+      e.preventDefault(); moved = true; dg = { x: e.clientX, s: tape.scrollLeft, id: e.pointerId };
+      try { tape.setPointerCapture(e.pointerId); } catch (x) {} tape.style.scrollSnapType = "none"; tape.classList.add("grab");
+    });
+    tape.addEventListener("pointermove", function (e) { if (dg && e.pointerId === dg.id) { dg.dx = e.clientX - dg.x; tape.scrollLeft = dg.s - dg.dx; } });
+    function drop() { if (!dg) return; tape._dragged = Math.abs(dg.dx || 0) > 4; dg = null; tape.classList.remove("grab"); tape.scrollLeft = Math.round(tape.scrollLeft / 12) * 12; tape.style.scrollSnapType = ""; }
+    tape.addEventListener("pointerup", drop); tape.addEventListener("pointercancel", drop);
     tape.addEventListener("keydown", function (e) { var d = e.key === "ArrowRight" || e.key === "ArrowUp" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowDown" ? -1 : 0; if (!d) return; e.preventDefault(); moved = true; go((cur().exact == null ? 70 : cur().exact) + d); });
   }
   function pickBand(i, silent) { // deep links (-band-2-pct-72) and tests still set a range; the ruler shows the number

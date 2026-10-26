@@ -401,7 +401,8 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
 /* ---------- 25 Oct (Alon, option 6): players looked at the women and skipped the question ----------
    Each question opens with the question alone, then it shrinks into the heading as the women slide in. In the player's first match
    it waits about 2 s (or a tap); once a match is finished (#embed-...-later) it shows for half a second, so the same five questions
-   don't slow the game. The tray carries the question too: "Drag me onto the one at the beach", then "Zofia, your one at the beach". */
+   don't slow the game. The tray carries the question too: "Drag me onto the one at the beach", then "Zofia, your one at the beach"
+   (25 Oct evening: each question has its own tray words, Q[].tray / Q[].mine). */
 .qfirst { position: absolute; left: 0; right: 0; z-index: 30; display: grid; place-items: center; background: radial-gradient(360px 320px at 50% 42%, #3a0f26 0%, #12050c 78%); cursor: pointer; transition: opacity .45s ease; }
 .qf-in { text-align: center; padding: 0 20px; transition: transform .5s cubic-bezier(.5, 0, .2, 1); animation: qfin .55s var(--spring) both; }
 .qf-k { font: 600 13px/1 var(--label); letter-spacing: .24em; text-transform: uppercase; color: var(--ink-2); }
@@ -429,7 +430,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
         <div class="tclock"><span class="dot"></span><b id="timer">12:43</b><span>left</span></div>
       </div>
       <div class="qprog"><div class="qsteps" id="qdots" aria-label="Question progress"></div><div class="qwhere"><span id="qmatch">Zofia vs Mariana</span> · Question <b id="qn">1</b> of 5</div></div>
-      <div class="qhead"><h2 id="qtitle"><span class="l1">Who is</span><span class="l2">the one?</span></h2></div>
+      <div class="qhead"><h2 id="qtitle"><span class="l1">Which one</span><span class="l2">catches your eye?</span></h2></div>
       <div class="stage" id="stage"><div class="panes" id="panes"></div><span class="vs">VS</span></div>
       <div class="dock" id="dock">
         <div class="tray" id="tray">
@@ -473,12 +474,14 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     BR: '<svg class="flag" viewBox="0 0 20 14" aria-hidden="true"><rect width="20" height="14" fill="#009c3b"/><path d="M10 1.6 18.4 7 10 12.4 1.6 7z" fill="#ffdf00"/><circle cx="10" cy="7" r="3.1" fill="#002776"/></svg>'
   };
   var W = { L: { name: "Zofia", cc: "PL", country: "Poland" }, M: { name: "Mariana", cc: "BR", country: "Brazil" } };
-  var Q = [ // photos cropped around faces found with Vision (re-checked 22 Oct for the taller, rounded cards)
-    { t: "Overall", h: ["Who is", "the one?"], L: ["zofia-01-who-is-the-one-1.jpg", "50% 0%"], M: ["mariana-01-who-is-the-one-1.jpg", "50% 0%"] },
-    { t: "First impression", h: ["Who is the one", "at first sight?"], L: ["zofia-02-at-first-sight-1.jpg", "50% 0%"], M: ["mariana-02-at-first-sight-1.jpg", "50% 0%"] },
-    { t: "Going Out / Date", h: ["Who is the one", "for a date?"], L: ["zofia-03-for-a-date-1.jpg", "50% 0%"], M: ["mariana-03-for-a-date-1.jpg", "50% 0%"] },
-    { t: "At the Beach", h: ["Who is the one", "at the beach?"], L: ["zofia-04-at-the-beach-1.jpg", "50% 0%"], M: ["mariana-04-at-the-beach-1.jpg", "50% 0%"] },
-    { t: "Bring Her to Mama", h: ["Who is the one", "to bring to Mama?"], L: ["zofia-05-to-bring-to-mama-1.jpg", "50% 0%"], M: ["mariana-05-to-bring-to-mama-1.jpg", "50% 0%"] }
+  var Q = [ // 25 Oct evening (client feedback; Alon: "exactly as the feedback is asking"): each question says what you judge; Overall is gone.
+    // tray: the box under the photos before you drag ("Drag me onto …"); mine: after the drop ("Zofia" + this). Until the new photos exist,
+    // Swimsuit shows her beach set and Sleepover her old "Who is the one?" set; Party has its own photos (07-party, no clip yet).
+    { t: "First impression", h: ["Which one", "catches your eye?"], tray: "the one who catches your eye", mine: "catches your eye", L: ["zofia-02-at-first-sight-1.jpg", "50% 0%"], M: ["mariana-02-at-first-sight-1.jpg", "50% 0%"] },
+    { t: "Swimsuit", h: ["Who looks hotter", "in a swimsuit?"], tray: "the hotter one in a swimsuit", mine: "hotter in a swimsuit", L: ["zofia-04-at-the-beach-1.jpg", "50% 0%"], M: ["mariana-04-at-the-beach-1.jpg", "50% 0%"] },
+    { t: "Going Out / Party", h: ["Who would you take", "to a party?"], tray: "the one you’d take to a party", mine: "you’d take to a party", L: ["zofia-07-party-1.jpg", "50% 0%"], M: ["mariana-07-party-1.jpg", "50% 0%"] },
+    { t: "Sleepover", h: ["Who would you invite", "for a sleepover?"], tray: "the one for a sleepover", mine: "invited for a sleepover", L: ["zofia-01-who-is-the-one-1.jpg", "50% 0%"], M: ["mariana-01-who-is-the-one-1.jpg", "50% 0%"] },
+    { t: "Bring Her to Mama", h: ["Who is the one", "to bring to Mama?"], tray: "the one to bring to Mama", mine: "your one to bring to Mama", L: ["zofia-05-to-bring-to-mama-1.jpg", "50% 0%"], M: ["mariana-05-to-bring-to-mama-1.jpg", "50% 0%"] }
   ];
   var BANDS = [[51, 59], [60, 69], [70, 79], [80, 89], [90, 100]];
   var CROWD = ["av-lion.jpg", "av-girl.jpg", "av-panda.jpg", "av-astro.jpg", "av-sun.jpg"];
@@ -486,8 +489,6 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var phone = $("#phone"), stageEl = $("#stage"), panesEl = $("#panes"), fx = $("#fx"), dock = $("#dock");
 
-  // 25 Oct (option 6): the words that change from question to question ("" for "Who is the one?", " at the beach" for the fourth)
-  function qWords() { return qi === 0 ? "" : " " + Q[qi].h[1].replace(/\?$/, ""); }
   var QUICK = /-later/.test(location.hash), qfT = null; // -later: the player has finished a match, so the question card does not wait
   function qFirst() { // the question alone first, then the women slide in under it
     clearTimeout(qfT); var old = $("#qfirst"); if (old) old.remove();
@@ -599,42 +600,42 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
   // Demo data. In the app her photos and short videos come from her own uploads, in the order she set; the numbers come from all her matches.
   // pics: her three photos for each question (img/<woman>-<question>-<n>.jpg, already centred on her face by tools/import_photos.py); her preview plays the current question's three
   var HER = {
-    L: { age: 26, city: "Kraków", bio: "Ballet until I was 18. Now I only dance in the kitchen.", portrait: "zofia-portrait.jpg", clips: ["zofia-01-who-is-the-one-1.mp4", "zofia-02-at-first-sight-1.mp4", "zofia-03-for-a-date-1.mp4", "zofia-04-at-the-beach-1.mp4", "zofia-05-to-bring-to-mama-1.mp4"], pics: [["zofia-01-who-is-the-one-1.jpg", "zofia-01-who-is-the-one-2.jpg", "zofia-01-who-is-the-one-3.jpg"], ["zofia-02-at-first-sight-1.jpg", "zofia-02-at-first-sight-2.jpg", "zofia-02-at-first-sight-3.jpg"], ["zofia-03-for-a-date-1.jpg", "zofia-03-for-a-date-2.jpg", "zofia-03-for-a-date-3.jpg"], ["zofia-04-at-the-beach-1.jpg", "zofia-04-at-the-beach-2.jpg", "zofia-04-at-the-beach-3.jpg"], ["zofia-05-to-bring-to-mama-1.jpg", "zofia-05-to-bring-to-mama-2.jpg", "zofia-05-to-bring-to-mama-3.jpg"]],
+    L: { age: 26, city: "Kraków", bio: "Ballet until I was 18. Now I only dance in the kitchen.", portrait: "zofia-portrait.jpg", clips: ["zofia-02-at-first-sight-1.mp4", "zofia-04-at-the-beach-1.mp4", null, "zofia-01-who-is-the-one-1.mp4", "zofia-05-to-bring-to-mama-1.mp4"], pics: [["zofia-02-at-first-sight-1.jpg", "zofia-02-at-first-sight-2.jpg", "zofia-02-at-first-sight-3.jpg"], ["zofia-04-at-the-beach-1.jpg", "zofia-04-at-the-beach-2.jpg", "zofia-04-at-the-beach-3.jpg"], ["zofia-07-party-1.jpg", "zofia-07-party-2.jpg", "zofia-07-party-3.jpg"], ["zofia-01-who-is-the-one-1.jpg", "zofia-01-who-is-the-one-2.jpg", "zofia-01-who-is-the-one-3.jpg"], ["zofia-05-to-bring-to-mama-1.jpg", "zofia-05-to-bring-to-mama-2.jpg", "zofia-05-to-bring-to-mama-3.jpg"]],
       rank: 6, total: 16, wins: 12,
       last: [["sophie.jpg", "Sophie", 1, 58], ["emma.jpg", "Emma", 1, 64], ["nina.jpg", "Nina", 0, 41], ["valentina.jpg", "Valentina", 1, 71], ["maya.jpg", "Maya", 1, 66]],
-      q: [[12, [4, 5, 2, 1, 0], 4], [13, [3, 6, 3, 1, 0], 3], [11, [5, 4, 2, 0, 0], 5], [9, [6, 2, 1, 0, 0], 7], [14, [2, 5, 4, 2, 1], 2]] }, // per question: won, times in each range when she won, lost
-    M: { age: 27, city: "Rio de Janeiro", bio: "Beach volleyball every morning, samba every night.", portrait: "mariana-portrait.jpg", clips: ["mariana-01-who-is-the-one-1.mp4", "mariana-02-at-first-sight-1.mp4", "mariana-03-for-a-date-1.mp4", "mariana-04-at-the-beach-1.mp4", "mariana-05-to-bring-to-mama-1.mp4"], pics: [["mariana-01-who-is-the-one-1.jpg", "mariana-01-who-is-the-one-2.jpg", "mariana-01-who-is-the-one-3.jpg"], ["mariana-02-at-first-sight-1.jpg", "mariana-02-at-first-sight-2.jpg", "mariana-02-at-first-sight-3.jpg"], ["mariana-03-for-a-date-1.jpg", "mariana-03-for-a-date-2.jpg", "mariana-03-for-a-date-3.jpg"], ["mariana-04-at-the-beach-1.jpg", "mariana-04-at-the-beach-2.jpg", "mariana-04-at-the-beach-3.jpg"], ["mariana-05-to-bring-to-mama-1.jpg", "mariana-05-to-bring-to-mama-2.jpg", "mariana-05-to-bring-to-mama-3.jpg"]],
+      q: [[13, [3, 6, 3, 1, 0], 3], [9, [6, 2, 1, 0, 0], 7], [11, [5, 4, 2, 0, 0], 5], [12, [4, 5, 2, 1, 0], 4], [14, [2, 5, 4, 2, 1], 2]] }, // per question: won, times in each range when she won, lost
+    M: { age: 27, city: "Rio de Janeiro", bio: "Beach volleyball every morning, samba every night.", portrait: "mariana-portrait.jpg", clips: ["mariana-02-at-first-sight-1.mp4", "mariana-04-at-the-beach-1.mp4", null, "mariana-01-who-is-the-one-1.mp4", "mariana-05-to-bring-to-mama-1.mp4"], pics: [["mariana-02-at-first-sight-1.jpg", "mariana-02-at-first-sight-2.jpg", "mariana-02-at-first-sight-3.jpg"], ["mariana-04-at-the-beach-1.jpg", "mariana-04-at-the-beach-2.jpg", "mariana-04-at-the-beach-3.jpg"], ["mariana-07-party-1.jpg", "mariana-07-party-2.jpg", "mariana-07-party-3.jpg"], ["mariana-01-who-is-the-one-1.jpg", "mariana-01-who-is-the-one-2.jpg", "mariana-01-who-is-the-one-3.jpg"], ["mariana-05-to-bring-to-mama-1.jpg", "mariana-05-to-bring-to-mama-2.jpg", "mariana-05-to-bring-to-mama-3.jpg"]],
       rank: 11, total: 15, wins: 9,
       last: [["luna.jpg", "Luna", 1, 55], ["sophie.jpg", "Sophie", 0, 47], ["maya.jpg", "Maya", 1, 61], ["valentina.jpg", "Valentina", 1, 58], ["nina.jpg", "Nina", 0, 44]],
-      q: [[9, [3, 4, 2, 0, 0], 6], [8, [4, 3, 1, 0, 0], 7], [11, [2, 4, 3, 2, 0], 4], [12, [2, 3, 4, 2, 1], 3], [7, [4, 2, 1, 0, 0], 8]] }
+      q: [[8, [4, 3, 1, 0, 0], 7], [12, [2, 3, 4, 2, 1], 3], [11, [2, 4, 3, 2, 0], 4], [9, [3, 4, 2, 0, 0], 6], [7, [4, 2, 1, 0, 0], 8]] }
   };
 
   /* ---------- the second match: Katya (Russia) vs Yasmin (Lebanon), opened with -m2 (2026-10-23) ---------- */
   var MATCH2 = {
     W: { L: { name: "Katya", cc: "RU", country: "Russia" }, M: { name: "Yasmin", cc: "LB", country: "Lebanon" } },
     HER: {
-      L: { age: 27, city: "Saint Petersburg", bio: "Figure skater as a kid. I still can’t walk past a frozen lake.", portrait: "katya-portrait.jpg", clips: ["katya-01-who-is-the-one-1.mp4", "katya-02-at-first-sight-1.mp4", "katya-03-for-a-date-1.mp4", "katya-04-at-the-beach-1.mp4", "katya-05-to-bring-to-mama-1.mp4"], pics: [["katya-01-who-is-the-one-1.jpg", "katya-01-who-is-the-one-2.jpg", "katya-01-who-is-the-one-3.jpg"], ["katya-02-at-first-sight-1.jpg", "katya-02-at-first-sight-2.jpg", "katya-02-at-first-sight-3.jpg"], ["katya-03-for-a-date-1.jpg", "katya-03-for-a-date-2.jpg", "katya-03-for-a-date-3.jpg"], ["katya-04-at-the-beach-1.jpg", "katya-04-at-the-beach-2.jpg", "katya-04-at-the-beach-3.jpg"], ["katya-05-to-bring-to-mama-1.jpg", "katya-05-to-bring-to-mama-2.jpg", "katya-05-to-bring-to-mama-3.jpg"]],
+      L: { age: 27, city: "Saint Petersburg", bio: "Figure skater as a kid. I still can’t walk past a frozen lake.", portrait: "katya-portrait.jpg", clips: ["katya-02-at-first-sight-1.mp4", "katya-04-at-the-beach-1.mp4", null, "katya-01-who-is-the-one-1.mp4", "katya-05-to-bring-to-mama-1.mp4"], pics: [["katya-02-at-first-sight-1.jpg", "katya-02-at-first-sight-2.jpg", "katya-02-at-first-sight-3.jpg"], ["katya-04-at-the-beach-1.jpg", "katya-04-at-the-beach-2.jpg", "katya-04-at-the-beach-3.jpg"], ["katya-07-party-1.jpg", "katya-07-party-2.jpg", "katya-07-party-3.jpg"], ["katya-01-who-is-the-one-1.jpg", "katya-01-who-is-the-one-2.jpg", "katya-01-who-is-the-one-3.jpg"], ["katya-05-to-bring-to-mama-1.jpg", "katya-05-to-bring-to-mama-2.jpg", "katya-05-to-bring-to-mama-3.jpg"]],
         rank: 4, total: 18, wins: 13,
         last: [["nina.jpg", "Nina", 1, 63], ["luna.jpg", "Luna", 1, 59], ["sophie.jpg", "Sophie", 0, 46], ["emma.jpg", "Emma", 1, 68], ["valentina.jpg", "Valentina", 1, 61]],
-        q: [[13, [5, 4, 3, 1, 0], 5], [14, [4, 6, 3, 1, 0], 4], [12, [3, 5, 3, 1, 0], 6], [11, [6, 3, 2, 0, 0], 7], [10, [5, 3, 2, 0, 0], 8]] },
-      M: { age: 25, city: "Beirut", bio: "Runway on weekdays, my grandmother’s kitchen on Sundays.", portrait: "yasmin-portrait.jpg", clips: ["yasmin-01-who-is-the-one-1.mp4", "yasmin-02-at-first-sight-1.mp4", "yasmin-03-for-a-date-1.mp4", "yasmin-04-at-the-beach-1.mp4", "yasmin-05-to-bring-to-mama-1.mp4"], pics: [["yasmin-01-who-is-the-one-1.jpg", "yasmin-01-who-is-the-one-2.jpg", "yasmin-01-who-is-the-one-3.jpg"], ["yasmin-02-at-first-sight-1.jpg", "yasmin-02-at-first-sight-2.jpg", "yasmin-02-at-first-sight-3.jpg"], ["yasmin-03-for-a-date-1.jpg", "yasmin-03-for-a-date-2.jpg", "yasmin-03-for-a-date-3.jpg"], ["yasmin-04-at-the-beach-1.jpg", "yasmin-04-at-the-beach-2.jpg", "yasmin-04-at-the-beach-3.jpg"], ["yasmin-05-to-bring-to-mama-1.jpg", "yasmin-05-to-bring-to-mama-2.jpg", "yasmin-05-to-bring-to-mama-3.jpg"]],
+        q: [[14, [4, 6, 3, 1, 0], 4], [11, [6, 3, 2, 0, 0], 7], [12, [3, 5, 3, 1, 0], 6], [13, [5, 4, 3, 1, 0], 5], [10, [5, 3, 2, 0, 0], 8]] },
+      M: { age: 25, city: "Beirut", bio: "Runway on weekdays, my grandmother’s kitchen on Sundays.", portrait: "yasmin-portrait.jpg", clips: ["yasmin-02-at-first-sight-1.mp4", "yasmin-04-at-the-beach-1.mp4", null, "yasmin-01-who-is-the-one-1.mp4", "yasmin-05-to-bring-to-mama-1.mp4"], pics: [["yasmin-02-at-first-sight-1.jpg", "yasmin-02-at-first-sight-2.jpg", "yasmin-02-at-first-sight-3.jpg"], ["yasmin-04-at-the-beach-1.jpg", "yasmin-04-at-the-beach-2.jpg", "yasmin-04-at-the-beach-3.jpg"], ["yasmin-07-party-1.jpg", "yasmin-07-party-2.jpg", "yasmin-07-party-3.jpg"], ["yasmin-01-who-is-the-one-1.jpg", "yasmin-01-who-is-the-one-2.jpg", "yasmin-01-who-is-the-one-3.jpg"], ["yasmin-05-to-bring-to-mama-1.jpg", "yasmin-05-to-bring-to-mama-2.jpg", "yasmin-05-to-bring-to-mama-3.jpg"]],
         rank: 8, total: 14, wins: 9,
         last: [["maya.jpg", "Maya", 1, 57], ["sophie.jpg", "Sophie", 1, 62], ["luna.jpg", "Luna", 0, 44], ["nina.jpg", "Nina", 1, 55], ["emma.jpg", "Emma", 0, 48]],
-        q: [[9, [3, 4, 2, 0, 0], 5], [10, [2, 4, 3, 1, 0], 4], [8, [4, 3, 1, 0, 0], 6], [9, [3, 3, 2, 1, 0], 5], [11, [2, 4, 3, 1, 1], 3]] }
+        q: [[10, [2, 4, 3, 1, 0], 4], [9, [3, 3, 2, 1, 0], 5], [8, [4, 3, 1, 0, 0], 6], [9, [3, 4, 2, 0, 0], 5], [11, [2, 4, 3, 1, 1], 3]] }
     }
   };
   /* ---------- the third match: Valeria (Colombia) vs Brooke (USA), opened with -m3 (2026-10-23) ---------- */
   var MATCH3 = {
     W: { L: { name: "Valeria", cc: "CO", country: "Colombia" }, M: { name: "Brooke", cc: "US", country: "USA" } },
     HER: {
-      L: { age: 25, city: "Medellín", bio: "Salsa three nights a week, my mother’s sancocho every Sunday.", portrait: "valeria-portrait.jpg", clips: ["valeria-01-who-is-the-one-1.mp4", "valeria-02-at-first-sight-1.mp4", "valeria-03-for-a-date-1.mp4", "valeria-04-at-the-beach-1.mp4", "valeria-05-to-bring-to-mama-1.mp4"], pics: [["valeria-01-who-is-the-one-1.jpg", "valeria-01-who-is-the-one-2.jpg", "valeria-01-who-is-the-one-3.jpg"], ["valeria-02-at-first-sight-1.jpg", "valeria-02-at-first-sight-2.jpg", "valeria-02-at-first-sight-3.jpg"], ["valeria-03-for-a-date-1.jpg", "valeria-03-for-a-date-2.jpg", "valeria-03-for-a-date-3.jpg"], ["valeria-04-at-the-beach-1.jpg", "valeria-04-at-the-beach-2.jpg", "valeria-04-at-the-beach-3.jpg"], ["valeria-05-to-bring-to-mama-1.jpg", "valeria-05-to-bring-to-mama-2.jpg", "valeria-05-to-bring-to-mama-3.jpg"]],
+      L: { age: 25, city: "Medellín", bio: "Salsa three nights a week, my mother’s sancocho every Sunday.", portrait: "valeria-portrait.jpg", clips: ["valeria-02-at-first-sight-1.mp4", "valeria-04-at-the-beach-1.mp4", null, "valeria-01-who-is-the-one-1.mp4", "valeria-05-to-bring-to-mama-1.mp4"], pics: [["valeria-02-at-first-sight-1.jpg", "valeria-02-at-first-sight-2.jpg", "valeria-02-at-first-sight-3.jpg"], ["valeria-04-at-the-beach-1.jpg", "valeria-04-at-the-beach-2.jpg", "valeria-04-at-the-beach-3.jpg"], ["valeria-07-party-1.jpg", "valeria-07-party-2.jpg", "valeria-07-party-3.jpg"], ["valeria-01-who-is-the-one-1.jpg", "valeria-01-who-is-the-one-2.jpg", "valeria-01-who-is-the-one-3.jpg"], ["valeria-05-to-bring-to-mama-1.jpg", "valeria-05-to-bring-to-mama-2.jpg", "valeria-05-to-bring-to-mama-3.jpg"]],
         rank: 5, total: 15, wins: 11,
         last: [["maya.jpg", "Maya", 1, 62], ["emma.jpg", "Emma", 1, 57], ["luna.jpg", "Luna", 0, 45], ["sophie.jpg", "Sophie", 1, 60], ["nina.jpg", "Nina", 1, 58]],
-        q: [[11, [3, 5, 2, 1, 0], 4], [12, [4, 4, 3, 1, 0], 3], [10, [3, 4, 2, 1, 0], 5], [13, [4, 5, 3, 1, 0], 2], [9, [4, 3, 2, 0, 0], 6]] },
-      M: { age: 28, city: "San Diego", bio: "Surf at sunrise, tacos at sunset.", portrait: "brooke-portrait.jpg", clips: ["brooke-01-who-is-the-one-1.mp4", "brooke-02-at-first-sight-1.mp4", "brooke-03-for-a-date-1.mp4", "brooke-04-at-the-beach-1.mp4", "brooke-05-to-bring-to-mama-1.mp4"], pics: [["brooke-01-who-is-the-one-1.jpg", "brooke-01-who-is-the-one-2.jpg", "brooke-01-who-is-the-one-3.jpg"], ["brooke-02-at-first-sight-1.jpg", "brooke-02-at-first-sight-2.jpg", "brooke-02-at-first-sight-3.jpg"], ["brooke-03-for-a-date-1.jpg", "brooke-03-for-a-date-2.jpg", "brooke-03-for-a-date-3.jpg"], ["brooke-04-at-the-beach-1.jpg", "brooke-04-at-the-beach-2.jpg", "brooke-04-at-the-beach-3.jpg"], ["brooke-05-to-bring-to-mama-1.jpg", "brooke-05-to-bring-to-mama-2.jpg", "brooke-05-to-bring-to-mama-3.jpg"]],
+        q: [[12, [4, 4, 3, 1, 0], 3], [13, [4, 5, 3, 1, 0], 2], [10, [3, 4, 2, 1, 0], 5], [11, [3, 5, 2, 1, 0], 4], [9, [4, 3, 2, 0, 0], 6]] },
+      M: { age: 28, city: "San Diego", bio: "Surf at sunrise, tacos at sunset.", portrait: "brooke-portrait.jpg", clips: ["brooke-02-at-first-sight-1.mp4", "brooke-04-at-the-beach-1.mp4", null, "brooke-01-who-is-the-one-1.mp4", "brooke-05-to-bring-to-mama-1.mp4"], pics: [["brooke-02-at-first-sight-1.jpg", "brooke-02-at-first-sight-2.jpg", "brooke-02-at-first-sight-3.jpg"], ["brooke-04-at-the-beach-1.jpg", "brooke-04-at-the-beach-2.jpg", "brooke-04-at-the-beach-3.jpg"], ["brooke-07-party-1.jpg", "brooke-07-party-2.jpg", "brooke-07-party-3.jpg"], ["brooke-01-who-is-the-one-1.jpg", "brooke-01-who-is-the-one-2.jpg", "brooke-01-who-is-the-one-3.jpg"], ["brooke-05-to-bring-to-mama-1.jpg", "brooke-05-to-bring-to-mama-2.jpg", "brooke-05-to-bring-to-mama-3.jpg"]],
         rank: 10, total: 13, wins: 8,
         last: [["valentina.jpg", "Valentina", 0, 46], ["luna.jpg", "Luna", 1, 56], ["emma.jpg", "Emma", 1, 59], ["maya.jpg", "Maya", 0, 43], ["nina.jpg", "Nina", 1, 54]],
-        q: [[8, [3, 3, 2, 0, 0], 5], [9, [2, 4, 2, 1, 0], 4], [7, [4, 2, 1, 0, 0], 6], [10, [2, 4, 3, 1, 0], 3], [8, [3, 3, 1, 1, 0], 5]] }
+        q: [[9, [2, 4, 2, 1, 0], 4], [10, [2, 4, 3, 1, 0], 3], [7, [4, 2, 1, 0, 0], 6], [8, [3, 3, 2, 0, 0], 5], [8, [3, 3, 1, 1, 0], 5]] }
     }
   };
   var MATCH = 1;
@@ -643,32 +644,44 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     Q.forEach(function (q, i) { q.L = [m.HER.L.pics[i][0], "50% 0%"]; q.M = [m.HER.M.pics[i][0], "50% 0%"]; });
   }
   // 24 Oct (Alon): a different line of hers on every slide of her preview; one per photo, in the order they play (the clip first)
-  var QUOTES = {
-    "zofia": [["Kraków is my city. Stay long enough and I’ll show you all of it.", "Opening night. I always leave before the last bow.", "Sunrise on the lake. The only thing I wake up early for."],
+  var QUOTES = { // per question in the 25 Oct order (First impression, Swimsuit, Party, Sleepover, Mama); stand-in lines until the new photos have their own
+    "zofia": [
       ["First coffee, no makeup. This is the real me.", "Minus ten outside. Warm me up with a good line.", "Red lips at the gallery. I came for the art, you looked at me."],
-      ["Champagne on a rooftop. You’d better have a good toast ready.", "I play one song on the piano. Make it worth it.", "Pick me up at eight. I choose the music."],
       ["Baltic wind, salty hair, zero regrets.", "Sunset on the pier. Stay until the lights come on.", "A good book and a big hat. You bring the sunscreen."],
-      ["My babcia’s pierogi. Flour on my face is part of the recipe.", "Tea, cake and twenty questions from my mother. Ready?", "Christmas market, hot wine, and a gift for your mama."]], "mariana": [["Rio is my playground. Sugarloaf is just the view.", "Shoes off on Copacabana. That’s how you know I like you.", "Selarón steps, sunshine and way too much laughing."],
+      ["Kraków’s best parties are underground. Literally.", "Techno in an old Zabłocie factory. No talking until sunrise.", "Na zdrowie! One shot, then you ask me to dance."],
+      ["Kraków is my city. Stay long enough and I’ll show you all of it.", "Opening night. I always leave before the last bow.", "Sunrise on the lake. The only thing I wake up early for."],
+      ["My babcia’s pierogi. Flour on my face is part of the recipe.", "Tea, cake and twenty questions from my mother. Ready?", "Christmas market, hot wine, and a gift for your mama."]],
+    "mariana": [
       ["Hi. Yes, the smile is always this big.", "Look a little longer. I don’t bite. Much.", "Salt on my skin, sun in my eyes. Say something nice."],
-      ["Red dress, warm night in Leblon. Where are you taking me?", "One glass of wine and I’ll tell you everything.", "Samba until two. Keep up if you can."],
       ["Coconut water and the best beach in the world.", "Golden hour on Ipanema. Walk with me.", "Surf in the morning, nap on the board after."],
-      ["Flowers for your mother. I already know what she likes.", "Sunday churrasco with my family. You bring dessert.", "I made brigadeiros. Chocolate opens every door, even Mama’s."]], "katya": [["White nights on the canals. The sun never sets, and neither do I.", "Snow on Palace Square. Spin with me.", "The rooftops of Petersburg at night. My favourite secret."],
+      ["Copacabana from the rooftop. The beach can wait.", "Carnival in Santa Teresa. My glitter, your face.", "Baile funk, leopard print, zero plans to go home."],
+      ["Rio is my playground. Sugarloaf is just the view.", "Shoes off on Copacabana. That’s how you know I like you.", "Selarón steps, sunshine and way too much laughing."],
+      ["Flowers for your mother. I already know what she likes.", "Sunday churrasco with my family. You bring dessert.", "I made brigadeiros. Chocolate opens every door, even Mama’s."]],
+    "katya": [
       ["Tea, slippers, messy hair. Still interested?", "Late taxi home. Tell me to come back.", "The Neva wind always messes up my hair. I let it."],
-      ["Red lips, chandeliers, and a man who can order the wine.", "A boat on the Neva and something golden in my glass.", "Order me something strong. I’ll stay for the conversation."],
       ["Black Sea, sunglasses up. Pebbles beat sand, fight me.", "Sunset on the sea wall. Sit with me, no talking.", "The sweetest peach on the beach. Want a bite?"],
-      ["Raspberries from my grandmother’s dacha. I saved you some.", "Blini on Sunday morning. Flipping them is my party trick.", "Tea from the samovar and my best manners for your mama."]], "yasmin": [["The Beirut Corniche at sunset. The city looks at me, I look at the sea.", "Gemmayzeh on a weekday. Catch me between castings.", "The old port of Byblos. Seven thousand years and still romantic."],
+      ["Miss the last bridge and you’re stuck at my party till morning.", "White nights party by the river. No sunset to send us home.", "Karaoke on Rubinstein Street. Your turn. I picked the song."],
+      ["White nights on the canals. The sun never sets, and neither do I.", "Snow on Palace Square. Spin with me.", "The rooftops of Petersburg at night. My favourite secret."],
+      ["Raspberries from my grandmother’s dacha. I saved you some.", "Blini on Sunday morning. Flipping them is my party trick.", "Tea from the samovar and my best manners for your mama."]],
+    "yasmin": [
       ["Morning sun and bougainvillea. Smile first, coffee second.", "Fitting room, black satin. Yes or no?", "Eyes closed, wind in my hair. Tell me what you see."],
-      ["Beirut lights below us. Dinner is on you, dessert is on me.", "Mezze for two. I promise to share the hummus.", "Red dress, old convertible, coast road. Drive."],
       ["Batroun beach club. Sunglasses down only for you.", "Walking the shore at sunset. Hold my sandals?", "Feet in the water, sun on my face. Perfect day."],
-      ["Lemons from our garden. My teta makes the best lemonade.", "Sunday lunch lasts three hours. Hungry?", "Man’oushe from scratch. Teta taught me, now I’ll teach you."]], "valeria": [["Comuna 13 is my backyard. Colour everywhere, like me.", "Medellín from the cable car. The city of eternal spring.", "Can’t dance salsa? I’ll teach you. Slowly."],
+      ["A Beirut rooftop at 2 a.m. Nobody here goes home early.", "Mar Mikhael on a Friday. The whole street is the party.", "Every Achrafieh party ends up in the kitchen. Pour me another."],
+      ["The Beirut Corniche at sunset. The city looks at me, I look at the sea.", "Gemmayzeh on a weekday. Catch me between castings.", "The old port of Byblos. Seven thousand years and still romantic."],
+      ["Lemons from our garden. My teta makes the best lemonade.", "Sunday lunch lasts three hours. Hungry?", "Man’oushe from scratch. Teta taught me, now I’ll teach you."]],
+    "valeria": [
       ["Hola. Yes, the curls are real.", "Colombian coffee: strong and sweet. Like me.", "Caught in the rain again. Share your umbrella?"],
-      ["A rooftop in El Poblado. Buy me a drink and earn a dance.", "Candles, red wine, a long dinner. No phones.", "I’m getting out of the taxi. Are you coming?"],
       ["Caribbean sun, and my hat keeps flying away.", "A hammock in Tayrona. Wake me only if it’s you.", "Rosario Islands water. Almost as warm as my smile."],
-      ["My mother’s sancocho. One taste and you’re family.", "Coffee on the porch in Jardín. Mama will love you here.", "This is a lulo. Taste it before you meet my mother."]], "brooke": [["Sunset Cliffs. Best view in San Diego, and I’m in it.", "Boardwalk rides with no plan. Race you to the pier.", "Ballpark hot dogs and yelling at the umpire. My kind of date."],
+      ["Reggaeton in Provenza. I know every word. Sing with me.", "Finca party in the hills. Fire, music, and nobody sleeps.", "Parque Lleras. That kiss was for you. Come get the next one."],
+      ["Comuna 13 is my backyard. Colour everywhere, like me.", "Medellín from the cable car. The city of eternal spring.", "Can’t dance salsa? I’ll teach you. Slowly."],
+      ["My mother’s sancocho. One taste and you’re family.", "Coffee on the porch in Jardín. Mama will love you here.", "This is a lulo. Taste it before you meet my mother."]],
+    "brooke": [
       ["Morning on the deck. Coffee’s on, come say hi.", "Iced coffee and a road-trip playlist. Shotgun’s yours.", "Just out of the water. Yes, I caught the best wave."],
-      ["Rooftop at sunset in my best dress. Your move.", "Beach bonfire, burnt marshmallows. Perfect night.", "One milkshake, two straws. Old-school romantic."],
       ["Coronado at noon. Grab a board and keep up.", "Lifeguard tower, red hoodie. I’ll keep you safe.", "Beach volleyball. I don’t lose gracefully."],
-      ["I cooked the turkey myself. Mom still doesn’t believe it.", "Meet Bailey. She approves of you first, then my mom.", "Dad’s grill, my burgers. Come hungry."]]};
+      ["Country night in San Diego. Boots on. Can you two-step?", "Backyard party in PB. You’re on drink duty.", "Gold dress, Gaslamp rooftop. Dance with me or just watch."],
+      ["Sunset Cliffs. Best view in San Diego, and I’m in it.", "Boardwalk rides with no plan. Race you to the pier.", "Ballpark hot dogs and yelling at the umpire. My kind of date."],
+      ["I cooked the turkey myself. Mom still doesn’t believe it.", "Meet Bailey. She approves of you first, then my mom.", "Dad’s grill, my burgers. Come hungry."]]
+  };
   var STORY_MS = 5000, storyEl = null, statsEl = null, sto = { k: null, i: 0, hold: null, held: false, anim: null };
   function clockText() { return Math.floor(timerS / 60) + ":" + String(timerS % 60).padStart(2, "0"); }
   function openStory(k) {
@@ -786,7 +799,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
   }
   function trayState() {
     var p = cur();
-    $("#homeMe").innerHTML = (p.you ? '<span class="empty">✓</span>' : meChip()) + '<span class="ht"><b>You</b><small class="ask">' + (p.you ? W[p.you].name + '<em>your one' + qWords() + '</em>' : 'Drag me onto<em>the one' + qWords() + '</em>') + '</small></span>';
+    $("#homeMe").innerHTML = (p.you ? '<span class="empty">✓</span>' : meChip()) + '<span class="ht"><b>You</b><small class="ask">' + (p.you ? W[p.you].name + '<em>' + Q[qi].mine + '</em>' : 'Drag me onto<em>' + Q[qi].tray + '</em>') + '</small></span>';
     $("#homeCrowd").innerHTML = (p.crowd ? '<span class="empty">✓</span>' : crowdChip(false)) + '<span class="ht"><b>Crowd</b><small>' + (p.crowd ? "Placed" : "1,000 players") + '</small></span>';
     var m = $("#homeMe .chip"), c = $("#homeCrowd .chip");
     if (m && step === "me") m.classList.add("bob");
@@ -812,7 +825,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     var c = center(chip); burst(c.x, c.y, ["#ff2e8b", "#ff7ab8", "#fff"], 16, 60);
     if (step === "me") {
       step = "crowd"; syncStep();
-      setInstr("The crowd’s one" + qWords() + "?"); trayState(); // option 6 (25 Oct); was "Predict the crowd vote" (Alon, 22 Oct)
+      setInstr("Predict the crowd"); trayState(); // 25 Oct evening: the full questions don't split into "the crowd's one …"; matches the intro's "Predict the crowd"
       var cc = $("#homeCrowd .chip"); if (cc) { cc.classList.remove("bob", "asleep"); cc.classList.add("awake"); }
     } else trayState();
   }

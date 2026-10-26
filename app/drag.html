@@ -386,7 +386,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
 .bn-face img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; display: block; }
 .bn-head b { font-size: 22px; white-space: nowrap; }
 .bn-head b.q2 { white-space: normal; font-size: 18px; line-height: 1.08; text-wrap: balance; } /* 25 Oct (Alon): the intro's own question, on two lines */
-.tray .arrow { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; align-self: center; padding: 0 0 2px; background: linear-gradient(135deg, var(--pink), var(--gold)); color: #1a0610; font: 800 20px/1 var(--ui); letter-spacing: 0; box-shadow: 0 0 0 3px rgba(14, 3, 9, .9), 0 0 14px rgba(255, 46, 139, .55), 0 0 18px rgba(245, 184, 73, .35); } /* your vote + the crowd's: pink to gold */
+.tray .arrow { width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; align-self: center; padding: 0 0 1px; background: rgba(255, 255, 255, .06); color: var(--ink-3); font: 700 13px/1 var(--ui); letter-spacing: 0; box-shadow: inset 0 0 0 1px var(--line-2); } /* 25 Oct (Alon): smaller, plain, it should not stand out (was a 28px pink-to-gold glow) */
 .tapewrap { position: relative; height: 70px; margin: 2px -4px 0; }
 .tape { position: absolute; inset: 0; overflow-x: scroll; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; touch-action: pan-x; outline: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 20%, #000 80%, transparent); mask-image: linear-gradient(90deg, transparent, #000 20%, #000 80%, transparent); }
 .tape::-webkit-scrollbar { display: none; }

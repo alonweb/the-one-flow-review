@@ -5,7 +5,7 @@
 <title>THE ONE App</title>
 <style>body{visibility:hidden}</style>
 <script src="gate.js"></script>
-<script>window.THEONE_APP = true; window.THEONE_V = "20261025220856";</script>
+<script>window.THEONE_APP = true; window.THEONE_V = "20261026095152";</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400..800&family=Barlow:wght@500;600;700;800&display=swap">
@@ -223,7 +223,7 @@ input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 
 .stat b.up { color: var(--green); }
 .stat em { display: block; font: 600 11px/1 var(--ui); font-style: normal; color: var(--green); margin-top: 3px; }
 .lrows { display: grid; }
-.lrow { display: grid; grid-template-columns: 34px 51px 1fr auto; gap: 10px; align-items: center; padding: 7px 0; font: 600 14px/1.1 var(--ui); }
+.lrow { display: grid; grid-template-columns: 34px 30px 1fr auto; gap: 10px; align-items: center; padding: 7px 0; font: 600 14px/1.1 var(--ui); }
 .lrow + .lrow { border-top: 1px solid var(--line); }
 .lrow .rk { font: 800 13px/1 var(--label); letter-spacing: .04em; font-variant-numeric: tabular-nums; color: var(--ink-2); }
 .lrow img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
@@ -2793,15 +2793,15 @@ html.protoon main.wrap { display: none; }
     { id: "ranking", anim: true, t: "Ranking", src: "Page 18", st: { sc: "world", per: "week" }, notes: [
         "<b>Opens on This week</b>: the weekly prize goes by this week’s score (average points per match × 10). City, country and world, as in the flow.",
         "<b>A weekly prize banner</b> with no numbers yet. There is no prize per match in the main game; the match screens only show points. The friends’ tables are a side game in coins.",
-        "<b>The podium rises</b> and the leader’s crown drops in. Each player shows their photo with their avatar (25 Oct), never the women’s photos.",
+        "<b>The podium rises</b> and the leader’s crown drops in. Each player shows their photo only (25 Oct), never the women’s photos.",
         "<b>Big M appears once</b>, with the neighbours just above and below.",
         "<b>The tabs work</b>: Tel Aviv, Israel or World, and this week, this month or all time. In Tel Aviv this week Big M is on the podium. <b>Details</b> on the prize banner says how the weekly prize works, with How points work linked from there.",
         "<b>From a ranking tile</b> on My profile or Your points, Ranking opens on All time, the period those tiles show.",
         "<b>Players | Competitors</b> (25 Oct): Competitors is the women’s league, ranked by wins, then win %: World, her Country or her City (opens on Poland and Kraków; tap the place to change it), with a podium and the table. Her row opens her page."],
       open: "Open: how many players win each week, what they win, the conditions and the tie-breakers. The prize has to keep the budget under control as play grows.",
       r: function (s) {
-        function pav(a) { return a.indexOf(".") > -1 ? '<span class="pav"><img src="' + IMG + a + '" alt=""></span>' : '<span class="pav"><img src="' + IMG + 'pl-' + a + '-photo.jpg" alt=""><img src="' + IMG + 'pl-' + a + '-av.jpg" alt=""></span>'; } // 25 Oct: photo + avatar; Big M is the player's own avatar
-        function ppav(a) { return a.indexOf(".") > -1 ? '<img src="' + IMG + a + '" alt="">' : '<span class="ppav"><img src="' + IMG + 'pl-' + a + '-photo.jpg" alt=""><img class="av" src="' + IMG + 'pl-' + a + '-av.jpg" alt=""></span>'; }
+        function pav(a) { return a.indexOf(".") > -1 ? '<span class="pav"><img src="' + IMG + a + '" alt=""></span>' : '<span class="pav"><img src="' + IMG + 'pl-' + a + '-face.jpg" alt=""></span>'; } // 25 Oct (Alon): the player's photo only; Big M is the player's own avatar
+        function ppav(a) { return a.indexOf(".") > -1 ? '<img src="' + IMG + a + '" alt="">' : '<img src="' + IMG + 'pl-' + a + '-face.jpg" alt="">'; }
         function lr(rk, av, name, cc, country, p, me) { return '<div class="lrow' + (me ? " me" : "") + '"><span class="rk">' + rk + '</span>' + pav(av) + '<span>' + name + (me ? '<span class="youtag">YOU</span>' : '') + '<small>' + country + '</small></span><span class="p">' + p + '</span></div>'; }
         var D = RANKS[s.sc || "world"], per = s.per || "week", mr = D.me[per], mp = RME[per], P0 = D.pts[per], L = D.list;
         function who(r) { if (r === mr) return ["bigm.png", "Big M", mp, D.mine, 1]; var j = r - 1 - (mr < r ? 1 : 0); return [L[j][1], L[j][0], P0[j], L[j][2], 0]; }

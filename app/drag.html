@@ -277,6 +277,8 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
 .bn-head small { display: block; font: 700 10.5px/1 var(--label); letter-spacing: .16em; text-transform: uppercase; color: var(--gold); }
 .bn-head b { display: block; margin-top: 3px; font: 400 21px/1 var(--display); letter-spacing: .02em; text-transform: uppercase; }
 .bn-step { display: flex; align-items: center; gap: 7px; font: 700 10.5px/1 var(--label); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
+.bn-step .bn-pt { margin-left: auto; font: 800 10.5px/1 var(--label); letter-spacing: .08em; font-style: normal; color: var(--gold-ink); background: var(--gold); padding: 4px 8px; border-radius: 999px; box-shadow: 0 0 12px rgba(245, 184, 73, .45); }
+.bn-step .bn-pt.ex { background: linear-gradient(90deg, #ffd27a, var(--gold)); }
 .bn-step span { width: 17px; height: 17px; border-radius: 5px; display: grid; place-items: center; background: rgba(255, 255, 255, .1); color: var(--ink); font-size: 10px; letter-spacing: 0; }
 .ranges { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
 .rb { white-space: nowrap; min-height: 40px; border-radius: 14px; border: 1px solid var(--line-2); background: rgba(255, 255, 255, .05); font: 400 17px/1 var(--display); letter-spacing: .02em; cursor: pointer; transition: transform .15s var(--spring), background .15s; }
@@ -866,14 +868,20 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     var b = document.createElement("div"); b.className = "banner" + (RM ? "" : " in"); bannerEl = b;
     b.innerHTML = '<span class="tail"></span>' +
       '<div class="bn-head"><span class="bn-face"><img src="' + IMG + HER[k].portrait + '" alt=""></span><div><small>Exact vote · your guess</small><b>What % will vote ' + W[k].name + '?</b></div></div>' + // 24 Oct preview: say plainly what the player guesses, with her face
-      '<div class="numrow"><span class="split" id="splitL"></span><div class="bignum unset" id="bignum">–<small>%</small></div><span class="split r" id="splitR"></span></div>' +
-      tapeHTML() + // 25 Oct (Alon chose A): one number on a ruler that scrolls under a pin; no ranges to pick
-      '<button class="lock" id="lock" disabled>Swipe the ruler</button>'; // the "Changed your mind?" line is gone (Alon, 22 Oct); tapping the other woman still moves the crowd
+      // 25 Oct evening (Alon): the range is back, with what each step is worth: the range +1 if right, then the exact number in it +7 more.
+      // The exact number is one of the ten in that range, tapped on a row (the ruler is gone; tapeHTML/bindTape stay only for the options page)
+      '<div class="bn-step"><span>1</span>Pick the range<em class="bn-pt">+1 point if right</em></div>' +
+      '<div class="ranges">' + BANDS.map(function (r, i) { return '<button class="rb" data-i="' + i + '">' + r[0] + '–' + r[1] + '</button>'; }).join("") + '</div>' +
+      '<div class="exact" hidden><div class="bn-step"><span>2</span>The exact %<em class="bn-pt ex">+7 more if exact</em></div>' +
+      '<div class="numrow"><span class="split" id="splitL"></span><div class="bignum unset" id="bignum">–<small>%</small></div><span class="split r" id="splitR"></span></div><div class="ruler" id="ruler"></div></div>' +
+      '<button class="lock" id="lock" disabled>Pick a range</button>'; // the "Changed your mind?" line is gone (Alon, 22 Oct); tapping the other woman still moves the crowd
     phone.appendChild(b);
     var pb = box(pane(k)), bb = box(b), tx = pb.x + pb.w / 2 - bb.x;
     b.style.setProperty("--tx", Math.max(30, Math.min(bb.w - 30, tx)) + "px");
+    b.querySelectorAll(".rb").forEach(function (el) { el.addEventListener("click", function () { pickBand(+el.dataset.i); }); });
     $("#lock", b).addEventListener("click", lockIt);
-    bindTape($("#tape", b)); if (p.exact != null) showExact();
+    if (p.band == null && p.exact != null) p.band = bandOf(p.exact);
+    if (p.band != null) pickBand(p.band, true);
   }
   function tapeHTML() {
     var t = ""; for (var n = 51; n <= 100; n++) t += '<span class="tk' + (n % 10 === 0 ? " m10" : n % 5 === 0 ? " m5" : "") + '" data-n="' + n + '">' + (n % 10 === 0 || n === 51 ? "<b>" + n + "</b>" : "") + '</span>';
@@ -901,8 +909,14 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     tape.addEventListener("pointerup", drop); tape.addEventListener("pointercancel", drop);
     tape.addEventListener("keydown", function (e) { var d = e.key === "ArrowRight" || e.key === "ArrowUp" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowDown" ? -1 : 0; if (!d) return; e.preventDefault(); moved = true; go((cur().exact == null ? 70 : cur().exact) + d); });
   }
-  function pickBand(i, silent) { // deep links (-band-2-pct-72) and tests still set a range; the ruler shows the number
-    var p = cur(); p.band = i; if (bannerEl && p.exact != null) showExact();
+  function pickBand(i, silent) { // the range first; a new range clears the exact number, then its ten numbers show on a row
+    var p = cur(), b = bannerEl; if (p.band !== i) p.exact = null; p.band = i; if (!b) return;
+    b.querySelectorAll(".rb").forEach(function (el) { var on = +el.dataset.i === i; el.classList.toggle("on", on); el.classList.remove("pop"); if (on && !silent) { void el.offsetWidth; el.classList.add("pop"); } });
+    var ex = $(".exact", b), was = ex.hidden; ex.hidden = false; if (was && !RM) ex.classList.add("in");
+    var lo = BANDS[i][0], hi = BANDS[i][1], cells = [];
+    for (var n = lo; n <= hi; n++) cells.push('<button class="cell" data-n="' + n + '">' + n + '</button>');
+    var ruler = $("#ruler", b); ruler.innerHTML = cells.join("");
+    bindRuler(ruler, lo, hi); showExact();
   }
   function showExact() {
     var p = cur(), b = bannerEl; if (!b) return;
@@ -910,7 +924,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     b.querySelectorAll(".cell").forEach(function (c) { c.classList.toggle("on", +c.dataset.n === p.exact); });
     if (p.exact == null) {
       big.className = "bignum unset"; big.innerHTML = "–<small>%</small>"; $("#splitL", b).innerHTML = ""; $("#splitR", b).innerHTML = "";
-      lock.disabled = true; lock.textContent = "Swipe the ruler"; lock.classList.remove("ready");
+      lock.disabled = true; lock.textContent = p.band == null ? "Pick a range" : "Pick the exact %"; lock.classList.remove("ready");
     } else {
       big.className = "bignum"; big.innerHTML = p.exact + "<small>%</small>";
       if (!RM) { void big.offsetWidth; big.classList.add("bump"); }

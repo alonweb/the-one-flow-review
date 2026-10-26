@@ -5,7 +5,7 @@
 <title>THE ONE App</title>
 <style>body{visibility:hidden}</style>
 <script src="gate.js"></script>
-<script>window.THEONE_APP = true; window.THEONE_V = "20261025201711";</script>
+<script>window.THEONE_APP = true; window.THEONE_V = "20261025203541";</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400..800&family=Barlow:wght@500;600;700;800&display=swap">
@@ -93,6 +93,7 @@ body { background: radial-gradient(1200px 800px at 60% 0%, #2a0a1b 0%, #0b0509 5
 .qhead h3 { margin: 0; font: 400 29px/1 var(--display); letter-spacing: .02em; text-transform: uppercase; }
 
 .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: relative; flex: none; }
+.duo.fill { flex: 1 1 auto; height: auto !important; min-height: 150px; } /* grows into the space above the button, never below 150px */
 .card { position: relative; border-radius: 20px; overflow: hidden; background: var(--plum-2); box-shadow: 0 0 0 1px var(--line), 0 14px 30px -16px rgba(0, 0, 0, .9); transition: box-shadow .2s; }
 .card.picked { box-shadow: 0 0 0 2px var(--pink), 0 0 30px rgba(255, 46, 139, .45); }
 .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -554,6 +555,11 @@ button.pane { cursor: pointer; }
 .mk.y { background: rgba(53, 214, 164, .16); color: var(--green); box-shadow: inset 0 0 0 1.5px var(--green); }
 .mk.n { background: rgba(255, 255, 255, .05); color: rgba(255, 244, 248, .45); box-shadow: inset 0 0 0 1px var(--line-2); }
 .mk.na { color: rgba(255, 244, 248, .25); }
+.mkw { justify-self: center; position: relative; width: 30px; height: 30px; }
+.mkw.y .face { box-shadow: 0 0 0 2px var(--green), 0 0 10px rgba(53, 214, 164, .5); }
+.mkw i { position: absolute; right: -5px; bottom: -4px; width: 15px; height: 15px; border-radius: 50%; display: grid; place-items: center; font: 800 9px/1 var(--ui); font-style: normal; }
+.mkw.y i { background: var(--green); color: #04150f; }
+.mkw.n i { background: #3a2230; color: rgba(255, 244, 248, .85); box-shadow: 0 0 0 1px var(--line-2); }
 .mk.gold { background: var(--gold); color: var(--gold-ink); box-shadow: 0 0 14px rgba(245, 184, 73, .8); }
 .bdr .p { text-align: center; font: 400 24px/1 var(--display); color: var(--gold); font-variant-numeric: tabular-nums; }
 .bdr .p.zero { color: rgba(255, 244, 248, .3); }
@@ -1690,7 +1696,7 @@ html.protoon main.wrap { display: none; }
       if (opts.st.crowd === "L") bL += '<span class="badge crowd">Crowd</span>'; if (opts.st.crowd === "M") bM += '<span class="badge crowd">Crowd</span>';
     }
     if (opts.win) { if (opts.win === "L") bL += '<span class="badge win">Winner</span>'; else bM += '<span class="badge win">Winner</span>'; }
-    return '<div class="duo' + (opts.sm ? " sm" : "") + '" style="height:' + h + 'px">' + card("L", imgs[0], imgs[2], bL, opts.st && opts.st.crowd === "L" ? "picked" : "") + card("M", imgs[1], imgs[3], bM, opts.st && opts.st.crowd === "M" ? "picked" : "") + '<span class="vs">VS</span></div>';
+    return '<div class="duo' + (opts.sm ? " sm" : "") + (opts.fill ? " fill" : "") + '" style="height:' + h + 'px">' + card("L", imgs[0], imgs[2], bL, opts.st && opts.st.crowd === "L" ? "picked" : "") + card("M", imgs[1], imgs[3], bM, opts.st && opts.st.crowd === "M" ? "picked" : "") + '<span class="vs">VS</span></div>';
   }
   function band(p) { return p < 60 ? "51–59" : p < 70 ? "60–69" : p < 80 ? "70–79" : p < 90 ? "80–89" : "90–100"; }
   var BANDS = ["51–59", "60–69", "70–79", "80–89", "90–100"];
@@ -1775,10 +1781,9 @@ html.protoon main.wrap { display: none; }
   function joiners(me, more) {
     return '<div class="joiners">' + (me ? '<span class="j me">' + meav() + '</span>' : '') + ["av-lion.jpg", "av-girl.jpg", "av-panda.jpg", "av-astro.jpg", "av-sun.jpg"].map(function (a, i) { return '<span class="j" style="--d:' + i + '"><img src="' + IMG + a + '" alt=""></span>'; }).join("") + (more ? '<span class="jmore">' + more + '</span>' : '') + '</div>';
   }
-  // the first 15 players into a lobby, shown on its match card: being early gets you seen (avatars are stand-ins, recoloured)
-  var FIRST = [["KingPick", "av-lion.jpg", ""], ["MayaWin", "av-astro.jpg", ""], ["LunaStar", "av-panda.jpg", ""], ["Diego11", "av-girl.jpg", ""], ["MateoPro", "av-sun.jpg", ""],
-    ["Noah E.", "av-lion.jpg", "h1"], ["Ella V.", "av-girl.jpg", "h1"], ["Omer L.", "av-astro.jpg", "h2"], ["Dana R.", "av-panda.jpg", "h2"], ["Shira.B", "av-sun.jpg", "h1"],
-    ["Itay22", "av-lion.jpg", "h2"], ["Noa_K", "av-girl.jpg", "h2"], ["Gal.M", "av-panda.jpg", "h1"], ["Yael_S", "av-astro.jpg", "h1"], ["RonB", "av-sun.jpg", "h2"]];
+  // the first 15 players into a lobby, shown on its match card: being early gets you seen
+  var FIRST = [ // 25 Oct (Alon): each player's own AI avatar (the one beside their photo on Ranking), no recolouring
+    ["KingPick", "pl-kingpick-av.jpg", ""], ["MayaWin", "pl-mayawin-av.jpg", ""], ["LunaStar", "pl-lunastar-av.jpg", ""], ["Diego11", "pl-diego11-av.jpg", ""], ["MateoPro", "pl-mateopro-av.jpg", ""], ["Noah E.", "pl-noah-e-av.jpg", ""], ["Ella V.", "pl-ella-v-av.jpg", ""], ["Omer L.", "pl-omer-l-av.jpg", ""], ["Dana R.", "pl-dana-r-av.jpg", ""], ["Shira.B", "pl-shira-b-av.jpg", ""], ["Itay22", "pl-itay22-av.jpg", ""], ["Noa_K", "pl-noa-k-av.jpg", ""], ["Gal.M", "pl-gal-m-av.jpg", ""], ["Yael_S", "pl-yael-s-av.jpg", ""], ["RonB", "pl-ronb-av.jpg", ""]];
   function first15(youAt) { // 22 Oct: "KingPick was first" is gone from the header (Alon); only "You're #N" once you've joined
     var row = FIRST.slice(); if (youAt) row.splice(youAt - 1, 1, ["You", null, "me"]);
     return '<div class="first15"><div class="f15h"><span>First 15 to join</span>' + (youAt ? '<b>You’re #' + youAt + '</b>' : '') + '</div><div class="f15r">' + row.map(function (p, i) {
@@ -2137,7 +2142,7 @@ html.protoon main.wrap { display: none; }
         '<h2 class="h-big">Choose your player ID</h2><p class="sub">Last step: your nickname and city.</p>' +
         '<div class="lcard"><div class="flabel">Choose an avatar</div><div class="avs">' +
           '<span class="av add">' + icon("camera", "var(--pink)") + '<b>Selfie</b></span>' +
-          ["bigm.png", "av-lion.jpg", "av-girl.jpg", "av-panda.jpg"].map(function (a, i) { return '<span class="av' + (i === 0 ? " on" : "") + (i === 0 ? " cut" : "") + '"><img src="' + IMG + a + '" alt=""></span>'; }).join("") + '</div>' +
+          ["bigm.png", "av-pick-1.jpg", "av-pick-2.jpg", "av-pick-3.jpg"].map(function (a, i) { return '<span class="av' + (i === 0 ? " on" : "") + (i === 0 ? " cut" : "") + '"><img src="' + IMG + a + '" alt=""></span>'; }).join("") + '</div>' +
           '<div class="selfie-link">Make your own avatar from a selfie ›</div>' +
           '<div class="flabel">Your nickname</div><div class="field"><input class="grow nick" type="text" value="Big M" maxlength="16" aria-label="Your nickname" autocomplete="off"></div>' +
           '<div class="geo"><div><div class="flabel">Country</div><div class="field">' + FLAGS.IL + '<span class="grow">Israel</span>' + icon("chev", "var(--on-ic)") + '</div></div>' +
@@ -2258,7 +2263,7 @@ html.protoon main.wrap { display: none; }
       r: function () { return phone(body(
         top() + pill("", "Final", "1,000 predictions counted") +
         '<div class="center"><h2 class="h-mid">Results</h2></div>' +
-        duo([PHOTOS[0][0], PHOTOS[0][1], PHOTOS[0][2], PHOTOS[0][3]], 150, { sm: true, win: "L" }) +
+        duo([PHOTOS[0][0], PHOTOS[0][1], PHOTOS[0][2], PHOTOS[0][3]], 150, { sm: true, win: "L", fill: true }) + // 25 Oct (Alon): the photos take the free space; the results stay as they are
         '<div class="dcard"><div class="split"><div class="names"><span>Zofia 58%</span><em>42% Mariana</em></div><div class="sb"><span style="width:58%"></span><span style="width:42%"></span></div></div>' +
         '<div class="reshead"><span>Category</span><span>Crowd</span><span>You</span><span>Pts</span></div><div class="resrows">' + Q.map(function (q, i) {
           var ex = q.res[0] === q.crowd && q.res[1] === q.pct;
@@ -2270,7 +2275,7 @@ html.protoon main.wrap { display: none; }
         '<button class="btn black push">See my points &gt;</button>' + confetti(28)
       ) + nav("Games"), true); } },
     { id: "points", anim: true, t: "Your points", src: "New, from the flow", notes: [
-        "<b>Where you were right or wrong</b>, category by category: the winner (+2), the 10-point range (In the range, +1) and the exact % (Exact hit, 7 more), each ticked, crossed or not counted.",
+        "<b>Where you were right or wrong</b>, category by category: the winner (+2), the 10-point range (In the range, +1) and the exact % (Exact hit, 7 more), each ticked or crossed. The Winner column shows the face of the woman who won that question, ✓ if you called her (25 Oct); with a wrong winner the range and exact are crossed too.",
         "<b>Under each category</b>, the crowd’s real answer next to yours, so the player sees why: First impression, the crowd said 58% and you said 55%, so the winner and the range were right but not the exact number. The crowd’s face is ringed in gold; on Sleepover the two faces differ, so the winner was wrong and nothing else counts.",
         "<b>+18 counts up</b>, the ticks pop in row by row, and the exact hit on Going Out / Party glows gold. Your score 91 → 94 (average points per match × 10).",
         "<b>This week’s score and rank</b> under a trophy count toward the weekly prize. The neighbours in the ranking are on the Ranking screen.",
@@ -2287,10 +2292,10 @@ html.protoon main.wrap { display: none; }
             var win = q.res[0] === q.crowd, range = win && bandIx(q.res[1]) === bandIx(q.pct), exact = win && q.res[1] === q.pct;
             var pts = (win ? 2 : 0) + (range ? 1 : 0) + (exact ? 7 : 0);
             return '<div class="bdr' + (exact ? " exact" : "") + '" style="--d:' + i + '"><span class="cat"><b>' + q.t + '</b><small>' + face(q.res[0], "xs won") + q.res[1] + '%<i>·</i>' + face(q.crowd, "xs") + q.pct + '%' + (exact ? '<em class="gap ex">exact</em>' : '<em class="gap">' + gapOf(q) + ' off</em>') + '</small></span>' +
-              mk(win ? "y" : "n") + mk(win ? (range ? "y" : "n") : "na") + mk(win ? (exact ? "y" : "n") : "na", exact) +
+              '<span class="mkw ' + (win ? "y" : "n") + '">' + face(q.res[0], "sm") + '<i>' + (win ? "✓" : "✕") + '</i></span>' + mk(range ? "y" : "n") + mk(exact ? "y" : "n", exact) + // 25 Oct (Alon): the winner's face; a wrong winner crosses all three, no empty dashes
               '<span class="p' + (pts ? "" : " zero") + (exact ? " ex" : "") + '">' + pts + '</span></div>';
           }).join("") +
-          '<div class="bdnote">✓ right · ✕ wrong · – not counted (wrong winner)</div></div>' + closeLine() +
+          '<div class="bdnote">Winner: the woman the crowd chose · ✓ right · ✕ wrong</div></div>' + closeLine() +
         ranks3() +
         '<div class="weekline">' + icon("trophy", "var(--gold)") + '<span><b>This week: score 82 · #412 in the world</b>Counts toward the weekly prize. The week ends Sunday.</span></div>' +
         '<button class="btn black push">' + (s && s.app && SEEN_AF ? 'Next match' : 'Continue') + ' &gt;</button>' + confetti(18)

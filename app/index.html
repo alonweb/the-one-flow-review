@@ -5,7 +5,7 @@
 <title>THE ONE App</title>
 <style>body{visibility:hidden}</style>
 <script src="gate.js"></script>
-<script>window.THEONE_APP = true; window.THEONE_V = "20261025220104";</script>
+<script>window.THEONE_APP = true; window.THEONE_V = "20261025220856";</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400..800&family=Barlow:wght@500;600;700;800&display=swap">
@@ -1730,7 +1730,7 @@ html.protoon main.wrap { display: none; }
   function gseg(i) { return '<div class="segc gsegc"><span' + (i ? '' : ' class="on"') + ' data-g="home-open">All games</span><span' + (i ? ' class="on"' : '') + ' data-g="my-games">My games</span></div>'; }
   function ranks3() { return '<div class="tiles3 ranks">' + [["city", "Tel Aviv", 3, 2], ["country", "Israel", 18, 4], ["world", "World", 575, 31]].map(function (r) { return '<div class="stat" role="button" tabindex="0" data-rank="' + r[0] + '"><small>' + r[1] + ' ›</small><b>#' + r[2] + '</b><em>▲ ' + r[3] + '</em></div>'; }).join("") + '</div>'; }
   function meav(cls) { return '<span class="meav' + (cls ? " " + cls : "") + '"><img src="' + IMG + 'bigm.png" alt="You"></span>'; }
-  function mini3() { return '<span class="mini3">' + [["av-lion.jpg", 15, 0], ["av-girl.jpg", 0, 13], ["av-panda.jpg", 30, 13]].map(function (a) { return '<img src="' + IMG + a[0] + '" alt="" style="left:' + a[1] + 'px;top:' + a[2] + 'px">'; }).join("") + '</span>'; }
+  function mini3() { return '<span class="mini3">' + [["pl-kingpick-face.jpg", 15, 0], ["pl-maxwin-face.jpg", 0, 13], ["pl-diego11-face.jpg", 30, 13]].map(function (a) { return '<img src="' + IMG + a[0] + '" alt="" style="left:' + a[1] + 'px;top:' + a[2] + 'px">'; }).join("") + '</span>'; }
   function confetti(n) {
     var C = ["#ff2e8b", "#f5b849", "#35d6a4", "#8a7bff", "#ffffff"], o = "";
     for (var i = 0; i < n; i++) o += '<i style="--x:' + (4 + (i * 37) % 92) + '%;--dx:' + ((i % 5) - 2) * 26 + 'px;--r:' + ((i * 97) % 540) + 'deg;--c:' + C[i % 5] + ';--d:' + ((i % 8) * 60) + 'ms"></i>';
@@ -1791,7 +1791,7 @@ html.protoon main.wrap { display: none; }
   ];
   function fside(x) { return '<span class="pane"><img src="' + IMG + x[0] + '" alt="" style="object-position:' + x[1] + '"><span class="fade"></span><span class="who"><b>' + x[2] + '</b><small>' + FLAGS[x[3]] + x[4] + '</small></span></span>'; }
   function joiners(me, more) {
-    return '<div class="joiners">' + (me ? '<span class="j me">' + meav() + '</span>' : '') + ["av-lion.jpg", "av-girl.jpg", "av-panda.jpg", "av-astro.jpg", "av-sun.jpg"].map(function (a, i) { return '<span class="j" style="--d:' + i + '"><img src="' + IMG + a + '" alt=""></span>'; }).join("") + (more ? '<span class="jmore">' + more + '</span>' : '') + '</div>';
+    return '<div class="joiners">' + (me ? '<span class="j me">' + meav() + '</span>' : '') + ["pl-itay22-face.jpg", "pl-gal-m-face.jpg", "pl-ronb-face.jpg", "pl-maor-face.jpg", "pl-avi-g-face.jpg"].map(function (a, i) { return '<span class="j" style="--d:' + i + '"><img src="' + IMG + a + '" alt=""></span>'; }).join("") + (more ? '<span class="jmore">' + more + '</span>' : '') + '</div>';
   }
   // the first 15 players into a lobby, shown on its match card: being early gets you seen
   var FIRST = [ // 25 Oct (Alon): each player's own photo (the one on Ranking; realistic, as in Alon's mockup), zoomed to the face
@@ -1861,7 +1861,7 @@ html.protoon main.wrap { display: none; }
   var INEXT = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'; // the arrow on the intro's Next
   function introHTML() {
     var Z = { src: "zofia-general.jpg", pos: "75% 0%" }, M = { src: "mariana-general.jpg", pos: "12% 0%" };
-    var CRD = ["av-lion.jpg", "av-girl.jpg", "av-panda.jpg", "av-astro.jpg", "av-sun.jpg"], DOT = ["#ff2e8b", "#f5b849", "#35d6a4", "#8a7bff", "#ff8a3d"];
+    var CRD = ["pl-kingpick-face.jpg", "pl-leostar-face.jpg", "pl-eli-v-face.jpg", "pl-noah-e-face.jpg", "pl-mateopro-face.jpg"], DOT = ["#ff2e8b", "#f5b849", "#35d6a4", "#8a7bff", "#ff8a3d"];
     var CLP = [[30, 0], [4, 8], [56, 8], [17, 26], [43, 26], [0, 32], [60, 32], [30, 34]];
     var TROPHY = '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M9.5 17h5v3h-5z"/></g></svg>';
     function ph(w, extra) { return '<div class="ix-ph"><img src="' + IMG + w.src + '" alt="" style="object-position:' + w.pos + '">' + (extra || "") + '</div>'; }
@@ -1973,18 +1973,18 @@ html.protoon main.wrap { display: none; }
   var TBL = { name: "Friday Night Six", code: "FN6-482", min: 100, cut: 20, bal: 1240,
     seats: [ // in the order they sat down; q = points per question in Zofia vs Mariana (Big M's are his own, from Q); stake per 100 of the minimum
       { n: "Big M", av: "bigm.png", me: 1, stake: 100, picks: 5, c: "#ff2e8b", q: Q.map(function (x) { return x.pts; }) },
-      { n: "Nir_K", av: "av-girl.jpg", stake: 100, picks: 5, c: "#35d6a4", q: [3, 0, 0, 0, 10] }, // 25 Oct: exact = 10; each friend keeps the same total, so the payouts stay
-      { n: "Itay22", av: "av-lion.jpg", stake: 150, picks: 5, c: "#f5b849", q: [2, 0, 10, 0, 0] },
-      { n: "Gal.M", av: "av-panda.jpg", stake: 100, picks: 5, c: "#8a7bff", q: [3, 3, 0, 3, 0] },
-      { n: "Yoav_S", av: "av-astro.jpg", stake: 100, picks: 5, c: "#5ec8ff", q: [2, 2, 3, 0, 0] },
-      { n: "RonB", av: "av-sun.jpg", stake: 100, picks: 5, c: "#ff8a5c", q: [0, 0, 0, 0, 3] }] };
+      { n: "Nir_K", av: "pl-nir-k-face.jpg", stake: 100, picks: 5, c: "#35d6a4", q: [3, 0, 0, 0, 10] }, // 25 Oct: exact = 10; each friend keeps the same total, so the payouts stay
+      { n: "Itay22", av: "pl-itay22-face.jpg", stake: 150, picks: 5, c: "#f5b849", q: [2, 0, 10, 0, 0] },
+      { n: "Gal.M", av: "pl-gal-m-face.jpg", stake: 100, picks: 5, c: "#8a7bff", q: [3, 3, 0, 3, 0] },
+      { n: "Yoav_S", av: "pl-yoav-s-face.jpg", stake: 100, picks: 5, c: "#5ec8ff", q: [2, 2, 3, 0, 0] },
+      { n: "RonB", av: "pl-ronb-face.jpg", stake: 100, picks: 5, c: "#ff8a5c", q: [0, 0, 0, 0, 3] }] };
   // a second friends' table, finished, on another match: a player can sit at several tables
   var TBL2 = { name: "Office League", min: 50, cut: 20, match: ["nina.jpg", "valentina.jpg", "Nina", "Valentina"], won: "Nina won with 61%",
-    seats: [{ n: "Big M", av: "bigm.png", me: 1, stake: 100, picks: 5, q: [3, 2, 0, 3, 2] }, { n: "Omer L.", av: "av-lion.jpg", stake: 100, picks: 5, q: [10, 3, 0, 2, 0] },
-      { n: "Dan R.", av: "av-girl.jpg", stake: 100, picks: 5, q: [3, 3, 3, 2, 0] }, { n: "Shlomi.B", av: "av-panda.jpg", stake: 100, picks: 5, q: [2, 0, 3, 0, 2] },
-      { n: "Avi.G", av: "av-astro.jpg", stake: 100, picks: 5, q: [0, 2, 0, 3, 0] }, { n: "Maor", av: "av-sun.jpg", stake: 100, picks: 5, q: [2, 0, 0, 0, 2] }] };
+    seats: [{ n: "Big M", av: "bigm.png", me: 1, stake: 100, picks: 5, q: [3, 2, 0, 3, 2] }, { n: "Omer L.", av: "pl-omer-l-face.jpg", stake: 100, picks: 5, q: [10, 3, 0, 2, 0] },
+      { n: "Dan R.", av: "pl-dan-r-face.jpg", stake: 100, picks: 5, q: [3, 3, 3, 2, 0] }, { n: "Shlomi.B", av: "pl-shlomi-b-face.jpg", stake: 100, picks: 5, q: [2, 0, 3, 0, 2] },
+      { n: "Avi.G", av: "pl-avi-g-face.jpg", stake: 100, picks: 5, q: [0, 2, 0, 3, 0] }, { n: "Maor", av: "pl-maor-face.jpg", stake: 100, picks: 5, q: [2, 0, 0, 0, 2] }] };
   // a table a friend invited the player to (the invitation screen)
-  var TBL3 = { name: "Beach Crew", min: 150, seats: [{ n: "Nir_K", av: "av-girl.jpg" }, { n: "Gal.M", av: "av-panda.jpg" }, { n: "Omer L.", av: "av-lion.jpg" }, { n: "Dan R.", av: "av-sun.jpg" }] };
+  var TBL3 = { name: "Beach Crew", min: 150, seats: [{ n: "Nir_K", av: "pl-nir-k-face.jpg" }, { n: "Gal.M", av: "pl-gal-m-face.jpg" }, { n: "Omer L.", av: "pl-omer-l-face.jpg" }, { n: "Dan R.", av: "pl-dan-r-face.jpg" }] };
   function tdata(s) { return s && s.t === "office" ? TBL2 : TBL; }
   var TSEATPOS = [[27, 16], [73, 16], [87, 50], [73, 84], [27, 84], [13, 50]]; // around the table, as % of its box
   function tpts(p) { return p.q.reduce(function (a, b) { return a + b; }, 0); }
@@ -2528,7 +2528,7 @@ html.protoon main.wrap { display: none; }
             '<div>' + icon("undo", "var(--green)") + '<span><b>Leave before it’s full</b> and your coins come back.</span></div>' +
             '<div>' + icon("lock", "var(--gold)") + '<span><b>Full table, locked.</b> Once all six sit, nobody can leave.</span></div>' +
             '<div>' + icon("people", "var(--pink)") + '<span><b>It runs only when full.</b> Not full when the picks close: cancelled, coins back.</span></div>' +
-            '<div>' + icon("trophy", "var(--gold)") + '<span>The house takes ' + TBL.cut + '%. The top three share the rest by their points.</span></div></div>' +
+            '</div>' + // 25 Oct (Alon): the "house takes 20%" line is gone
           (sat ? '<button class="btn black push">My tables &gt;</button><div class="textlink tleave">Leave the table · ' + T.min + ' coins back</div>'
             : ok ? '<button class="btn black push">Take a seat · ' + T.min + ' coins</button><div class="textlink">Not now</div>'
             : '<div class="caption">Lock your five picks in this match first. The invite waits.</div><button class="btn black push">Make my picks &gt;</button>')
@@ -2540,7 +2540,7 @@ html.protoon main.wrap { display: none; }
         "<b>A notification and Activity</b> say the same, so nobody wonders where the coins went.",
         "<b>Start a new table</b> opens Start a table."],
       r: function () {
-        var seats = [["Big M", "bigm.png", 100, 1], ["Nir_K", "av-girl.jpg", 100], ["Itay22", "av-lion.jpg", 150], ["Gal.M", "av-panda.jpg", 100]];
+        var seats = [["Big M", "bigm.png", 100, 1], ["Nir_K", "pl-nir-k-face.jpg", 100], ["Itay22", "pl-itay22-face.jpg", 150], ["Gal.M", "pl-gal-m-face.jpg", 100]];
         return phone(body(
           top() + pill("", "Cancelled", "Weekend Duo") +
           fchip({ a: ["sophie.jpg", "50% 25%", "Sophie", "US", "USA"], b: ["emma.jpg", "50% 25%", "Emma", "GB", "UK"] }, "Tuesday 18:00 · final") +
@@ -2864,7 +2864,7 @@ html.protoon main.wrap { display: none; }
         "<b>Report and block</b> work from her chat, her live and a table’s chat: tap a message."],
       open: "Open: what happens to coins left in the balance and to purchases when an account is deleted, how long data is kept, and whether the selfie is kept after the avatar is made. The wording here waits on those.",
       r: function (s) {
-        var ub = s.unb || {}, B = [["Tomer.K", "av-lion.jpg", "In Friday Night Six’s chat"], ["Shai_99", "av-sun.jpg", "In Zofia’s live"]];
+        var ub = s.unb || {}, B = [["Tomer.K", "pl-tomer-k-face.jpg", "In Friday Night Six’s chat"], ["Shai_99", "pl-shai-99-face.jpg", "In Zofia’s live"]];
         function lk(k, label, v) { return '<div class="setrow" data-k="' + k + '"><span>' + label + '</span><em>' + (v || "") + icon("chev", "currentColor") + '</em></div>'; }
         return phone(body(
           '<div class="ph-top"><span class="iconbtn">' + icon("back", "var(--on-ic)") + '</span><div class="kick">Settings</div><span class="iconbtn"></span></div><div class="center"><h2 class="h-mid">Privacy and safety</h2></div>' +

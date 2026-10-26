@@ -332,7 +332,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
 @keyframes toast { 0% { opacity: 0; transform: translate(-50%, -8px); } 12%, 80% { opacity: 1; transform: translate(-50%, 0); } 100% { opacity: 0; } }
 .pane:focus-visible, .chip:focus-visible, .rb:focus-visible, .cell:focus-visible, .lock:focus-visible, .again:focus-visible, .nbtn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 .still *, .still *::before, .still *::after { animation: none !important; transition: none !important; }
-@media (max-height: 720px) { .qhead h2 { font-size: 21px; } .qhead h2 span { line-height: 23px; } .qhead h2 .l2 { font-size: 25px; line-height: 28px; } .stage { min-height: 262px; } .tray { min-height: 131px; padding-block: 10px; } .bignum { font-size: 40px; } .rb { min-height: 36px; } .cell { min-height: 30px; } .bn-step { display: none; } .rb { font-size: 15px; } .bopen .slot { opacity: 0; transition: opacity .2s; } }
+@media (max-height: 720px) { .qhead h2 { font-size: 21px; } .qhead h2 span { line-height: 23px; } .qhead h2 .l2 { font-size: 25px; line-height: 28px; } .stage { min-height: 262px; } .tray { min-height: 131px; padding-block: 10px; } .bignum { font-size: 40px; } .rb { min-height: 36px; } .cell { min-height: 30px; } .bn-step { font-size: 9.5px; letter-spacing: .12em; } .bn-step .bn-pt { font-size: 9.5px; padding: 3px 7px; } .bn-head b.q2 { font-size: 16px; } .bn-face { width: 36px; height: 36px; } .bignum { font-size: 34px; } .rb { font-size: 15px; } /* 25 Oct: the step lines stay on small phones, they carry the +1 / +7 */ .bopen .slot { opacity: 0; transition: opacity .2s; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } .hand { display: none; } }
 
 /* ---------- 24 Oct (Alon with Sally): the question screen, version 2; live since 25 Oct ----------
@@ -385,6 +385,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
 .bn-face { width: 42px; height: 42px; border-radius: 50%; overflow: hidden; flex: none; box-shadow: 0 0 0 2px var(--gold), 0 0 14px rgba(245, 184, 73, .55); }
 .bn-face img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; display: block; }
 .bn-head b { font-size: 22px; white-space: nowrap; }
+.bn-head b.q2 { white-space: normal; font-size: 18px; line-height: 1.08; text-wrap: balance; } /* 25 Oct (Alon): the intro's own question, on two lines */
 .tray .arrow { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; align-self: center; padding: 0 0 2px; background: linear-gradient(135deg, var(--pink), var(--gold)); color: #1a0610; font: 800 20px/1 var(--ui); letter-spacing: 0; box-shadow: 0 0 0 3px rgba(14, 3, 9, .9), 0 0 14px rgba(255, 46, 139, .55), 0 0 18px rgba(245, 184, 73, .35); } /* your vote + the crowd's: pink to gold */
 .tapewrap { position: relative; height: 70px; margin: 2px -4px 0; }
 .tape { position: absolute; inset: 0; overflow-x: scroll; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; touch-action: pan-x; outline: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 20%, #000 80%, transparent); mask-image: linear-gradient(90deg, transparent, #000 20%, #000 80%, transparent); }
@@ -867,7 +868,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     pane(k).classList.add("spot"); pane(other).classList.add("dim"); dock.classList.add("away"); phone.classList.add("bopen");
     var b = document.createElement("div"); b.className = "banner" + (RM ? "" : " in"); bannerEl = b;
     b.innerHTML = '<span class="tail"></span>' +
-      '<div class="bn-head"><span class="bn-face"><img src="' + IMG + HER[k].portrait + '" alt=""></span><div><small>Exact vote · your guess</small><b>What % will vote ' + W[k].name + '?</b></div></div>' + // 24 Oct preview: say plainly what the player guesses, with her face
+      '<div class="bn-head"><span class="bn-face"><img src="' + IMG + HER[k].portrait + '" alt=""></span><div><small>Exact vote · your guess</small><b class="q2">What percentage of the crowd will prefer her over the other woman?</b></div></div>' + // 24 Oct preview: say plainly what the player guesses, with her face
       // 25 Oct evening (Alon): the range is back, with what each step is worth: the range +1 if right, then the exact number in it +7 more.
       // The exact number is one of the ten in that range, tapped on a row (the ruler is gone; tapeHTML/bindTape stay only for the options page)
       '<div class="bn-step"><span>1</span>Pick the range<em class="bn-pt">+1 point if right</em></div>' +

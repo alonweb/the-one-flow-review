@@ -5,7 +5,7 @@
 <title>THE ONE App</title>
 <style>body{visibility:hidden}</style>
 <script src="gate.js"></script>
-<script>window.THEONE_APP = true; window.THEONE_V = "20261025214923";</script>
+<script>window.THEONE_APP = true; window.THEONE_V = "20261025215708";</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400..800&family=Barlow:wght@500;600;700;800&display=swap">
@@ -2559,7 +2559,7 @@ html.protoon main.wrap { display: none; }
         "<b>The filter button</b> opens a sheet: sort, country, show only. Countries you tick narrow the cards, the count and the badge on the button; Reset clears them.",
         "<b>Search and empty results</b>: typing a name narrows the cards; when nothing matches, the grid says so and offers to clear the search or the filters.",
         "<b>A woman’s card opens her full page</b>: stats and best categories always; her contact menu and prices only after her match’s results.",
-        "<b>Explore | League</b> (25 Oct): League ranks the women by wins, then win %: World, her Country or her City (opens on Poland and Kraków; tap the place to change it), with a podium and the table. Her row opens her page."],
+        "<b>The women’s league</b> moved to Ranking › Competitors (25 Oct)."],
       r: function (s) {
         var L = WOMEN, nf = L.filter(function (w) { return FOL[w[1]]; }).length, cty = s.cty || {}, CN = { PL: "Poland", CO: "Colombia", BR: "Brazil", US: "USA", GB: "UK", ES: "Spain", AR: "Argentina", MX: "Mexico" };
         var con = Object.keys(cty).filter(function (k) { return cty[k]; });
@@ -2574,8 +2574,7 @@ html.protoon main.wrap { display: none; }
           '<div class="fsh-btns"><span class="btn outline" data-act="ctyclr">Reset</span><span class="btn black" data-act="sheet">Show ' + shown + (shown === 1 ? ' woman' : ' women') + '</span></div></div>';
         return phone(body(
           top() + '<h2 class="h-mid center">Competitors</h2><p class="sub center wsub">The women who play in the matches</p>' +
-          '<div class="segc wview">' + [["explore", "Explore"], ["league", "League"]].map(function (x) { return '<span' + ((s.view || "explore") === x[0] ? ' class="on"' : '') + ' data-act="wview" data-v="' + x[0] + '">' + x[1] + '</span>'; }).join("") + '</div>' + // 25 Oct (Alon)
-          (s.view === "league" ? leagueHTML(s) : '<div class="srow"><div class="sfield">' + icon("search", "var(--ink-3)") + '<input class="sin" type="search" placeholder="Search by name" aria-label="Search by name" autocomplete="off"></div><button class="ffbtn' + (s.sheet ? " on" : "") + '" data-act="sheet" aria-label="Filters, ' + con.length + ' on">' + icon("filter", "currentColor") + (con.length ? '<i>' + con.length + '</i>' : '') + '</button></div>' +
+          ('<div class="srow"><div class="sfield">' + icon("search", "var(--ink-3)") + '<input class="sin" type="search" placeholder="Search by name" aria-label="Search by name" autocomplete="off"></div><button class="ffbtn' + (s.sheet ? " on" : "") + '" data-act="sheet" aria-label="Filters, ' + con.length + ' on">' + icon("filter", "currentColor") + (con.length ? '<i>' + con.length + '</i>' : '') + '</button></div>' +
           '<div class="qchips">' + CH.map(function (c) { return '<button class="qc' + (s.chip === c[0] ? " on" : "") + '" data-act="chip" data-v="' + c[0] + '">' + c[1] + ' <em>' + c[2] + '</em></button>'; }).join("") + '</div>' +
           '<div class="rescount"><b data-all="' + shown + (shown === 1 ? ' woman' : ' women') + '">' + shown + (shown === 1 ? ' woman' : ' women') + '</b> · sorted by popular' + (con.length ? ' · ' + con.map(function (c) { return CN[c]; }).join(", ") : '') + '</div>' +
           '<div class="wgrid">' + rows.map(function (w) {
@@ -2797,7 +2796,8 @@ html.protoon main.wrap { display: none; }
         "<b>The podium rises</b> and the leader’s crown drops in. Each player shows their photo with their avatar (25 Oct), never the women’s photos.",
         "<b>Big M appears once</b>, with the neighbours just above and below.",
         "<b>The tabs work</b>: Tel Aviv, Israel or World, and this week, this month or all time. In Tel Aviv this week Big M is on the podium. <b>Details</b> on the prize banner says how the weekly prize works, with How points work linked from there.",
-        "<b>From a ranking tile</b> on My profile or Your points, Ranking opens on All time, the period those tiles show."],
+        "<b>From a ranking tile</b> on My profile or Your points, Ranking opens on All time, the period those tiles show.",
+        "<b>Players | Competitors</b> (25 Oct): Competitors is the women’s league, ranked by wins, then win %: World, her Country or her City (opens on Poland and Kraków; tap the place to change it), with a podium and the table. Her row opens her page."],
       open: "Open: how many players win each week, what they win, the conditions and the tie-breakers. The prize has to keep the budget under control as play grows.",
       r: function (s) {
         function pav(a) { return a.indexOf(".") > -1 ? '<span class="pav"><img src="' + IMG + a + '" alt=""></span>' : '<span class="pav"><img src="' + IMG + 'pl-' + a + '-photo.jpg" alt=""><img src="' + IMG + 'pl-' + a + '-av.jpg" alt=""></span>'; } // 25 Oct: photo + avatar; Big M is the player's own avatar
@@ -2811,11 +2811,13 @@ html.protoon main.wrap { display: none; }
         var rows = mr <= 6 ? row(4) + row(5) + row(6) : row(4) + row(5) + '<div class="gap">···</div>' + lr(mr - 1, D.near[0][1], D.near[0][0], "", D.near[0][2], D.npts[per][0]) + lr(mr, "bigm.png", "Big M", "", D.mine, mp, 1) + lr(mr + 1, D.near[1][1], D.near[1][0], "", D.near[1][2], D.npts[per][1]);
         return phone(body(
           top() + '<div class="center"><h2 class="h-mid">Ranking</h2></div>' +
+          '<div class="segc wview">' + [["players", "Players"], ["competitors", "Competitors"]].map(function (x) { return '<span' + ((s.rview || "players") === x[0] ? ' class="on"' : '') + ' data-act="rview" data-v="' + x[0] + '">' + x[1] + '</span>'; }).join("") + '</div>' + // 25 Oct (Alon): the women's league lives here
+          (s.rview === "competitors" ? leagueHTML(s) :
           '<div class="segc">' + [["city", "Tel Aviv"], ["country", "Israel"], ["world", "World"]].map(function (t) { return '<span' + ((s.sc || "world") === t[0] ? ' class="on"' : '') + ' data-act="rsc" data-v="' + t[0] + '">' + t[1] + '</span>'; }).join("") + '</div>' +
           '<div class="chips">' + [["week", "This week"], ["month", "This month"], ["all", "All time"]].map(function (t) { return '<span' + (per === t[0] ? ' class="on"' : '') + ' data-act="rper" data-v="' + t[0] + '">' + t[1] + '</span>'; }).join("") + '</div>' +
           '<div class="prize">' + icon("trophy", "var(--gold-ink)") + '<div><b>Weekly prize</b><span>The week’s top players by score win. Ends Sunday 23:59, your time.</span></div><span class="mini">Details</span></div>' +
           '<div class="podium">' + pod(2) + pod(1) + pod(3) + '</div>' +
-          '<div class="lcard" style="gap:0"><div class="lrows">' + rows + '</div></div>'
+          '<div class="lcard" style="gap:0"><div class="lrows">' + rows + '</div></div>')
         ) + nav("Ranking"), true);
       } },
     { id: "prize", anim: true, t: "Weekly prize: claim it", src: "New, from Ranking and Activity", st: { claimed: false }, notes: [
@@ -2893,7 +2895,7 @@ html.protoon main.wrap { display: none; }
   // what a tap inside a screen changes (used by the screen page and by the clickable prototype)
   function applyAct(s, b) {
     var a = b.dataset.act;
-    if (a === "wview") { s.view = b.dataset.v; return true; }
+    if (a === "rview") { s.rview = b.dataset.v; return true; }
     if (a === "wsc") { s.wsc = b.dataset.v; return true; }
     if (a === "cb") { var nb = +b.dataset.i; if (s.crowd !== b.dataset.w || bandIx(s.pct) !== nb) s.pct = null; s.crowd = b.dataset.w; s.band = nb; }
     else if (a === "style") s.style = b.dataset.v;
@@ -3193,8 +3195,9 @@ html.protoon main.wrap { display: none; }
       [".fol", function (el) { return herGo(el.dataset.w); }],
       [".rg", function (el, h) { return [].indexOf.call(h.querySelectorAll(".rg:not(.trg)"), el) ? NOTBUILT : RESULTS_IN ? "results" : LOCKED ? "locked" : resumeAt(LEFT ? LEFT.q : null); }], [".sechead .mini", "my-games"], [".editb, .pc-loc em", "profile-edit"], [".pc-av", "design"]],
     women: [[".sclr", function (el, h) { var i = h.querySelector(".sin"); i.value = ""; i.dispatchEvent(new Event("input", { bubbles: true })); return null; }], [".wbell", function (el) { return folToggle(el.closest(".wcard").querySelector(".wname b").textContent); }], [".wcard", function (el) { return herGo(el.querySelector(".wname b").textContent); }],
-      [".wlrow, .podium .pod[data-n]", function (el) { return herGo(el.dataset.n); }],
-      [".wplace", function () { var s = pst("women"), sc = s.wsc, seen = {}, opts = [];
+      [".wlrow, .podium .pod[data-n]", function (el) { return herGo(el.dataset.n); }]],
+    ranking: [[".prize .mini", function () { prizeSheet(); return null; }], [".wlrow, .podium .pod[data-n]", function (el) { return herGo(el.dataset.n); }],
+      [".wplace", function () { var s = pst("ranking"), sc = s.wsc, seen = {}, opts = [];
         LEAGUE.forEach(function (w) { var k = sc === "country" ? w[4] : w[5]; if (!seen[k]) { seen[k] = 1; opts.push([k, sc === "country" ? FLAGS[w[3]] || "" : ""]); } });
         pickSheet(sc === "country" ? "Country" : "City", opts, lgPlace(s, sc), function (v) { s.wplace = s.wplace || {}; s.wplace[sc] = v; redraw(); }); return null; }]],
     "her-game": [[".btn.black, .ph-top .iconbtn:first-child", function () { return OVER ? "close" : "back"; }], [".fbtn", function () { return folToggle("Zofia"); }],
@@ -3208,7 +3211,6 @@ html.protoon main.wrap { display: none; }
       [".ctl.tip", function () { paySheet({ t: "Tip Zofia", sub: "In the post-game live", tip: true, then: function (a) { var st = host().querySelector(".stream"); if (!st) return; var d = document.createElement("div"); d.className = "sline tipl"; d.innerHTML = icon("tip", "var(--on-ic)").replace('<svg', '<svg style="width:16px;height:16px;flex:none"'); d.appendChild(document.createTextNode("You sent a $" + (a || 2) + " tip to Zofia")); st.appendChild(d); st.scrollTop = st.scrollHeight; } }); return null; }],
       [".controls .ctl:nth-child(2)", function (el, h) { openField(h.querySelector(".composer .field")); return null; }]],
     call: [[".ph-top .iconbtn:first-child, .ctl.end", "back"], [".ph-top .iconbtn:last-child", "toast:Reported. Our team will look at this call."]],
-    ranking: [[".prize .mini", function () { prizeSheet(); return null; }]],
     closed: [[".btn.black", "home-open"]],
     "tbl-join": [[".ph-top .iconbtn:first-child", "back"], [".coinbal", "coins"], [".textlink.tleave", function () { leaveSheet(); return null; }], [".textlink", "back"], [".btn.black", function () {
         if (JT) { pst("my-games").tab = "tables"; return "my-games"; }

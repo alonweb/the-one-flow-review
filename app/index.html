@@ -5,7 +5,7 @@
 <title>THE ONE App</title>
 <style>body{visibility:hidden}</style>
 <script src="gate.js"></script>
-<script>window.THEONE_APP = true; window.THEONE_V = "20261025215708";</script>
+<script>window.THEONE_APP = true; window.THEONE_V = "20261025220104";</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400..800&family=Barlow:wght@500;600;700;800&display=swap">
@@ -2573,7 +2573,7 @@ html.protoon main.wrap { display: none; }
           '<div class="flabel">Show only</div><div class="fopts"><span><i class="ldot"></i>Live now</span><span>Playing today</span><span>Following</span></div>' +
           '<div class="fsh-btns"><span class="btn outline" data-act="ctyclr">Reset</span><span class="btn black" data-act="sheet">Show ' + shown + (shown === 1 ? ' woman' : ' women') + '</span></div></div>';
         return phone(body(
-          top() + '<h2 class="h-mid center">Competitors</h2><p class="sub center wsub">The women who play in the matches</p>' +
+          top() + '<h2 class="h-mid center">Competitors</h2>' + // 25 Oct (Alon): no subtitle
           ('<div class="srow"><div class="sfield">' + icon("search", "var(--ink-3)") + '<input class="sin" type="search" placeholder="Search by name" aria-label="Search by name" autocomplete="off"></div><button class="ffbtn' + (s.sheet ? " on" : "") + '" data-act="sheet" aria-label="Filters, ' + con.length + ' on">' + icon("filter", "currentColor") + (con.length ? '<i>' + con.length + '</i>' : '') + '</button></div>' +
           '<div class="qchips">' + CH.map(function (c) { return '<button class="qc' + (s.chip === c[0] ? " on" : "") + '" data-act="chip" data-v="' + c[0] + '">' + c[1] + ' <em>' + c[2] + '</em></button>'; }).join("") + '</div>' +
           '<div class="rescount"><b data-all="' + shown + (shown === 1 ? ' woman' : ' women') + '">' + shown + (shown === 1 ? ' woman' : ' women') + '</b> · sorted by popular' + (con.length ? ' · ' + con.map(function (c) { return CN[c]; }).join(", ") : '') + '</div>' +

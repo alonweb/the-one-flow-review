@@ -5,7 +5,7 @@
 <title>THE ONE App</title>
 <style>body{visibility:hidden}</style>
 <script src="gate.js"></script>
-<script>window.THEONE_APP = true; window.THEONE_V = "20261026095152";</script>
+<script>window.THEONE_APP = true; window.THEONE_V = "20261026203358";</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400..800&family=Barlow:wght@500;600;700;800&display=swap">
@@ -108,6 +108,7 @@ body { background: radial-gradient(1200px 800px at 60% 0%, #2a0a1b 0%, #0b0509 5
 .badges { position: absolute; top: 10px; left: 10px; display: flex; flex-direction: column; gap: 5px; align-items: flex-start; }
 .badge { font: 700 10.5px/1 var(--label); letter-spacing: .14em; padding: 5px 8px; border-radius: 999px; text-transform: uppercase; }
 .badge.you { background: #fff; color: var(--pink-ink); } .badge.crowd { background: var(--pink); color: var(--pink-ink); box-shadow: 0 0 12px rgba(255, 46, 139, .6); } .badge.win { background: var(--gold); color: var(--gold-ink); }
+.card.lost img { filter: grayscale(1); } /* 26 Oct (Alon, client feedback): on Results the woman who lost is in black and white */
 
 .panel, .dcard { background: linear-gradient(180deg, rgba(42, 15, 30, .94), rgba(28, 9, 19, .94)); color: var(--ink); border: 1px solid var(--line); border-radius: 22px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 20px 40px -24px rgba(0, 0, 0, .9); }
 .panel { padding: 12px 14px; display: grid; gap: 10px; }
@@ -622,6 +623,21 @@ button.pane { cursor: pointer; }
 .wplace small { flex-basis: 100%; text-align: center; font: 500 11px/1 var(--ui); color: var(--ink-3); }
 .podium.one { grid-template-columns: 1fr; justify-items: center; }
 .podium.one .pod { width: 46%; }
+/* 26 Oct (client feedback, Alon chose option B): on Ranking the top 3 are photo tiles in gold, silver and bronze (Players and Competitors); the friends' table podium keeps its cards */
+.podium.tiles { --silver: #d9dee6; --bronze: #d9925a; grid-template-columns: 1fr 1.18fr 1fr; gap: 6px; }
+.podium.tiles .pod { position: relative; display: block; padding: 0; border: 0; border-radius: 16px; overflow: hidden; background: #1a0d14; text-align: left; --m: var(--bronze); box-shadow: 0 0 0 2px var(--m); }
+.podium.tiles .pod.r1 { --m: var(--gold); height: 190px; padding: 0; background: #1a0d14; box-shadow: 0 0 0 2px var(--m), 0 0 26px rgba(245, 184, 73, .4); }
+.podium.tiles .pod.r2 { --m: var(--silver); height: 158px; } .podium.tiles .pod.r3 { height: 142px; }
+.podium.tiles .pod.me { box-shadow: 0 0 0 2px var(--pink), 0 0 18px rgba(255, 46, 139, .45); }
+.podium.tiles .pod img, .podium.tiles .pod.first img, .podium.tiles .pod.me img { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 0; object-fit: cover; object-position: 50% 20%; box-shadow: none; }
+.podium.tiles .pod::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(7, 3, 10, .92) 100%); pointer-events: none; }
+.podium.tiles .prk { position: absolute; top: 6px; left: 6px; z-index: 2; min-width: 26px; height: 26px; padding: 0 6px; border-radius: 999px; display: grid; place-items: center; background: var(--m); color: #160a05; font: 400 16px/1 var(--display); }
+.podium.tiles .crown { position: absolute; top: 6px; right: 6px; z-index: 2; }
+.podium.tiles .pcap { position: absolute; left: 8px; right: 6px; bottom: 8px; z-index: 2; display: grid; gap: 3px; }
+.podium.tiles .pcap b { font: 700 13px/1.1 var(--ui); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.podium.tiles .pcap small { font: 400 19px/1 var(--display); letter-spacing: .03em; color: var(--m); white-space: nowrap; }
+.podium.tiles .pod.me .pcap small { color: var(--pink); }
+.podium.tiles.one .pod { width: 46%; }
 .wlrow { cursor: pointer; }
 .wlrow .p small { display: block; margin-top: 3px; font: 500 11px/1 var(--ui); color: var(--ink-3); text-align: right; }
 .wlrow img { object-fit: cover; }
@@ -1574,6 +1590,39 @@ html.protoon main.wrap { display: none; }
 .bcbar i { display: block; height: 100%; border-radius: 3px; background: var(--green); box-shadow: 0 0 8px rgba(53, 214, 164, .5); }
 .bc em { display: flex; align-items: baseline; justify-content: space-between; padding: 0 7px; font: 400 16px/1 var(--display); font-style: normal; color: var(--ink); }
 .bc em small { font: 600 10.5px/1 var(--ui); color: var(--ink-3); }
+/* 26 Oct: her page in two screens (Stats | Talk to her); the stats that the match's Stats screen showed */
+.segc.htabs { margin: 0; }
+.hs-rank { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-radius: 14px; background: rgba(255, 255, 255, .05); border: 1px solid var(--line); font: 500 13.5px/1.2 var(--ui); color: var(--ink-2); }
+.hs-rank svg { width: 18px; height: 18px; flex: none; }
+.hs-rank b { color: var(--ink); font-size: 16px; }
+.hs-last { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; text-align: center; }
+.hs-last img { display: block; width: 42px; height: 42px; margin: 0 auto 5px; border-radius: 50%; object-fit: cover; }
+.hs-last .w img { box-shadow: 0 0 0 2.5px var(--green); } .hs-last .l img { box-shadow: 0 0 0 2.5px #ff6b6b; opacity: .8; }
+.hs-last b { display: block; font: 800 11px/1 var(--label); letter-spacing: .06em; text-transform: uppercase; }
+.hs-last .w b { color: var(--green); } .hs-last .l b { color: #ff6b6b; }
+.hs-last span { display: block; margin-top: 3px; font: 700 14px/1.2 var(--ui); }
+.hs-last small { font: 500 10.5px/1.2 var(--ui); color: var(--ink-3); }
+.kick.hs-kq { display: flex; justify-content: space-between; align-items: baseline; }
+.kick.hs-kq small { font: 600 11.5px/1 var(--ui); letter-spacing: 0; text-transform: none; color: var(--ink-3); }
+.hs-q { border: 1px solid var(--line); border-radius: 14px; background: rgba(255, 255, 255, .05); overflow: hidden; flex: none; }
+.hs-q.open { border-color: rgba(245, 184, 73, .6); }
+.hs-qh { width: 100%; display: flex; align-items: center; gap: 10px; padding: 9px 12px; border: 0; background: none; color: var(--ink); text-align: left; cursor: pointer; }
+.hs-qn { flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; background: var(--pink-soft); color: var(--pink); font: 800 11px/1 var(--ui); }
+.hs-q.open .hs-qn { background: var(--gold); color: var(--gold-ink); }
+.hs-nm { font: 700 14px/1.2 var(--ui); }
+.hs-won { margin-left: auto; font: 500 12.5px/1 var(--ui); color: var(--ink-2); white-space: nowrap; }
+.hs-won b { color: var(--ink); font-size: 15px; }
+.hs-ch { flex: none; width: 14px; color: var(--ink-3); font-size: 13px; text-align: center; transition: transform .2s; }
+.hs-q.open .hs-ch { transform: rotate(180deg); }
+.hs-det { padding: 0 12px 9px; }
+.hs-dh { display: flex; justify-content: space-between; padding: 7px 0 4px; border-top: 1px solid var(--line); font: 700 10px/1 var(--label); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.hs-dr { display: grid; grid-template-columns: 66px 1fr 70px; gap: 10px; align-items: center; padding: 3px 0; font: 700 13px/1.2 var(--ui); font-variant-numeric: tabular-nums; }
+.hs-dr .tr { position: relative; height: 7px; border-radius: 4px; background: rgba(255, 255, 255, .07); overflow: hidden; }
+.hs-dr .tr i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 0 4px 4px 0; background: var(--pink); }
+.hs-dr .n { text-align: right; }
+.hs-dr.z { color: var(--ink-3); font-weight: 500; }
+.hs-dr.lost { margin-top: 3px; padding-top: 6px; border-top: 1px dashed var(--line); }
+.hs-dr.lost .tr i { background: rgba(255, 255, 255, .35); }
 .menu.two { grid-template-columns: 1fr 1fr; gap: 6px; }
 .menu.two .mrow { grid-template-columns: 30px minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 8px; row-gap: 3px; padding: 7px 8px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255, 255, 255, .03); }
 .menu.two .mrow + .mrow { border-top: 1px solid var(--line); }
@@ -1708,7 +1757,7 @@ html.protoon main.wrap { display: none; }
       if (opts.st.crowd === "L") bL += '<span class="badge crowd">Crowd</span>'; if (opts.st.crowd === "M") bM += '<span class="badge crowd">Crowd</span>';
     }
     if (opts.win) { if (opts.win === "L") bL += '<span class="badge win">Winner</span>'; else bM += '<span class="badge win">Winner</span>'; }
-    return '<div class="duo' + (opts.sm ? " sm" : "") + (opts.fill ? " fill" : "") + '" style="height:' + h + 'px">' + card("L", imgs[0], imgs[2], bL, opts.st && opts.st.crowd === "L" ? "picked" : "") + card("M", imgs[1], imgs[3], bM, opts.st && opts.st.crowd === "M" ? "picked" : "") + '<span class="vs">VS</span></div>';
+    return '<div class="duo' + (opts.sm ? " sm" : "") + (opts.fill ? " fill" : "") + '" style="height:' + h + 'px">' + card("L", imgs[0], imgs[2], bL, opts.st && opts.st.crowd === "L" ? "picked" : opts.win === "M" ? "lost" : "") + card("M", imgs[1], imgs[3], bM, opts.st && opts.st.crowd === "M" ? "picked" : opts.win === "L" ? "lost" : "") + '<span class="vs">VS</span></div>';
   }
   function band(p) { return p < 60 ? "51–59" : p < 70 ? "60–69" : p < 80 ? "70–79" : p < 90 ? "80–89" : "90–100"; }
   var BANDS = ["51–59", "60–69", "70–79", "80–89", "90–100"];
@@ -2062,16 +2111,28 @@ html.protoon main.wrap { display: none; }
   function lgPct(w) { return Math.round(w[6] * 100 / (w[6] + w[7])) + "%"; }
   function leagueHTML(s) {
     var sc = s.wsc || "world", L = lgList(s), pl = sc === "world" ? "" : lgPlace(s, sc), cc = sc === "world" ? "" : (LEAGUE.filter(function (w) { return sc === "country" ? w[4] === pl : w[5] === pl; })[0] || [])[3];
-    function pod(r) { var w = L[r - 1]; if (!w) return '<div></div>'; return '<div class="pod' + (r === 1 ? " first" : "") + '" data-n="' + w[0] + '" style="--d:' + (r - 1) + '">' + (r === 1 ? '<span class="crown">' + icon("crown", "var(--gold)") + '</span>' : '<span class="r">' + r + '</span>') +
-      '<img src="' + IMG + w[1] + '" alt="" style="object-position:' + w[2] + '"><b>' + w[0] + '</b><small>' + w[6] + 'W – ' + w[7] + 'L</small></div>'; }
+    function pod(r) { var w = L[r - 1]; if (!w) return '<div></div>'; return '<div class="pod r' + r + (r === 1 ? " first" : "") + '" data-n="' + w[0] + '" style="--d:' + (r - 1) + '"><img src="' + IMG + w[1] + '" alt="" style="object-position:' + w[2] + '"><span class="prk">' + r + '</span>' + (r === 1 ? '<span class="crown">' + icon("crown", "var(--gold)") + '</span>' : '') + // 26 Oct: photo tiles, as on Players
+      '<span class="pcap"><b>' + w[0] + '</b><small>' + w[6] + 'W – ' + w[7] + 'L</small></span></div>'; }
     var rows = L.slice(3).map(function (w, i) { return '<div class="lrow wlrow" data-n="' + w[0] + '"><span class="rk">' + (i + 4) + '</span><img src="' + IMG + w[1] + '" alt="" style="object-position:' + w[2] + '"><span>' + w[0] + '<small>' + (FLAGS[w[3]] || "") + w[4] + ' · ' + w[5] + '</small></span><span class="p">' + w[6] + '–' + w[7] + '<small>' + lgPct(w) + '</small></span></div>'; }).join("");
     return '<div class="chips">' + [["world", "World"], ["country", "Country"], ["city", "City"]].map(function (x) { return '<span' + (sc === x[0] ? ' class="on"' : '') + ' data-act="wsc" data-v="' + x[0] + '">' + x[1] + '</span>'; }).join("") + '</div>' +
       (sc === "world" ? '<div class="wlhint">All 128 women · ranked by wins, then win %</div>' : '<button class="wplace" type="button">' + (FLAGS[cc] || "") + '<b>' + pl + '</b>' + icon("chev", "var(--ink-2)") + '<small>' + L.length + (L.length === 1 ? ' woman' : ' women') + ' · tap to change</small></button>') +
-      (L.length > 1 ? '<div class="podium">' + pod(2) + pod(1) + pod(3) + '</div>' : '<div class="podium one">' + pod(1) + '</div>') +
+      (L.length > 1 ? '<div class="podium tiles">' + pod(2) + pod(1) + pod(3) + '</div>' : '<div class="podium tiles one">' + pod(1) + '</div>') +
       (rows ? '<div class="lcard" style="gap:0"><div class="lrows">' + rows + '</div></div>' : '') +
       (sc === "world" ? '<div class="more">Showing the top ' + L.length + ' of 128 · scroll for more</div>' : '');
   }
   var FOL0 = { Zofia: 1, Sophie: 1, Nina: 1 }, FOL = JSON.parse(JSON.stringify(FOL0));
+  // 26 Oct (client feedback): her page is two screens, Stats and Talk to her; both keep her card (photo, name, Follow, socials, record)
+  var HERST = { rank: 2, total: 16, wins: 12, // Zofia's numbers, as the match's Stats screen showed them (drag.html HER.L)
+    last: [["sophie.jpg", "Sophie", 1, 58], ["emma.jpg", "Emma", 1, 64], ["nina.jpg", "Nina", 0, 41], ["valentina.jpg", "Valentina", 1, 71], ["maya.jpg", "Maya", 1, 66]],
+    q: [[13, [3, 6, 3, 1, 0], 3], [9, [6, 2, 1, 0, 0], 7], [11, [5, 4, 2, 0, 0], 5], [12, [4, 5, 2, 1, 0], 4], [14, [2, 5, 4, 2, 1], 2]] }; // per category: won, times in each range when she won, lost
+  function herHead(s, tab) {
+    var pre = s && s.app && !s.res;
+    return '<div class="ph-top"><span class="iconbtn">' + icon("back", "var(--on-ic)") + '</span><div class="kick">Competitor' + (pre ? ' · playing now' : '') + '</div><span class="iconbtn"></span></div>' +
+      '<div class="lcard hcard"><div class="hc-top"><div class="hc-ph"><img src="' + IMG + 'zofia-portrait.jpg" alt="" style="object-position:50% 25%"></div><div class="hc-id"><h4>Zofia</h4><small class="hand">@zofia</small><small>' + FLAGS.PL + 'Poland</small>' +
+        '<div class="hc-act">' + folBtn() + '<span class="socials"><span>' + icon("ig", "var(--on-ic)") + '</span><span>' + icon("fb", "var(--on-ic)") + '</span><span>' + icon("tt", "var(--on-ic)") + '</span></span></div></div></div>' +
+        '<div class="hc-stats"><span><small>Record</small><b>12W – 4L</b></span><span><small>Win rate</small><b>' + icon("games", "var(--gold)") + '75%</b></span><span><small>Matches</small><b>16</b></span></div></div>' +
+      '<div class="segc htabs">' + [["stats", "Stats"], ["talk", "Talk to her"]].map(function (x) { return '<span' + (tab === x[0] ? ' class="on"' : '') + ' data-tab="' + x[0] + '">' + x[1] + '</span>'; }).join("") + '</div>';
+  }
   function folBtn() { return '<span class="fbtn' + (FOL.Zofia ? ' on' : '') + '">' + icon("bell") + (FOL.Zofia ? 'Following' : 'Follow') + '</span>'; }
   // a match card for any match in the feed, with both women's faces
   function fchip(m, sub) { function f(x) { return '<span class="face sm"><img src="' + IMG + x[0] + '" alt="' + x[2] + '" style="object-position:' + (x[1] === "100% 0%" || x[1] === "0% 0%" ? "50% 20%" : x[1]) + ';transform:none"></span>'; } return '<div class="tmchip">' + f(m.a) + '<span class="vs3 sm">VS</span>' + f(m.b) + '<span><b>' + m.a[2] + ' vs ' + m.b[2] + '</b><small>' + sub + '</small></span></div>'; }
@@ -2703,26 +2764,44 @@ html.protoon main.wrap { display: none; }
         '<div class="lcard soon"><span class="ic">' + icon("lock", "var(--gold)") + '</span><div><b>Chat, live and calls open after the results</b><span>Her contact menu shows when the match ends. Supporting her never changes the match.</span></div></div>' +
         '<button class="btn black push">Back to my vote</button>'
       ) + nav("Games"), true); } },
-    { id: "her-page", t: "Her page: after results", src: "Page 15", notes: [
-        "<b>From Competitors or Following, at any time</b>: her full profile (stats and best categories). While her match is still on, the contact menu is replaced by “Chat, live and calls open after the results”, so no prices show during a match; after the results (and from “Get more from the game”) the menu appears.",
-        "<b>Contact me on a vote photo</b> opens the shorter page above, over the question.",
-        "<b>The flow’s contact menu and prices</b>, with the length of each item.",
-        "<b>Her stats laid out as in the designer’s card</b> (Pilot mockup 3, page 15): photo, name, handle, country, Follow and her socials, then labelled numbers: Record 12W – 4L, Win rate 75%, Matches 16.",
-        "<b>Her best categories</b> as photo tiles with a bar, the win % and the record (First impression 80%, 4–1). No church. Since 25 October the tiles use the new category names (Sleepover, Going Out / Party).",
-        "<b>Her own prices</b>: each woman sets the price of every item on her menu (Zofia’s are shown). 80% goes to her, and “never changes the match” is on the page.",
-        "<b>Country, not city.</b> Custom request opens a form to write the request before paying."],
+    { id: "her-page", t: "Her page 1 of 2: her stats", src: "Page 15, split in two (26 Oct)", st: { hq: 0 }, notes: [
+        "<b>Her page is two screens</b> (26 Oct, client feedback): <b>Stats</b> here, and <b>Talk to her</b> (next) with everything you pay for. The switch under her card moves between them; Back leaves her page.",
+        "<b>From Competitors, Following or the women’s league, at any time</b>, and never from inside a match: the match screens show only the photos. Her photo, name, Follow and socials stay on both screens.",
+        "<b>Her stats laid out as in the designer’s card</b> (Pilot mockup 3, page 15): Record 12W – 4L, Win rate 75%, Matches 16.",
+        "<b>What the match’s Stats screen showed now lives here</b>: her place in the women’s league, her last 5 matches (Won / Lost, her %, who she faced), and each of the five categories with “won X of 16”. Tap a category to see how many votes she got when she won, as plain counts.",
+        "<b>Her best categories</b> as photo tiles with a bar, the win % and the record. No church."],
       r: function (s) {
-        var pre = s && s.app && !s.res; // her match isn't final yet: the profile shows, her menu and prices wait
-        var M = [["msg", "Send a message", "one message", "$1"], ["chat", "Private chat", "10 minutes", "$3"], ["live", "Post-game live", "with her fans", "$5"], ["room", "Private room", "10 minutes", "$5"], ["video", "Video call", "5 minutes", "$5"], ["request", "Custom request", "one request", "$3"], ["tip", "Tip", "support her", "From $1"]];
+        var H = HERST, rng = function (n) { return n === 0 ? "never" : n === 1 ? "1 time" : n + " times"; };
         return phone(body(
-          '<div class="ph-top"><span class="iconbtn">' + icon("back", "var(--on-ic)") + '</span><div class="kick">Competitor' + (pre ? ' · playing now' : '') + '</div><span class="iconbtn"></span></div>' +
-          '<div class="lcard hcard"><div class="hc-top"><div class="hc-ph"><img src="' + IMG + 'zofia-portrait.jpg" alt="" style="object-position:50% 25%"></div><div class="hc-id"><h4>Zofia</h4><small class="hand">@zofia</small><small>' + FLAGS.PL + 'Poland</small>' +
-            '<div class="hc-act">' + folBtn() + '<span class="socials"><span>' + icon("ig", "var(--on-ic)") + '</span><span>' + icon("fb", "var(--on-ic)") + '</span><span>' + icon("tt", "var(--on-ic)") + '</span></span></div></div></div>' +
-            '<div class="hc-stats"><span><small>Record</small><b>12W – 4L</b></span><span><small>Win rate</small><b>' + icon("games", "var(--gold)") + '75%</b></span><span><small>Matches</small><b>16</b></span></div></div>' +
+          herHead(s, "stats") +
+          '<div class="hs-rank">' + icon("crown", "var(--gold)") + '<span><b>#' + H.rank + '</b> in the women’s league · World</span></div>' +
+          '<div class="kick">Last 5 matches</div>' +
+          '<div class="hs-last">' + H.last.map(function (m) { return '<div class="' + (m[2] ? "w" : "l") + '"><img src="' + IMG + m[0] + '" alt=""><b>' + (m[2] ? "Won" : "Lost") + '</b><span>' + m[3] + '%</span><small>vs ' + m[1] + '</small></div>'; }).join("") + '</div>' +
           '<div class="kick">Her best categories</div>' +
           '<div class="bestcats">' + [["zofia-portrait.jpg", "First impression", 80, "4–1", "50% 22%"], ["zofia-general.jpg", "Sleepover", 75, "12–4", "62% 10%"], ["zofia-07-party-1.jpg", "Going Out / Party", 75, "3–1", "50% 22%"], ["zofia-mama.jpg", "Bring Her to Mama", 75, "3–1", "88% 18%"]].map(function (c, i) {
             return '<div class="bc" style="--d:' + i + '"><span class="bcph"><img src="' + IMG + c[0] + '" alt="" style="object-position:' + c[4] + '"></span><b>' + c[1] + '</b><span class="bcbar"><i style="width:' + c[2] + '%"></i></span><em>' + c[2] + '%<small>' + c[3] + '</small></em></div>'; }).join("") + '</div>' +
-          (pre ? '<div class="kick">Talk to her</div><div class="lcard soon"><span class="ic">' + icon("lock", "var(--gold)") + '</span><div><b>Chat, live and calls open after the results</b><span>Zofia is playing now. Her menu and her prices show when the match ends, at 13:00 your time. Supporting her never changes the match.</span></div></div>'
+          '<div class="kick hs-kq">Her five categories<small>Tap one to open</small></div>' +
+          Q.map(function (q, i) {
+            var d = H.q[i], mx = Math.max.apply(null, d[1].concat([d[2]])) || 1, op = s.hq === i;
+            return '<div class="hs-q' + (op ? " open" : "") + '"><button class="hs-qh" type="button" data-act="hq" data-v="' + i + '" aria-expanded="' + op + '"><span class="hs-qn">' + (i + 1) + '</span><span class="hs-nm">' + q.t + '</span><span class="hs-won">won <b>' + d[0] + '</b> of ' + H.total + '</span><span class="hs-ch" aria-hidden="true">⌄</span></button>' +
+              (op ? '<div class="hs-det"><div class="hs-dh"><span>Votes she got</span><span>Matches</span></div>' +
+                BANDS.map(function (b, j) { var n = d[1][j]; return '<div class="hs-dr' + (n ? '' : ' z') + '"><span>' + b + '%</span><span class="tr"><i style="width:' + Math.round(n / mx * 100) + '%"></i></span><span class="n">' + rng(n) + '</span></div>'; }).join("") +
+                '<div class="hs-dr lost' + (d[2] ? '' : ' z') + '"><span>She lost</span><span class="tr"><i style="width:' + Math.round(d[2] / mx * 100) + '%"></i></span><span class="n">' + rng(d[2]) + '</span></div></div>' : '') + '</div>';
+          }).join("")
+        ) + nav("Competitors"), true);
+      } },
+    { id: "her-talk", t: "Her page 2 of 2: talk to her", src: "Page 15, split in two (26 Oct)", notes: [
+        "<b>Everything between the player and her, on its own screen</b> (26 Oct, client feedback): the contact menu with her prices. Stats is one tap back on the switch.",
+        "<b>While her match is still on</b>, the menu is replaced by “Chat, live and calls open after the results”, so no prices show during a match; after the results (and from “Get more from the game”, which opens this screen) the menu appears.",
+        "<b>The flow’s contact menu and prices</b>, with the length of each item. Custom request opens a form to write the request before paying.",
+        "<b>Her own prices</b>: each woman sets the price of every item on her menu (Zofia’s are shown). 80% goes to her, and “never changes the match” is on the page.",
+        "<b>Country, not city.</b>"],
+      r: function (s) {
+        var pre = s && s.app && !s.res; // her match isn't final yet: her menu and prices wait
+        var M = [["msg", "Send a message", "one message", "$1"], ["chat", "Private chat", "10 minutes", "$3"], ["live", "Post-game live", "with her fans", "$5"], ["room", "Private room", "10 minutes", "$5"], ["video", "Video call", "5 minutes", "$5"], ["request", "Custom request", "one request", "$3"], ["tip", "Tip", "support her", "From $1"]];
+        return phone(body(
+          herHead(s, "talk") +
+          (pre ? '<div class="lcard soon"><span class="ic">' + icon("lock", "var(--gold)") + '</span><div><b>Chat, live and calls open after the results</b><span>Zofia is playing now. Her menu and her prices show when the match ends, at 13:00 your time. Supporting her never changes the match.</span></div></div>'
             : '<div class="kick">Stay after the match</div>' +
           '<div class="lcard" style="gap:0"><div class="menu two">' + M.map(function (m) { return '<div class="mrow"><span class="ic">' + icon(m[0], "var(--on-dot)") + '</span><b>' + m[1] + '</b><span class="mmeta"><span class="price">' + m[3] + '</span>' + m[2] + '</span></div>'; }).join("") + '</div></div>' +
           '<div class="note80">Zofia sets her own prices, and 80% goes to her. Supporting her never changes the match.</div>')
@@ -2793,7 +2872,7 @@ html.protoon main.wrap { display: none; }
     { id: "ranking", anim: true, t: "Ranking", src: "Page 18", st: { sc: "world", per: "week" }, notes: [
         "<b>Opens on This week</b>: the weekly prize goes by this week’s score (average points per match × 10). City, country and world, as in the flow.",
         "<b>A weekly prize banner</b> with no numbers yet. There is no prize per match in the main game; the match screens only show points. The friends’ tables are a side game in coins.",
-        "<b>The podium rises</b> and the leader’s crown drops in. Each player shows their photo only (25 Oct), never the women’s photos.",
+        "<b>The podium rises</b> and the leader’s crown drops in. Each player shows their photo only (25 Oct), never the women’s photos. <b>26 Oct (client feedback):</b> the top 3 are tall photo tiles in gold, silver and bronze, with the place in the corner and the name and score over the photo; the first tile is the tallest. The same on Competitors, with the W–L record.",
         "<b>Big M appears once</b>, with the neighbours just above and below.",
         "<b>The tabs work</b>: Tel Aviv, Israel or World, and this week, this month or all time. In Tel Aviv this week Big M is on the podium. <b>Details</b> on the prize banner says how the weekly prize works, with How points work linked from there.",
         "<b>From a ranking tile</b> on My profile or Your points, Ranking opens on All time, the period those tiles show.",
@@ -2805,8 +2884,8 @@ html.protoon main.wrap { display: none; }
         function lr(rk, av, name, cc, country, p, me) { return '<div class="lrow' + (me ? " me" : "") + '"><span class="rk">' + rk + '</span>' + pav(av) + '<span>' + name + (me ? '<span class="youtag">YOU</span>' : '') + '<small>' + country + '</small></span><span class="p">' + p + '</span></div>'; }
         var D = RANKS[s.sc || "world"], per = s.per || "week", mr = D.me[per], mp = RME[per], P0 = D.pts[per], L = D.list;
         function who(r) { if (r === mr) return ["bigm.png", "Big M", mp, D.mine, 1]; var j = r - 1 - (mr < r ? 1 : 0); return [L[j][1], L[j][0], P0[j], L[j][2], 0]; }
-        function pod(r) { var w = who(r); return '<div class="pod' + (r === 1 ? " first" : "") + (w[4] ? " me" : "") + '" style="--d:' + (r - 1) + '">' + (r === 1 ? '<span class="crown">' + icon("crown", "var(--gold)") + '</span>' : '<span class="r">' + r + '</span>') +
-          ppav(w[0]) + '<b>' + w[1] + (w[4] ? ' <span class="youtag">YOU</span>' : '') + '</b><small>' + w[2].toLocaleString("en-US") + '</small></div>'; }
+        function pod(r) { var w = who(r); return '<div class="pod r' + r + (r === 1 ? " first" : "") + (w[4] ? " me" : "") + '" style="--d:' + (r - 1) + '"><img src="' + IMG + (w[0].indexOf(".") > -1 ? w[0] : 'pl-' + w[0] + '-photo.jpg') + '" alt=""><span class="prk">' + r + '</span>' + (r === 1 ? '<span class="crown">' + icon("crown", "var(--gold)") + '</span>' : '') + // 26 Oct (client feedback, Alon chose B): photo tiles
+          '<span class="pcap"><b>' + w[1] + (w[4] ? ' <span class="youtag">YOU</span>' : '') + '</b><small>' + w[2].toLocaleString("en-US") + '</small></span></div>'; }
         function row(r) { var w = who(r); return lr(r, w[0], w[1], "", w[3], w[2].toLocaleString("en-US"), w[4]); }
         var rows = mr <= 6 ? row(4) + row(5) + row(6) : row(4) + row(5) + '<div class="gap">···</div>' + lr(mr - 1, D.near[0][1], D.near[0][0], "", D.near[0][2], D.npts[per][0]) + lr(mr, "bigm.png", "Big M", "", D.mine, mp, 1) + lr(mr + 1, D.near[1][1], D.near[1][0], "", D.near[1][2], D.npts[per][1]);
         return phone(body(
@@ -2816,7 +2895,7 @@ html.protoon main.wrap { display: none; }
           '<div class="segc">' + [["city", "Tel Aviv"], ["country", "Israel"], ["world", "World"]].map(function (t) { return '<span' + ((s.sc || "world") === t[0] ? ' class="on"' : '') + ' data-act="rsc" data-v="' + t[0] + '">' + t[1] + '</span>'; }).join("") + '</div>' +
           '<div class="chips">' + [["week", "This week"], ["month", "This month"], ["all", "All time"]].map(function (t) { return '<span' + (per === t[0] ? ' class="on"' : '') + ' data-act="rper" data-v="' + t[0] + '">' + t[1] + '</span>'; }).join("") + '</div>' +
           '<div class="prize">' + icon("trophy", "var(--gold-ink)") + '<div><b>Weekly prize</b><span>The week’s top players by score win. Ends Sunday 23:59, your time.</span></div><span class="mini">Details</span></div>' +
-          '<div class="podium">' + pod(2) + pod(1) + pod(3) + '</div>' +
+          '<div class="podium tiles">' + pod(2) + pod(1) + pod(3) + '</div>' +
           '<div class="lcard" style="gap:0"><div class="lrows">' + rows + '</div></div>')
         ) + nav("Ranking"), true);
       } },
@@ -2896,6 +2975,7 @@ html.protoon main.wrap { display: none; }
   function applyAct(s, b) {
     var a = b.dataset.act;
     if (a === "rview") { s.rview = b.dataset.v; return true; }
+    if (a === "hq") { s.hq = s.hq === +b.dataset.v ? -1 : +b.dataset.v; return true; }
     if (a === "wsc") { s.wsc = b.dataset.v; return true; }
     if (a === "cb") { var nb = +b.dataset.i; if (s.crowd !== b.dataset.w || bandIx(s.pct) !== nb) s.pct = null; s.crowd = b.dataset.w; s.band = nb; }
     else if (a === "style") s.style = b.dataset.v;
@@ -3108,10 +3188,10 @@ html.protoon main.wrap { display: none; }
   }
   function pst(id) { if (!PST[id]) PST[id] = BY[id].st ? JSON.parse(JSON.stringify(BY[id].st)) : {}; return PST[id]; }
   var NEXT = { splash: "intro", intro: "home-first", "home-first": "login", login: "selfie", selfie: "design", design: "signup-1", "design-craft": "signup-1", "signup-1": "home-open", "home-open": "q1",
-    q1: "review", q2: "review", away: "home-open", q3: "review", q4: "review", q5: "review", review: "locked", locked: "results", results: "points", points: "after-first", "after-first": "her-page",
-    "her-page": "chat", chat: "live", live: "call", call: "me", "my-games": "results", "next-games": "home-open", women: "me", me: "ranking", "her-game": "q1", ranking: "settings", settings: "splash",
+    q1: "review", q2: "review", away: "home-open", q3: "review", q4: "review", q5: "review", review: "locked", locked: "results", results: "points", points: "after-first", "after-first": "her-talk",
+    "her-page": "her-talk", "her-talk": "chat", chat: "live", live: "call", call: "me", "my-games": "results", "next-games": "home-open", women: "me", me: "ranking", "her-game": "q1", ranking: "settings", settings: "splash",
     "tbl-create": "tbl-invite", "tbl-invite": "tbl-table", "tbl-table": "tbl-chat", "tbl-chat": "tbl-results", "tbl-results": "tbl-join", "tbl-join": "tbl-cancel", "tbl-cancel": "home-open",
-    closed: "home-open", request: "her-page", "profile-edit": "me", activity: "me", coins: "me", prize: "ranking", privacy: "settings" };
+    closed: "home-open", request: "her-talk", "profile-edit": "me", activity: "me", coins: "me", prize: "ranking", privacy: "settings" };
   var HINT = { splash: "Tap the screen, or wait a moment.", "signup-1": "Check your nickname and city, then Join the match.", intro: "Tap through the five slides, or Skip.", login: "Pick Google, Facebook or Microsoft.", selfie: "Tap the shutter.", design: "Pick a version, or craft your own. Then Use this avatar.",
     "design-craft": "Try a hair colour and an accessory, then Use this avatar.", "home-first": "Browse as a guest. Join the match asks you to sign in, only the first time.", "home-open": "Predict this match, or try the chips: ✓ Joined shows only your matches. Leave a match half-way with the tabs and it follows you.",
     q1: "Play all five questions: drag or tap your avatar, then the crowd, then the %. Contact me opens her page.", locked: "Challenge your friends starts a table on these picks. Next jumps to 13:00, when the results come in.",
@@ -3120,7 +3200,7 @@ html.protoon main.wrap { display: none; }
     "tbl-results": "Rematch, Back to the chat, or Coin history.", "tbl-join": "Take a seat (coins), then Leave the table to get them back.", "tbl-cancel": "Start a new table, or Back to My games.",
     closed: "Back to Games.", request: "Pick a kind, edit the text, then Pay $3 and send.", "profile-edit": "Change the country and city, then Save.", activity: "Tap a row: each opens its place.",
     coins: "Back with the arrow.", prize: "Claim my prize, or How the weekly prize works.", privacy: "Unblock a player, or Delete my account.", results: "See my points.",
-    points: "Next match.", "after-first": "See Zofia’s page, or Not now.", "her-page": "Try Private chat, Post-game live or Video call.", me: "Tap a ranking tile, a woman you follow, Edit, or a recent game.",
+    points: "Next match.", "after-first": "See Zofia’s page, or Not now.", "her-page": "Tap a category to see her votes, or switch to Talk to her.", "her-talk": "Try Private chat, Post-game live or Video call.", me: "Tap a ranking tile, a woman you follow, Edit, or a recent game.",
     women: "Explore: type a name, try the chips or the filter button, or tap a woman.", settings: "Tap the switches, Rules and points, or Log out to start again.", away: "Tap Continue on the bar: it opens question 3.", "her-game": "Back to my vote returns to the question.", "my-games": "Tap a match.", ranking: "Use the tabs at the bottom." };
   var NAVT = ["home-open", "me", "ranking", "women"];
   var SOON = "toast:You’ll get a reminder before it opens.";
@@ -3181,7 +3261,7 @@ html.protoon main.wrap { display: none; }
       ["[data-k=back]", function () { return pst("tbl-results").t === "office" ? "back" : "tbl-chat"; }], ["[data-k=coins]", "coins"]],
     results: [[".btn.black", "points"]],
     points: [[".ranks .stat", rankGo], [".btn.black", function () { if (SEEN_AF) return "home-open"; SEEN_AF = true; return "after-first"; }]],
-    "after-first": [[".btn.black", "her-page"], [".textlink", "home-open"]],
+    "after-first": [[".btn.black", "her-talk"], [".textlink", "home-open"]],
     "my-games": [[".gsegc [data-g]", gsegGo], [".tnew", "tbl-create"], [".mcard", function (el, h) {
       var k = [].indexOf.call(h.querySelectorAll(".mcard"), el);
       if (pst("my-games").tab === "tables") { var t = el.dataset.t; if (t === "office") { pst("tbl-results").t = "office"; return "tbl-results"; } if (t === "crew") return "tbl-join"; if (t === "duo") return "tbl-cancel"; return RESULTS_IN ? "tbl-results" : "tbl-table"; }
@@ -3202,7 +3282,10 @@ html.protoon main.wrap { display: none; }
         pickSheet(sc === "country" ? "Country" : "City", opts, lgPlace(s, sc), function (v) { s.wplace = s.wplace || {}; s.wplace[sc] = v; redraw(); }); return null; }]],
     "her-game": [[".btn.black, .ph-top .iconbtn:first-child", function () { return OVER ? "close" : "back"; }], [".fbtn", function () { return folToggle("Zofia"); }],
       [".socials span", function (el) { return "toast:Opens Zofia’s " + ["Instagram", "Facebook", "TikTok"][[].indexOf.call(el.parentNode.children, el)] + "."; }]],
-    "her-page": [[".ph-top .iconbtn:first-child", "back"], [".mrow", function (el) { var k = [].indexOf.call(el.parentNode.children, el); if (k === 5) return "request"; paySheet(PAYS[k]); return null; }],
+    "her-page": [[".ph-top .iconbtn:first-child", "back"], [".htabs span[data-tab=talk]", function () { go("her-talk", false); return null; }],
+      [".fbtn", function () { return folToggle("Zofia"); }],
+      [".socials span", function (el) { return "toast:Opens Zofia’s " + ["Instagram", "Facebook", "TikTok"][[].indexOf.call(el.parentNode.children, el)] + "."; }]],
+    "her-talk": [[".ph-top .iconbtn:first-child", "back"], [".htabs span[data-tab=stats]", function () { go("her-page", false); return null; }], [".mrow", function (el) { var k = [].indexOf.call(el.parentNode.children, el); if (k === 5) return "request"; paySheet(PAYS[k]); return null; }],
       [".fbtn", function () { return folToggle("Zofia"); }],
       [".socials span", function (el) { return "toast:Opens Zofia’s " + ["Instagram", "Facebook", "TikTok"][[].indexOf.call(el.parentNode.children, el)] + "."; }]],
     chat: [[".chathead > span:first-child", "back"], [".timerbar .mini", function () { if (pst("chat").mode === "msg") { paySheet(PAYS[1]); return null; } paySheet({ t: "10 more minutes", sub: "Private chat with Zofia", price: "$3", then: function () { var b = host().querySelector(".timerbar b"); if (b) b.textContent = "17:42"; ptoast("10 minutes added."); } }); return null; }],

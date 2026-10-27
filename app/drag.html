@@ -455,7 +455,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     <ol>
       <li><b>Drag yourself</b> (your profile icon) onto the woman you choose, or just <b>tap her photo</b>. Your vote.</li>
       <li><b>Drag the crowd</b> onto the woman you think most players will choose, or tap her photo.</li>
-      <li><b>▶ Preview</b> on each photo opens her story (her photos, one line about her) with <b>See her stats</b>; <b>Contact me</b> under her name opens her page.</li>
+      <li><b>The photos alone</b>: no Preview and no story in the match (26 Oct, client feedback). More about her, her stats and her contact menu are on her page, outside the game.</li>
       <li><b>Answer the banner</b> over her: pick the range, then the exact %. Lock it. No points show while you vote: they come with the results, when the match closes.</li>
     </ol>
     <p class="small">You can also tap an icon, then a photo. To change your mind, drag an icon onto the other woman, or tap her while the question banner is open.</p>
@@ -591,7 +591,6 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     panesEl.innerHTML = ["L", "M"].map(function (k) {
       var w = W[k];
       return '<button class="pane" data-k="' + k + '" aria-label="' + w.name + '"><img class="ph" src="' + IMG + q[k][0] + '" alt="" style="object-position:' + q[k][1] + '"><span class="fade"></span><span class="sel" aria-hidden="true"><i>✓</i><span class="s-me">Tap to pick</span><span class="s-crowd">Crowd’s pick</span></span>' +
-        '<span class="vbtn" role="button" tabindex="0" aria-label="Preview ' + w.name + '">' + IC_PLAY + 'Preview</span>' +
         '<span class="slot me"></span><span class="slot crowd"></span><span class="who"><b>' + w.name + '</b><small>' + FLAGS[w.cc] + w.country + '</small></span></button>'; // no Contact me in the match: contact is on her page in Competitors
     }).join("");
   }
@@ -599,7 +598,9 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
   var IC_PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l10.5-6.5z"/></svg>';
   var IC_CHAT = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M4 5h16v11H10l-5 4v-4H4z"/></svg>';
 
-  /* ---------- her preview and her stats (2026-10-22) ---------- */
+  /* ---------- her preview and her stats (2026-10-22) ----------
+     26 Oct (client feedback): the Preview button, its story and its clips are gone from the match, so openStory/openStats below
+     are no longer reached (kept for now; HER is still used by the exact-vote banner). Her stats live on her page outside the game. */
   // Demo data. In the app her photos and short videos come from her own uploads, in the order she set; the numbers come from all her matches.
   // pics: her three photos for each question (img/<woman>-<question>-<n>.jpg, already centred on her face by tools/import_photos.py); her preview plays the current question's three
   var HER = {
@@ -1068,7 +1069,6 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     toast("The tabs lead out of the match in the app");
   });
   panesEl.addEventListener("click", function (e) {
-    var v = e.target.closest(".vbtn"); if (v) { openStory(v.closest(".pane").dataset.k); return; }
     if (e.target.closest(".cme")) { openHer(); return; }
     var p = e.target.closest(".pane"); if (p && !e.target.closest(".chip")) tapPane(p);
   });
@@ -1089,7 +1089,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     for (var k = 1; k < t.length; k++) {
       if (/^q[1-5]$/.test(t[k])) o.q = +t[k].slice(1) - 1;
       else if (t[k] === "still" || t[k] === "end" || t[k] === "one" || t[k] === "m2" || t[k] === "m3") o[t[k]] = true;
-      else if (["you", "crowd", "band", "pct", "preview", "stats"].indexOf(t[k]) > -1 && t[k + 1] != null) { o[t[k]] = t[k + 1]; k++; }
+      else if (["you", "crowd", "band", "pct"].indexOf(t[k]) > -1 && t[k + 1] != null) { o[t[k]] = t[k + 1]; k++; }
     }
     if (o.still) phone.classList.add("still");
     if (o.end) { window.DRAG.end(); return; }
@@ -1102,8 +1102,6 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     qi = o.q; loadQuestion(false);
     if (o.you) { touched = true; placeMe(o.you); }
     if (o.crowd) { placeCrowd(o.crowd); setTimeout(function () { if (o.band != null) pickBand(+o.band, true); if (o.pct != null) { cur().exact = +o.pct; showExact(); } }, 720); }
-    if (o.preview) openStory(o.preview); // -preview-L opens her story, -stats-L her stats
-    if (o.stats) openStats(o.stats);
   })();
 })();
 </script>

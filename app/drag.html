@@ -362,7 +362,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
 .pane .vbtn { top: auto; right: auto; left: 10px; bottom: 10px; gap: 6px; padding: 8px 13px 8px 10px; border: 0; background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; color: var(--pink-ink); font: 800 12px/1 var(--label); letter-spacing: .1em; box-shadow: 0 6px 16px rgba(0, 0, 0, .45), 0 0 16px rgba(255, 255, 255, .3); animation: vpulse .8s var(--spring) .6s 1 both; }
 .pane .vbtn svg { width: 12px; height: 12px; color: var(--pink); }
 @keyframes vpulse { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.14); } }
-.pane .who { bottom: 50px; }
+.pane .who { bottom: 12px; } /* 27 Oct (Alon): down into the space the Preview button left (it was 50px, above that button) */
 .slot { bottom: 10px; }
 .slot.me { left: auto; right: 8px; }
 .slot.crowd { right: 8px; }
@@ -433,7 +433,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
         <div class="tclock"><span class="dot"></span><b id="timer">12:43</b><span>left</span></div>
       </div>
       <div class="qprog"><div class="qsteps" id="qdots" aria-label="Question progress"></div><div class="qwhere"><span id="qmatch">Zofia vs Mariana</span> · Question <b id="qn">1</b> of 5</div></div>
-      <div class="qhead"><h2 id="qtitle"><span class="l1">Which one</span><span class="l2">catches your eye?</span></h2></div>
+      <div class="qhead"><h2 id="qtitle"><span class="l1">Who’s</span><span class="l2">hotter?</span></h2></div>
       <div class="stage" id="stage"><div class="panes" id="panes"></div><span class="vs">VS</span></div>
       <div class="dock" id="dock">
         <div class="tray" id="tray">
@@ -477,14 +477,15 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     BR: '<svg class="flag" viewBox="0 0 20 14" aria-hidden="true"><rect width="20" height="14" fill="#009c3b"/><path d="M10 1.6 18.4 7 10 12.4 1.6 7z" fill="#ffdf00"/><circle cx="10" cy="7" r="3.1" fill="#002776"/></svg>'
   };
   var W = { L: { name: "Zofia", cc: "PL", country: "Poland" }, M: { name: "Mariana", cc: "BR", country: "Brazil" } };
-  var Q = [ // 25 Oct evening (client feedback; Alon: "exactly as the feedback is asking"): each question says what you judge; Overall is gone.
-    // tray: the box under the photos before you drag ("Drag me onto …"); mine: after the drop ("Zofia" + this). Until the new photos exist,
-    // Swimsuit shows her beach set and Sleepover her old "Who is the one?" set; Party has its own photos (07-party, no clip yet).
-    { t: "First impression", h: ["Which one", "catches your eye?"], tray: "the one who catches your eye", mine: "catches your eye", L: ["zofia-02-at-first-sight-1.jpg", "50% 0%"], M: ["mariana-02-at-first-sight-1.jpg", "50% 0%"] },
-    { t: "Swimsuit", h: ["Who looks hotter", "in a swimsuit?"], tray: "the hotter one in a swimsuit", mine: "looks hotter", L: ["zofia-04-at-the-beach-1.jpg", "50% 0%"], M: ["mariana-04-at-the-beach-1.jpg", "50% 0%"] },
-    { t: "Party", h: ["Who would you take", "to a party?"], tray: "the one you’d take to a party", mine: "comes to the party", L: ["zofia-07-party-1.jpg", "50% 0%"], M: ["mariana-07-party-1.jpg", "50% 0%"] },
-    { t: "Sleepover", h: ["Who would you invite", "for a sleepover?"], tray: "the one for a sleepover", mine: "gets the invite", L: ["zofia-01-who-is-the-one-1.jpg", "50% 0%"], M: ["mariana-01-who-is-the-one-1.jpg", "50% 0%"] },
-    { t: "Bring Her to Mama", h: ["Who is the one", "to bring to Mama?"], tray: "the one to bring to Mama", mine: "meets Mama", L: ["zofia-05-to-bring-to-mama-1.jpg", "50% 0%"], M: ["mariana-05-to-bring-to-mama-1.jpg", "50% 0%"] }
+  var Q = [ // 27 Oct (Alon): five categories in this order, each with the player's own question (h) and the crowd question (c);
+    // the headline shows h while you place your face, then c from the crowd step on. pi: her photo set for it (HER.pics, stored in the 25 Oct order).
+    // ask: the player's own question word for word, in the box under the photos (27 Oct, Alon: Mati's text); after the drop her name answers it.
+    // f: Swimsuit and Sleepover have one photo per woman, <name>-<f>-1.jpg (27 Oct, made in Draw Things and picked by Alon).
+    { t: "First Impression", h: ["Who’s", "hotter?"], c: ["Who will the crowd", "find hotter?"], ask: "Who’s hotter?", pi: 0, L: ["zofia-02-at-first-sight-1.jpg", "50% 0%"], M: ["mariana-02-at-first-sight-1.jpg", "50% 0%"] },
+    { t: "Bring Home to Mama", h: ["Who would you bring", "home to Mama?"], c: ["Who’s the crowd bringing", "home to Mama?"], ask: "Who would you bring home to Mama?", pi: 4, L: ["zofia-05-to-bring-to-mama-1.jpg", "50% 0%"], M: ["mariana-05-to-bring-to-mama-1.jpg", "50% 0%"] },
+    { t: "Party", h: ["Who would you take", "to a party?"], c: ["Who’s the crowd’s", "party pick?"], ask: "Who would you take to a party?", pi: 2, L: ["zofia-07-party-1.jpg", "50% 0%"], M: ["mariana-07-party-1.jpg", "50% 0%"] },
+    { t: "Swimsuit", h: ["Who looks sexier", "in a swimsuit?"], c: ["Who’s the crowd’s", "swimsuit queen?"], ask: "Who looks sexier in a swimsuit?", pi: 1, f: "swimsuit", L: ["zofia-swimsuit-1.jpg", "50% 0%"], M: ["mariana-swimsuit-1.jpg", "50% 0%"] },
+    { t: "Sleepover", h: ["Who’s staying", "the night?"], c: ["Who does the crowd want", "to wake up next to?"], ask: "Who’s staying the night?", pi: 3, f: "sleepover", L: ["zofia-sleepover-1.jpg", "50% 0%"], M: ["mariana-sleepover-1.jpg", "50% 0%"] }
   ];
   var BANDS = [[51, 59], [60, 69], [70, 79], [80, 89], [90, 100]];
   var CROWD = ["pl-kingpick-face.jpg", "pl-maxwin-face.jpg", "pl-diego11-face.jpg", "pl-mateopro-face.jpg", "pl-noah-e-face.jpg"]; // 25 Oct (Alon): real players in the crowd, not cartoons
@@ -573,7 +574,8 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
   function setInstr(text) { var l = $("#instr"); l.textContent = text || ""; l.hidden = !text; }
   function setHead(pop) { // the two headline lines; each shrinks until it fits the width (Mama is the longest)
     var h = $("#qtitle"), l1 = $(".l1", h), l2 = $(".l2", h);
-    l1.textContent = Q[qi].h[0]; l2.textContent = Q[qi].h[1]; fitHead();
+    var hq = step === "me" || !Q[qi].c ? Q[qi].h : Q[qi].c; // 27 Oct: your question first, the crowd question from the crowd step on
+    l1.textContent = hq[0]; l2.textContent = hq[1]; fitHead();
     l2.classList.remove("pop"); if (pop && !RM) { void l2.offsetWidth; l2.classList.add("pop"); }
   }
   function fitHead() {
@@ -645,7 +647,8 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
   var MATCH = 1;
   function useMatch(n) { // same five questions, the second or third pair of women
     var m = n === 3 ? MATCH3 : MATCH2; MATCH = n; W = m.W; HER = m.HER;
-    Q.forEach(function (q, i) { q.L = [m.HER.L.pics[i][0], "50% 0%"]; q.M = [m.HER.M.pics[i][0], "50% 0%"]; });
+    Q.forEach(function (q) { // 27 Oct: by the question's own photo set, not its place; Swimsuit and Sleepover by her name
+      q.L = [q.f ? m.W.L.name.toLowerCase() + "-" + q.f + "-1.jpg" : m.HER.L.pics[q.pi][0], "50% 0%"]; q.M = [q.f ? m.W.M.name.toLowerCase() + "-" + q.f + "-1.jpg" : m.HER.M.pics[q.pi][0], "50% 0%"]; });
   }
   // 24 Oct (Alon): a different line of hers on every slide of her preview; one per photo, in the order they play (the clip first)
   var QUOTES = { // per question in the 25 Oct order (First impression, Swimsuit, Party, Sleepover, Mama); stand-in lines until the new photos have their own
@@ -803,7 +806,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
   }
   function trayState() {
     var p = cur();
-    $("#homeMe").innerHTML = (p.you ? '<span class="empty">✓</span>' : meChip()) + '<span class="ht"><b>You</b><small class="ask">' + (p.you ? W[p.you].name + '<em>' + Q[qi].mine + '</em>' : 'Drag me onto<em>' + Q[qi].tray + '</em>') + '</small></span>';
+    $("#homeMe").innerHTML = (p.you ? '<span class="empty">✓</span>' : meChip()) + '<span class="ht"><b>You</b><small class="ask">' + (p.you ? Q[qi].ask + '<em>' + W[p.you].name + '</em>' : 'Drag me<em>' + Q[qi].ask + '</em>') + '</small></span>';
     $("#homeCrowd").innerHTML = (p.crowd ? '<span class="empty">✓</span>' : crowdChip(false)) + '<span class="ht"><b>Crowd</b><small>' + (p.crowd ? W[p.crowd].name : "1,000 players") + '</small></span>';
     var m = $("#homeMe .chip"), c = $("#homeCrowd .chip");
     if (m && step === "me") m.classList.add("bob");
@@ -829,7 +832,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     var c = center(chip); burst(c.x, c.y, ["#ff2e8b", "#ff7ab8", "#fff"], 16, 60);
     if (step === "me") {
       step = "crowd"; syncStep();
-      setInstr("Predict the crowd"); trayState(); // 25 Oct evening: the full questions don't split into "the crowd's one …"; matches the intro's "Predict the crowd"
+      setInstr("Predict the crowd"); trayState(); setHead(true); // 25 Oct evening: the full questions don't split into "the crowd's one …"; matches the intro's "Predict the crowd"
       var cc = $("#homeCrowd .chip"); if (cc) { cc.classList.remove("bob", "asleep"); cc.classList.add("awake"); }
     } else trayState();
   }

@@ -481,10 +481,10 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     // tray: the box under the photos before you drag ("Drag me onto …"); mine: after the drop ("Zofia" + this). Until the new photos exist,
     // Swimsuit shows her beach set and Sleepover her old "Who is the one?" set; Party has its own photos (07-party, no clip yet).
     { t: "First impression", h: ["Which one", "catches your eye?"], tray: "the one who catches your eye", mine: "catches your eye", L: ["zofia-02-at-first-sight-1.jpg", "50% 0%"], M: ["mariana-02-at-first-sight-1.jpg", "50% 0%"] },
-    { t: "Swimsuit", h: ["Who looks hotter", "in a swimsuit?"], tray: "the hotter one in a swimsuit", mine: "hotter in a swimsuit", L: ["zofia-04-at-the-beach-1.jpg", "50% 0%"], M: ["mariana-04-at-the-beach-1.jpg", "50% 0%"] },
-    { t: "Going Out / Party", h: ["Who would you take", "to a party?"], tray: "the one you’d take to a party", mine: "you’d take to a party", L: ["zofia-07-party-1.jpg", "50% 0%"], M: ["mariana-07-party-1.jpg", "50% 0%"] },
-    { t: "Sleepover", h: ["Who would you invite", "for a sleepover?"], tray: "the one for a sleepover", mine: "invited for a sleepover", L: ["zofia-01-who-is-the-one-1.jpg", "50% 0%"], M: ["mariana-01-who-is-the-one-1.jpg", "50% 0%"] },
-    { t: "Bring Her to Mama", h: ["Who is the one", "to bring to Mama?"], tray: "the one to bring to Mama", mine: "your one to bring to Mama", L: ["zofia-05-to-bring-to-mama-1.jpg", "50% 0%"], M: ["mariana-05-to-bring-to-mama-1.jpg", "50% 0%"] }
+    { t: "Swimsuit", h: ["Who looks hotter", "in a swimsuit?"], tray: "the hotter one in a swimsuit", mine: "looks hotter", L: ["zofia-04-at-the-beach-1.jpg", "50% 0%"], M: ["mariana-04-at-the-beach-1.jpg", "50% 0%"] },
+    { t: "Party", h: ["Who would you take", "to a party?"], tray: "the one you’d take to a party", mine: "comes to the party", L: ["zofia-07-party-1.jpg", "50% 0%"], M: ["mariana-07-party-1.jpg", "50% 0%"] },
+    { t: "Sleepover", h: ["Who would you invite", "for a sleepover?"], tray: "the one for a sleepover", mine: "gets the invite", L: ["zofia-01-who-is-the-one-1.jpg", "50% 0%"], M: ["mariana-01-who-is-the-one-1.jpg", "50% 0%"] },
+    { t: "Bring Her to Mama", h: ["Who is the one", "to bring to Mama?"], tray: "the one to bring to Mama", mine: "meets Mama", L: ["zofia-05-to-bring-to-mama-1.jpg", "50% 0%"], M: ["mariana-05-to-bring-to-mama-1.jpg", "50% 0%"] }
   ];
   var BANDS = [[51, 59], [60, 69], [70, 79], [80, 89], [90, 100]];
   var CROWD = ["pl-kingpick-face.jpg", "pl-maxwin-face.jpg", "pl-diego11-face.jpg", "pl-mateopro-face.jpg", "pl-noah-e-face.jpg"]; // 25 Oct (Alon): real players in the crowd, not cartoons
@@ -503,7 +503,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     var d = document.createElement("div"); d.id = "qfirst"; d.className = "qfirst" + (QUICK ? " quick" : "");
     var head = $(".qhead"), tab = $("#tabbar");
     d.style.top = head.offsetTop + "px"; d.style.bottom = (phone.offsetHeight - tab.offsetTop) + "px";
-    d.innerHTML = '<div class="qf-in"><div class="qf-k">Question ' + (qi + 1) + ' of 5</div><div class="qf-1">' + Q[qi].h[0] + '</div><div class="qf-2">' + Q[qi].h[1] + '</div></div>';
+    d.innerHTML = '<div class="qf-in"><div class="qf-k">' + (qi + 1) + ' of 5 · ' + Q[qi].t + '</div><div class="qf-1">' + Q[qi].h[0] + '</div><div class="qf-2">' + Q[qi].h[1] + '</div></div>';
     phone.appendChild(d);
     var done = false, t = setTimeout(go, QUICK ? 500 : 1900);
     function go() {
@@ -804,7 +804,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
   function trayState() {
     var p = cur();
     $("#homeMe").innerHTML = (p.you ? '<span class="empty">✓</span>' : meChip()) + '<span class="ht"><b>You</b><small class="ask">' + (p.you ? W[p.you].name + '<em>' + Q[qi].mine + '</em>' : 'Drag me onto<em>' + Q[qi].tray + '</em>') + '</small></span>';
-    $("#homeCrowd").innerHTML = (p.crowd ? '<span class="empty">✓</span>' : crowdChip(false)) + '<span class="ht"><b>Crowd</b><small>' + (p.crowd ? "Placed" : "1,000 players") + '</small></span>';
+    $("#homeCrowd").innerHTML = (p.crowd ? '<span class="empty">✓</span>' : crowdChip(false)) + '<span class="ht"><b>Crowd</b><small>' + (p.crowd ? W[p.crowd].name : "1,000 players") + '</small></span>';
     var m = $("#homeMe .chip"), c = $("#homeCrowd .chip");
     if (m && step === "me") m.classList.add("bob");
     if (c) c.classList.add(step === "me" ? "asleep" : "bob");
@@ -850,7 +850,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
       requestAnimationFrame(function () { pieces.forEach(function (x) { setTimeout(function () { x[0].style.left = x[1].x + "px"; x[0].style.top = x[1].y + "px"; }, x[2] * 45); }); });
       setTimeout(function () { pieces.forEach(function (x) { x[0].remove(); }); chip.style.visibility = ""; chip.classList.add("landed"); var c = center(chip); burst(c.x, c.y, ["#f5b849", "#ff2e8b", "#fff"], 18, 70); }, 620);
     } else chip.classList.add("landed");
-    var c0 = center(slot); setTimeout(function () { floaty(c0.x, c0.y - 30, "YOUR GUESS"); }, 380);
+    var c0 = center(slot); setTimeout(function () { floaty(c0.x, c0.y - 30, "CROWD PICK"); }, 380);
     trayState(); step = "banner"; syncStep(); setTimeout(function () { openBanner(k); }, RM ? 0 : 650);
   }
 
@@ -869,7 +869,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     pane(k).classList.add("spot"); pane(other).classList.add("dim"); dock.classList.add("away"); phone.classList.add("bopen");
     var b = document.createElement("div"); b.className = "banner" + (RM ? "" : " in"); bannerEl = b;
     b.innerHTML = '<span class="tail"></span>' +
-      '<div class="bn-head"><span class="bn-face"><img src="' + IMG + HER[k].portrait + '" alt=""></span><div><small>Exact vote · your guess</small><b class="q2">What percentage of the crowd will prefer her over the other woman?</b></div></div>' + // 24 Oct preview: say plainly what the player guesses, with her face
+      '<div class="bn-head"><span class="bn-face"><img src="' + IMG + HER[k].portrait + '" alt=""></span><div><small>Predict her share</small><b class="q2">What % of the votes will she get?</b></div></div>' + // 24 Oct preview: say plainly what the player guesses, with her face
       // 25 Oct evening (Alon): the range is back, with what each step is worth: the range +1 if right, then the exact number in it +7 more.
       // The exact number is one of the ten in that range, tapped on a row (the ruler is gone; tapeHTML/bindTape stay only for the options page)
       '<div class="bn-step"><span>1</span>Pick the range<em class="bn-pt">+1 point if right</em></div>' +
@@ -971,6 +971,8 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
   function changed() { var pp = proto(); if (pp && pp.changed) pp.changed(); else next(); }
   function firstOpen() { for (var i = 0; i < Q.length; i++) if (!(picks[i] && picks[i].locked)) return i; return Q.length - 1; }
   function next() {
+    var bp = proto(); // 26 Oct (client feedback): inside the app a live leaderboard comes after categories 1 and 3; its button brings the player back to the next question
+    if (bp && bp.board && (qi === 0 || qi === 2) && picks[qi] && picks[qi].locked) { try { if (bp.board(qi + 1)) return; } catch (x) {} }
     var n = qi + 1; while (n < Q.length && picks[n] && picks[n].locked) n++; // answers saved earlier are skipped
     if (n < Q.length) {
       if (!RM) stageEl.classList.add("leave");
@@ -1003,7 +1005,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
   var flying = null; // 24 Oct: a tapped chip still in the air (430 ms). Your vote counts from the tap, so a quick second tap is already the crowd (Alon: it used to place you twice)
   function canUse(kind) { if (cur().locked) return false; return kind === "me" || step !== "me" || flying === "me"; }
   function startDrag(chip, e) {
-    var kind = chip.dataset.kind; if (!canUse(kind)) { if (kind === "crowd") { chip.classList.remove("shake"); void chip.offsetWidth; chip.classList.add("shake"); toast("First choose yours: drag yourself or tap her photo"); } return; }
+    var kind = chip.dataset.kind; if (!canUse(kind)) { if (kind === "crowd") { chip.classList.remove("shake"); void chip.offsetWidth; chip.classList.add("shake"); toast("Your vote first: tap her photo"); } return; }
     e.preventDefault(); touched = true; $("#hand").style.display = "none";
     var p = local(e); try { chip.setPointerCapture(e.pointerId); } catch (x) {}
     drag = { kind: kind, chip: chip, start: p, t: Date.now(), moved: false, rot: 0, last: p, hover: null, ghost: null, home: center(chip) };

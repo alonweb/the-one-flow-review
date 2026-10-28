@@ -474,7 +474,15 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     PL: '<svg class="flag" viewBox="0 0 8 5" aria-hidden="true"><rect width="8" height="5" fill="#dc143c"/><rect width="8" height="2.5" fill="#fff"/></svg>',
     US: '<svg class="flag" viewBox="0 0 19 10" aria-hidden="true"><rect width="19" height="10" fill="#b22234"/><path d="M0 1.5h19M0 3.5h19M0 5.5h19M0 7.5h19" stroke="#fff" stroke-width=".8"/><rect width="8" height="5.4" fill="#3c3b6e"/></svg>',
     CO: '<svg class="flag" viewBox="0 0 3 2" aria-hidden="true"><rect width="3" height="1" fill="#fcd116"/><rect y="1" width="3" height=".5" fill="#003893"/><rect y="1.5" width="3" height=".5" fill="#ce1126"/></svg>',
-    BR: '<svg class="flag" viewBox="0 0 20 14" aria-hidden="true"><rect width="20" height="14" fill="#009c3b"/><path d="M10 1.6 18.4 7 10 12.4 1.6 7z" fill="#ffdf00"/><circle cx="10" cy="7" r="3.1" fill="#002776"/></svg>'
+    BR: '<svg class="flag" viewBox="0 0 20 14" aria-hidden="true"><rect width="20" height="14" fill="#009c3b"/><path d="M10 1.6 18.4 7 10 12.4 1.6 7z" fill="#ffdf00"/><circle cx="10" cy="7" r="3.1" fill="#002776"/></svg>',
+    IT: '<svg class="flag" viewBox="0 0 3 2" aria-hidden="true"><rect width="1" height="2" fill="#009246"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ce2b37"/></svg>',
+    ES: '<svg class="flag" viewBox="0 0 3 2" aria-hidden="true"><rect width="3" height="2" fill="#c60b1e"/><rect y=".5" width="3" height="1" fill="#ffc400"/></svg>',
+    IN: '<svg class="flag" viewBox="0 0 9 6" aria-hidden="true"><rect width="9" height="2" fill="#ff9933"/><rect y="2" width="9" height="2" fill="#fff"/><rect y="4" width="9" height="2" fill="#138808"/><circle cx="4.5" cy="3" r=".8" fill="none" stroke="#000080" stroke-width=".25"/></svg>',
+    SE: '<svg class="flag" viewBox="0 0 16 10" aria-hidden="true"><rect width="16" height="10" fill="#006aa7"/><rect x="5" width="2" height="10" fill="#fecc00"/><rect y="4" width="16" height="2" fill="#fecc00"/></svg>',
+    LV: '<svg class="flag" viewBox="0 0 20 10" aria-hidden="true"><rect width="20" height="10" fill="#9e3039"/><rect y="4" width="20" height="2" fill="#fff"/></svg>',
+    JP: '<svg class="flag" viewBox="0 0 3 2" aria-hidden="true"><rect width="3" height="2" fill="#fff"/><circle cx="1.5" cy="1" r=".6" fill="#bc002d"/></svg>',
+    CA: '<svg class="flag" viewBox="0 0 4 2" aria-hidden="true"><rect width="4" height="2" fill="#fff"/><rect width="1" height="2" fill="#d52b1e"/><rect x="3" width="1" height="2" fill="#d52b1e"/><path d="M2 .45 2.2 .85 2.45 .75 2.35 1.2 2.1 1.15 2.05 1.55H1.95L1.9 1.15 1.65 1.2 1.55 .75 1.8 .85Z" fill="#d52b1e"/></svg>',
+    FR: '<svg class="flag" viewBox="0 0 3 2" aria-hidden="true"><rect width="1" height="2" fill="#002395"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ed2939"/></svg>'
   };
   var W = { L: { name: "Zofia", cc: "PL", country: "Poland" }, M: { name: "Mariana", cc: "BR", country: "Brazil" } };
   var Q = [ // 27 Oct (Alon): five categories in this order, each with the player's own question (h) and the crowd question (c);
@@ -608,11 +616,11 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
   var HER = {
     L: { age: 26, city: "Kraków", bio: "Ballet until I was 18. Now I only dance in the kitchen.", portrait: "zofia-portrait.jpg", clips: ["zofia-02-at-first-sight-1.mp4", "zofia-04-at-the-beach-1.mp4", null, "zofia-01-who-is-the-one-1.mp4", "zofia-05-to-bring-to-mama-1.mp4"], pics: [["zofia-02-at-first-sight-1.jpg", "zofia-02-at-first-sight-2.jpg", "zofia-02-at-first-sight-3.jpg"], ["zofia-04-at-the-beach-1.jpg", "zofia-04-at-the-beach-2.jpg", "zofia-04-at-the-beach-3.jpg"], ["zofia-07-party-1.jpg", "zofia-07-party-2.jpg", "zofia-07-party-3.jpg"], ["zofia-01-who-is-the-one-1.jpg", "zofia-01-who-is-the-one-2.jpg", "zofia-01-who-is-the-one-3.jpg"], ["zofia-05-to-bring-to-mama-1.jpg", "zofia-05-to-bring-to-mama-2.jpg", "zofia-05-to-bring-to-mama-3.jpg"]],
       rank: 2, total: 16, wins: 12,
-      last: [["sophie.jpg", "Sophie", 1, 58], ["emma.jpg", "Emma", 1, 64], ["nina.jpg", "Nina", 0, 41], ["valentina.jpg", "Valentina", 1, 71], ["maya.jpg", "Maya", 1, 66]],
+      last: [["sophie.jpg", "Sophie", 1, 58], ["emma.jpg", "Emma", 1, 64], ["nina.jpg", "Nina", 0, 41], ["valentina.jpg", "Victoria", 1, 71], ["maya.jpg", "Maya", 1, 66]],
       q: [[13, [3, 6, 3, 1, 0], 3], [9, [6, 2, 1, 0, 0], 7], [11, [5, 4, 2, 0, 0], 5], [12, [4, 5, 2, 1, 0], 4], [14, [2, 5, 4, 2, 1], 2]] }, // per question: won, times in each range when she won, lost
     M: { age: 27, city: "Rio de Janeiro", bio: "Beach volleyball every morning, samba every night.", portrait: "mariana-portrait.jpg", clips: ["mariana-02-at-first-sight-1.mp4", "mariana-04-at-the-beach-1.mp4", null, "mariana-01-who-is-the-one-1.mp4", "mariana-05-to-bring-to-mama-1.mp4"], pics: [["mariana-02-at-first-sight-1.jpg", "mariana-02-at-first-sight-2.jpg", "mariana-02-at-first-sight-3.jpg"], ["mariana-04-at-the-beach-1.jpg", "mariana-04-at-the-beach-2.jpg", "mariana-04-at-the-beach-3.jpg"], ["mariana-07-party-1.jpg", "mariana-07-party-2.jpg", "mariana-07-party-3.jpg"], ["mariana-01-who-is-the-one-1.jpg", "mariana-01-who-is-the-one-2.jpg", "mariana-01-who-is-the-one-3.jpg"], ["mariana-05-to-bring-to-mama-1.jpg", "mariana-05-to-bring-to-mama-2.jpg", "mariana-05-to-bring-to-mama-3.jpg"]],
       rank: 9, total: 15, wins: 9,
-      last: [["luna.jpg", "Luna", 1, 55], ["sophie.jpg", "Sophie", 0, 47], ["maya.jpg", "Maya", 1, 61], ["valentina.jpg", "Valentina", 1, 58], ["nina.jpg", "Nina", 0, 44]],
+      last: [["luna.jpg", "Luna", 1, 55], ["sophie.jpg", "Sophie", 0, 47], ["maya.jpg", "Maya", 1, 61], ["valentina.jpg", "Victoria", 1, 58], ["nina.jpg", "Nina", 0, 44]],
       q: [[8, [4, 3, 1, 0, 0], 7], [12, [2, 3, 4, 2, 1], 3], [11, [2, 4, 3, 2, 0], 4], [9, [3, 4, 2, 0, 0], 6], [7, [4, 2, 1, 0, 0], 8]] }
   };
 
@@ -622,7 +630,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     HER: {
       L: { age: 27, city: "Saint Petersburg", bio: "Figure skater as a kid. I still can’t walk past a frozen lake.", portrait: "katya-portrait.jpg", clips: ["katya-02-at-first-sight-1.mp4", "katya-04-at-the-beach-1.mp4", null, "katya-01-who-is-the-one-1.mp4", "katya-05-to-bring-to-mama-1.mp4"], pics: [["katya-02-at-first-sight-1.jpg", "katya-02-at-first-sight-2.jpg", "katya-02-at-first-sight-3.jpg"], ["katya-04-at-the-beach-1.jpg", "katya-04-at-the-beach-2.jpg", "katya-04-at-the-beach-3.jpg"], ["katya-07-party-1.jpg", "katya-07-party-2.jpg", "katya-07-party-3.jpg"], ["katya-01-who-is-the-one-1.jpg", "katya-01-who-is-the-one-2.jpg", "katya-01-who-is-the-one-3.jpg"], ["katya-05-to-bring-to-mama-1.jpg", "katya-05-to-bring-to-mama-2.jpg", "katya-05-to-bring-to-mama-3.jpg"]],
         rank: 1, total: 18, wins: 13,
-        last: [["nina.jpg", "Nina", 1, 63], ["luna.jpg", "Luna", 1, 59], ["sophie.jpg", "Sophie", 0, 46], ["emma.jpg", "Emma", 1, 68], ["valentina.jpg", "Valentina", 1, 61]],
+        last: [["nina.jpg", "Nina", 1, 63], ["luna.jpg", "Luna", 1, 59], ["sophie.jpg", "Sophie", 0, 46], ["emma.jpg", "Emma", 1, 68], ["valentina.jpg", "Victoria", 1, 61]],
         q: [[14, [4, 6, 3, 1, 0], 4], [11, [6, 3, 2, 0, 0], 7], [12, [3, 5, 3, 1, 0], 6], [13, [5, 4, 3, 1, 0], 5], [10, [5, 3, 2, 0, 0], 8]] },
       M: { age: 25, city: "Beirut", bio: "Runway on weekdays, my grandmother’s kitchen on Sundays.", portrait: "yasmin-portrait.jpg", clips: ["yasmin-02-at-first-sight-1.mp4", "yasmin-04-at-the-beach-1.mp4", null, "yasmin-01-who-is-the-one-1.mp4", "yasmin-05-to-bring-to-mama-1.mp4"], pics: [["yasmin-02-at-first-sight-1.jpg", "yasmin-02-at-first-sight-2.jpg", "yasmin-02-at-first-sight-3.jpg"], ["yasmin-04-at-the-beach-1.jpg", "yasmin-04-at-the-beach-2.jpg", "yasmin-04-at-the-beach-3.jpg"], ["yasmin-07-party-1.jpg", "yasmin-07-party-2.jpg", "yasmin-07-party-3.jpg"], ["yasmin-01-who-is-the-one-1.jpg", "yasmin-01-who-is-the-one-2.jpg", "yasmin-01-who-is-the-one-3.jpg"], ["yasmin-05-to-bring-to-mama-1.jpg", "yasmin-05-to-bring-to-mama-2.jpg", "yasmin-05-to-bring-to-mama-3.jpg"]],
         rank: 8, total: 14, wins: 9,
@@ -640,13 +648,75 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
         q: [[12, [4, 4, 3, 1, 0], 3], [13, [4, 5, 3, 1, 0], 2], [10, [3, 4, 2, 1, 0], 5], [11, [3, 5, 2, 1, 0], 4], [9, [4, 3, 2, 0, 0], 6]] },
       M: { age: 28, city: "San Diego", bio: "Surf at sunrise, tacos at sunset.", portrait: "brooke-portrait.jpg", clips: ["brooke-02-at-first-sight-1.mp4", "brooke-04-at-the-beach-1.mp4", null, "brooke-01-who-is-the-one-1.mp4", "brooke-05-to-bring-to-mama-1.mp4"], pics: [["brooke-02-at-first-sight-1.jpg", "brooke-02-at-first-sight-2.jpg", "brooke-02-at-first-sight-3.jpg"], ["brooke-04-at-the-beach-1.jpg", "brooke-04-at-the-beach-2.jpg", "brooke-04-at-the-beach-3.jpg"], ["brooke-07-party-1.jpg", "brooke-07-party-2.jpg", "brooke-07-party-3.jpg"], ["brooke-01-who-is-the-one-1.jpg", "brooke-01-who-is-the-one-2.jpg", "brooke-01-who-is-the-one-3.jpg"], ["brooke-05-to-bring-to-mama-1.jpg", "brooke-05-to-bring-to-mama-2.jpg", "brooke-05-to-bring-to-mama-3.jpg"]],
         rank: 11, total: 13, wins: 8,
-        last: [["valentina.jpg", "Valentina", 0, 46], ["luna.jpg", "Luna", 1, 56], ["emma.jpg", "Emma", 1, 59], ["maya.jpg", "Maya", 0, 43], ["nina.jpg", "Nina", 1, 54]],
+        last: [["valentina.jpg", "Victoria", 0, 46], ["luna.jpg", "Luna", 1, 56], ["emma.jpg", "Emma", 1, 59], ["maya.jpg", "Maya", 0, 43], ["nina.jpg", "Nina", 1, 54]],
         q: [[9, [2, 4, 2, 1, 0], 4], [10, [2, 4, 3, 1, 0], 3], [7, [4, 2, 1, 0, 0], 6], [8, [3, 3, 2, 0, 0], 5], [8, [3, 3, 1, 1, 0], 5]] }
     }
   };
+  /* ---------- matches 4 to 8, opened with -m4 … -m8 (28 Oct, Alon: ten new women made in Draw Things; one photo per category, sample stats) ---------- */
+  var MATCHES = { 2: MATCH2, 3: MATCH3 };
+  MATCHES[4] = {
+    W: { L: { name: "Valentina", cc: "IT", country: "Italy" }, M: { name: "Aaliyah", cc: "US", country: "USA" } },
+    HER: {
+      L: { age: 25, city: "Naples", bio: "Lemon groves, espresso, and a boat to Capri on Sundays.", portrait: "valentina-portrait.jpg", clips: [null, null, null, null, null], pics: [["valentina-02-at-first-sight-1.jpg"], ["valentina-swimsuit-1.jpg"], ["valentina-07-party-1.jpg"], ["valentina-sleepover-1.jpg"], ["valentina-05-to-bring-to-mama-1.jpg"]],
+        rank: 4, total: 14, wins: 10,
+        last: [["maya.jpg", "Maya", 1, 60], ["emma.jpg", "Emma", 1, 57], ["luna.jpg", "Luna", 0, 45], ["sophie.jpg", "Sophie", 1, 62], ["nina.jpg", "Nina", 1, 58]],
+        q: [[12, [4, 4, 3, 1, 0], 3], [11, [4, 4, 2, 1, 0], 4], [10, [3, 4, 2, 1, 0], 5], [11, [3, 5, 2, 1, 0], 4], [9, [4, 3, 2, 0, 0], 6]] },
+      M: { age: 26, city: "Los Angeles", bio: "Pilates at sunrise, rooftop sunsets after.", portrait: "aaliyah-portrait.jpg", clips: [null, null, null, null, null], pics: [["aaliyah-02-at-first-sight-1.jpg"], ["aaliyah-swimsuit-1.jpg"], ["aaliyah-07-party-1.jpg"], ["aaliyah-sleepover-1.jpg"], ["aaliyah-05-to-bring-to-mama-1.jpg"]],
+        rank: 6, total: 13, wins: 9,
+        last: [["luna.jpg", "Luna", 1, 56], ["sophie.jpg", "Sophie", 0, 47], ["emma.jpg", "Emma", 1, 59], ["maya.jpg", "Maya", 0, 44], ["nina.jpg", "Nina", 1, 54]],
+        q: [[9, [3, 3, 2, 1, 0], 5], [10, [2, 4, 3, 1, 0], 4], [8, [4, 3, 1, 0, 0], 6], [9, [3, 4, 2, 0, 0], 5], [8, [3, 3, 1, 1, 0], 6]] } }
+  };
+  MATCHES[5] = {
+    W: { L: { name: "Kiara", cc: "IN", country: "India" }, M: { name: "Freja", cc: "SE", country: "Sweden" } },
+    HER: {
+      L: { age: 25, city: "Mumbai", bio: "Bollywood dance class on Mondays, my nani’s chai every day.", portrait: "kiara-portrait.jpg", clips: [null, null, null, null, null], pics: [["kiara-02-at-first-sight-1.jpg"], ["kiara-swimsuit-1.jpg"], ["kiara-07-party-1.jpg"], ["kiara-sleepover-1.jpg"], ["kiara-05-to-bring-to-mama-1.jpg"]],
+        rank: 5, total: 12, wins: 8,
+        last: [["maya.jpg", "Maya", 1, 60], ["emma.jpg", "Emma", 1, 57], ["luna.jpg", "Luna", 0, 45], ["sophie.jpg", "Sophie", 1, 62], ["nina.jpg", "Nina", 1, 58]],
+        q: [[12, [4, 4, 3, 1, 0], 3], [11, [4, 4, 2, 1, 0], 4], [10, [3, 4, 2, 1, 0], 5], [11, [3, 5, 2, 1, 0], 4], [9, [4, 3, 2, 0, 0], 6]] },
+      M: { age: 26, city: "Stockholm", bio: "Cold plunge in winter, sailing all summer.", portrait: "freja-portrait.jpg", clips: [null, null, null, null, null], pics: [["freja-02-at-first-sight-1.jpg"], ["freja-swimsuit-1.jpg"], ["freja-07-party-1.jpg"], ["freja-sleepover-1.jpg"], ["freja-05-to-bring-to-mama-1.jpg"]],
+        rank: 7, total: 15, wins: 9,
+        last: [["luna.jpg", "Luna", 1, 56], ["sophie.jpg", "Sophie", 0, 47], ["emma.jpg", "Emma", 1, 59], ["maya.jpg", "Maya", 0, 44], ["nina.jpg", "Nina", 1, 54]],
+        q: [[9, [3, 3, 2, 1, 0], 5], [10, [2, 4, 3, 1, 0], 4], [8, [4, 3, 1, 0, 0], 6], [9, [3, 4, 2, 0, 0], 5], [8, [3, 3, 1, 1, 0], 6]] } }
+  };
+  MATCHES[6] = {
+    W: { L: { name: "Lucia", cc: "ES", country: "Spain" }, M: { name: "Nadia", cc: "LV", country: "Latvia" } },
+    HER: {
+      L: { age: 26, city: "Marbella", bio: "Flamenco on Fridays, paella with my family on Sundays.", portrait: "lucia-portrait.jpg", clips: [null, null, null, null, null], pics: [["lucia-02-at-first-sight-1.jpg"], ["lucia-swimsuit-1.jpg"], ["lucia-07-party-1.jpg"], ["lucia-sleepover-1.jpg"], ["lucia-05-to-bring-to-mama-1.jpg"]],
+        rank: 3, total: 16, wins: 11,
+        last: [["maya.jpg", "Maya", 1, 60], ["emma.jpg", "Emma", 1, 57], ["luna.jpg", "Luna", 0, 45], ["sophie.jpg", "Sophie", 1, 62], ["nina.jpg", "Nina", 1, 58]],
+        q: [[12, [4, 4, 3, 1, 0], 3], [11, [4, 4, 2, 1, 0], 4], [10, [3, 4, 2, 1, 0], 5], [11, [3, 5, 2, 1, 0], 4], [9, [4, 3, 2, 0, 0], 6]] },
+      M: { age: 28, city: "Riga", bio: "Ice skating all winter, Jūrmala beach all summer.", portrait: "nadia-portrait.jpg", clips: [null, null, null, null, null], pics: [["nadia-02-at-first-sight-1.jpg"], ["nadia-swimsuit-1.jpg"], ["nadia-07-party-1.jpg"], ["nadia-sleepover-1.jpg"], ["nadia-05-to-bring-to-mama-1.jpg"]],
+        rank: 10, total: 14, wins: 8,
+        last: [["luna.jpg", "Luna", 1, 56], ["sophie.jpg", "Sophie", 0, 47], ["emma.jpg", "Emma", 1, 59], ["maya.jpg", "Maya", 0, 44], ["nina.jpg", "Nina", 1, 54]],
+        q: [[9, [3, 3, 2, 1, 0], 5], [10, [2, 4, 3, 1, 0], 4], [8, [4, 3, 1, 0, 0], 6], [9, [3, 4, 2, 0, 0], 5], [8, [3, 3, 1, 1, 0], 6]] } }
+  };
+  MATCHES[7] = {
+    W: { L: { name: "Mei", cc: "JP", country: "Japan" }, M: { name: "Jade", cc: "CA", country: "Canada" } },
+    HER: {
+      L: { age: 26, city: "Tokyo", bio: "Ramen at midnight, karaoke until sunrise.", portrait: "mei-portrait.jpg", clips: [null, null, null, null, null], pics: [["mei-02-at-first-sight-1.jpg"], ["mei-swimsuit-1.jpg"], ["mei-07-party-1.jpg"], ["mei-sleepover-1.jpg"], ["mei-05-to-bring-to-mama-1.jpg"]],
+        rank: 6, total: 13, wins: 9,
+        last: [["maya.jpg", "Maya", 1, 60], ["emma.jpg", "Emma", 1, 57], ["luna.jpg", "Luna", 0, 45], ["sophie.jpg", "Sophie", 1, 62], ["nina.jpg", "Nina", 1, 58]],
+        q: [[12, [4, 4, 3, 1, 0], 3], [11, [4, 4, 2, 1, 0], 4], [10, [3, 4, 2, 1, 0], 5], [11, [3, 5, 2, 1, 0], 4], [9, [4, 3, 2, 0, 0], 6]] },
+      M: { age: 27, city: "Toronto", bio: "Spin class at six, brunch at ten.", portrait: "jade-portrait.jpg", clips: [null, null, null, null, null], pics: [["jade-02-at-first-sight-1.jpg"], ["jade-swimsuit-1.jpg"], ["jade-07-party-1.jpg"], ["jade-sleepover-1.jpg"], ["jade-05-to-bring-to-mama-1.jpg"]],
+        rank: 9, total: 12, wins: 7,
+        last: [["luna.jpg", "Luna", 1, 56], ["sophie.jpg", "Sophie", 0, 47], ["emma.jpg", "Emma", 1, 59], ["maya.jpg", "Maya", 0, 44], ["nina.jpg", "Nina", 1, 54]],
+        q: [[9, [3, 3, 2, 1, 0], 5], [10, [2, 4, 3, 1, 0], 4], [8, [4, 3, 1, 0, 0], 6], [9, [3, 4, 2, 0, 0], 5], [8, [3, 3, 1, 1, 0], 6]] } }
+  };
+  MATCHES[8] = {
+    W: { L: { name: "Camila", cc: "CO", country: "Colombia" }, M: { name: "Chloe", cc: "FR", country: "France" } },
+    HER: {
+      L: { age: 25, city: "Cartagena", bio: "Salsa every weekend, the beach every day I can.", portrait: "camila-portrait.jpg", clips: [null, null, null, null, null], pics: [["camila-02-at-first-sight-1.jpg"], ["camila-swimsuit-1.jpg"], ["camila-07-party-1.jpg"], ["camila-sleepover-1.jpg"], ["camila-05-to-bring-to-mama-1.jpg"]],
+        rank: 2, total: 15, wins: 11,
+        last: [["maya.jpg", "Maya", 1, 60], ["emma.jpg", "Emma", 1, 57], ["luna.jpg", "Luna", 0, 45], ["sophie.jpg", "Sophie", 1, 62], ["nina.jpg", "Nina", 1, 58]],
+        q: [[12, [4, 4, 3, 1, 0], 3], [11, [4, 4, 2, 1, 0], 4], [10, [3, 4, 2, 1, 0], 5], [11, [3, 5, 2, 1, 0], 4], [9, [4, 3, 2, 0, 0], 6]] },
+      M: { age: 25, city: "Paris", bio: "A croissant in one hand, a vintage camera in the other.", portrait: "chloe-portrait.jpg", clips: [null, null, null, null, null], pics: [["chloe-02-at-first-sight-1.jpg"], ["chloe-swimsuit-1.jpg"], ["chloe-07-party-1.jpg"], ["chloe-sleepover-1.jpg"], ["chloe-05-to-bring-to-mama-1.jpg"]],
+        rank: 8, total: 14, wins: 8,
+        last: [["luna.jpg", "Luna", 1, 56], ["sophie.jpg", "Sophie", 0, 47], ["emma.jpg", "Emma", 1, 59], ["maya.jpg", "Maya", 0, 44], ["nina.jpg", "Nina", 1, 54]],
+        q: [[9, [3, 3, 2, 1, 0], 5], [10, [2, 4, 3, 1, 0], 4], [8, [4, 3, 1, 0, 0], 6], [9, [3, 4, 2, 0, 0], 5], [8, [3, 3, 1, 1, 0], 6]] } }
+  };
   var MATCH = 1;
-  function useMatch(n) { // same five questions, the second or third pair of women
-    var m = n === 3 ? MATCH3 : MATCH2; MATCH = n; W = m.W; HER = m.HER;
+  function useMatch(n) { // same five questions, another pair of women (matches 2 to 8)
+    var m = MATCHES[n]; MATCH = n; W = m.W; HER = m.HER;
     Q.forEach(function (q) { // 27 Oct: by the question's own photo set, not its place; Swimsuit and Sleepover by her name
       q.L = [q.f ? m.W.L.name.toLowerCase() + "-" + q.f + "-1.jpg" : m.HER.L.pics[q.pi][0], "50% 0%"]; q.M = [q.f ? m.W.M.name.toLowerCase() + "-" + q.f + "-1.jpg" : m.HER.M.pics[q.pi][0], "50% 0%"]; });
   }
@@ -1094,6 +1164,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     for (var k = 1; k < t.length; k++) {
       if (/^q[1-5]$/.test(t[k])) o.q = +t[k].slice(1) - 1;
       else if (t[k] === "still" || t[k] === "end" || t[k] === "one" || t[k] === "m2" || t[k] === "m3") o[t[k]] = true;
+      else if (/^m[2-8]$/.test(t[k])) o.mn = +t[k].slice(1);
       else if (["you", "crowd", "band", "pct"].indexOf(t[k]) > -1 && t[k + 1] != null) { o[t[k]] = t[k + 1]; k++; }
     }
     if (o.still) phone.classList.add("still");
@@ -1104,6 +1175,7 @@ html.embed .page { display: block; padding: 0; } html.embed .notes { display: no
     if (o.one) { ONE = true; picks[o.q] = null; } // Change on the review: answer this one again, then back to the review
     if (o.m2) useMatch(2);
     if (o.m3) useMatch(3);
+    if (o.mn) useMatch(o.mn);
     qi = o.q; loadQuestion(false);
     if (o.you) { touched = true; placeMe(o.you); }
     if (o.crowd) { placeCrowd(o.crowd); setTimeout(function () { if (o.band != null) pickBand(+o.band, true); if (o.pct != null) { cur().exact = +o.pct; showExact(); } }, 720); }

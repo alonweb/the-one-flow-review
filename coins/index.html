@@ -561,9 +561,10 @@ button.coinchip { cursor: pointer; }
   var LOOK = /^[abc]$/.test(P.get("look") || "") ? P.get("look") : P.get("look") === "0" ? "" : "b";
   if (LOOK) phone.classList.add("look-" + LOOK);
 
-  // a seeded random, so the simulated crowd is the same on every run
+  // the simulated crowd is new on every visit; review states (?s=) and ?seed=N keep a fixed crowd, so a result can be shown again
+  var FIXED = REVIEW || P.has("seed"), SEED = P.has("seed") ? +P.get("seed") || 1 : FIXED ? 29102026 : Math.floor(Math.random() * 2147483647);
   function rng(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
-  var R = rng(29102026);
+  var R = rng(SEED);
 
   var COIN = '<svg class="coin" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="url(#gFoil)"/><circle cx="12" cy="12" r="7.8" fill="none" stroke="#7d5517" stroke-opacity=".55" stroke-width="1"/><path d="M12 7.6l1.3 2.7 3 .4-2.2 2 .6 2.9L12 14.2l-2.7 1.4.6-2.9-2.2-2 3-.4z" fill="#8a5f1c" fill-opacity=".7"/></svg>';
   // the logo mark: one coin split in two, the gold side and the rose side
@@ -669,11 +670,13 @@ button.coinchip { cursor: pointer; }
   };
 
   function init() {
-    R = rng(29102026);
+    R = rng(SEED);
     BOTS = FACES.map(function (f) { return { name: f[0], face: pface(f[1]) }; })
       .concat(MORE.map(function (n, i) { return { name: n, face: pface(FACES[(i * 5 + 3) % FACES.length][1]) }; }));
     BOTS.forEach(function (b) { b.coins = Math.max(60, Math.round((1000 + (R() - .42) * 1700) / 5) * 5); });
     MATCHES.forEach(function (m) {
+      if (m.lean0 == null) m.lean0 = m.lean;
+      m.lean = FIXED ? m.lean0 : .35 + R() * .3; // which girl the crowd leans to changes from visit to visit too
       var order = BOTS.map(function (_, i) { return i; }).sort(function () { return R() - .5; });
       m.entries = order.map(function (i) { return { bot: i, side: R() < m.lean ? "a" : "b", stake: STAKES[Math.floor(R() * STAKES.length)] }; });
       m.joined = m.start; m.state = "open"; m.you = null; m.res = null; m.seen = false;
@@ -748,8 +751,8 @@ button.coinchip { cursor: pointer; }
   function welcomeHTML() {
     return '<div class="wel"><div class="wel-bg">' + ["zofia", "yasmin", "camila", "mariana", "valentina", "brooke"].map(function (k) { return '<img src="' + photo(k) + '" alt="">'; }).join("") + '</div>' +
       '<div class="wel-in">' + LOGO +
-      '<h1>Back her.<br><span>Take their coins.</span></h1>' +
-      '<p>Two girls. 50 players. One vote each. Most votes wins. Her backers split the losers’ coins.</p>' +
+      '<h1>Choose<br><span>THE ONE.</span></h1>' +
+      '<p>Two girls, one winner. Put your coins on the one you choose. If the crowd agrees, you win.</p>' +
       '<label class="field">Name on the Ranking<input id="nm" maxlength="16" placeholder="Type your name" autocomplete="off" value="' + esc(S.name || "") + '"></label>' +
       '<button class="betbtn" id="join">I’m in</button></div></div>';
   }
